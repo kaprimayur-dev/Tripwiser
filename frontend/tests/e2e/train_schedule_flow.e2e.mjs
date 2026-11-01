@@ -129,8 +129,8 @@ async function runE2ETest() {
       throw new Error(`Expected at least 5 commercial stops for 12002, got ${stopRows.length}`);
     }
 
-    // Toggle All Stops
-    console.log('7. Testing "All Stops (Waypoints)" toggle...');
+    // Toggle All Recorded Stops
+    console.log('7. Testing "All Recorded Stops" toggle...');
     const allStopsToggle = await page.$('#all-stops-toggle');
     if (allStopsToggle) {
       await allStopsToggle.click();

@@ -1,7 +1,7 @@
 # TW-110 Completion Report — Train Schedule Intelligence & Intermediate Stoppage Inspector
 
 **Milestone:** TW-110  
-**Status:** Completed & Fully Verified  
+**Status:** Completed & Fully Verified (Post-Audit Terminology Aligned)  
 **Date:** November 2, 2026  
 **Commit Message:** `feat(trains): add timetable intelligence and intermediate stop inspection`
 
@@ -30,9 +30,9 @@ Under **TW-110**, TripWiser unlocks full timetable intelligence:
   - Added `get_schedule_with_stations(train_number)` joining `train_schedules` with `stations` to retrieve stop sequences, station names, codes, arrival/departure times, and distances in a single indexed query.
   - Added `get_station_names_for_codes(station_codes)` batch helper to avoid N+1 queries.
 - **`backend/app/domain/services/route_engine.py`**:
-  - Enhanced `_build_journey_leg` to count commercial stops between leg origin and destination (`arrival_time != departure_time`) and attach running days from verified calendars.
+  - Enhanced `_build_journey_leg` to count intermediate scheduled halts with positive dwell time (`arrival_time != departure_time`) and attach running days from verified calendars.
 
-### 2.2 New REST API Endpoints (`/api/v1/trains`)
+### 2.2 REST API Endpoints (`/api/v1/trains`)
 Registered in `backend/app/main.py` before dynamic route parameters to avoid route collision:
 
 | Method | Endpoint | Description |
@@ -50,7 +50,7 @@ Registered in `backend/app/main.py` before dynamic route parameters to avoid rou
 ### 2.4 Halt Duration Calculation
 Halt durations in minutes are calculated from verified schedule arrival and departure times:
 - Origin and terminus stations: `0` min halt.
-- Passing waypoints (`arrival_time == departure_time`): `0` min halt.
+- Passing stops (`arrival_time == departure_time`): `0` min halt.
 - Daytime commercial stops: `(dep.hour * 60 + dep.minute) - (arr.hour * 60 + arr.minute)`.
 - Overnight halts crossing midnight: handles `dep < arr` by adding 1,440 minutes.
 
@@ -64,16 +64,17 @@ Halt durations in minutes are calculated from verified schedule arrival and depa
 - Preset quick-launch pills for iconic Indian Railway trains (`12002 Bhopal Shatabdi`, `12951 Mumbai Rajdhani`, `12301 Howrah Rajdhani`, `12621 Tamil Nadu Express`).
 
 ### 3.2 Train Timetable Viewer (`TrainScheduleView.tsx`)
-- **Header Banner:** Displays train number, verified TAG status, official table reference (e.g. `Table 3A: New Delhi - Rani Kamlapati (Bhopal) Shatabdi Express`), total distance, and commercial halts count.
+- **Header Banner:** Displays train number, verified TAG status, official table reference (e.g. `Table 3A: New Delhi - Rani Kamlapati (Bhopal) Shatabdi Express`), total distance, and scheduled halts count.
 - **Operating Running Days Strip:** Visual Mon–Sun chips highlighting active days with tooltips (e.g. `Runs on Mon`, `Does not run on Fri`).
-- **Commercial vs All Stops Toggle:** Allows users to view either concise passenger commercial halts (e.g. 7 stops for 12002) or all track waypoints (87 entries including passing junctions).
-- **Stoppage Table:** Shows stop sequence, station code, station name, arrival time, departure time, halt duration pill (e.g. `3m halt`, `8m halt`), and cumulative distance.
+- **Scheduled Halts vs All Recorded Stops Toggle:** Allows users to view either scheduled timetable halts with dwell time > 0 (e.g. 7 stops for 12002) or all recorded stops (87 entries including passing junctions).
+- **Dwell Time Transparency Note:** Explicit disclosure confirms: *"These labels describe timetable data only. They do not confirm whether passenger boarding or deboarding is permitted."*
+- **Stoppage Table:** Shows stop sequence, station code, station name, arrival time, departure time, halt duration pill (e.g. `3 min`, `8 min`), and cumulative distance.
 
 ### 3.3 Intermediate Halts in Journey Discovery (`IntermediateStopsList.tsx`)
 - Embedded into `RouteCard.tsx`, `TransitTimeline.tsx`, and `JourneyDetailsModal.tsx`.
 - Displays expandable intermediate halt count and disclosure button.
 - Asynchronously slices schedule between the specific leg boarding and arrival stations.
-- Non-stop legs clearly state: *"Non-stop direct leg: No intermediate commercial passenger halts between X and Y"*.
+- Non-stop legs clearly state: *"Non-stop direct leg: No intermediate scheduled halts recorded between X and Y"*.
 
 ### 3.4 Navigation & Deep Linking (`Navbar.tsx` & `page.tsx`)
 - Added dedicated **"Timetable"** mode tab to navigation bar and hero mode selector.
@@ -110,7 +111,7 @@ Executed real browser-driven E2E tests against Chromium:
    - Searched train `12002` (Bhopal Shatabdi).
    - Verified timetable header, TAG Table 3A citation, origin NDLS, destination BPL.
    - Verified operating days strip (7 active daily chips).
-   - Verified 7 commercial stops; toggled to all 87 waypoints.
+   - Verified 7 scheduled halts; toggled to all 87 recorded stops.
    - Switched to Connecting Routes, searched BCT $\rightarrow$ NDLS, expanded intermediate stops in leg timeline, and opened Journey Details Modal.
    - **Result:** PASSED (Exit code 0).
 2. **`journey_flow.e2e.mjs`**:
@@ -136,11 +137,20 @@ Executed real browser-driven E2E tests against Chromium:
 - [x] **No Invented Platform Numbers:** Platforms are not rendered as facts unless verified in official feeds; clear disclaimer explains platform confirmation occurs at stations.
 - [x] **No Fabricated Operating Days:** Running days derive strictly from the 164 TAG 2024–2026 verified calendar records audited in TW-109.
 - [x] **No Invented Halts:** Stoppage records come directly from compiled schedule data without synthetic filler.
-- [x] **Honest Commercial vs Passing Distinction:** Explicit toggle lets users differentiate true passenger commercial halts from technical waypoints.
+- [x] **Honest Dwell vs Recorded Stop Distinction:** Explicit toggle differentiates scheduled halts (dwell > 0) from all recorded stops without overclaiming commercial passenger boarding permission.
 - [x] **Awaiting Schedule Disclosure:** Quarantined or uncompiled trains return an explicit `AWAITING_VERIFIED_SCHEDULE` message rather than synthetic timetables.
 
 ---
 
-## 7. Conclusion
+## 7. Post-Implementation Terminology Correction (TW-110 Addendum)
 
-Milestone **TW-110** is fully implemented, verified across unit, integration, build, and browser E2E test suites, and adheres strictly to TripWiser's engineering standards.
+Following focused data-integrity audit:
+1. **`TrainScheduleView.tsx`:** Renamed "Commercial Halts" to "Scheduled Halts" and "All Stops" to "All Recorded Stops". Added explicit disclosure: *"These labels describe timetable data only. They do not confirm whether passenger boarding or deboarding is permitted."* Rendered neutral `0 min` dwell for zero-halt stops rather than unverified technical waypoint labels.
+2. **`IntermediateStopsList.tsx`:** Replaced claims of verified commercial passenger halts with honest "Scheduled halts" and "Recorded stops" terminology.
+3. **`trains.py`:** Documented that `only_commercial` filters by positive scheduled dwell time (halt > 0) rather than certified commercial booking quotas.
+
+---
+
+## 8. Conclusion
+
+Milestone **TW-110** is fully implemented, audited, verified across unit, integration, build, and browser E2E test suites, and adheres strictly to TripWiser's engineering standards.

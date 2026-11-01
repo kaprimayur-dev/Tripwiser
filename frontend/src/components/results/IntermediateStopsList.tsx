@@ -56,7 +56,7 @@ export function IntermediateStopsList({
     return (
       <div className="py-4 px-3 flex items-center justify-center gap-2 text-xs text-espresso-600 bg-cream-50/50 rounded-xl border border-cream-200">
         <Loader2 className="w-4 h-4 animate-spin text-terracotta" />
-        <span>Loading verified intermediate halts for #{trainNumber}...</span>
+        <span>Loading intermediate scheduled halts for #{trainNumber}...</span>
       </div>
     );
   }
@@ -74,7 +74,7 @@ export function IntermediateStopsList({
     return (
       <div className="py-3 px-4 text-xs text-espresso-600 bg-cream-50 rounded-xl border border-cream-200 flex items-center justify-between">
         <span className="font-medium text-espresso-800">
-          Non-stop direct leg: No intermediate commercial passenger halts between {fromCode} and {toCode}.
+          Non-stop direct leg: No intermediate scheduled halts recorded between {fromCode} and {toCode}.
         </span>
         <span className="inline-flex items-center gap-1 text-[11px] text-olive font-semibold">
           <ShieldCheck className="w-3.5 h-3.5" />

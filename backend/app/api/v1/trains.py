@@ -116,7 +116,10 @@ class ScheduleStopSchema(BaseModel):
     day_offset: int = 0
     distance_km: float = 0.0
     halt_minutes: int = 0
-    is_commercial_halt: bool = False
+    is_commercial_halt: bool = Field(
+        False,
+        description="True if stop has positive scheduled dwell time (halt > 0) or is an endpoint. Reflects timetable dwell records only; does not certify passenger commercial booking permissions.",
+    )
 
 
 class TrainSummarySchema(BaseModel):
@@ -344,7 +347,10 @@ async def get_train(
 @router.get("/{train_number}/schedule", response_model=TrainScheduleResponse)
 async def get_train_schedule(
     train_number: str,
-    only_commercial: bool = Query(False, description="If true, returns only commercial passenger halts"),
+    only_commercial: bool = Query(
+        False,
+        description="If true, filters by positive scheduled dwell time (halt > 0 minutes) or route endpoints. Note: describes timetable dwell data only; does not certify commercial passenger booking permissions.",
+    ),
     session: AsyncSession = Depends(get_db),
 ):
     """
@@ -434,7 +440,10 @@ async def get_intermediate_stops(
     train_number: str,
     from_code: str = Query(..., min_length=1, max_length=10, description="Boarding station code"),
     to_code: str = Query(..., min_length=1, max_length=10, description="Deboarding station code"),
-    only_commercial: bool = Query(True, description="Filter to commercial stops with passenger halts"),
+    only_commercial: bool = Query(
+        True,
+        description="If true, filters intermediate stops to those with positive scheduled dwell time (halt > 0 minutes). Note: describes timetable dwell data only; does not certify commercial passenger booking permissions.",
+    ),
     session: AsyncSession = Depends(get_db),
 ):
     """

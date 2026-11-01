@@ -157,7 +157,7 @@ export function TrainScheduleView({ trainNumber, onClose }: TrainScheduleViewPro
               </div>
             </div>
             <div className="sm:mt-1">
-              <span className="text-[10px] uppercase font-bold text-espresso-500">Commercial Stops</span>
+              <span className="text-[10px] uppercase font-bold text-espresso-500">Scheduled Halts</span>
               <div className="font-semibold text-espresso-800">
                 {commercial_stops_count} Halts
               </div>
@@ -205,7 +205,7 @@ export function TrainScheduleView({ trainNumber, onClose }: TrainScheduleViewPro
                   : 'text-espresso-600 hover:text-espresso-900'
               }`}
             >
-              Commercial Halts ({commercial_stops_count})
+              Scheduled Halts ({commercial_stops_count})
             </button>
             <button
               type="button"
@@ -217,8 +217,16 @@ export function TrainScheduleView({ trainNumber, onClose }: TrainScheduleViewPro
                   : 'text-espresso-600 hover:text-espresso-900'
               }`}
             >
-              All Stops ({total_stops})
+              All Recorded Stops ({total_stops})
             </button>
+          </div>
+        </div>
+
+        {/* Timetable Stop Interpretation Note */}
+        <div className="text-[11px] text-espresso-600 bg-cream-50 p-2.5 rounded-xl border border-cream-200 flex items-start gap-2">
+          <AlertCircle className="w-3.5 h-3.5 text-espresso-500 flex-shrink-0 mt-0.5" />
+          <div>
+            <span className="font-semibold text-espresso-800">Timetable Dwell Note:</span> Scheduled Halts are timetable records with positive scheduled dwell time. These labels describe timetable data only. They do not confirm whether passenger boarding or deboarding is permitted.
           </div>
         </div>
       </div>
@@ -311,7 +319,7 @@ export function TrainScheduleView({ trainNumber, onClose }: TrainScheduleViewPro
                           {stop.halt_minutes} min
                         </span>
                       ) : (
-                        <span className="text-espresso-400 text-[10px]">Pass</span>
+                        <span className="text-espresso-400 text-[10px]">0 min</span>
                       )}
                     </td>
 
