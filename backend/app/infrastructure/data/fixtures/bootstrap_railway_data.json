@@ -1,0 +1,1834 @@
+{
+  "metadata": {
+    "version": "1.1.0",
+    "reference_standard": "Ministry of Railways (Railway Board) - Trains at a Glance 2026",
+    "official_index_url": "https://rb.indianrailways.gov.in/uploads/directorate/coaching/TAG_2026/TableNumberIndex.pdf",
+    "curated_train_total": 20,
+    "active_verified_trains_count": 12,
+    "train_references_count": 8,
+    "index_verified_reference_count": 6,
+    "source_conflict_reference_count": 2,
+    "active_incomplete_schedules_count": 0,
+    "station_count": 50,
+    "station_coordinate_taxonomy": {
+      "coordinates_present": 50,
+      "structurally_validated": 50,
+      "independently_verified": 5,
+      "not_independently_verified": 45
+    }
+  },
+  "stations": [
+    {
+      "code": "NDLS",
+      "name": "New Delhi",
+      "latitude": 28.6423,
+      "longitude": 77.22,
+      "state": "Delhi",
+      "zone": "NR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true,
+      "independent_source": "Open Government Data (OGD) Platform / Survey of India benchmark",
+      "independent_source_url": "https://data.gov.in/"
+    },
+    {
+      "code": "HWH",
+      "name": "Howrah Junction",
+      "latitude": 22.5841,
+      "longitude": 88.341,
+      "state": "West Bengal",
+      "zone": "ER",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true,
+      "independent_source": "West Bengal Spatial Data Infrastructure (WBSDI) GIS benchmark",
+      "independent_source_url": "https://wbsdi.gov.in/"
+    },
+    {
+      "code": "MMCT",
+      "name": "Mumbai Central",
+      "latitude": 18.9696,
+      "longitude": 72.8193,
+      "state": "Maharashtra",
+      "zone": "WR",
+      "coordinate_source": "DataMeet Railways (stations.json / legacy code BCT)",
+      "coordinate_validation_status": "INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true,
+      "independent_source": "Municipal Corporation of Greater Mumbai (MCGM) OneGIS benchmark",
+      "independent_source_url": "https://onegis.mcgm.gov.in/"
+    },
+    {
+      "code": "CSMT",
+      "name": "Mumbai CSMT",
+      "latitude": 18.9401,
+      "longitude": 72.8354,
+      "state": "Maharashtra",
+      "zone": "CR",
+      "coordinate_source": "DataMeet Railways (stations.json / legacy code CSTM)",
+      "coordinate_validation_status": "INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true,
+      "independent_source": "UNESCO World Heritage Centre Boundary Map (Ref 945rev) / MCGM OneGIS",
+      "independent_source_url": "https://whc.unesco.org/en/list/945/"
+    },
+    {
+      "code": "MAS",
+      "name": "MGR Chennai Central",
+      "latitude": 13.0827,
+      "longitude": 80.2755,
+      "state": "Tamil Nadu",
+      "zone": "SR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true,
+      "independent_source": "Chennai Metropolitan Development Authority (CMDA) GIS benchmark",
+      "independent_source_url": "https://www.cmdachennai.gov.in/"
+    },
+    {
+      "code": "SBC",
+      "name": "KSR Bengaluru",
+      "latitude": 12.9784,
+      "longitude": 77.5801,
+      "state": "Karnataka",
+      "zone": "SWR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "ADI",
+      "name": "Ahmedabad Junction",
+      "latitude": 23.0225,
+      "longitude": 72.5714,
+      "state": "Gujarat",
+      "zone": "WR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "PUNE",
+      "name": "Pune Junction",
+      "latitude": 18.5284,
+      "longitude": 73.8744,
+      "state": "Maharashtra",
+      "zone": "CR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "SC",
+      "name": "Secunderabad Junction",
+      "latitude": 17.4334,
+      "longitude": 78.5046,
+      "state": "Telangana",
+      "zone": "SCR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "HYB",
+      "name": "Hyderabad Deccan",
+      "latitude": 17.3923,
+      "longitude": 78.4697,
+      "state": "Telangana",
+      "zone": "SCR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "CNB",
+      "name": "Kanpur Central",
+      "latitude": 26.4547,
+      "longitude": 80.3507,
+      "state": "Uttar Pradesh",
+      "zone": "NCR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "DDU",
+      "name": "Pt. Deen Dayal Upadhyaya Junction",
+      "latitude": 25.2818,
+      "longitude": 83.1197,
+      "state": "Uttar Pradesh",
+      "zone": "ECR",
+      "coordinate_source": "DataMeet Railways (stations.json / legacy code MGS)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "PRYJ",
+      "name": "Prayagraj Junction",
+      "latitude": 25.4484,
+      "longitude": 81.8333,
+      "state": "Uttar Pradesh",
+      "zone": "NCR",
+      "coordinate_source": "DataMeet Railways (stations.json / legacy code ALD)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "BPL",
+      "name": "Bhopal Junction",
+      "latitude": 23.268,
+      "longitude": 77.4126,
+      "state": "Madhya Pradesh",
+      "zone": "WCR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "RKMP",
+      "name": "Rani Kamlapati",
+      "latitude": 23.2045,
+      "longitude": 77.441,
+      "state": "Madhya Pradesh",
+      "zone": "WCR",
+      "coordinate_source": "DataMeet Railways (stations.json / legacy code HBJ)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "NGP",
+      "name": "Nagpur Junction",
+      "latitude": 21.1524,
+      "longitude": 79.0888,
+      "state": "Maharashtra",
+      "zone": "CR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "BZA",
+      "name": "Vijayawada Junction",
+      "latitude": 16.5186,
+      "longitude": 80.6199,
+      "state": "Andhra Pradesh",
+      "zone": "SCR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "BSB",
+      "name": "Varanasi Junction",
+      "latitude": 25.3278,
+      "longitude": 82.9863,
+      "state": "Uttar Pradesh",
+      "zone": "NR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "LKO",
+      "name": "Lucknow Charbagh",
+      "latitude": 26.8322,
+      "longitude": 80.9234,
+      "state": "Uttar Pradesh",
+      "zone": "NR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "PNBE",
+      "name": "Patna Junction",
+      "latitude": 25.6022,
+      "longitude": 85.1376,
+      "state": "Bihar",
+      "zone": "ECR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "GHY",
+      "name": "Guwahati",
+      "latitude": 26.1822,
+      "longitude": 91.7519,
+      "state": "Assam",
+      "zone": "NFR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "TVC",
+      "name": "Thiruvananthapuram Central",
+      "latitude": 8.4875,
+      "longitude": 76.9525,
+      "state": "Kerala",
+      "zone": "SR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "ERS",
+      "name": "Ernakulam Junction",
+      "latitude": 9.9676,
+      "longitude": 76.2898,
+      "state": "Kerala",
+      "zone": "SR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "CLT",
+      "name": "Kozhikode Main",
+      "latitude": 11.2483,
+      "longitude": 75.7839,
+      "state": "Kerala",
+      "zone": "SR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "MAQ",
+      "name": "Mangaluru Central",
+      "latitude": 12.8634,
+      "longitude": 74.8419,
+      "state": "Karnataka",
+      "zone": "SR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "MYS",
+      "name": "Mysuru Junction",
+      "latitude": 12.3164,
+      "longitude": 76.6473,
+      "state": "Karnataka",
+      "zone": "SWR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "UBL",
+      "name": "SSS Hubballi Junction",
+      "latitude": 15.3524,
+      "longitude": 75.1479,
+      "state": "Karnataka",
+      "zone": "SWR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "JAT",
+      "name": "Jammu Tawi",
+      "latitude": 32.7061,
+      "longitude": 74.8795,
+      "state": "Jammu and Kashmir",
+      "zone": "NR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "ASR",
+      "name": "Amritsar Junction",
+      "latitude": 31.634,
+      "longitude": 74.8723,
+      "state": "Punjab",
+      "zone": "NR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "CDG",
+      "name": "Chandigarh Junction",
+      "latitude": 30.7046,
+      "longitude": 76.8277,
+      "state": "Chandigarh",
+      "zone": "NR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "JP",
+      "name": "Jaipur Junction",
+      "latitude": 26.9196,
+      "longitude": 75.7878,
+      "state": "Rajasthan",
+      "zone": "NWR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "JU",
+      "name": "Jodhpur Junction",
+      "latitude": 26.2808,
+      "longitude": 73.0189,
+      "state": "Rajasthan",
+      "zone": "NWR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "BKN",
+      "name": "Bikaner Junction",
+      "latitude": 28.0167,
+      "longitude": 73.3119,
+      "state": "Rajasthan",
+      "zone": "NWR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "GWL",
+      "name": "Gwalior Junction",
+      "latitude": 26.2163,
+      "longitude": 78.1882,
+      "state": "Madhya Pradesh",
+      "zone": "NCR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "VGLJ",
+      "name": "Virangana Lakshmibai Jhansi",
+      "latitude": 25.4484,
+      "longitude": 78.5685,
+      "state": "Uttar Pradesh",
+      "zone": "NCR",
+      "coordinate_source": "DataMeet Railways (stations.json / legacy code JHS)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "AGC",
+      "name": "Agra Cantt.",
+      "latitude": 27.1583,
+      "longitude": 77.9944,
+      "state": "Uttar Pradesh",
+      "zone": "NCR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "MTJ",
+      "name": "Mathura Junction",
+      "latitude": 27.4924,
+      "longitude": 77.6737,
+      "state": "Uttar Pradesh",
+      "zone": "NCR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "KOTA",
+      "name": "Kota Junction",
+      "latitude": 25.2185,
+      "longitude": 75.8648,
+      "state": "Rajasthan",
+      "zone": "WCR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "RTM",
+      "name": "Ratlam Junction",
+      "latitude": 23.3441,
+      "longitude": 75.0352,
+      "state": "Madhya Pradesh",
+      "zone": "WR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "BRC",
+      "name": "Vadodara Junction",
+      "latitude": 22.3107,
+      "longitude": 73.1812,
+      "state": "Gujarat",
+      "zone": "WR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "ST",
+      "name": "Surat",
+      "latitude": 21.2049,
+      "longitude": 72.8406,
+      "state": "Gujarat",
+      "zone": "WR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "BVI",
+      "name": "Borivali",
+      "latitude": 19.229,
+      "longitude": 72.8573,
+      "state": "Maharashtra",
+      "zone": "WR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "NZM",
+      "name": "Hazrat Nizamuddin",
+      "latitude": 28.5888,
+      "longitude": 77.2534,
+      "state": "Delhi",
+      "zone": "NR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "ANVT",
+      "name": "Anand Vihar Terminal",
+      "latitude": 28.6508,
+      "longitude": 77.3153,
+      "state": "Delhi",
+      "zone": "NR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "DNR",
+      "name": "Danapur",
+      "latitude": 25.5941,
+      "longitude": 85.0444,
+      "state": "Bihar",
+      "zone": "ECR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "BYPL",
+      "name": "Baiyyappanahalli",
+      "latitude": 12.9902,
+      "longitude": 77.6509,
+      "state": "Karnataka",
+      "zone": "SWR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinates_present": true,
+      "structurally_validated": true,
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED"
+    },
+    {
+      "code": "VSKP",
+      "name": "Visakhapatnam Junction",
+      "latitude": 17.7215,
+      "longitude": 83.2906,
+      "state": "Andhra Pradesh",
+      "zone": "ECoR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "BBS",
+      "name": "Bhubaneswar",
+      "latitude": 20.2644,
+      "longitude": 85.8436,
+      "state": "Odisha",
+      "zone": "ECoR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "PURI",
+      "name": "Puri",
+      "latitude": 19.8135,
+      "longitude": 85.8312,
+      "state": "Odisha",
+      "zone": "ECoR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    },
+    {
+      "code": "R",
+      "name": "Raipur Junction",
+      "latitude": 21.2583,
+      "longitude": 81.6296,
+      "state": "Chhattisgarh",
+      "zone": "SECR",
+      "coordinate_source": "DataMeet Railways (stations.json)",
+      "coordinate_validation_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "coordinates_present": true,
+      "structurally_validated": true
+    }
+  ],
+  "trains": [
+    {
+      "number": "12951",
+      "name": "Mumbai Central - New Delhi Tejas Rajdhani Express",
+      "origin_code": "MMCT",
+      "destination_code": "NDLS",
+      "runs_on_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "verification_source": "TAG 2026 Table 3",
+      "verification_status": "ROUTE_TABLE_VERIFIED",
+      "schedule": [
+        {
+          "stop_sequence": 1,
+          "station_code": "MMCT",
+          "arrival_time": null,
+          "departure_time": "17:00:00",
+          "day_offset": 0,
+          "distance_km": 0.0
+        },
+        {
+          "stop_sequence": 2,
+          "station_code": "BVI",
+          "arrival_time": "17:22:00",
+          "departure_time": "17:24:00",
+          "day_offset": 0,
+          "distance_km": 30.0
+        },
+        {
+          "stop_sequence": 3,
+          "station_code": "ST",
+          "arrival_time": "19:43:00",
+          "departure_time": "19:48:00",
+          "day_offset": 0,
+          "distance_km": 263.0
+        },
+        {
+          "stop_sequence": 4,
+          "station_code": "BRC",
+          "arrival_time": "21:06:00",
+          "departure_time": "21:16:00",
+          "day_offset": 0,
+          "distance_km": 392.0
+        },
+        {
+          "stop_sequence": 5,
+          "station_code": "RTM",
+          "arrival_time": "00:25:00",
+          "departure_time": "00:28:00",
+          "day_offset": 1,
+          "distance_km": 653.0
+        },
+        {
+          "stop_sequence": 6,
+          "station_code": "KOTA",
+          "arrival_time": "03:15:00",
+          "departure_time": "03:20:00",
+          "day_offset": 1,
+          "distance_km": 920.0
+        },
+        {
+          "stop_sequence": 7,
+          "station_code": "NDLS",
+          "arrival_time": "08:32:00",
+          "departure_time": null,
+          "day_offset": 1,
+          "distance_km": 1386.0
+        }
+      ],
+      "source_table": "3A",
+      "source_document": "Rajdhani_Exp.pdf",
+      "source_page": 2,
+      "source_url": "https://rb.indianrailways.gov.in/uploads/directorate/coaching/TAG_2026/Rajdhani_Exp.pdf",
+      "verified_fields": [
+        "number",
+        "name",
+        "origin_code",
+        "destination_code",
+        "runs_on_days",
+        "table_number",
+        "origin_departure",
+        "destination_arrival",
+        "intermediate_halts",
+        "distances"
+      ]
+    },
+    {
+      "number": "12952",
+      "name": "New Delhi - Mumbai Central Tejas Rajdhani Express",
+      "origin_code": "NDLS",
+      "destination_code": "MMCT",
+      "runs_on_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "verification_source": "TAG 2026 Table 3",
+      "verification_status": "ROUTE_TABLE_VERIFIED",
+      "schedule": [
+        {
+          "stop_sequence": 1,
+          "station_code": "NDLS",
+          "arrival_time": null,
+          "departure_time": "16:55:00",
+          "day_offset": 0,
+          "distance_km": 0.0
+        },
+        {
+          "stop_sequence": 2,
+          "station_code": "KOTA",
+          "arrival_time": "21:30:00",
+          "departure_time": "21:40:00",
+          "day_offset": 0,
+          "distance_km": 466.0
+        },
+        {
+          "stop_sequence": 3,
+          "station_code": "RTM",
+          "arrival_time": "00:32:00",
+          "departure_time": "00:35:00",
+          "day_offset": 1,
+          "distance_km": 733.0
+        },
+        {
+          "stop_sequence": 4,
+          "station_code": "BRC",
+          "arrival_time": "03:40:00",
+          "departure_time": "03:50:00",
+          "day_offset": 1,
+          "distance_km": 994.0
+        },
+        {
+          "stop_sequence": 5,
+          "station_code": "ST",
+          "arrival_time": "05:13:00",
+          "departure_time": "05:18:00",
+          "day_offset": 1,
+          "distance_km": 1123.0
+        },
+        {
+          "stop_sequence": 6,
+          "station_code": "BVI",
+          "arrival_time": "07:35:00",
+          "departure_time": "07:37:00",
+          "day_offset": 1,
+          "distance_km": 1356.0
+        },
+        {
+          "stop_sequence": 7,
+          "station_code": "MMCT",
+          "arrival_time": "08:35:00",
+          "departure_time": null,
+          "day_offset": 1,
+          "distance_km": 1386.0
+        }
+      ],
+      "source_table": "3",
+      "source_document": "Rajdhani_Exp.pdf",
+      "source_page": 2,
+      "source_url": "https://rb.indianrailways.gov.in/uploads/directorate/coaching/TAG_2026/Rajdhani_Exp.pdf",
+      "verified_fields": [
+        "number",
+        "name",
+        "origin_code",
+        "destination_code",
+        "runs_on_days",
+        "table_number",
+        "origin_departure",
+        "destination_arrival",
+        "intermediate_halts",
+        "distances"
+      ]
+    },
+    {
+      "number": "12002",
+      "name": "New Delhi - Rani Kamlapati Shatabdi Express",
+      "origin_code": "NDLS",
+      "destination_code": "RKMP",
+      "runs_on_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "verification_source": "TAG 2026 Table 2",
+      "verification_status": "ROUTE_TABLE_VERIFIED",
+      "schedule": [
+        {
+          "stop_sequence": 1,
+          "station_code": "NDLS",
+          "arrival_time": null,
+          "departure_time": "06:00:00",
+          "day_offset": 0,
+          "distance_km": 0.0
+        },
+        {
+          "stop_sequence": 2,
+          "station_code": "MTJ",
+          "arrival_time": "07:19:00",
+          "departure_time": "07:20:00",
+          "day_offset": 0,
+          "distance_km": 141.0
+        },
+        {
+          "stop_sequence": 3,
+          "station_code": "AGC",
+          "arrival_time": "07:50:00",
+          "departure_time": "07:55:00",
+          "day_offset": 0,
+          "distance_km": 195.0
+        },
+        {
+          "stop_sequence": 4,
+          "station_code": "GWL",
+          "arrival_time": "09:23:00",
+          "departure_time": "09:28:00",
+          "day_offset": 0,
+          "distance_km": 313.0
+        },
+        {
+          "stop_sequence": 5,
+          "station_code": "VGLJ",
+          "arrival_time": "10:26:00",
+          "departure_time": "10:31:00",
+          "day_offset": 0,
+          "distance_km": 410.0
+        },
+        {
+          "stop_sequence": 6,
+          "station_code": "BPL",
+          "arrival_time": "14:02:00",
+          "departure_time": "14:05:00",
+          "day_offset": 0,
+          "distance_km": 702.0
+        },
+        {
+          "stop_sequence": 7,
+          "station_code": "RKMP",
+          "arrival_time": "14:40:00",
+          "departure_time": null,
+          "day_offset": 0,
+          "distance_km": 708.0
+        }
+      ],
+      "source_table": "2",
+      "source_document": "Shatabdi_Exp.pdf",
+      "source_page": 1,
+      "source_url": "https://rb.indianrailways.gov.in/uploads/directorate/coaching/TAG_2026/Shatabdi_Exp.pdf",
+      "verified_fields": [
+        "number",
+        "name",
+        "origin_code",
+        "destination_code",
+        "runs_on_days",
+        "table_number",
+        "origin_departure",
+        "destination_arrival",
+        "intermediate_halts",
+        "distances"
+      ]
+    },
+    {
+      "number": "12001",
+      "name": "Rani Kamlapati - New Delhi Shatabdi Express",
+      "origin_code": "RKMP",
+      "destination_code": "NDLS",
+      "runs_on_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "verification_source": "TAG 2026 Table 2",
+      "verification_status": "ROUTE_TABLE_VERIFIED",
+      "schedule": [
+        {
+          "stop_sequence": 1,
+          "station_code": "RKMP",
+          "arrival_time": null,
+          "departure_time": "15:10:00",
+          "day_offset": 0,
+          "distance_km": 0.0
+        },
+        {
+          "stop_sequence": 2,
+          "station_code": "BPL",
+          "arrival_time": "15:27:00",
+          "departure_time": "15:30:00",
+          "day_offset": 0,
+          "distance_km": 6.0
+        },
+        {
+          "stop_sequence": 3,
+          "station_code": "VGLJ",
+          "arrival_time": "18:40:00",
+          "departure_time": "18:45:00",
+          "day_offset": 0,
+          "distance_km": 298.0
+        },
+        {
+          "stop_sequence": 4,
+          "station_code": "GWL",
+          "arrival_time": "19:40:00",
+          "departure_time": "19:45:00",
+          "day_offset": 0,
+          "distance_km": 395.0
+        },
+        {
+          "stop_sequence": 5,
+          "station_code": "AGC",
+          "arrival_time": "21:10:00",
+          "departure_time": "21:15:00",
+          "day_offset": 0,
+          "distance_km": 513.0
+        },
+        {
+          "stop_sequence": 6,
+          "station_code": "MTJ",
+          "arrival_time": "21:48:00",
+          "departure_time": "21:50:00",
+          "day_offset": 0,
+          "distance_km": 567.0
+        },
+        {
+          "stop_sequence": 7,
+          "station_code": "NDLS",
+          "arrival_time": "23:50:00",
+          "departure_time": null,
+          "day_offset": 0,
+          "distance_km": 708.0
+        }
+      ],
+      "source_table": "2A",
+      "source_document": "Shatabdi_Exp.pdf",
+      "source_page": 1,
+      "source_url": "https://rb.indianrailways.gov.in/uploads/directorate/coaching/TAG_2026/Shatabdi_Exp.pdf",
+      "verified_fields": [
+        "number",
+        "name",
+        "origin_code",
+        "destination_code",
+        "runs_on_days",
+        "table_number",
+        "origin_departure",
+        "destination_arrival",
+        "intermediate_halts",
+        "distances"
+      ]
+    },
+    {
+      "number": "12301",
+      "name": "Howrah - New Delhi Kolkata Rajdhani Express (via Gaya)",
+      "origin_code": "HWH",
+      "destination_code": "NDLS",
+      "runs_on_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "verification_source": "TAG 2026 Table 1",
+      "verification_status": "ROUTE_TABLE_VERIFIED",
+      "schedule": [
+        {
+          "stop_sequence": 1,
+          "station_code": "HWH",
+          "arrival_time": null,
+          "departure_time": "16:50:00",
+          "day_offset": 0,
+          "distance_km": 0.0
+        },
+        {
+          "stop_sequence": 2,
+          "station_code": "DDU",
+          "arrival_time": "00:45:00",
+          "departure_time": "00:55:00",
+          "day_offset": 1,
+          "distance_km": 671.0
+        },
+        {
+          "stop_sequence": 3,
+          "station_code": "PRYJ",
+          "arrival_time": "02:33:00",
+          "departure_time": "02:35:00",
+          "day_offset": 1,
+          "distance_km": 824.0
+        },
+        {
+          "stop_sequence": 4,
+          "station_code": "CNB",
+          "arrival_time": "04:40:00",
+          "departure_time": "04:45:00",
+          "day_offset": 1,
+          "distance_km": 1018.0
+        },
+        {
+          "stop_sequence": 5,
+          "station_code": "NDLS",
+          "arrival_time": "10:05:00",
+          "departure_time": null,
+          "day_offset": 1,
+          "distance_km": 1451.0
+        }
+      ],
+      "source_table": "1A",
+      "source_document": "Rajdhani_Exp.pdf",
+      "source_page": 1,
+      "source_url": "https://rb.indianrailways.gov.in/uploads/directorate/coaching/TAG_2026/Rajdhani_Exp.pdf",
+      "verified_fields": [
+        "number",
+        "name",
+        "origin_code",
+        "destination_code",
+        "runs_on_days",
+        "table_number",
+        "origin_departure",
+        "destination_arrival",
+        "intermediate_halts",
+        "distances"
+      ]
+    },
+    {
+      "number": "12302",
+      "name": "New Delhi - Howrah Kolkata Rajdhani Express (via Gaya)",
+      "origin_code": "NDLS",
+      "destination_code": "HWH",
+      "runs_on_days": [
+        0,
+        1,
+        2,
+        3,
+        5,
+        6
+      ],
+      "verification_source": "TAG 2026 Table 1",
+      "verification_status": "ROUTE_TABLE_VERIFIED",
+      "schedule": [
+        {
+          "stop_sequence": 1,
+          "station_code": "NDLS",
+          "arrival_time": null,
+          "departure_time": "16:50:00",
+          "day_offset": 0,
+          "distance_km": 0.0
+        },
+        {
+          "stop_sequence": 2,
+          "station_code": "CNB",
+          "arrival_time": "21:32:00",
+          "departure_time": "21:37:00",
+          "day_offset": 0,
+          "distance_km": 433.0
+        },
+        {
+          "stop_sequence": 3,
+          "station_code": "PRYJ",
+          "arrival_time": "23:43:00",
+          "departure_time": "23:45:00",
+          "day_offset": 0,
+          "distance_km": 627.0
+        },
+        {
+          "stop_sequence": 4,
+          "station_code": "DDU",
+          "arrival_time": "01:37:00",
+          "departure_time": "01:47:00",
+          "day_offset": 1,
+          "distance_km": 780.0
+        },
+        {
+          "stop_sequence": 5,
+          "station_code": "HWH",
+          "arrival_time": "09:55:00",
+          "departure_time": null,
+          "day_offset": 1,
+          "distance_km": 1451.0
+        }
+      ],
+      "source_table": "1",
+      "source_document": "Rajdhani_Exp.pdf",
+      "source_page": 1,
+      "source_url": "https://rb.indianrailways.gov.in/uploads/directorate/coaching/TAG_2026/Rajdhani_Exp.pdf",
+      "verified_fields": [
+        "number",
+        "name",
+        "origin_code",
+        "destination_code",
+        "runs_on_days",
+        "table_number",
+        "origin_departure",
+        "destination_arrival",
+        "intermediate_halts",
+        "distances"
+      ]
+    },
+    {
+      "number": "20171",
+      "name": "Rani Kamlapati - Hazrat Nizamuddin Vande Bharat Express",
+      "origin_code": "RKMP",
+      "destination_code": "NZM",
+      "runs_on_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "verification_source": "TAG 2026 Table 2",
+      "verification_status": "ROUTE_TABLE_VERIFIED",
+      "schedule": [
+        {
+          "stop_sequence": 1,
+          "station_code": "RKMP",
+          "arrival_time": null,
+          "departure_time": "05:40:00",
+          "day_offset": 0,
+          "distance_km": 0.0
+        },
+        {
+          "stop_sequence": 2,
+          "station_code": "VGLJ",
+          "arrival_time": "08:39:00",
+          "departure_time": "08:43:00",
+          "day_offset": 0,
+          "distance_km": 298.0
+        },
+        {
+          "stop_sequence": 3,
+          "station_code": "GWL",
+          "arrival_time": "09:41:00",
+          "departure_time": "09:45:00",
+          "day_offset": 0,
+          "distance_km": 395.0
+        },
+        {
+          "stop_sequence": 4,
+          "station_code": "AGC",
+          "arrival_time": "11:11:00",
+          "departure_time": "11:15:00",
+          "day_offset": 0,
+          "distance_km": 513.0
+        },
+        {
+          "stop_sequence": 5,
+          "station_code": "NZM",
+          "arrival_time": "13:16:00",
+          "departure_time": null,
+          "day_offset": 0,
+          "distance_km": 701.0
+        }
+      ],
+      "source_table": "2A",
+      "source_document": "VandeBharatTrains.pdf",
+      "source_page": 1,
+      "source_url": "https://rb.indianrailways.gov.in/uploads/directorate/coaching/TAG_2026/VandeBharatTrains.pdf",
+      "verified_fields": [
+        "number",
+        "name",
+        "origin_code",
+        "destination_code",
+        "runs_on_days",
+        "table_number",
+        "origin_departure",
+        "destination_arrival",
+        "intermediate_halts",
+        "distances"
+      ]
+    },
+    {
+      "number": "20172",
+      "name": "Hazrat Nizamuddin - Rani Kamlapati Vande Bharat Express",
+      "origin_code": "NZM",
+      "destination_code": "RKMP",
+      "runs_on_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "verification_source": "TAG 2026 Table 2",
+      "verification_status": "ROUTE_TABLE_VERIFIED",
+      "schedule": [
+        {
+          "stop_sequence": 1,
+          "station_code": "NZM",
+          "arrival_time": null,
+          "departure_time": "14:40:00",
+          "day_offset": 0,
+          "distance_km": 0.0
+        },
+        {
+          "stop_sequence": 2,
+          "station_code": "AGC",
+          "arrival_time": "16:30:00",
+          "departure_time": "16:34:00",
+          "day_offset": 0,
+          "distance_km": 188.0
+        },
+        {
+          "stop_sequence": 3,
+          "station_code": "GWL",
+          "arrival_time": "18:00:00",
+          "departure_time": "18:02:00",
+          "day_offset": 0,
+          "distance_km": 306.0
+        },
+        {
+          "stop_sequence": 4,
+          "station_code": "VGLJ",
+          "arrival_time": "19:03:00",
+          "departure_time": "19:07:00",
+          "day_offset": 0,
+          "distance_km": 403.0
+        },
+        {
+          "stop_sequence": 5,
+          "station_code": "RKMP",
+          "arrival_time": "22:16:00",
+          "departure_time": null,
+          "day_offset": 0,
+          "distance_km": 701.0
+        }
+      ],
+      "source_table": "2",
+      "source_document": "VandeBharatTrains.pdf",
+      "source_page": 1,
+      "source_url": "https://rb.indianrailways.gov.in/uploads/directorate/coaching/TAG_2026/VandeBharatTrains.pdf",
+      "verified_fields": [
+        "number",
+        "name",
+        "origin_code",
+        "destination_code",
+        "runs_on_days",
+        "table_number",
+        "origin_departure",
+        "destination_arrival",
+        "intermediate_halts",
+        "distances"
+      ]
+    },
+    {
+      "number": "22436",
+      "name": "New Delhi - Varanasi Vande Bharat Express",
+      "origin_code": "NDLS",
+      "destination_code": "BSB",
+      "runs_on_days": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6
+      ],
+      "verification_source": "TAG 2026 Table 1",
+      "verification_status": "ROUTE_TABLE_VERIFIED",
+      "schedule": [
+        {
+          "stop_sequence": 1,
+          "station_code": "NDLS",
+          "arrival_time": null,
+          "departure_time": "06:00:00",
+          "day_offset": 0,
+          "distance_km": 0.0
+        },
+        {
+          "stop_sequence": 2,
+          "station_code": "CNB",
+          "arrival_time": "10:08:00",
+          "departure_time": "10:10:00",
+          "day_offset": 0,
+          "distance_km": 433.0
+        },
+        {
+          "stop_sequence": 3,
+          "station_code": "PRYJ",
+          "arrival_time": "12:08:00",
+          "departure_time": "12:10:00",
+          "day_offset": 0,
+          "distance_km": 627.0
+        },
+        {
+          "stop_sequence": 4,
+          "station_code": "BSB",
+          "arrival_time": "14:00:00",
+          "departure_time": null,
+          "day_offset": 0,
+          "distance_km": 757.0
+        }
+      ],
+      "source_table": "1",
+      "source_document": "VandeBharatTrains.pdf",
+      "source_page": 4,
+      "source_url": "https://rb.indianrailways.gov.in/uploads/directorate/coaching/TAG_2026/VandeBharatTrains.pdf",
+      "verified_fields": [
+        "number",
+        "name",
+        "origin_code",
+        "destination_code",
+        "runs_on_days",
+        "table_number",
+        "origin_departure",
+        "destination_arrival",
+        "intermediate_halts",
+        "distances"
+      ]
+    },
+    {
+      "number": "22435",
+      "name": "Varanasi - New Delhi Vande Bharat Express",
+      "origin_code": "BSB",
+      "destination_code": "NDLS",
+      "runs_on_days": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6
+      ],
+      "verification_source": "TAG 2026 Table 1",
+      "verification_status": "ROUTE_TABLE_VERIFIED",
+      "schedule": [
+        {
+          "stop_sequence": 1,
+          "station_code": "BSB",
+          "arrival_time": null,
+          "departure_time": "15:00:00",
+          "day_offset": 0,
+          "distance_km": 0.0
+        },
+        {
+          "stop_sequence": 2,
+          "station_code": "PRYJ",
+          "arrival_time": "16:30:00",
+          "departure_time": "16:32:00",
+          "day_offset": 0,
+          "distance_km": 130.0
+        },
+        {
+          "stop_sequence": 3,
+          "station_code": "CNB",
+          "arrival_time": "18:30:00",
+          "departure_time": "18:32:00",
+          "day_offset": 0,
+          "distance_km": 324.0
+        },
+        {
+          "stop_sequence": 4,
+          "station_code": "NDLS",
+          "arrival_time": "23:00:00",
+          "departure_time": null,
+          "day_offset": 0,
+          "distance_km": 757.0
+        }
+      ],
+      "source_table": "1A",
+      "source_document": "VandeBharatTrains.pdf",
+      "source_page": 4,
+      "source_url": "https://rb.indianrailways.gov.in/uploads/directorate/coaching/TAG_2026/VandeBharatTrains.pdf",
+      "verified_fields": [
+        "number",
+        "name",
+        "origin_code",
+        "destination_code",
+        "runs_on_days",
+        "table_number",
+        "origin_departure",
+        "destination_arrival",
+        "intermediate_halts",
+        "distances"
+      ]
+    },
+    {
+      "number": "12953",
+      "name": "Mumbai Central - Hazrat Nizamuddin August Kranti Tejas Rajdhani",
+      "origin_code": "MMCT",
+      "destination_code": "NZM",
+      "runs_on_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "verification_source": "TAG 2026 Table 3",
+      "verification_status": "ROUTE_TABLE_VERIFIED",
+      "schedule": [
+        {
+          "stop_sequence": 1,
+          "station_code": "MMCT",
+          "arrival_time": null,
+          "departure_time": "17:10:00",
+          "day_offset": 0,
+          "distance_km": 0.0
+        },
+        {
+          "stop_sequence": 2,
+          "station_code": "BVI",
+          "arrival_time": "17:33:00",
+          "departure_time": "17:35:00",
+          "day_offset": 0,
+          "distance_km": 30.0
+        },
+        {
+          "stop_sequence": 3,
+          "station_code": "ST",
+          "arrival_time": "19:53:00",
+          "departure_time": "19:58:00",
+          "day_offset": 0,
+          "distance_km": 263.0
+        },
+        {
+          "stop_sequence": 4,
+          "station_code": "BRC",
+          "arrival_time": "21:16:00",
+          "departure_time": "21:26:00",
+          "day_offset": 0,
+          "distance_km": 392.0
+        },
+        {
+          "stop_sequence": 5,
+          "station_code": "RTM",
+          "arrival_time": "00:48:00",
+          "departure_time": "00:50:00",
+          "day_offset": 1,
+          "distance_km": 653.0
+        },
+        {
+          "stop_sequence": 6,
+          "station_code": "KOTA",
+          "arrival_time": "03:45:00",
+          "departure_time": "03:55:00",
+          "day_offset": 1,
+          "distance_km": 920.0
+        },
+        {
+          "stop_sequence": 7,
+          "station_code": "MTJ",
+          "arrival_time": "07:53:00",
+          "departure_time": "07:55:00",
+          "day_offset": 1,
+          "distance_km": 1244.0
+        },
+        {
+          "stop_sequence": 8,
+          "station_code": "NZM",
+          "arrival_time": "09:43:00",
+          "departure_time": null,
+          "day_offset": 1,
+          "distance_km": 1377.0
+        }
+      ],
+      "source_table": "3A",
+      "source_document": "Rajdhani_Exp.pdf",
+      "source_page": 2,
+      "source_url": "https://rb.indianrailways.gov.in/uploads/directorate/coaching/TAG_2026/Rajdhani_Exp.pdf",
+      "verified_fields": [
+        "number",
+        "name",
+        "origin_code",
+        "destination_code",
+        "runs_on_days",
+        "table_number",
+        "origin_departure",
+        "destination_arrival",
+        "intermediate_halts",
+        "distances"
+      ]
+    },
+    {
+      "number": "12954",
+      "name": "Hazrat Nizamuddin - Mumbai Central August Kranti Tejas Rajdhani",
+      "origin_code": "NZM",
+      "destination_code": "MMCT",
+      "runs_on_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "verification_source": "TAG 2026 Table 3",
+      "verification_status": "ROUTE_TABLE_VERIFIED",
+      "schedule": [
+        {
+          "stop_sequence": 1,
+          "station_code": "NZM",
+          "arrival_time": null,
+          "departure_time": "17:15:00",
+          "day_offset": 0,
+          "distance_km": 0.0
+        },
+        {
+          "stop_sequence": 2,
+          "station_code": "MTJ",
+          "arrival_time": "18:43:00",
+          "departure_time": "18:45:00",
+          "day_offset": 0,
+          "distance_km": 133.0
+        },
+        {
+          "stop_sequence": 3,
+          "station_code": "KOTA",
+          "arrival_time": "22:00:00",
+          "departure_time": "22:10:00",
+          "day_offset": 0,
+          "distance_km": 457.0
+        },
+        {
+          "stop_sequence": 4,
+          "station_code": "RTM",
+          "arrival_time": "01:05:00",
+          "departure_time": "01:07:00",
+          "day_offset": 1,
+          "distance_km": 724.0
+        },
+        {
+          "stop_sequence": 5,
+          "station_code": "BRC",
+          "arrival_time": "04:29:00",
+          "departure_time": "04:39:00",
+          "day_offset": 1,
+          "distance_km": 985.0
+        },
+        {
+          "stop_sequence": 6,
+          "station_code": "ST",
+          "arrival_time": "06:08:00",
+          "departure_time": "06:13:00",
+          "day_offset": 1,
+          "distance_km": 1114.0
+        },
+        {
+          "stop_sequence": 7,
+          "station_code": "BVI",
+          "arrival_time": "09:10:00",
+          "departure_time": "09:12:00",
+          "day_offset": 1,
+          "distance_km": 1347.0
+        },
+        {
+          "stop_sequence": 8,
+          "station_code": "MMCT",
+          "arrival_time": "10:05:00",
+          "departure_time": null,
+          "day_offset": 1,
+          "distance_km": 1377.0
+        }
+      ],
+      "source_table": "3",
+      "source_document": "Rajdhani_Exp.pdf",
+      "source_page": 2,
+      "source_url": "https://rb.indianrailways.gov.in/uploads/directorate/coaching/TAG_2026/Rajdhani_Exp.pdf",
+      "verified_fields": [
+        "number",
+        "name",
+        "origin_code",
+        "destination_code",
+        "runs_on_days",
+        "table_number",
+        "origin_departure",
+        "destination_arrival",
+        "intermediate_halts",
+        "distances"
+      ]
+    }
+  ],
+  "train_references": [
+    {
+      "number": "12621",
+      "name": "MGR Chennai Central - New Delhi Tamil Nadu Express",
+      "origin_code": "MAS",
+      "destination_code": "NDLS",
+      "source_table": "8",
+      "source_document": "TableNumberIndex.pdf",
+      "source_page": 4,
+      "source_url": "https://rb.indianrailways.gov.in/uploads/directorate/coaching/TAG_2026/TableNumberIndex.pdf",
+      "verification_status": "INDEX_VERIFIED",
+      "verified_fields": [
+        "number",
+        "name",
+        "source_table",
+        "origin_code",
+        "destination_code"
+      ],
+      "note": "Train identity and table number verified via TAG 2026 index. Full intermediate route table, running days, and stop distances pending extraction from main TAG 2026 Table 8. Excluded from active usable schedules."
+    },
+    {
+      "number": "12622",
+      "name": "New Delhi - MGR Chennai Central Tamil Nadu Express",
+      "origin_code": "NDLS",
+      "destination_code": "MAS",
+      "source_table": "8",
+      "source_document": "TableNumberIndex.pdf",
+      "source_page": 4,
+      "source_url": "https://rb.indianrailways.gov.in/uploads/directorate/coaching/TAG_2026/TableNumberIndex.pdf",
+      "verification_status": "INDEX_VERIFIED",
+      "verified_fields": [
+        "number",
+        "name",
+        "source_table",
+        "origin_code",
+        "destination_code"
+      ],
+      "note": "Train identity and table number verified via TAG 2026 index. Full intermediate route table, running days, and stop distances pending extraction from main TAG 2026 Table 8. Excluded from active usable schedules."
+    },
+    {
+      "number": "12627",
+      "name": "KSR Bengaluru - New Delhi Karnataka Express",
+      "origin_code": "SBC",
+      "destination_code": "NDLS",
+      "source_table": "9",
+      "source_document": "TableNumberIndex.pdf",
+      "source_page": 4,
+      "source_url": "https://rb.indianrailways.gov.in/uploads/directorate/coaching/TAG_2026/TableNumberIndex.pdf",
+      "verification_status": "INDEX_VERIFIED",
+      "verified_fields": [
+        "number",
+        "name",
+        "source_table",
+        "origin_code",
+        "destination_code"
+      ],
+      "note": "Train identity and table number verified via TAG 2026 index. Full intermediate route table, running days, and stop distances pending extraction from main TAG 2026 Table 9. Excluded from active usable schedules."
+    },
+    {
+      "number": "12628",
+      "name": "New Delhi - KSR Bengaluru Karnataka Express",
+      "origin_code": "NDLS",
+      "destination_code": "SBC",
+      "source_table": "9",
+      "source_document": "TableNumberIndex.pdf",
+      "source_page": 4,
+      "source_url": "https://rb.indianrailways.gov.in/uploads/directorate/coaching/TAG_2026/TableNumberIndex.pdf",
+      "verification_status": "INDEX_VERIFIED",
+      "verified_fields": [
+        "number",
+        "name",
+        "source_table",
+        "origin_code",
+        "destination_code"
+      ],
+      "note": "Train identity and table number verified via TAG 2026 index. Full intermediate route table, running days, and stop distances pending extraction from main TAG 2026 Table 9. Excluded from active usable schedules."
+    },
+    {
+      "number": "12625",
+      "name": "Thiruvananthapuram Central - New Delhi Kerala Express",
+      "origin_code": "TVC",
+      "destination_code": "NDLS",
+      "source_table": "8, 86",
+      "source_document": "TableNumberIndex.pdf",
+      "source_page": 4,
+      "source_url": "https://rb.indianrailways.gov.in/uploads/directorate/coaching/TAG_2026/TableNumberIndex.pdf",
+      "verification_status": "INDEX_VERIFIED",
+      "verified_fields": [
+        "number",
+        "name",
+        "source_table",
+        "origin_code",
+        "destination_code"
+      ],
+      "note": "Train identity and table number verified via TAG 2026 index. Full intermediate route table, running days, and stop distances pending extraction from main TAG 2026 Table 8/86. Excluded from active usable schedules."
+    },
+    {
+      "number": "12626",
+      "name": "New Delhi - Thiruvananthapuram Central Kerala Express",
+      "origin_code": "NDLS",
+      "destination_code": "TVC",
+      "source_table": "8, 86",
+      "source_document": "TableNumberIndex.pdf",
+      "source_page": 4,
+      "source_url": "https://rb.indianrailways.gov.in/uploads/directorate/coaching/TAG_2026/TableNumberIndex.pdf",
+      "verification_status": "INDEX_VERIFIED",
+      "verified_fields": [
+        "number",
+        "name",
+        "source_table",
+        "origin_code",
+        "destination_code"
+      ],
+      "note": "Train identity and table number verified via TAG 2026 index. Full intermediate route table, running days, and stop distances pending extraction from main TAG 2026 Table 8/86. Excluded from active usable schedules."
+    },
+    {
+      "number": "12615",
+      "name": "Chennai - New Delhi Grand Trunk Express",
+      "source_table": "8",
+      "source_document": "TableNumberIndex.pdf",
+      "source_page": 4,
+      "source_url": "https://rb.indianrailways.gov.in/uploads/directorate/coaching/TAG_2026/TableNumberIndex.pdf",
+      "verification_status": "SOURCE_CONFLICT",
+      "verified_fields": [
+        "number",
+        "name",
+        "source_table"
+      ],
+      "candidate_endpoints": {
+        "tag_2026_index": {
+          "origin_station": "Chennai Egmore",
+          "origin_code": "MS",
+          "destination_station": "New Delhi",
+          "destination_code": "NDLS"
+        },
+        "sr_operational_circular_2025": {
+          "origin_station": "MGR Chennai Central",
+          "origin_code": "MAS",
+          "destination_station": "New Delhi",
+          "destination_code": "NDLS"
+        },
+        "lok_sabha_unstarred_2026": {
+          "origin_station": "MGR Chennai Central",
+          "origin_code": "MAS",
+          "destination_station": "New Delhi",
+          "destination_code": "NDLS"
+        },
+        "cris_ntes_live": {
+          "origin_station": "MGR Chennai Central",
+          "origin_code": "MAS",
+          "destination_station": "Delhi Sarai Rohilla",
+          "destination_code": "DEE"
+        }
+      },
+      "conflict_citations": [
+        "TAG 2026 Table Number Index (Railway Board) explicitly lists '12615/12616 Chennai Egmore New Delhi Grand Trunk 8'.",
+        "Southern Railway circular (June 2025) announced temporary terminal shift from Chennai Egmore (MS) to MGR Chennai Central (MAS) due to redevelopment.",
+        "Lok Sabha unstarred question answer (4 Feb 2026) references 'New Delhi - MGR Chennai Central Grand Trunk Express'.",
+        "Live CRIS NTES train enquiry system lists commercial operations between Chennai Central (MAS) and Delhi Sarai Rohilla (DEE)."
+      ],
+      "note": "Material source conflict across 4 official and operational systems. Quarantined in train_references; excluded from active trains collection."
+    },
+    {
+      "number": "12616",
+      "name": "New Delhi - Chennai Grand Trunk Express",
+      "source_table": "8",
+      "source_document": "TableNumberIndex.pdf",
+      "source_page": 4,
+      "source_url": "https://rb.indianrailways.gov.in/uploads/directorate/coaching/TAG_2026/TableNumberIndex.pdf",
+      "verification_status": "SOURCE_CONFLICT",
+      "verified_fields": [
+        "number",
+        "name",
+        "source_table"
+      ],
+      "candidate_endpoints": {
+        "tag_2026_index": {
+          "origin_station": "New Delhi",
+          "origin_code": "NDLS",
+          "destination_station": "Chennai Egmore",
+          "destination_code": "MS"
+        },
+        "sr_operational_circular_2025": {
+          "origin_station": "New Delhi",
+          "origin_code": "NDLS",
+          "destination_station": "MGR Chennai Central",
+          "destination_code": "MAS"
+        },
+        "lok_sabha_unstarred_2026": {
+          "origin_station": "New Delhi",
+          "origin_code": "NDLS",
+          "destination_station": "MGR Chennai Central",
+          "destination_code": "MAS"
+        },
+        "cris_ntes_live": {
+          "origin_station": "Delhi Sarai Rohilla",
+          "origin_code": "DEE",
+          "destination_station": "MGR Chennai Central",
+          "destination_code": "MAS"
+        }
+      },
+      "conflict_citations": [
+        "TAG 2026 Table Number Index (Railway Board) explicitly lists '12615/12616 Chennai Egmore New Delhi Grand Trunk 8'.",
+        "Southern Railway circular (June 2025) announced temporary terminal shift from Chennai Egmore (MS) to MGR Chennai Central (MAS) due to redevelopment.",
+        "Lok Sabha unstarred question answer (4 Feb 2026) references 'New Delhi - MGR Chennai Central Grand Trunk Express'.",
+        "Live CRIS NTES train enquiry system lists commercial operations between Delhi Sarai Rohilla (DEE) and Chennai Central (MAS)."
+      ],
+      "note": "Material source conflict across 4 official and operational systems. Quarantined in train_references; excluded from active trains collection."
+    }
+  ]
+}
