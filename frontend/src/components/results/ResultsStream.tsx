@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Train, AlertCircle, ArrowRight, Calendar, Compass, RefreshCw } from 'lucide-react';
 import { RouteSearchResponse, CandidateRoute } from '../../types/api';
 import { RouteCard } from './RouteCard';
-import { SortingFilterBar, SortMode } from './SortingFilterBar';
+import { SortingFilterBar, SortMode, TransferFilterMode } from './SortingFilterBar';
 import { RouteComparisonMatrix } from './RouteComparisonMatrix';
 import { NearbyAlternativesBanner } from './NearbyAlternativesBanner';
 import { JourneyDetailsModal } from './JourneyDetailsModal';
@@ -28,6 +28,34 @@ export function ResultsStream({
   onSelectCorridor,
 }: ResultsStreamProps) {
   const [activeModalRoute, setActiveModalRoute] = useState<CandidateRoute | null>(null);
+  const [transferFilter, setTransferFilter] = useState<TransferFilterMode>('all');
+
+  const routes = data?.routes || [];
+
+  // Transfer counts for filter badges
+  const directCount = useMemo(() => routes.filter((r) => r.is_direct).length, [routes]);
+  const transfer1Count = useMemo(
+    () => routes.filter((r) => !r.is_direct && r.transfer_count === 1).length,
+    [routes]
+  );
+  const transfer2Count = useMemo(
+    () => routes.filter((r) => !r.is_direct && r.transfer_count === 2).length,
+    [routes]
+  );
+
+  // Filtered routes based on selected transfer filter
+  const displayedRoutes = useMemo(() => {
+    if (transferFilter === 'direct') {
+      return routes.filter((r) => r.is_direct);
+    }
+    if (transferFilter === '1-transfer') {
+      return routes.filter((r) => !r.is_direct && r.transfer_count === 1);
+    }
+    if (transferFilter === '2-transfers') {
+      return routes.filter((r) => !r.is_direct && r.transfer_count === 2);
+    }
+    return routes;
+  }, [routes, transferFilter]);
 
   if (isLoading) {
     return (
@@ -76,7 +104,6 @@ export function ResultsStream({
     transfer_routes_count,
     no_route_reason,
     sorting_note,
-    routes,
   } = data;
 
   // Empty State with specific diagnostic guidance
@@ -239,26 +266,39 @@ export function ResultsStream({
       <SortingFilterBar
         currentSort={currentSort}
         onSortChange={onSortChange}
+        transferFilter={transferFilter}
+        onTransferFilterChange={setTransferFilter}
+        directCount={directCount}
+        transfer1Count={transfer1Count}
+        transfer2Count={transfer2Count}
         sortingNote={sorting_note}
         totalRoutes={total_routes_found}
       />
 
       {/* Candidate Route Cards */}
       <div className="space-y-4">
-        {routes.map((route, idx) => (
-          <RouteCard
-            key={route.route_id}
-            route={route}
-            isRecommended={idx === 0 && currentSort === 'recommended'}
-            onOpenDetails={(r) => setActiveModalRoute(r)}
-          />
-        ))}
+        {displayedRoutes.length === 0 ? (
+          <div className="bg-white rounded-2xl p-6 border border-cream-300 text-center text-xs text-espresso-600">
+            No routes found matching the current transfer filter &ldquo;{transferFilter}&rdquo;. Try selecting &ldquo;All Routes&rdquo;.
+          </div>
+        ) : (
+          displayedRoutes.map((route, idx) => (
+            <RouteCard
+              key={route.route_id}
+              route={route}
+              journeyDate={query.journey_date}
+              isRecommended={idx === 0 && currentSort === 'recommended' && transferFilter === 'all'}
+              onOpenDetails={(r) => setActiveModalRoute(r)}
+            />
+          ))
+        )}
       </div>
 
       {/* Full Journey Details Modal */}
       <JourneyDetailsModal
         route={activeModalRoute}
         isOpen={Boolean(activeModalRoute)}
+        journeyDate={query.journey_date}
         onClose={() => setActiveModalRoute(null)}
         isRecommended={
           Boolean(activeModalRoute) &&

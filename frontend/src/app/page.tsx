@@ -12,10 +12,12 @@ import { TrainSearchCard } from '../components/trains/TrainSearchCard';
 import { TrainScheduleView } from '../components/trains/TrainScheduleView';
 import { StationSearchCard } from '../components/stations/StationSearchCard';
 import { StationDetailView } from '../components/stations/StationDetailView';
+import { SavedTripsView } from '../components/trips/SavedTripsView';
 import { SortMode } from '../components/results/SortingFilterBar';
 import { Station, RouteSearchResponse, BachelorSpecialSearchResponse } from '../types/api';
+import { SavedTrip } from '../lib/savedTrips';
 import { searchRoutes, searchBachelorSpecial, getStationByCode } from '../services/api';
-import { Sparkles, Navigation, Layers, Compass } from 'lucide-react';
+import { Sparkles, Navigation, Layers, Compass, Bookmark, AlertTriangle, X } from 'lucide-react';
 
 export default function Home() {
   const [activeMode, setActiveMode] = useState<AppMode>('connecting');
@@ -31,6 +33,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
   const [searchResponse, setSearchResponse] = useState<RouteSearchResponse | null>(null);
+  const [urlValidationError, setUrlValidationError] = useState<string | null>(null);
 
   // Bachelor Special State
   const [travelClass, setTravelClass] = useState<string>('3A');
@@ -90,7 +93,8 @@ export default function Home() {
   useEffect(() => {
     const d = new Date();
     d.setDate(d.getDate() + 1);
-    setDate(d.toISOString().split('T')[0]);
+    const tomorrowStr = d.toISOString().split('T')[0];
+    setDate(tomorrowStr);
 
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
@@ -99,7 +103,8 @@ export default function Home() {
         modeParam === 'timetable' ||
         modeParam === 'bachelor' ||
         modeParam === 'connecting' ||
-        modeParam === 'stations'
+        modeParam === 'stations' ||
+        modeParam === 'saved'
       ) {
         setActiveMode(modeParam as AppMode);
       }
@@ -115,25 +120,62 @@ export default function Home() {
       if (transfersParam && ['0', '1', '2'].includes(transfersParam)) {
         setMaxTransfers(Number(transfersParam));
       }
+      const sortParam = params.get('sort');
+      if (sortParam && ['recommended', 'fastest', 'fewest_transfers', 'cheapest'].includes(sortParam)) {
+        setSortMode(sortParam as SortMode);
+      }
 
       const origParam = params.get('origin');
       const destParam = params.get('destination');
-      if (origParam && destParam && (!modeParam || modeParam === 'connecting')) {
-        Promise.all([getStationByCode(origParam), getStationByCode(destParam)]).then(([o, d]) => {
-          if (o && d) {
-            setOrigin(o);
-            setDestination(d);
-            const queryDate = params.get('date') || new Date(Date.now() + 86400000).toISOString().split('T')[0];
-            const numTransfers = transfersParam ? Number(transfersParam) : 1;
-            executeSearch({
-              originCode: o.code,
-              destCode: d.code,
-              journeyDate: queryDate,
-              transfers: numTransfers,
-              sortBy: 'recommended',
-            });
+      const dateParam = params.get('date');
+
+      if (origParam && destParam) {
+        const cleanOrig = origParam.trim().toUpperCase();
+        const cleanDest = destParam.trim().toUpperCase();
+
+        if (cleanOrig === cleanDest) {
+          setUrlValidationError('The shared link has identical origin and destination stations.');
+        } else {
+          let effectiveDate = dateParam;
+          if (!effectiveDate || !/^\d{4}-\d{2}-\d{2}$/.test(effectiveDate)) {
+            effectiveDate = tomorrowStr;
           }
-        });
+          setDate(effectiveDate);
+
+          const numTransfers = transfersParam && ['0', '1', '2'].includes(transfersParam)
+            ? Number(transfersParam)
+            : 1;
+          const effectiveSort = (sortParam as SortMode) || 'recommended';
+
+          Promise.all([getStationByCode(cleanOrig), getStationByCode(cleanDest)])
+            .then(([o, d]) => {
+              if (!o || !d) {
+                const missing = [];
+                if (!o) missing.push(cleanOrig);
+                if (!d) missing.push(cleanDest);
+                setUrlValidationError(
+                  `Could not find station ${missing.join(', ')} in the railway master dataset.`
+                );
+                return;
+              }
+
+              setOrigin(o);
+              setDestination(d);
+              if (!modeParam || modeParam === 'connecting') {
+                setActiveMode('connecting');
+                executeSearch({
+                  originCode: o.code,
+                  destCode: d.code,
+                  journeyDate: effectiveDate,
+                  transfers: numTransfers,
+                  sortBy: effectiveSort,
+                });
+              }
+            })
+            .catch(() => {
+              setUrlValidationError('Failed to load stations from the shared link.');
+            });
+        }
       }
     }
   }, [executeSearch]);
@@ -347,6 +389,49 @@ export default function Home() {
     }
   };
 
+  // Re-run saved trip search
+  const handleRecheckTrip = async (trip: SavedTrip) => {
+    try {
+      const [origStation, destStation] = await Promise.all([
+        getStationByCode(trip.originCode),
+        getStationByCode(trip.destinationCode),
+      ]);
+
+      const o: Station = origStation || {
+        code: trip.originCode,
+        name: trip.originName,
+        city: '',
+        state: '',
+        latitude: 0,
+        longitude: 0,
+      };
+      const d: Station = destStation || {
+        code: trip.destinationCode,
+        name: trip.destinationName,
+        city: '',
+        state: '',
+        latitude: 0,
+        longitude: 0,
+      };
+
+      setOrigin(o);
+      setDestination(d);
+      setDate(trip.journeyDate);
+      setMaxTransfers(trip.maxTransfers);
+      handleModeChange('connecting');
+
+      executeSearch({
+        originCode: o.code,
+        destCode: d.code,
+        journeyDate: trip.journeyDate,
+        transfers: trip.maxTransfers,
+        sortBy: sortMode,
+      });
+    } catch (err) {
+      console.error('Failed to recheck saved trip:', err);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-cream-100 text-espresso-900">
       <Navbar currentMode={activeMode} onSelectMode={handleModeChange} />
@@ -365,6 +450,8 @@ export default function Home() {
               ? 'One train. Continuous berths. Zero waitlist.'
               : activeMode === 'timetable'
               ? 'Inspect every halt, offset & running day.'
+              : activeMode === 'saved'
+              ? 'Your pinned railway journeys, ready anytime.'
               : 'Every station, coordinates & spatial radius.'}
           </h1>
 
@@ -375,6 +462,8 @@ export default function Home() {
               ? 'TripWiser Bachelor Special finds and assembles vacant berth segments across intermediate stations on the same train, giving you a continuous journey without changing trains.'
               : activeMode === 'timetable'
               ? 'Search any compiled train to view its complete stoppage sequence, arrival/departure timings, halt durations, operating days, and verified timetable provenance.'
+              : activeMode === 'saved'
+              ? 'Review your saved itineraries, inspect original transfer windows, and recalculate schedules with current timetable operating days.'
               : 'Explore 8,697 Indian railway stations, discover nearby alternate boarding terminals with PostGIS geodetic distance, and inspect verified timetable schedule coverage.'}
           </p>
         </div>
@@ -437,8 +526,46 @@ export default function Home() {
               <Sparkles className="w-4 h-4" />
               <span>Bachelor Special</span>
             </button>
+
+            <button
+              type="button"
+              id="tab-saved-mode"
+              onClick={() => handleModeChange('saved')}
+              className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+                activeMode === 'saved'
+                  ? 'bg-espresso-900 text-cream-100 shadow-sm font-bold'
+                  : 'text-espresso-600 hover:text-espresso-900'
+              }`}
+            >
+              <Bookmark className={`w-4 h-4 ${activeMode === 'saved' ? 'fill-terracotta text-terracotta' : ''}`} />
+              <span>My Trips</span>
+            </button>
           </div>
         </div>
+
+        {/* URL Shared Link Validation Notice */}
+        {urlValidationError && (
+          <div
+            id="url-validation-banner"
+            className="p-4 bg-amber-50 border border-amber-200 rounded-2xl flex items-start justify-between gap-3 text-xs text-amber-800 animate-in fade-in"
+          >
+            <div className="flex items-start gap-2.5">
+              <AlertTriangle className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
+              <div>
+                <span className="font-bold text-amber-900 block mb-0.5">Shared Link Warning</span>
+                <p>{urlValidationError}</p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => setUrlValidationError(null)}
+              className="p-1 text-amber-600 hover:text-amber-900 rounded-full"
+              title="Dismiss warning"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        )}
 
         {/* Dynamic Search Console according to active mode */}
         {activeMode === 'connecting' && (
@@ -467,6 +594,13 @@ export default function Home() {
               onSelectCorridor={handleSelectCorridor}
             />
           </>
+        )}
+
+        {activeMode === 'saved' && (
+          <SavedTripsView
+            onRecheckTrip={handleRecheckTrip}
+            onNavigateSearch={() => handleModeChange('connecting')}
+          />
         )}
 
         {activeMode === 'bachelor' && (

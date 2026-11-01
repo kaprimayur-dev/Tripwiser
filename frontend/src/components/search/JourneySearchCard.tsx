@@ -1,7 +1,16 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { ArrowLeftRight, Calendar, Search, Navigation, Filter, Sparkles, Loader2 } from 'lucide-react';
+import {
+  ArrowLeftRight,
+  Calendar,
+  Search,
+  Filter,
+  Sparkles,
+  Loader2,
+  AlertCircle,
+  Clock,
+} from 'lucide-react';
 import { Station } from '../../types/api';
 import { StationAutocomplete } from './StationAutocomplete';
 import { NearbyStationsModal } from './NearbyStationsModal';
@@ -56,10 +65,23 @@ export function JourneySearchCard({
   }, [initialDestination]);
 
   useEffect(() => {
+    if (initialDate) {
+      setDate(initialDate);
+    }
+  }, [initialDate]);
+
+  useEffect(() => {
     if (initialMaxTransfers !== undefined) {
       setMaxTransfers(initialMaxTransfers);
     }
   }, [initialMaxTransfers]);
+
+  // Clear validation error when inputs change
+  useEffect(() => {
+    if (validationError && origin && destination && origin.code !== destination.code) {
+      setValidationError(null);
+    }
+  }, [origin, destination, validationError]);
 
   // Quick date helpers
   const setQuickDate = (daysFromToday: number) => {
@@ -93,10 +115,10 @@ export function JourneySearchCard({
       return;
     }
     if (!destination) {
-      setValidationError('Please select a destination station.');
+      setValidationError('Please select an arrival station.');
       return;
     }
-    if (origin.code === destination.code) {
+    if (origin.code.toUpperCase() === destination.code.toUpperCase()) {
       setValidationError('Origin and destination stations cannot be identical.');
       return;
     }
@@ -121,6 +143,19 @@ export function JourneySearchCard({
     }
   };
 
+  const formattedDateLabel = (() => {
+    try {
+      const parts = date.split('-');
+      if (parts.length === 3) {
+        const d = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+        return d.toLocaleDateString('en-IN', { weekday: 'short', month: 'short', day: 'numeric' });
+      }
+      return '';
+    } catch {
+      return '';
+    }
+  })();
+
   return (
     <>
       <div className="bg-white rounded-2xl p-5 sm:p-7 border border-cream-300 shadow-md">
@@ -128,6 +163,7 @@ export function JourneySearchCard({
           {/* Top Station Row with Swap Trigger */}
           <div className="relative flex flex-col md:flex-row items-stretch md:items-center gap-3">
             <StationAutocomplete
+              id="input-origin-station"
               label="Boarding From"
               placeholder="e.g. Mumbai Central (BCT)"
               value={origin}
@@ -139,6 +175,8 @@ export function JourneySearchCard({
             <div className="flex justify-center md:pt-5 -my-1 md:my-0">
               <button
                 type="button"
+                id="btn-swap-stations"
+                data-testid="swap-stations-btn"
                 onClick={handleSwap}
                 aria-label="Swap origin and destination"
                 className={`w-10 h-10 rounded-full bg-cream-50 hover:bg-cream-100 text-espresso-700 border border-cream-300 flex items-center justify-center transition-all shadow-sm hover:scale-105 active:scale-95 ${
@@ -151,6 +189,7 @@ export function JourneySearchCard({
             </div>
 
             <StationAutocomplete
+              id="input-destination-station"
               label="Arriving At"
               placeholder="e.g. New Delhi (NDLS)"
               value={destination}
@@ -159,19 +198,34 @@ export function JourneySearchCard({
             />
           </div>
 
+          {/* Validation Alert */}
+          {validationError && (
+            <div
+              id="search-validation-error"
+              className="p-3 bg-red-50 border border-red-200 rounded-xl flex items-center gap-2.5 text-xs text-red-700 animate-in fade-in duration-150"
+            >
+              <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0" />
+              <span className="font-medium">{validationError}</span>
+            </div>
+          )}
+
           {/* Date & Options Row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1">
             {/* Date Input */}
             <div className="sm:col-span-2">
-              <label className="block text-[11px] font-bold uppercase tracking-wider text-espresso-600 mb-1 flex items-center justify-between">
+              <label
+                htmlFor="input-journey-date"
+                className="block text-[11px] font-bold uppercase tracking-wider text-espresso-600 mb-1 flex items-center justify-between"
+              >
                 <span>Journey Date</span>
                 <span className="text-[10px] text-espresso-500 font-normal">
-                  {new Date(date).toLocaleDateString('en-IN', { weekday: 'short', month: 'short', day: 'numeric' })}
+                  {formattedDateLabel}
                 </span>
               </label>
-              <div className="relative flex items-center bg-white rounded-xl border border-cream-300 px-3.5 py-2.5 focus-within:border-terracotta focus-within:ring-2 focus-within:ring-terracotta/15 transition-all">
+              <div className="relative flex items-center bg-white rounded-xl border border-cream-300 px-3.5 py-2.5 focus-within:border-terracotta focus-within:ring-2 focus-within:ring-terracotta/15 transition-all min-h-[46px]">
                 <Calendar className="w-4 h-4 text-espresso-600 mr-2.5 flex-shrink-0" />
                 <input
+                  id="input-journey-date"
                   type="date"
                   value={date}
                   min={new Date().toISOString().split('T')[0]}
@@ -184,6 +238,7 @@ export function JourneySearchCard({
               <div className="flex items-center gap-1.5 mt-2 flex-wrap text-xs">
                 <button
                   type="button"
+                  id="btn-quick-today"
                   onClick={() => setQuickDate(0)}
                   className="px-2.5 py-1 rounded-md bg-cream-100 hover:bg-cream-200 text-espresso-800 text-[11px] font-medium transition-colors"
                 >
@@ -191,6 +246,7 @@ export function JourneySearchCard({
                 </button>
                 <button
                   type="button"
+                  id="btn-quick-tomorrow"
                   onClick={() => setQuickDate(1)}
                   className="px-2.5 py-1 rounded-md bg-cream-100 hover:bg-cream-200 text-espresso-800 text-[11px] font-medium transition-colors"
                 >
@@ -198,6 +254,7 @@ export function JourneySearchCard({
                 </button>
                 <button
                   type="button"
+                  id="btn-quick-weekend"
                   onClick={setNextWeekend}
                   className="px-2.5 py-1 rounded-md bg-cream-100 hover:bg-cream-200 text-espresso-800 text-[11px] font-medium transition-colors"
                 >
@@ -211,16 +268,17 @@ export function JourneySearchCard({
               <label className="block text-[11px] font-bold uppercase tracking-wider text-espresso-600 mb-1">
                 Connections
               </label>
-              <div className="flex rounded-xl border border-cream-300 bg-cream-50 p-1">
+              <div className="flex rounded-xl border border-cream-300 bg-cream-50 p-1 min-h-[46px] items-center">
                 <button
                   type="button"
                   id="btn-transfers-0"
                   onClick={() => setMaxTransfers(0)}
                   className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                     maxTransfers === 0
-                      ? 'bg-white text-espresso-900 shadow-sm border border-cream-300'
+                      ? 'bg-white text-espresso-900 shadow-sm font-bold'
                       : 'text-espresso-600 hover:text-espresso-900'
                   }`}
+                  title="Direct trains only"
                 >
                   Direct
                 </button>
@@ -230,9 +288,10 @@ export function JourneySearchCard({
                   onClick={() => setMaxTransfers(1)}
                   className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                     maxTransfers === 1
-                      ? 'bg-white text-espresso-900 shadow-sm border border-cream-300'
+                      ? 'bg-white text-espresso-900 shadow-sm font-bold'
                       : 'text-espresso-600 hover:text-espresso-900'
                   }`}
+                  title="Direct or 1 transfer"
                 >
                   1 Transfer
                 </button>
@@ -242,66 +301,58 @@ export function JourneySearchCard({
                   onClick={() => setMaxTransfers(2)}
                   className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                     maxTransfers === 2
-                      ? 'bg-white text-espresso-900 shadow-sm border border-cream-300'
+                      ? 'bg-white text-espresso-900 shadow-sm font-bold'
                       : 'text-espresso-600 hover:text-espresso-900'
                   }`}
+                  title="Up to 2 transfers"
                 >
                   2 Transfers
                 </button>
               </div>
               <p className="text-[10px] text-espresso-500 mt-1">
                 {maxTransfers === 0
-                  ? 'Only direct trains'
+                  ? 'Only trains with zero transfers'
                   : maxTransfers === 1
-                  ? 'Single junction layover'
-                  : 'Up to 2 transfers / 3 train legs'}
+                  ? 'Searches direct & 1-transfer routes'
+                  : 'Explores multi-transfer routes across India'}
               </p>
             </div>
 
-            {/* Nearby Stations Trigger */}
-            <div className="flex flex-col justify-between">
-              <label className="block text-[11px] font-bold uppercase tracking-wider text-espresso-600 mb-1">
-                Spatial Radius
-              </label>
+            {/* Submit Action Button */}
+            <div className="flex flex-col justify-end">
               <button
-                type="button"
-                onClick={() => setIsNearbyModalOpen(true)}
-                className="w-full py-2.5 px-3 rounded-xl border border-cream-300 bg-cream-50 hover:bg-cream-100 text-espresso-800 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
+                type="submit"
+                id="btn-search-routes"
+                disabled={isLoading}
+                className="w-full h-[46px] rounded-xl bg-terracotta hover:bg-terracotta/90 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition-all hover:shadow active:scale-[0.99] disabled:opacity-50 disabled:pointer-events-none"
               >
-                <Navigation className="w-3.5 h-3.5 text-olive" />
-                <span>Nearby Stations</span>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Searching Routes...</span>
+                  </>
+                ) : (
+                  <>
+                    <Search className="w-4 h-4" />
+                    <span>Search Routes</span>
+                  </>
+                )}
               </button>
-              <p className="text-[10px] text-espresso-500 mt-1">
-                Use GPS or city proximity
-              </p>
+
+              {/* Nearby Stations Trigger */}
+              <div className="mt-2 text-center">
+                <button
+                  type="button"
+                  id="btn-explore-nearby-stations"
+                  onClick={() => setIsNearbyModalOpen(true)}
+                  className="text-[11px] font-semibold text-espresso-600 hover:text-terracotta inline-flex items-center gap-1 transition-colors"
+                >
+                  <Sparkles className="w-3 h-3 text-terracotta" />
+                  <span>Discover Nearby Stations</span>
+                </button>
+              </div>
             </div>
           </div>
-
-          {/* Validation Error Alert */}
-          {validationError && (
-            <div className="p-3 bg-terracotta/10 border border-terracotta/20 rounded-xl text-xs text-terracotta font-medium flex items-center gap-2">
-              <span>{validationError}</span>
-            </div>
-          )}
-
-          {/* Action Trigger */}
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="w-full py-3.5 px-6 rounded-xl bg-terracotta hover:bg-terracotta-hover text-white font-display text-sm font-bold tracking-wide shadow-sm hover:shadow transition-all flex items-center justify-center gap-2 disabled:opacity-60 active:scale-[0.99]"
-          >
-            {isLoading ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin text-white" />
-                <span>Searching Real Railway Timetables...</span>
-              </>
-            ) : (
-              <>
-                <Search className="w-4 h-4" />
-                <span>Find Railway Routes</span>
-              </>
-            )}
-          </button>
         </form>
       </div>
 
@@ -314,4 +365,3 @@ export function JourneySearchCard({
     </>
   );
 }
-

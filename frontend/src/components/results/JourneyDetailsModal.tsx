@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   X,
   Train,
@@ -15,15 +15,28 @@ import {
   Sparkles,
   ChevronDown,
   ChevronUp,
+  Bookmark,
+  Link,
+  Info,
 } from 'lucide-react';
 import { CandidateRoute, JourneyLeg } from '../../types/api';
 import { TransferAdvisoryBadge } from './TransferAdvisoryBadge';
 import { IntermediateStopsList } from './IntermediateStopsList';
+import {
+  isTripSaved,
+  saveTrip,
+  removeSavedTrip,
+  buildTripId,
+  subscribeSavedTrips,
+  SavedTrip,
+} from '../../lib/savedTrips';
+import { buildShareableJourneyUrl, copyToClipboard } from '../../lib/shareUrl';
 
 interface JourneyDetailsModalProps {
   route: CandidateRoute | null;
   isOpen: boolean;
   onClose: () => void;
+  journeyDate?: string;
   isRecommended?: boolean;
 }
 
@@ -31,10 +44,34 @@ export function JourneyDetailsModal({
   route,
   isOpen,
   onClose,
+  journeyDate,
   isRecommended = false,
 }: JourneyDetailsModalProps) {
-  const [copied, setCopied] = useState(false);
+  const [copiedLink, setCopiedLink] = useState(false);
+  const [copiedItinerary, setCopiedItinerary] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
   const [expandedLegs, setExpandedLegs] = useState<Record<number, boolean>>({});
+
+  const firstLeg = route?.legs?.[0];
+  const lastLeg = route?.legs ? route.legs[route.legs.length - 1] : undefined;
+
+  const effectiveDate = journeyDate || (firstLeg ? firstLeg.departure_time.split('T')[0] : '');
+  const tripId =
+    firstLeg && lastLeg && route
+      ? buildTripId(firstLeg.origin_code, lastLeg.destination_code, effectiveDate, route.route_id)
+      : '';
+
+  useEffect(() => {
+    if (tripId) {
+      setIsSaved(isTripSaved(tripId));
+      const unsubscribe = subscribeSavedTrips(() => {
+        setIsSaved(isTripSaved(tripId));
+      });
+      return unsubscribe;
+    }
+  }, [tripId]);
+
+  if (!isOpen || !route || !firstLeg || !lastLeg) return null;
 
   const toggleLeg = (idx: number) => {
     setExpandedLegs((prev) => ({
@@ -43,10 +80,57 @@ export function JourneyDetailsModal({
     }));
   };
 
-  if (!isOpen || !route) return null;
+  const handleToggleSave = () => {
+    if (isSaved) {
+      removeSavedTrip(tripId);
+      setIsSaved(false);
+    } else {
+      const trainSummary = route.is_direct
+        ? `${firstLeg.train_name} (#${firstLeg.train_number})`
+        : route.legs.map((l) => `${l.train_name} (#${l.train_number})`).join(' ➔ ');
 
-  const firstLeg = route.legs[0];
-  const lastLeg = route.legs[route.legs.length - 1];
+      const savedData: SavedTrip = {
+        id: tripId,
+        savedAt: new Date().toISOString(),
+        originCode: firstLeg.origin_code,
+        originName: firstLeg.origin_code,
+        destinationCode: lastLeg.destination_code,
+        destinationName: lastLeg.destination_code,
+        journeyDate: effectiveDate,
+        maxTransfers: route.transfer_count,
+        totalDurationMinutes: route.total_duration_minutes,
+        totalTravelTimeMinutes: route.total_travel_time_minutes || route.total_duration_minutes,
+        totalWaitTimeMinutes: route.total_wait_time_minutes || 0,
+        transferCount: route.transfer_count,
+        isDirect: route.is_direct,
+        trainSummary,
+        trainNumbers: route.legs.map((l) => l.train_number),
+        departureTime: firstLeg.departure_time,
+        arrivalTime: lastLeg.arrival_time,
+        overallTransferRisk: route.overall_transfer_risk || null,
+        routeId: route.route_id,
+      };
+
+      saveTrip(savedData);
+      setIsSaved(true);
+    }
+  };
+
+  const handleShareLink = async () => {
+    const url = buildShareableJourneyUrl({
+      originCode: firstLeg.origin_code,
+      destinationCode: lastLeg.destination_code,
+      journeyDate: effectiveDate,
+      maxTransfers: route.transfer_count,
+      routeId: route.route_id,
+    });
+
+    const success = await copyToClipboard(url);
+    if (success) {
+      setCopiedLink(true);
+      setTimeout(() => setCopiedLink(false), 2000);
+    }
+  };
 
   const formatTime = (isoString: string) => {
     try {
@@ -97,7 +181,7 @@ export function JourneyDetailsModal({
       : 100;
   const waitPct = 100 - travelPct;
 
-  const handleCopy = () => {
+  const handleCopyItinerary = async () => {
     const lines = [
       `TripWiser Itinerary: ${firstLeg.origin_code} ➔ ${lastLeg.destination_code}`,
       `Total Duration: ${formatDuration(route.total_duration_minutes)} (${totalDistance} km)`,
@@ -116,10 +200,11 @@ export function JourneyDetailsModal({
       'Generated via TripWiser — Verified Timetable Intelligence.',
     ];
 
-    navigator.clipboard.writeText(lines.join('\n')).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    });
+    const success = await copyToClipboard(lines.join('\n'));
+    if (success) {
+      setCopiedItinerary(true);
+      setTimeout(() => setCopiedItinerary(false), 2500);
+    }
   };
 
   const handlePrint = () => {
@@ -141,11 +226,11 @@ export function JourneyDetailsModal({
               )}
               {route.is_direct ? (
                 <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-olive/15 text-olive">
-                  DIRECT ROUTE
+                  DIRECT SERVICE
                 </span>
               ) : (
                 <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-terracotta/10 text-terracotta">
-                  1 TRANSFER VIA {intermediateHub}
+                  {route.transfer_count} TRANSFER{route.transfer_count > 1 ? 'S' : ''} VIA {intermediateHub}
                 </span>
               )}
               <span className="inline-flex items-center gap-1 text-[11px] text-olive font-semibold">
@@ -162,173 +247,212 @@ export function JourneyDetailsModal({
             </p>
           </div>
 
-          <button
-            type="button"
-            onClick={onClose}
-            className="p-1.5 rounded-full text-espresso-500 hover:text-espresso-900 hover:bg-cream-200 transition-colors"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          <div className="flex items-center gap-1.5">
+            <button
+              type="button"
+              id="modal-btn-toggle-save"
+              onClick={handleToggleSave}
+              className={`p-2 rounded-xl text-xs font-semibold border transition-all flex items-center gap-1 ${
+                isSaved
+                  ? 'bg-terracotta text-white border-terracotta shadow-2xs'
+                  : 'bg-white hover:bg-cream-100 text-espresso-700 border-cream-300'
+              }`}
+              title={isSaved ? 'Remove from My Trips' : 'Save to My Trips'}
+            >
+              <Bookmark className={`w-4 h-4 ${isSaved ? 'fill-white text-white' : 'text-espresso-600'}`} />
+            </button>
+
+            <button
+              type="button"
+              id="modal-close-button"
+              onClick={onClose}
+              className="w-8 h-8 rounded-full bg-white hover:bg-cream-100 border border-cream-300 flex items-center justify-center text-espresso-700 transition-colors"
+              title="Close modal"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
         {/* Modal Scrollable Body */}
-        <div className="p-5 sm:p-6 space-y-5 overflow-y-auto flex-1">
-          {/* Key Metrics Strip */}
+        <div className="p-5 sm:p-6 overflow-y-auto space-y-6 flex-1">
+          {/* Key Metrics Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div className="bg-cream-50 rounded-xl p-3 border border-cream-300">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-espresso-500">
+            <div className="bg-cream-50 p-3.5 rounded-xl border border-cream-300">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-espresso-500 block">
                 Total Duration
               </span>
-              <div className="font-display text-lg font-bold text-espresso-900 mt-0.5">
+              <span className="font-display text-lg font-bold text-espresso-900 block mt-0.5">
                 {formatDuration(route.total_duration_minutes)}
-              </div>
+              </span>
+              <span className="text-[11px] text-espresso-600 block mt-0.5">
+                {totalDistance} km total
+              </span>
             </div>
 
-            <div className="bg-cream-50 rounded-xl p-3 border border-cream-300">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-espresso-500">
+            <div className="bg-cream-50 p-3.5 rounded-xl border border-cream-300">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-espresso-500 block">
                 Aboard Trains
               </span>
-              <div className="font-display text-lg font-bold text-olive mt-0.5">
+              <span className="font-display text-lg font-bold text-olive block mt-0.5">
                 {formatDuration(totalTravelMins)}
-              </div>
-              <span className="text-[10px] text-espresso-600 block">{travelPct}% of journey</span>
+              </span>
+              <span className="text-[11px] text-espresso-600 block mt-0.5">
+                {travelPct}% of journey
+              </span>
             </div>
 
-            <div className="bg-cream-50 rounded-xl p-3 border border-cream-300">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-espresso-500">
+            <div className="bg-cream-50 p-3.5 rounded-xl border border-cream-300">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-espresso-500 block">
                 Transfer Waiting
               </span>
-              <div className="font-display text-lg font-bold text-terracotta mt-0.5">
+              <span className="font-display text-lg font-bold text-terracotta block mt-0.5">
                 {formatDuration(totalWaitMins)}
-              </div>
-              <span className="text-[10px] text-espresso-600 block">{waitPct}% of journey</span>
+              </span>
+              <span className="text-[11px] text-espresso-600 block mt-0.5">
+                {waitPct}% of journey
+              </span>
             </div>
 
-            <div className="bg-cream-50 rounded-xl p-3 border border-cream-300">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-espresso-500">
+            <div className="bg-cream-50 p-3.5 rounded-xl border border-cream-300">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-espresso-500 block">
                 Legs &amp; Transfers
               </span>
-              <div className="font-display text-base font-bold text-espresso-800 mt-0.5">
+              <span className="font-display text-lg font-bold text-espresso-900 block mt-0.5">
                 {route.legs.length} Train{route.legs.length > 1 ? 's' : ''}
-              </div>
-              <span className="text-[10px] text-espresso-600 block">
-                {route.transfer_count === 0 ? 'Direct service' : `${route.transfer_count} transfer${route.transfer_count > 1 ? 's' : ''}`}
+              </span>
+              <span className="text-[11px] text-espresso-600 block mt-0.5">
+                {route.transfer_count === 0 ? 'Direct service' : `${route.transfer_count} transfer`}
               </span>
             </div>
           </div>
 
           {/* Journey Reliability & Timetable Insights Section */}
-          <div className="bg-cream-50 rounded-xl p-4 border border-cream-300 space-y-2">
-            <div className="flex items-center justify-between gap-2 flex-wrap">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-espresso-700 flex items-center gap-1.5">
+          <div className="bg-cream-100/70 rounded-xl p-4 border border-cream-200 space-y-3">
+            <div className="flex items-center justify-between flex-wrap gap-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-espresso-900 flex items-center gap-1.5">
                 <Clock className="w-3.5 h-3.5 text-terracotta" />
                 <span>Journey Reliability &amp; Timetable Insights</span>
-              </h3>
+              </span>
               {route.overall_transfer_risk && (
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-cream-200 text-espresso-800 border border-cream-300">
+                <span className="text-xs font-bold px-2 py-0.5 rounded bg-cream-200 text-espresso-900 border border-cream-300">
                   Overall Risk: {route.overall_transfer_risk.replace('_', ' ')}
                 </span>
               )}
             </div>
-            {route.insights && route.insights.length > 0 ? (
-              <ul className="text-xs text-espresso-700 space-y-1 list-disc list-inside">
-                {route.insights.map((insight, i) => (
-                  <li key={i}>{insight}</li>
+
+            {/* Insight List */}
+            {route.insights && route.insights.length > 0 && (
+              <ul className="text-xs text-espresso-800 space-y-1.5 list-disc list-inside">
+                {route.insights.map((insight, idx) => (
+                  <li key={idx} className="leading-relaxed">
+                    {insight}
+                  </li>
                 ))}
               </ul>
-            ) : (
-              <p className="text-xs text-espresso-600">Calculated from published Indian Railways timetable stops.</p>
             )}
-            <p className="text-[11px] text-espresso-500 pt-2 border-t border-cream-200">
-              * Feasibility is computed strictly from published timetable stop schedules. Live delays, platform allocation, and walking speeds vary; connections are not guaranteed.
-            </p>
+
+            {/* Explicit Timetable Disclaimer */}
+            <div className="pt-2 border-t border-cream-200/70 flex items-start gap-2 text-[11px] text-espresso-600">
+              <Info className="w-3.5 h-3.5 text-espresso-500 flex-shrink-0 mt-0.5" />
+              <p className="leading-relaxed">
+                All metrics and connection classifications are calculated strictly from published timetable data.
+                They do not represent live tracking, historical punctuality, or delay probabilities.
+                Allow adequate buffer for train delays and platform transfers.
+              </p>
+            </div>
           </div>
 
-          {/* Leg-by-leg Timeline */}
+          {/* Chronological Leg Breakdown */}
           <div className="space-y-4">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-espresso-700">
-              Leg-By-Leg Route Breakdown
+            <h3 className="text-xs font-bold uppercase tracking-wider text-espresso-600">
+              Complete Travel Itinerary
             </h3>
 
-            {route.legs.map((leg: JourneyLeg, idx: number) => {
-              const layoverMins = route.transfer_durations_minutes?.[idx];
+            {route.legs.map((leg, idx) => {
+              const isFirst = idx === 0;
+              const isLast = idx === route.legs.length - 1;
+              const layoverDur = route.transfer_durations_minutes?.[idx];
+              const layoverObj = route.layovers?.[idx];
+              const isLegExpanded = Boolean(expandedLegs[idx]);
 
               return (
-                <React.Fragment key={`${leg.train_number}-${idx}`}>
-                  {/* Leg Card */}
-                  <div className="bg-white rounded-xl border border-cream-300 shadow-sm p-4 space-y-3">
-                    {/* Header */}
-                    <div className="flex items-center justify-between gap-3 pb-2.5 border-b border-cream-200">
+                <React.Fragment key={idx}>
+                  {/* Leg Box */}
+                  <div className="border border-cream-300 rounded-xl p-4 bg-white shadow-2xs space-y-3">
+                    <div className="flex items-center justify-between flex-wrap gap-2">
                       <div className="flex items-center gap-2">
-                        <span className="w-6 h-6 rounded-md bg-espresso-900 text-cream-100 flex items-center justify-center text-xs font-bold font-mono">
+                        <span className="w-6 h-6 rounded-full bg-espresso-900 text-cream-100 flex items-center justify-center text-xs font-bold font-mono">
                           {idx + 1}
                         </span>
                         <div>
-                          <div className="font-semibold text-sm text-espresso-900">
+                          <div className="font-bold text-sm text-espresso-900">
                             {leg.train_name}
                           </div>
-                          <div className="text-[11px] text-espresso-600 font-mono">
-                            Train #{leg.train_number}
+                          <div className="text-[11px] text-espresso-600">
+                            Train #{leg.train_number} • {leg.distance_km} km • {formatDuration(leg.duration_minutes)}
                           </div>
                         </div>
                       </div>
 
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-cream-100 text-espresso-800 border border-cream-300">
-                        {formatDuration(leg.duration_minutes)}
-                      </span>
+                      {leg.frequency_description && (
+                        <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-cream-100 text-espresso-800">
+                          {leg.frequency_description}
+                        </span>
+                      )}
                     </div>
 
-                    {/* Departure & Arrival Grid */}
-                    <div className="grid grid-cols-2 gap-4 text-xs">
+                    {/* Timeline stops for this leg */}
+                    <div className="grid grid-cols-2 gap-4 bg-cream-50 p-3 rounded-lg text-xs">
                       <div>
-                        <span className="text-[10px] uppercase font-bold text-espresso-500">
-                          Boarding
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-espresso-500 block">
+                          Board
                         </span>
-                        <div className="font-display text-base font-bold text-espresso-900">
+                        <span className="font-display text-base font-bold text-espresso-900 block">
                           {formatTime(leg.departure_time)}
-                        </div>
-                        <div className="font-semibold text-espresso-800">
-                          Station: <span className="font-mono text-terracotta">{leg.origin_code}</span>
-                        </div>
-                        <div className="text-[11px] text-espresso-600">
+                        </span>
+                        <span className="font-bold text-espresso-800 block">
+                          Station {leg.origin_code}
+                        </span>
+                        <span className="text-[10px] text-espresso-500 block">
                           {formatDate(leg.departure_time)}
-                        </div>
+                        </span>
                       </div>
 
-                      <div className="text-right">
-                        <span className="text-[10px] uppercase font-bold text-espresso-500">
-                          Arrival
+                      <div>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-espresso-500 block">
+                          Deboard
                         </span>
-                        <div className="font-display text-base font-bold text-espresso-900">
+                        <span className="font-display text-base font-bold text-espresso-900 block">
                           {formatTime(leg.arrival_time)}
-                        </div>
-                        <div className="font-semibold text-espresso-800">
-                          Station: <span className="font-mono text-terracotta">{leg.destination_code}</span>
-                        </div>
-                        <div className="text-[11px] text-espresso-600">
+                        </span>
+                        <span className="font-bold text-espresso-800 block">
+                          Station {leg.destination_code}
+                        </span>
+                        <span className="text-[10px] text-espresso-500 block">
                           {formatDate(leg.arrival_time)}
-                        </div>
+                        </span>
                       </div>
                     </div>
 
-                    {/* Intermediate Halts Toggle */}
-                    <div className="pt-2 border-t border-cream-200">
+                    {/* Intermediate Stops Trigger */}
+                    <div>
                       <button
                         type="button"
-                        data-testid="modal-toggle-intermediate-stops"
                         onClick={() => toggleLeg(idx)}
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-terracotta hover:text-terracotta/80 transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-espresso-700 hover:text-terracotta transition-colors"
                       >
                         <span>
-                          {expandedLegs[idx]
-                            ? 'Hide Intermediate Halts'
-                            : `View Intermediate Halts (${leg.intermediate_stop_count !== undefined ? `${leg.intermediate_stop_count} stops` : 'Expand'})`}
+                          {isLegExpanded ? 'Hide' : 'View'}{' '}
+                          {leg.intermediate_stop_count !== undefined && leg.intermediate_stop_count > 0
+                            ? `${leg.intermediate_stop_count} intermediate halts`
+                            : 'intermediate stops'}
                         </span>
-                        {expandedLegs[idx] ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                        {isLegExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
                       </button>
 
-                      {expandedLegs[idx] && (
-                        <div className="mt-2">
+                      {isLegExpanded && (
+                        <div className="mt-3 pt-3 border-t border-cream-200">
                           <IntermediateStopsList
                             trainNumber={leg.train_number}
                             fromCode={leg.origin_code}
@@ -337,37 +461,30 @@ export function JourneyDetailsModal({
                         </div>
                       )}
                     </div>
-
-                    {/* Platform & Station Guidance */}
-                    <div className="pt-2 border-t border-cream-200 flex items-start gap-2 text-[11px] text-espresso-600">
-                      <AlertCircle className="w-3.5 h-3.5 text-olive flex-shrink-0 mt-0.5" />
-                      <span>
-                        <strong>Station Platform Policy:</strong> Platforms in Indian Railways are allocated dynamically on the day of departure via station display boards. Check station electronic indicators upon arrival for cross-platform transfers and foot overbridge routes.
-                      </span>
-                    </div>
                   </div>
 
-                  {/* Transfer Layover Node if there is a next leg */}
-                  {layoverMins !== undefined && (
-                    <div className="p-4 bg-cream-50 rounded-xl border border-cream-300 space-y-2">
-                      <div className="flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-2">
-                          <Clock className="w-4 h-4 text-terracotta" />
-                          <span className="font-semibold text-xs text-espresso-900">
-                            Interchange at Station <strong className="font-mono text-terracotta">{leg.destination_code}</strong>
+                  {/* Transfer Layover Connector */}
+                  {layoverDur !== undefined && (
+                    <div className="my-2 p-3 bg-cream-100 rounded-xl border border-cream-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2.5 h-2.5 rounded-full bg-terracotta" />
+                        <div>
+                          <span className="text-xs font-bold text-espresso-900">
+                            Transfer at {leg.destination_code} ({formatDuration(layoverDur)} layover)
+                          </span>
+                          <span className="text-[11px] text-espresso-600 block">
+                            Change from Train #{leg.train_number} to Train #{route.legs[idx + 1].train_number}
                           </span>
                         </div>
-                        <TransferAdvisoryBadge
-                          transferMinutes={layoverMins}
-                          transferStationCode={leg.destination_code}
-                          riskLevel={route.layovers?.[idx]?.risk_level}
-                          riskDescription={route.layovers?.[idx]?.risk_description}
-                          variant="compact"
-                        />
                       </div>
-                      <p className="text-[11px] text-espresso-600 leading-relaxed">
-                        Layover window: <strong>{formatDuration(layoverMins)}</strong>. Next connecting train (Leg {idx + 2}) departs from this station at <strong>{formatTime(route.legs[idx + 1].departure_time)}</strong>. Navigate cross-platform transfers via foot overbridges; station waiting lounges and refreshment facilities are recommended during extended connections.
-                      </p>
+
+                      <TransferAdvisoryBadge
+                        transferMinutes={layoverDur}
+                        transferStationCode={leg.destination_code}
+                        riskLevel={layoverObj?.risk_level}
+                        riskDescription={layoverObj?.risk_description}
+                        variant="detailed"
+                      />
                     </div>
                   )}
                 </React.Fragment>
@@ -377,17 +494,39 @@ export function JourneyDetailsModal({
         </div>
 
         {/* Modal Footer Controls */}
-        <div className="p-4 sm:p-5 border-t border-cream-200 bg-cream-50 flex items-center justify-between gap-3 flex-shrink-0">
-          <div className="flex items-center gap-2">
+        <div className="p-4 sm:p-5 border-t border-cream-200 bg-cream-50 flex items-center justify-between gap-3 flex-shrink-0 flex-wrap">
+          <div className="flex items-center gap-2 flex-wrap">
             <button
               type="button"
-              onClick={handleCopy}
+              id="modal-btn-share-link"
+              onClick={handleShareLink}
               className="px-3.5 py-2 rounded-xl border border-cream-300 bg-white hover:bg-cream-100 text-espresso-800 text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm"
+              title="Copy shareable link"
             >
-              {copied ? (
+              {copiedLink ? (
                 <>
                   <Check className="w-3.5 h-3.5 text-olive" />
-                  <span className="text-olive">Copied!</span>
+                  <span className="text-olive font-bold">Link Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Link className="w-3.5 h-3.5 text-espresso-600" />
+                  <span>Share Link</span>
+                </>
+              )}
+            </button>
+
+            <button
+              type="button"
+              id="modal-btn-copy-itinerary"
+              onClick={handleCopyItinerary}
+              className="px-3.5 py-2 rounded-xl border border-cream-300 bg-white hover:bg-cream-100 text-espresso-800 text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm"
+              title="Copy plain text itinerary"
+            >
+              {copiedItinerary ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-olive" />
+                  <span className="text-olive font-bold">Itinerary Copied!</span>
                 </>
               ) : (
                 <>
@@ -403,14 +542,14 @@ export function JourneyDetailsModal({
               className="px-3.5 py-2 rounded-xl border border-cream-300 bg-white hover:bg-cream-100 text-espresso-800 text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm hidden sm:inline-flex"
             >
               <Printer className="w-3.5 h-3.5 text-espresso-600" />
-              <span>Print Itinerary</span>
+              <span>Print</span>
             </button>
           </div>
 
           <button
             type="button"
             onClick={onClose}
-            className="px-5 py-2 bg-espresso-900 text-cream-100 rounded-xl text-xs font-semibold hover:bg-espresso-800 transition-colors"
+            className="px-5 py-2 bg-espresso-900 text-cream-100 rounded-xl text-xs font-semibold hover:bg-espresso-800 transition-colors ml-auto"
           >
             Close
           </button>
@@ -419,4 +558,3 @@ export function JourneyDetailsModal({
     </div>
   );
 }
-

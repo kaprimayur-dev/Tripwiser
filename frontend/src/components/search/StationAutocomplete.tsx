@@ -20,6 +20,7 @@ interface StationAutocompleteProps {
   onChange: (station: Station | null) => void;
   icon?: 'train' | 'pin';
   className?: string;
+  id?: string;
 }
 
 export function StationAutocomplete({
@@ -29,6 +30,7 @@ export function StationAutocomplete({
   onChange,
   icon = 'train',
   className = '',
+  id,
 }: StationAutocompleteProps) {
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
@@ -130,16 +132,26 @@ export function StationAutocomplete({
 
   return (
     <div ref={wrapperRef} className={`relative flex-1 ${className}`}>
-      <label className="block text-[11px] font-bold uppercase tracking-wider text-espresso-600 mb-1">
-        {label}
-      </label>
+      <div className="flex items-center justify-between mb-1">
+        <label
+          htmlFor={id}
+          className="block text-[11px] font-bold uppercase tracking-wider text-espresso-600"
+        >
+          {label}
+        </label>
+        {value && (
+          <span className="text-[10px] text-espresso-500 font-medium">
+            {[value.city, value.state].filter(Boolean).join(', ')}
+          </span>
+        )}
+      </div>
 
       <div
         onClick={() => {
           setIsOpen(true);
           inputRef.current?.focus();
         }}
-        className={`relative flex items-center bg-white rounded-xl border transition-all duration-150 px-3.5 py-2.5 cursor-text ${
+        className={`relative flex items-center bg-white rounded-xl border transition-all duration-150 px-3.5 py-2.5 min-h-[46px] cursor-text ${
           isOpen
             ? 'border-terracotta ring-2 ring-terracotta/15 shadow-sm'
             : 'border-cream-300 hover:border-espresso-500'
@@ -153,8 +165,9 @@ export function StationAutocomplete({
           )}
         </div>
 
-        <div className="flex-1 min-w-0 pr-8">
+        <div className="flex-1 min-w-0 pr-12">
           <input
+            id={id}
             ref={inputRef}
             type="text"
             value={query}
@@ -181,6 +194,7 @@ export function StationAutocomplete({
               <button
                 type="button"
                 onClick={handleClear}
+                aria-label={`Clear ${label} selection`}
                 className="p-1 text-espresso-500 hover:text-espresso-900 rounded-full hover:bg-cream-100 transition-colors"
                 title="Clear station"
               >
@@ -211,9 +225,10 @@ export function StationAutocomplete({
                 <button
                   key={station.code}
                   type="button"
+                  data-station-code={station.code}
                   onMouseEnter={() => setHighlightedIndex(index)}
                   onClick={() => handleSelect(station)}
-                  className={`w-full px-3.5 py-2.5 text-left flex items-center justify-between gap-3 transition-colors ${
+                  className={`w-full px-3.5 py-2.5 min-h-[44px] text-left flex items-center justify-between gap-3 transition-colors ${
                     isHighlighted || isSelected
                       ? 'bg-cream-100 text-espresso-900'
                       : 'hover:bg-cream-50 text-espresso-800'
@@ -243,4 +258,3 @@ export function StationAutocomplete({
     </div>
   );
 }
-
