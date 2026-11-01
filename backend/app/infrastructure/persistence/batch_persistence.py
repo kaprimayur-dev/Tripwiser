@@ -214,6 +214,10 @@ class RailwayDataPersistenceService:
             if persist_stations and dataset.stations:
                 st_count = await self._execute_bulk_stations(dataset.stations, chunk_size, session)
             if persist_trains and dataset.compiled_trains:
+                valid_numbers = [t.number for t in dataset.compiled_trains]
+                await session.execute(
+                    delete(TrainORM).where(TrainORM.number.not_in(valid_numbers))
+                )
                 tr_count = await self._execute_bulk_trains(dataset.compiled_trains, chunk_size, session)
             return st_count, tr_count
 
@@ -222,6 +226,10 @@ class RailwayDataPersistenceService:
                 if persist_stations and dataset.stations:
                     st_count = await self._execute_bulk_stations(dataset.stations, chunk_size, s)
                 if persist_trains and dataset.compiled_trains:
+                    valid_numbers = [t.number for t in dataset.compiled_trains]
+                    await s.execute(
+                        delete(TrainORM).where(TrainORM.number.not_in(valid_numbers))
+                    )
                     tr_count = await self._execute_bulk_trains(dataset.compiled_trains, chunk_size, s)
 
         return st_count, tr_count

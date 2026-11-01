@@ -72,3 +72,4 @@ class TestCalendarProviders:
     def test_composite_calendar_provider_empty(self):
         composite = CompositeCalendarProvider([])
         assert composite.get_running_days("12001") is None
+

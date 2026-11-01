@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Mapping, Protocol, Sequence, Union
+from typing import Any, Mapping, Protocol, Sequence, Union
 import json
 
 
@@ -46,13 +46,14 @@ class JsonCalendarProvider:
     """
     Verified running calendar provider backed by an external structured JSON file.
     
-    Supports metadata extraction (source, license, version) and validates that running days
-    fall strictly within 0 (Monday) to 6 (Sunday).
+    Supports metadata extraction (source, license, version), train-specific provenance inspection,
+    and validates that running days fall strictly within 0 (Monday) to 6 (Sunday).
     """
 
     def __init__(self, json_path: Union[str, Path]):
         self._path = Path(json_path)
         self._mapping: dict[str, tuple[int, ...]] = {}
+        self._provenance_by_train: dict[str, dict[str, Any]] = {}
         self._metadata: dict[str, str] = {
             "source": "UNKNOWN",
             "license": "UNKNOWN",
@@ -73,15 +74,27 @@ class JsonCalendarProvider:
                 self._metadata["source"] = str(data.get("source", "Official Indian Railways Publications"))
                 self._metadata["license"] = str(data.get("license", "Government Open Data License - India (GODL)"))
                 self._metadata["version"] = str(data.get("version", "1.0.0"))
+                if "audit_status" in data:
+                    self._metadata["audit_status"] = str(data["audit_status"])
+                if "audit_policy" in data:
+                    self._metadata["audit_policy"] = str(data["audit_policy"])
                 raw_calendars = data["calendars"]
             else:
                 raw_calendars = data
 
-            for num, days in raw_calendars.items():
+            for num, val in raw_calendars.items():
+                clean_num = str(num).strip()
+                days = None
+                if isinstance(val, dict):
+                    days = val.get("runs_on_days")
+                    self._provenance_by_train[clean_num] = val
+                elif isinstance(val, (list, tuple)):
+                    days = val
+
                 if isinstance(days, (list, tuple)):
                     valid_days = [int(d) for d in days if 0 <= int(d) <= 6]
                     if valid_days:
-                        self._mapping[str(num).strip()] = tuple(sorted(set(valid_days)))
+                        self._mapping[clean_num] = tuple(sorted(set(valid_days)))
 
     @property
     def metadata(self) -> dict[str, str]:
@@ -93,6 +106,10 @@ class JsonCalendarProvider:
 
     def get_running_days(self, train_number: str) -> tuple[int, ...] | None:
         return self._mapping.get(str(train_number).strip())
+
+    def get_provenance(self, train_number: str) -> dict[str, Any] | None:
+        return self._provenance_by_train.get(str(train_number).strip())
+
 
 
 class CompositeCalendarProvider:
