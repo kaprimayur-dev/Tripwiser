@@ -42,8 +42,11 @@ class RouteSearchResult:
     direct_routes_count: int = 0
     transfer_routes_count: int = 0
     no_route_reason: Optional[str] = None
+    timetable_status: str = "TIMETABLE_CONFIRMED"
     fare_status: str = "DEFERRED_NO_COMMERCIAL_FEED"
-    availability_status: str = "TIMETABLE_CONFIRMED_SEAT_AVAILABILITY_DEFERRED"
+    availability_status: str = "NOT_CHECKED_SEAT_AVAILABILITY_DEFERRED"
+    sorting_applied: str = "recommended"
+    sorting_note: Optional[str] = None
 
 
 class RouteDiscoveryEngine:
@@ -121,7 +124,16 @@ class RouteDiscoveryEngine:
             candidate_routes.extend(connecting_routes)
 
         # 4. Rank and Filter Routes
-        ranked_routes = self._rank_routes(candidate_routes, sort_by=sort_by)
+        sorting_applied = sort_by.lower()
+        sorting_note = None
+        if sorting_applied == "cheapest":
+            sorting_applied = "recommended"
+            sorting_note = "Cheapest sorting deferred: No verified commercial fare feed is available."
+
+        result.sorting_applied = sorting_applied
+        result.sorting_note = sorting_note
+
+        ranked_routes = self._rank_routes(candidate_routes, sort_by=sorting_applied)
         result.routes = ranked_routes[:limit]
         result.total_routes_found = len(candidate_routes)
         result.direct_routes_count = len(direct_routes)
@@ -164,7 +176,7 @@ class RouteDiscoveryEngine:
                     route_id=route_id,
                     legs=[leg],
                     total_duration_minutes=leg.duration_minutes,
-                    total_fare=0.0,
+                    total_fare=None,
                     transfer_count=0,
                     transfer_durations_minutes=[],
                     is_direct=True,
@@ -233,7 +245,7 @@ class RouteDiscoveryEngine:
                                 route_id=route_id,
                                 legs=[leg1, leg2],
                                 total_duration_minutes=total_duration,
-                                total_fare=0.0,
+                                total_fare=None,
                                 transfer_count=1,
                                 transfer_durations_minutes=[transfer_minutes],
                                 is_direct=False,
@@ -319,16 +331,7 @@ class RouteDiscoveryEngine:
         if distance_km < 0:
             distance_km = float(dest_stop.distance_km)
 
-        # Distinguish timetable-confirmed service from live seat availability
-        availability = AvailabilityResult(
-            status=AvailabilityStatusCode.CHARTING_PENDING,
-            quota="GN",
-            travel_class="3A",
-            fare=0.0,
-            checked_at=datetime.datetime.now(datetime.timezone.utc),
-            source="timetable_confirmed",
-        )
-
+        # Timetable route discovery does not fabricate live availability or commercial fares
         return JourneyLeg(
             train_number=train.number,
             train_name=train.name,
@@ -337,9 +340,9 @@ class RouteDiscoveryEngine:
             departure_time=dep_datetime,
             arrival_time=arr_datetime,
             duration_minutes=duration_minutes,
-            travel_class="3A",
+            travel_class=None,
             distance_km=distance_km,
-            availability=availability,
+            availability=None,
         )
 
     def _rank_routes(self, routes: Sequence[CandidateRoute], sort_by: str) -> List[CandidateRoute]:

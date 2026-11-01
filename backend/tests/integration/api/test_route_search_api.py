@@ -78,8 +78,9 @@ async def test_route_search_direct_trains():
         assert data["query"]["destination"] == "NDLS"
         assert data["origin_station"] is not None
         assert data["destination_station"] is not None
+        assert data["timetable_status"] == "TIMETABLE_CONFIRMED"
         assert data["fare_status"] == "DEFERRED_NO_COMMERCIAL_FEED"
-        assert data["availability_status"] == "TIMETABLE_CONFIRMED_SEAT_AVAILABILITY_DEFERRED"
+        assert data["availability_status"] == "NOT_CHECKED_SEAT_AVAILABILITY_DEFERRED"
 
         # In DataMeet compiled dataset, 12951 and 12953 run BCT -> NDLS / NZM
         if data["total_routes_found"] > 0:
@@ -87,15 +88,15 @@ async def test_route_search_direct_trains():
             route = data["routes"][0]
             assert route["is_direct"] is True
             assert route["transfer_count"] == 0
-            assert route["total_fare"] == 0.0
+            assert route["total_fare"] is None  # Never fabricated to 0.0
             assert route["total_duration_minutes"] > 0
             assert len(route["legs"]) == 1
 
             leg = route["legs"][0]
             assert leg["train_number"] in ("12951", "12953")
-            assert leg["availability"]["status"] == "CHARTING_PENDING"
-            assert leg["availability"]["fare"] == 0.0
-            assert leg["availability"]["source"] == "timetable_confirmed"
+            assert leg["timetable_status"] == "TIMETABLE_CONFIRMED"
+            assert leg["travel_class"] is None  # Unverified commercial classes not fabricated
+            assert leg["availability"] is None  # Seat availability provider was not queried
 
 
 @pytest.mark.asyncio
@@ -134,6 +135,19 @@ async def test_route_search_sorting_modes():
             assert res.status_code == 200
             data = res.json()
             assert data["query"]["sort_by"] == sort_mode
+            assert data["sorting_applied"] == sort_mode
+            assert data["sorting_note"] is None
+
+        # Test cheapest sorting fallback: must clearly indicate deferral
+        res_cheap = await client.get(
+            "/api/v1/routes/search?origin=BCT&destination=NDLS&date=2026-11-05&sort_by=cheapest"
+        )
+        assert res_cheap.status_code == 200
+        cheap_data = res_cheap.json()
+        assert cheap_data["query"]["sort_by"] == "cheapest"
+        assert cheap_data["sorting_applied"] == "recommended"
+        assert cheap_data["sorting_note"] is not None
+        assert "deferred" in cheap_data["sorting_note"].lower()
 
 
 @pytest.mark.asyncio

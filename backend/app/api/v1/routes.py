@@ -24,10 +24,10 @@ class AvailabilitySchema(BaseModel):
     status: str
     available_count: Optional[int] = None
     waitlist_count: Optional[int] = None
-    quota: str
-    travel_class: str
-    fare: float
-    source: str
+    quota: Optional[str] = None
+    travel_class: Optional[str] = None
+    fare: Optional[float] = None
+    source: Optional[str] = None
 
 
 class LegSchema(BaseModel):
@@ -38,9 +38,10 @@ class LegSchema(BaseModel):
     departure_time: datetime.datetime
     arrival_time: datetime.datetime
     duration_minutes: int
-    travel_class: str
+    travel_class: Optional[str] = None
     distance_km: float
-    availability: AvailabilitySchema
+    timetable_status: str = "TIMETABLE_CONFIRMED"
+    availability: Optional[AvailabilitySchema] = None
 
 
 class RouteSchema(BaseModel):
@@ -48,7 +49,7 @@ class RouteSchema(BaseModel):
     is_direct: bool
     transfer_count: int
     total_duration_minutes: int
-    total_fare: float
+    total_fare: Optional[float] = None
     transfer_durations_minutes: List[int]
     score: float
     legs: List[LegSchema]
@@ -69,8 +70,11 @@ class RouteSearchResponse(BaseModel):
     total_routes_found: int
     direct_routes_count: int
     transfer_routes_count: int
+    timetable_status: str = "TIMETABLE_CONFIRMED"
     fare_status: str
     availability_status: str
+    sorting_applied: str
+    sorting_note: Optional[str] = None
     no_route_reason: Optional[str] = None
     routes: List[RouteSchema]
 
@@ -134,14 +138,19 @@ async def search_routes(
                     duration_minutes=leg.duration_minutes,
                     travel_class=leg.travel_class,
                     distance_km=leg.distance_km,
-                    availability=AvailabilitySchema(
-                        status=leg.availability.status.value,
-                        available_count=leg.availability.available_count,
-                        waitlist_count=leg.availability.waitlist_count,
-                        quota=leg.availability.quota,
-                        travel_class=leg.availability.travel_class,
-                        fare=leg.availability.fare,
-                        source=leg.availability.source,
+                    timetable_status="TIMETABLE_CONFIRMED",
+                    availability=(
+                        AvailabilitySchema(
+                            status=leg.availability.status.value,
+                            available_count=leg.availability.available_count,
+                            waitlist_count=leg.availability.waitlist_count,
+                            quota=leg.availability.quota,
+                            travel_class=leg.availability.travel_class,
+                            fare=leg.availability.fare,
+                            source=leg.availability.source,
+                        )
+                        if leg.availability is not None
+                        else None
                     ),
                 )
                 for leg in r.legs
@@ -191,8 +200,11 @@ async def search_routes(
         total_routes_found=result.total_routes_found,
         direct_routes_count=result.direct_routes_count,
         transfer_routes_count=result.transfer_routes_count,
+        timetable_status=result.timetable_status,
         fare_status=result.fare_status,
         availability_status=result.availability_status,
+        sorting_applied=result.sorting_applied,
+        sorting_note=result.sorting_note,
         no_route_reason=result.no_route_reason,
         routes=routes_data,
     )

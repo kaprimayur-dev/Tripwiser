@@ -47,8 +47,8 @@ class TestRouteDiscoveryEngineUnit:
         assert leg_gwl.arrival_time == datetime.datetime(2026, 11, 5, 8, 0)
         assert leg_gwl.duration_minutes == 22 * 60  # 10:00 Wed to 08:00 Thu = 22 hours
         assert leg_gwl.distance_km == 800.0
-        assert leg_gwl.availability.source == "timetable_confirmed"
-        assert leg_gwl.availability.fare == 0.0
+        assert leg_gwl.availability is None
+        assert leg_gwl.travel_class is None
 
         # 2. Searching from BPL on Thursday (2026-11-05 is a Thursday, weekday=3)
         # Since BPL day_offset is 1, train started from GWL on Wednesday (3 - 1 = 2) -> MATCH!
@@ -98,11 +98,11 @@ class TestRouteDiscoveryEngineUnit:
         leg_a = JourneyLeg(
             train_number="T1", train_name="Direct", origin_code="A", destination_code="C",
             departure_time=now, arrival_time=now + datetime.timedelta(minutes=600),
-            duration_minutes=600, travel_class="3A", distance_km=500.0,
-            availability=MagicMock(status=AvailabilityStatusCode.CHARTING_PENDING, quota="GN", travel_class="3A", fare=0.0, source="timetable_confirmed")
+            duration_minutes=600, travel_class=None, distance_km=500.0,
+            availability=None
         )
         route_direct = CandidateRoute(
-            route_id="r_direct", legs=[leg_a], total_duration_minutes=600, total_fare=0.0,
+            route_id="r_direct", legs=[leg_a], total_duration_minutes=600, total_fare=None,
             transfer_count=0, transfer_durations_minutes=[], is_direct=True, score=600.0
         )
 
@@ -113,16 +113,16 @@ class TestRouteDiscoveryEngineUnit:
         t_b2_arr = t_b2_dep + datetime.timedelta(minutes=240)
         leg_b1 = JourneyLeg(
             train_number="T2", train_name="Leg 1", origin_code="A", destination_code="B",
-            departure_time=now, arrival_time=t_b1_arr, duration_minutes=200, travel_class="3A", distance_km=250.0,
-            availability=MagicMock(status=AvailabilityStatusCode.CHARTING_PENDING, quota="GN", travel_class="3A", fare=0.0, source="timetable_confirmed")
+            departure_time=now, arrival_time=t_b1_arr, duration_minutes=200, travel_class=None, distance_km=250.0,
+            availability=None
         )
         leg_b2 = JourneyLeg(
             train_number="T3", train_name="Leg 2", origin_code="B", destination_code="C",
-            departure_time=t_b2_dep, arrival_time=t_b2_arr, duration_minutes=240, travel_class="3A", distance_km=250.0,
-            availability=MagicMock(status=AvailabilityStatusCode.CHARTING_PENDING, quota="GN", travel_class="3A", fare=0.0, source="timetable_confirmed")
+            departure_time=t_b2_dep, arrival_time=t_b2_arr, duration_minutes=240, travel_class=None, distance_km=250.0,
+            availability=None
         )
         route_transfer = CandidateRoute(
-            route_id="r_transfer", legs=[leg_b1, leg_b2], total_duration_minutes=500, total_fare=0.0,
+            route_id="r_transfer", legs=[leg_b1, leg_b2], total_duration_minutes=500, total_fare=None,
             transfer_count=1, transfer_durations_minutes=[60], is_direct=False, score=500.0 + 180.0
         )
 
@@ -140,6 +140,38 @@ class TestRouteDiscoveryEngineUnit:
         recommended = engine._rank_routes([route_direct, route_transfer], sort_by="recommended")
         assert recommended[0].route_id == "r_direct"
         assert recommended[1].route_id == "r_transfer"
+
+        # 4. Ranking by "cheapest": Fares deferred, falls back to recommended ranking
+        cheapest = engine._rank_routes([route_direct, route_transfer], sort_by="cheapest")
+        assert cheapest[0].route_id == "r_direct"
+        assert cheapest[1].route_id == "r_transfer"
+
+    def test_unverified_commercial_data_never_fabricated(self):
+        engine = RouteDiscoveryEngine(session=MagicMock())
+        stops = [
+            TrainScheduleEntry(
+                station_code="NDLS", station_name="New Delhi", arrival_time=None,
+                departure_time=datetime.time(6, 0), stop_sequence=1, day_offset=0, distance_km=0.0
+            ),
+            TrainScheduleEntry(
+                station_code="BPL", station_name="Bhopal", arrival_time=datetime.time(14, 0),
+                departure_time=None, stop_sequence=2, day_offset=0, distance_km=700.0
+            ),
+        ]
+        train = Train(
+            number="12001",
+            name="Shatabdi",
+            origin_code="NDLS",
+            destination_code="BPL",
+            runs_on_days=[0, 1, 2, 3, 4, 5, 6],
+            schedule=stops,
+        )
+
+        leg = engine._build_journey_leg(train, "NDLS", "BPL", datetime.date(2026, 11, 2))
+        assert leg is not None
+        # Must never fabricate fare, seat availability, travel class or quota
+        assert leg.availability is None
+        assert leg.travel_class is None
 
     @pytest.mark.asyncio
     async def test_search_routes_same_origin_destination(self):

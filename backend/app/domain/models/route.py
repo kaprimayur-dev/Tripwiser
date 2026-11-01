@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel, Field, ConfigDict, field_validator, ValidationInfo
 import datetime
 from app.domain.models.availability import AvailabilityResult
@@ -12,13 +13,23 @@ class JourneyLeg(BaseModel):
     departure_time: datetime.datetime
     arrival_time: datetime.datetime
     duration_minutes: int = Field(..., ge=0)
-    travel_class: str = Field(..., min_length=1)
+    travel_class: Optional[str] = Field(None)
     distance_km: float = Field(..., ge=0.0)
-    availability: AvailabilityResult
+    availability: Optional[AvailabilityResult] = None
 
-    @field_validator("train_number", "train_name", "origin_code", "destination_code", "travel_class")
+    @field_validator("train_number", "train_name", "origin_code", "destination_code")
     @classmethod
     def validate_non_empty(cls, v: str) -> str:
+        stripped = v.strip()
+        if not stripped:
+            raise ValueError("Field cannot be empty or whitespace only")
+        return stripped
+
+    @field_validator("travel_class")
+    @classmethod
+    def validate_travel_class(cls, v: Optional[str]) -> Optional[str]:
+        if v is None:
+            return None
         stripped = v.strip()
         if not stripped:
             raise ValueError("Field cannot be empty or whitespace only")
@@ -60,7 +71,7 @@ class CandidateRoute(BaseModel):
     route_id: str = Field(..., min_length=1)
     legs: list[JourneyLeg] = Field(..., min_length=1)
     total_duration_minutes: int = Field(..., ge=0)
-    total_fare: float = Field(..., ge=0.0)
+    total_fare: Optional[float] = Field(None, ge=0.0)
     transfer_count: int = Field(..., ge=0)
     transfer_durations_minutes: list[int] = Field(default_factory=list)
     is_direct: bool
