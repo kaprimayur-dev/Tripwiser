@@ -5,6 +5,13 @@ from app.infrastructure.adapters.datameet.models import (
     SourceProvenance,
     AdapterResult,
 )
+from app.infrastructure.adapters.datameet.train_adapter import DataMeetTrainAdapter
+from app.infrastructure.adapters.datameet.train_models import (
+    DataMeetTrainRecord,
+    AcceptedTrainRecord,
+    TrainQuarantineRecord,
+    TrainAdapterResult,
+)
 
 __all__ = [
     "DataMeetStationAdapter",
@@ -12,4 +19,9 @@ __all__ = [
     "QuarantineRecord",
     "SourceProvenance",
     "AdapterResult",
+    "DataMeetTrainAdapter",
+    "DataMeetTrainRecord",
+    "AcceptedTrainRecord",
+    "TrainQuarantineRecord",
+    "TrainAdapterResult",
 ]
