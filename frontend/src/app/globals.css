@@ -6,11 +6,28 @@
   body {
     background-color: #F4EFE4;
     color: #191612;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', system-ui, sans-serif;
-    font-weight: 700;
+    font-family: var(--font-epilogue), 'Epilogue', sans-serif;
   }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F4EFE4;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D8D1BF;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #756F65;
 }

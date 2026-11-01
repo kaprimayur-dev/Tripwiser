@@ -10,29 +10,31 @@ module.exports = {
       colors: {
         cream: {
           50: '#FAF7F2',
-          100: '#F4EFE4', // Primary Cream background
-          200: '#E7E2D7',
-          300: '#D8D2C4',
+          100: '#F4EFE4', // Primary Archival Cream canvas
+          200: '#EAE4D5', // Elevated surface
+          300: '#D8D1BF', // Ledger border rule
         },
         espresso: {
-          900: '#191612', // Primary Espresso dark text
+          900: '#191612', // Primary dark text
           800: '#2A2520',
           700: '#3D3630',
+          600: '#564F44', // Secondary muted umber text
+          500: '#756F65',
         },
         terracotta: {
           DEFAULT: '#B9532D', // Primary Terracotta accent
           hover: '#A34624',
-          light: '#F5E8E2',
+          light: '#FDF2ED',
         },
         olive: {
           DEFAULT: '#67664A', // Muted Olive secondary accent
           hover: '#54533C',
           light: '#ECEBE4',
-        }
+        },
       },
       fontFamily: {
-        display: ['Space Grotesk', 'Cabinet Grotesk', 'system-ui', 'sans-serif'],
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['var(--font-epilogue)', 'Epilogue', 'sans-serif'],
+        sans: ['var(--font-plus-jakarta)', 'Plus Jakarta Sans', 'sans-serif'],
       },
     },
   },
