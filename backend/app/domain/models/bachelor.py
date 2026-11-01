@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field, ConfigDict, field_validator, ValidationInfo
 import datetime
+from typing import Optional
 
 class BerthSegment(BaseModel):
     model_config = ConfigDict(frozen=True)
@@ -140,3 +141,25 @@ class BachelorSpecialItinerary(BaseModel):
                 "is_continuous cannot be False."
             )
         return v
+
+
+class BachelorSpecialSearchResult(BaseModel):
+    model_config = ConfigDict(frozen=True)
+
+    origin_code: str = Field(..., min_length=1, description="Requested origin station code")
+    destination_code: str = Field(..., min_length=1, description="Requested destination station code")
+    travel_date: datetime.date = Field(..., description="Date of travel")
+    travel_class: Optional[str] = Field(None, description="Requested travel class filter")
+    total_itineraries: int = Field(..., ge=0, description="Total number of discovered valid itineraries")
+    itineraries: list[BachelorSpecialItinerary] = Field(default_factory=list, description="Ranked list of itineraries")
+    status: str = Field("SUCCESS", description="Discovery status (SUCCESS, NO_CHART_VACANCIES, NO_DIRECT_TRAINS)")
+    data_source: str = Field("chart_vacancies", description="Underlying vacancy repository data source")
+    is_live_source: bool = Field(False, description="Whether data is sourced from real-time live charting API")
+    chart_policy_notice: str = Field(
+        "Charts in Indian Railways are prepared 4 hours prior to train departure from its origin station (first chart) "
+        "and 30 minutes prior (final chart). Berth vacancies are only observed during active chart windows. "
+        "Bachelor Special combines vacant segments on the same train; separate tickets or TTE endorsement may "
+        "be required. One PNR is not guaranteed.",
+        description="Transparent regulatory and charting notice"
+    )
+

@@ -6,20 +6,33 @@ import { Footer } from '../components/layout/Footer';
 import { JourneySearchCard } from '../components/search/JourneySearchCard';
 import { ResultsStream } from '../components/results/ResultsStream';
 import { DataIntegrityBanner } from '../components/common/DataIntegrityBanner';
+import { BachelorSearchCard } from '../components/bachelor/BachelorSearchCard';
+import { BachelorSpecialStream } from '../components/bachelor/BachelorSpecialStream';
 import { SortMode } from '../components/results/SortingFilterBar';
-import { Station, RouteSearchResponse } from '../types/api';
-import { searchRoutes, getStationByCode } from '../services/api';
+import { Station, RouteSearchResponse, BachelorSpecialSearchResponse } from '../types/api';
+import { searchRoutes, searchBachelorSpecial, getStationByCode } from '../services/api';
+import { Sparkles, Navigation } from 'lucide-react';
 
 export default function Home() {
+  const [activeMode, setActiveMode] = useState<'connecting' | 'bachelor'>('connecting');
+
+  // Shared Form State
   const [origin, setOrigin] = useState<Station | null>(null);
   const [destination, setDestination] = useState<Station | null>(null);
   const [date, setDate] = useState<string>('');
+
+  // Connecting Routes State
   const [maxTransfers, setMaxTransfers] = useState<number>(1);
   const [sortMode, setSortMode] = useState<SortMode>('recommended');
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
   const [searchResponse, setSearchResponse] = useState<RouteSearchResponse | null>(null);
+
+  // Bachelor Special State
+  const [travelClass, setTravelClass] = useState<string>('3A');
+  const [bachelorLoading, setBachelorLoading] = useState<boolean>(false);
+  const [bachelorError, setBachelorError] = useState<Error | null>(null);
+  const [bachelorResponse, setBachelorResponse] = useState<BachelorSpecialSearchResponse | null>(null);
 
   // Default tomorrow date on mount
   useEffect(() => {
@@ -28,7 +41,7 @@ export default function Home() {
     setDate(d.toISOString().split('T')[0]);
   }, []);
 
-  // Execute route search
+  // Execute connecting route search
   const executeSearch = useCallback(
     async (params: {
       originCode: string;
@@ -50,7 +63,6 @@ export default function Home() {
         });
         setSearchResponse(response);
 
-        // Update URL query parameters cleanly
         if (typeof window !== 'undefined') {
           const url = new URL(window.location.href);
           url.searchParams.set('origin', params.originCode);
@@ -69,7 +81,36 @@ export default function Home() {
     []
   );
 
-  // Handle search submission from JourneySearchCard
+  // Execute Bachelor Special search
+  const executeBachelorSearch = useCallback(
+    async (params: {
+      originCode: string;
+      destCode: string;
+      journeyDate: string;
+      preferredClass?: string;
+    }) => {
+      setBachelorLoading(true);
+      setBachelorError(null);
+
+      try {
+        const response = await searchBachelorSpecial({
+          origin: params.originCode,
+          destination: params.destCode,
+          date: params.journeyDate,
+          travelClass: params.preferredClass,
+        });
+        setBachelorResponse(response);
+      } catch (err: any) {
+        setBachelorError(err instanceof Error ? err : new Error(String(err)));
+        setBachelorResponse(null);
+      } finally {
+        setBachelorLoading(false);
+      }
+    },
+    []
+  );
+
+  // Handle connecting search submission
   const handleSearchSubmit = (params: {
     origin: Station;
     destination: Station;
@@ -90,6 +131,26 @@ export default function Home() {
     });
   };
 
+  // Handle Bachelor Special search submission
+  const handleBachelorSubmit = (params: {
+    origin: Station;
+    destination: Station;
+    date: string;
+    travelClass?: string;
+  }) => {
+    setOrigin(params.origin);
+    setDestination(params.destination);
+    setDate(params.date);
+    if (params.travelClass) setTravelClass(params.travelClass);
+
+    executeBachelorSearch({
+      originCode: params.origin.code,
+      destCode: params.destination.code,
+      journeyDate: params.date,
+      preferredClass: params.travelClass,
+    });
+  };
+
   // Handle changing sort mode
   const handleSortChange = (newSort: SortMode) => {
     setSortMode(newSort);
@@ -104,7 +165,7 @@ export default function Home() {
     }
   };
 
-  // Helper to quickly load a test corridor
+  // Corridor helper
   const handleSelectCorridor = async (origCode: string, destCode: string) => {
     try {
       const [origStation, destStation] = await Promise.all([
@@ -117,13 +178,22 @@ export default function Home() {
         setDestination(destStation);
         const queryDate = date || new Date().toISOString().split('T')[0];
 
-        executeSearch({
-          originCode: origStation.code,
-          destCode: destStation.code,
-          journeyDate: queryDate,
-          transfers: 1,
-          sortBy: 'recommended',
-        });
+        if (activeMode === 'connecting') {
+          executeSearch({
+            originCode: origStation.code,
+            destCode: destStation.code,
+            journeyDate: queryDate,
+            transfers: 1,
+            sortBy: 'recommended',
+          });
+        } else {
+          executeBachelorSearch({
+            originCode: origStation.code,
+            destCode: destStation.code,
+            journeyDate: queryDate,
+            preferredClass: travelClass,
+          });
+        }
       }
     } catch (err) {
       console.error('Failed to set corridor:', err);
@@ -132,7 +202,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-cream-100 text-espresso-900">
-      <Navbar />
+      <Navbar currentMode={activeMode} onSelectMode={setActiveMode} />
 
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8">
         {/* Hero Section */}
@@ -142,40 +212,98 @@ export default function Home() {
           </div>
 
           <h1 className="font-display text-4xl sm:text-5xl font-bold tracking-tight text-espresso-900 leading-tight">
-            The direct route isn&rsquo;t the only route.
+            {activeMode === 'connecting'
+              ? 'The direct route isn’t the only route.'
+              : 'One train. Continuous berths. Zero waitlist.'}
           </h1>
 
           <p className="text-sm sm:text-base text-espresso-600 leading-relaxed">
-            When direct trains are waitlisted, TripWiser discovers practical connecting journeys, guaranteed transfer windows, and nearby station alternatives across Indian Railways.
+            {activeMode === 'connecting'
+              ? 'When direct trains are waitlisted, TripWiser discovers practical connecting journeys, guaranteed transfer windows, and nearby station alternatives across Indian Railways.'
+              : 'TripWiser Bachelor Special finds and assembles vacant berth segments across intermediate stations on the same train, giving you a continuous journey without changing trains.'}
           </p>
         </div>
 
-        {/* Search Console */}
-        <JourneySearchCard
-          initialOrigin={origin}
-          initialDestination={destination}
-          initialDate={date}
-          initialMaxTransfers={maxTransfers}
-          isLoading={isLoading}
-          onSearch={handleSearchSubmit}
-        />
+        {/* Feature Mode Selector Tabs */}
+        <div className="flex justify-center">
+          <div className="inline-flex p-1 rounded-2xl bg-cream-200/80 border border-cream-300 shadow-inner">
+            <button
+              type="button"
+              id="tab-connecting-mode"
+              onClick={() => setActiveMode('connecting')}
+              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+                activeMode === 'connecting'
+                  ? 'bg-white text-espresso-900 shadow-sm'
+                  : 'text-espresso-600 hover:text-espresso-900'
+              }`}
+            >
+              <Navigation className="w-4 h-4 text-espresso-700" />
+              <span>Connecting Route Discovery</span>
+            </button>
 
-        {/* Data Integrity Banner */}
-        <DataIntegrityBanner
-          timetableStatus={searchResponse?.timetable_status}
-          fareStatus={searchResponse?.fare_status}
-          availabilityStatus={searchResponse?.availability_status}
-        />
+            <button
+              type="button"
+              id="tab-bachelor-mode"
+              onClick={() => setActiveMode('bachelor')}
+              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+                activeMode === 'bachelor'
+                  ? 'bg-terracotta text-white shadow-sm'
+                  : 'text-terracotta hover:bg-terracotta/10'
+              }`}
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>Bachelor Special (Berth Segments)</span>
+            </button>
+          </div>
+        </div>
 
-        {/* Results Stream */}
-        <ResultsStream
-          data={searchResponse}
-          isLoading={isLoading}
-          error={error}
-          currentSort={sortMode}
-          onSortChange={handleSortChange}
-          onSelectCorridor={handleSelectCorridor}
-        />
+        {/* Dynamic Search Console according to active mode */}
+        {activeMode === 'connecting' ? (
+          <>
+            <JourneySearchCard
+              initialOrigin={origin}
+              initialDestination={destination}
+              initialDate={date}
+              initialMaxTransfers={maxTransfers}
+              isLoading={isLoading}
+              onSearch={handleSearchSubmit}
+            />
+
+            <DataIntegrityBanner
+              timetableStatus={searchResponse?.timetable_status}
+              fareStatus={searchResponse?.fare_status}
+              availabilityStatus={searchResponse?.availability_status}
+            />
+
+            <ResultsStream
+              data={searchResponse}
+              isLoading={isLoading}
+              error={error}
+              currentSort={sortMode}
+              onSortChange={handleSortChange}
+              onSelectCorridor={handleSelectCorridor}
+            />
+          </>
+        ) : (
+          <>
+            <BachelorSearchCard
+              initialOrigin={origin}
+              initialDestination={destination}
+              initialDate={date}
+              initialTravelClass={travelClass}
+              isLoading={bachelorLoading}
+              onSearch={handleBachelorSubmit}
+            />
+
+            <BachelorSpecialStream
+              data={bachelorResponse}
+              isLoading={bachelorLoading}
+              error={bachelorError}
+              onSwitchToConnecting={() => setActiveMode('connecting')}
+              onSelectSampleCorridor={handleSelectCorridor}
+            />
+          </>
+        )}
       </main>
 
       <Footer />

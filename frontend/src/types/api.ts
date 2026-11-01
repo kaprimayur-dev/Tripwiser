@@ -76,3 +76,43 @@ export interface RouteSearchResponse {
   routes: CandidateRoute[];
 }
 
+export interface BerthSegment {
+  segment_id: string;
+  train_number: string;
+  date: string;
+  coach: string;
+  berth_number: number;
+  berth_type: string;
+  from_station_code: string;
+  to_station_code: string;
+  from_sequence: number;
+  to_sequence: number;
+}
+
+export interface BachelorSpecialItinerary {
+  train_number: string;
+  train_name: string;
+  origin_code: string;
+  destination_code: string;
+  travel_date: string;
+  travel_class: string;
+  segments: BerthSegment[];
+  total_segment_count: number;
+  berth_changes_count: number;
+  is_continuous: boolean;
+}
+
+export interface BachelorSpecialSearchResponse {
+  origin_code: string;
+  destination_code: string;
+  travel_date: string;
+  travel_class?: string | null;
+  total_itineraries: number;
+  itineraries: BachelorSpecialItinerary[];
+  status: string;
+  data_source: string;
+  is_live_source: boolean;
+  chart_policy_notice: string;
+}
+
+

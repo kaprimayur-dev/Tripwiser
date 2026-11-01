@@ -3,7 +3,7 @@
  * Uses relative URL path to leverage Next.js proxy rewrites in next.config.js.
  */
 
-import { Station, NearbyStationItem, RouteSearchResponse } from '../types/api';
+import { Station, NearbyStationItem, RouteSearchResponse, BachelorSpecialSearchResponse } from '../types/api';
 
 const API_BASE = '/api/v1';
 
@@ -65,4 +65,30 @@ export async function searchRoutes(params: RouteSearchParams): Promise<RouteSear
   }
   return res.json();
 }
+
+export interface BachelorSearchParams {
+  origin: string;
+  destination: string;
+  date: string;
+  travelClass?: string;
+}
+
+export async function searchBachelorSpecial(params: BachelorSearchParams): Promise<BachelorSpecialSearchResponse> {
+  const searchParams = new URLSearchParams({
+    origin: params.origin.trim().toUpperCase(),
+    destination: params.destination.trim().toUpperCase(),
+    date: params.date,
+  });
+  if (params.travelClass) {
+    searchParams.set('travel_class', params.travelClass.trim().toUpperCase());
+  }
+
+  const res = await fetch(`${API_BASE}/bachelor/search?${searchParams.toString()}`);
+  if (!res.ok) {
+    const errorBody = await res.json().catch(() => ({ detail: res.statusText }));
+    throw new Error(errorBody.detail || `Bachelor Special search failed with status ${res.status}`);
+  }
+  return res.json();
+}
+
 
