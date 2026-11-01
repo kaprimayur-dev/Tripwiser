@@ -57,6 +57,25 @@ export interface JourneyLeg {
   intermediate_stop_count?: number;
 }
 
+export type TransferRiskLevel =
+  | 'INVALID_CONNECTION'
+  | 'TIGHT_CONNECTION'
+  | 'MODERATE_CONNECTION'
+  | 'COMFORTABLE_CONNECTION'
+  | 'LONG_WAIT';
+
+export interface TransferLayover {
+  interchange_station_code: string;
+  arriving_train_number: string;
+  departing_train_number: string;
+  arrival_time: string;
+  departure_time: string;
+  duration_minutes: number;
+  risk_level: TransferRiskLevel;
+  risk_label: string;
+  risk_description: string;
+}
+
 export interface CandidateRoute {
   route_id: string;
   is_direct: boolean;
@@ -66,6 +85,12 @@ export interface CandidateRoute {
   transfer_durations_minutes: number[];
   score: number;
   legs: JourneyLeg[];
+  // TW-113 Journey Time Breakdown & Risk Intelligence
+  total_travel_time_minutes: number;
+  total_wait_time_minutes: number;
+  layovers?: TransferLayover[];
+  insights?: string[];
+  overall_transfer_risk?: TransferRiskLevel | null;
 }
 
 export interface RouteSearchQuery {

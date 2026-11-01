@@ -192,23 +192,39 @@ export function TransitTimeline({ route }: TransitTimelineProps) {
               {layoverDuration !== undefined && (
                 <div className="flex items-center gap-3 py-1 px-3">
                   <div className="w-8 flex justify-center">
-                    <div className="w-0.5 h-10 bg-terracotta border-dashed"></div>
+                    <div className="w-0.5 h-12 bg-terracotta border-dashed"></div>
                   </div>
-                  <div className="flex-1 bg-terracotta/10 rounded-xl p-3 border border-terracotta/20 flex items-center justify-between text-xs">
+                  <div className="flex-1 bg-cream-100 rounded-xl p-3 border border-cream-300 flex items-center justify-between text-xs flex-wrap gap-2">
                     <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-terracotta" />
+                      <Clock className="w-4 h-4 text-terracotta flex-shrink-0" />
                       <div>
-                        <span className="font-semibold text-espresso-900">
-                          {formatDuration(layoverDuration)} Transfer Window
-                        </span>
-                        <span className="text-espresso-600 block text-[11px]">
-                          Change trains at station <strong className="font-mono text-terracotta font-bold">{leg.destination_code}</strong>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="font-semibold text-espresso-900">
+                            {formatDuration(layoverDuration)} Scheduled Layover
+                          </span>
+                          {route.layovers?.[index] && (
+                            <span
+                              className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                                route.layovers[index].risk_level === 'TIGHT_CONNECTION'
+                                  ? 'bg-amber-100 text-amber-900 border border-amber-300'
+                                  : route.layovers[index].risk_level === 'LONG_WAIT'
+                                  ? 'bg-cream-200 text-espresso-800 border border-cream-300'
+                                  : 'bg-olive/15 text-olive border border-olive/30'
+                              }`}
+                            >
+                              {route.layovers[index].risk_label}
+                            </span>
+                          )}
+                        </div>
+                        <span className="text-espresso-600 block text-[11px] mt-0.5">
+                          {route.layovers?.[index]?.risk_description ||
+                            `Change from Train #${leg.train_number} to #${route.legs[index + 1]?.train_number} at ${leg.destination_code}.`}
                         </span>
                       </div>
                     </div>
 
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-terracotta bg-white px-2 py-1 rounded border border-terracotta/20">
-                      Coordinated Hub
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-espresso-700 bg-white px-2 py-1 rounded border border-cream-300">
+                      Interchange Hub
                     </span>
                   </div>
                 </div>

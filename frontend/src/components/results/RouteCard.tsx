@@ -77,6 +77,20 @@ export function RouteCard({
 
   const layoverMinutes = route.transfer_durations_minutes?.[0];
 
+  const totalTravelMins =
+    route.total_travel_time_minutes !== undefined && route.total_travel_time_minutes > 0
+      ? route.total_travel_time_minutes
+      : route.legs.reduce((acc, l) => acc + (l.duration_minutes || 0), 0);
+  const totalWaitMins =
+    route.total_wait_time_minutes !== undefined
+      ? route.total_wait_time_minutes
+      : Math.max(0, route.total_duration_minutes - totalTravelMins);
+  const travelPct =
+    route.total_duration_minutes > 0
+      ? Math.min(100, Math.max(0, Math.round((totalTravelMins / route.total_duration_minutes) * 100)))
+      : 100;
+  const waitPct = 100 - travelPct;
+
   return (
     <div
       id={`route-card-${route.route_id}`}
@@ -118,6 +132,8 @@ export function RouteCard({
                     key={i}
                     transferMinutes={dur}
                     transferStationCode={intermediateHubs[i]}
+                    riskLevel={route.layovers?.[i]?.risk_level}
+                    riskDescription={route.layovers?.[i]?.risk_description}
                     variant="compact"
                   />
                 ))}
@@ -229,6 +245,58 @@ export function RouteCard({
               </span>
             </div>
           </div>
+        </div>
+
+        {/* Journey Time Breakdown Strip */}
+        <div className="bg-cream-100/70 rounded-xl p-3 border border-cream-200 space-y-2">
+          <div className="flex items-center justify-between text-xs flex-wrap gap-2">
+            <span className="font-bold text-espresso-900 flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5 text-terracotta" />
+              <span>Journey Time Breakdown:</span>
+            </span>
+            <div className="flex items-center gap-3 text-[11px] text-espresso-700 font-medium">
+              <span>
+                <strong className="text-olive font-bold">{formatDuration(totalTravelMins)}</strong> aboard train ({travelPct}%)
+              </span>
+              {!route.is_direct && (
+                <span>
+                  • <strong className="text-terracotta font-bold">{formatDuration(totalWaitMins)}</strong> transfer waiting ({waitPct}%)
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* Visual Ratio Bar */}
+          {!route.is_direct && (
+            <div className="w-full h-1.5 rounded-full bg-cream-300 overflow-hidden flex">
+              <div
+                className="bg-olive h-full transition-all"
+                style={{ width: `${travelPct}%` }}
+                title={`Travelling: ${travelPct}%`}
+              />
+              <div
+                className="bg-terracotta h-full transition-all"
+                style={{ width: `${waitPct}%` }}
+                title={`Waiting: ${waitPct}%`}
+              />
+            </div>
+          )}
+
+          {/* Factual Journey Insights */}
+          {route.insights && route.insights.length > 0 && (
+            <div className="flex items-center gap-1.5 flex-wrap pt-1.5 border-t border-cream-200/60 text-[11px]">
+              <span className="font-semibold text-espresso-800">Insights:</span>
+              {route.insights.map((insight, idx) => (
+                <span
+                  key={idx}
+                  data-testid="journey-insight-pill"
+                  className="px-2 py-0.5 rounded bg-white text-espresso-700 font-medium border border-cream-300 shadow-2xs"
+                >
+                  {insight}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Honest Commercial Data Strip */}

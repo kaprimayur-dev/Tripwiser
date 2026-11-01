@@ -14,7 +14,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.domain.models.station import Station
 from app.domain.models.train import Train, TrainScheduleEntry
-from app.domain.models.route import JourneyLeg, CandidateRoute
+from app.domain.models.route import JourneyLeg, CandidateRoute, TransferLayover, TransferRiskLevel
 from app.domain.models.availability import AvailabilityResult, AvailabilityStatusCode
 from app.domain.models.network import TrainConnectivity, StationConnectivityResult, InterchangeStation
 from app.infrastructure.database.models.train import TrainORM, ScheduleORM
@@ -60,6 +60,142 @@ class RouteDiscoveryEngine:
         self.session = session
         self.station_repo = SQLAlchemyStationRepository(session)
         self.train_repo = SQLAlchemyTrainRepository(session)
+
+    @staticmethod
+    def _format_minutes(mins: int) -> str:
+        h = mins // 60
+        m = mins % 60
+        if h == 0:
+            return f"{m}m"
+        if m == 0:
+            return f"{h}h"
+        return f"{h}h {m}m"
+
+    @classmethod
+    def classify_transfer_layover(
+        cls,
+        station_code: str,
+        arriving_train_number: str,
+        departing_train_number: str,
+        arrival_time: datetime.datetime,
+        departure_time: datetime.datetime,
+        duration_minutes: int,
+    ) -> TransferLayover:
+        """
+        Classifies a transfer layover into one of 5 standard categories based strictly on scheduled wait time:
+        - < 30 mins: INVALID_CONNECTION
+        - 30-44 mins: TIGHT_CONNECTION
+        - 45-89 mins: MODERATE_CONNECTION
+        - 90-180 mins: COMFORTABLE_CONNECTION
+        - > 180 mins: LONG_WAIT
+        """
+        if duration_minutes < 30:
+            risk_level = TransferRiskLevel.INVALID_CONNECTION
+            risk_label = "Invalid Connection"
+            desc = (
+                f"Scheduled transfer window of {duration_minutes}m at {station_code} is below "
+                "the 30-minute minimum buffer required for safe station interchange."
+            )
+        elif duration_minutes <= 44:
+            risk_level = TransferRiskLevel.TIGHT_CONNECTION
+            risk_label = "Tight Connection"
+            desc = (
+                f"Tight scheduled connection ({duration_minutes}m) at {station_code}. "
+                "Inbound train delays risk missing the onward service."
+            )
+        elif duration_minutes <= 89:
+            risk_level = TransferRiskLevel.MODERATE_CONNECTION
+            risk_label = "Moderate Connection"
+            desc = (
+                f"Moderate scheduled connection window ({duration_minutes}m) at {station_code} "
+                f"between train #{arriving_train_number} and #{departing_train_number}."
+            )
+        elif duration_minutes <= 180:
+            risk_level = TransferRiskLevel.COMFORTABLE_CONNECTION
+            risk_label = "Comfortable Connection"
+            desc = (
+                f"Comfortable scheduled layover ({cls._format_minutes(duration_minutes)}) at {station_code} "
+                "providing ample buffer between connecting services."
+            )
+        else:
+            risk_level = TransferRiskLevel.LONG_WAIT
+            risk_label = "Long Wait"
+            desc = (
+                f"Extended scheduled waiting period ({cls._format_minutes(duration_minutes)}) at {station_code} "
+                f"before onward train #{departing_train_number} departs."
+            )
+
+        return TransferLayover(
+            interchange_station_code=station_code,
+            arriving_train_number=arriving_train_number,
+            departing_train_number=departing_train_number,
+            arrival_time=arrival_time,
+            departure_time=departure_time,
+            duration_minutes=duration_minutes,
+            risk_level=risk_level,
+            risk_label=risk_label,
+            risk_description=desc,
+        )
+
+    @classmethod
+    def generate_journey_insights(
+        cls,
+        legs: List[JourneyLeg],
+        total_duration: int,
+        travel_time: int,
+        wait_time: int,
+        layovers: List[TransferLayover],
+    ) -> Tuple[List[str], Optional[str]]:
+        """
+        Generates factual, calculated journey insights and determines overall transfer risk.
+        Never fabricates walking times, platform amenities, or delay predictions.
+        """
+        insights: List[str] = []
+
+        if len(legs) == 1:
+            insights.append("Direct service with no train changes.")
+            if legs[0].intermediate_stop_count > 0:
+                insights.append(f"{legs[0].intermediate_stop_count} intermediate scheduled stops.")
+            insights.append("100% of journey duration is spent travelling aboard the train.")
+            return insights, None
+
+        # Multi-transfer journey
+        transfers_count = len(legs) - 1
+        transfer_word = "transfer" if transfers_count == 1 else "transfers"
+        insights.append(f"{transfers_count} {transfer_word} across {len(legs)} connecting trains.")
+
+        travel_pct = round(travel_time / total_duration * 100) if total_duration > 0 else 0
+        wait_pct = round(wait_time / total_duration * 100) if total_duration > 0 else 0
+
+        insights.append(f"Total scheduled waiting time: {cls._format_minutes(wait_time)} ({wait_pct}% of journey).")
+        insights.append(f"Time aboard trains: {cls._format_minutes(travel_time)} ({travel_pct}% of journey).")
+
+        if travel_pct >= 80:
+            insights.append("Most of your journey is spent travelling aboard trains.")
+
+        for layover in layovers:
+            if layover.risk_level == TransferRiskLevel.TIGHT_CONNECTION:
+                insights.append(
+                    f"Tight scheduled connection at {layover.interchange_station_code} ({layover.duration_minutes}m layover)."
+                )
+            elif layover.risk_level == TransferRiskLevel.LONG_WAIT:
+                insights.append(
+                    f"Extended layover of {cls._format_minutes(layover.duration_minutes)} at {layover.interchange_station_code}."
+                )
+
+        # Overall risk
+        if any(l.risk_level == TransferRiskLevel.INVALID_CONNECTION for l in layovers):
+            overall_risk = TransferRiskLevel.INVALID_CONNECTION.value
+        elif any(l.risk_level == TransferRiskLevel.TIGHT_CONNECTION for l in layovers):
+            overall_risk = TransferRiskLevel.TIGHT_CONNECTION.value
+        elif any(l.risk_level == TransferRiskLevel.LONG_WAIT for l in layovers):
+            overall_risk = TransferRiskLevel.LONG_WAIT.value
+        elif any(l.risk_level == TransferRiskLevel.MODERATE_CONNECTION for l in layovers):
+            overall_risk = TransferRiskLevel.MODERATE_CONNECTION.value
+        else:
+            overall_risk = TransferRiskLevel.COMFORTABLE_CONNECTION.value
+
+        return insights, overall_risk
 
     async def search_routes(
         self,
@@ -185,6 +321,13 @@ class RouteDiscoveryEngine:
             )
             if leg is not None:
                 route_id = f"route_direct_{train.number}_{journey_date.strftime('%Y%m%d')}"
+                insights, overall_risk = self.generate_journey_insights(
+                    legs=[leg],
+                    total_duration=leg.duration_minutes,
+                    travel_time=leg.duration_minutes,
+                    wait_time=0,
+                    layovers=[],
+                )
                 route = CandidateRoute(
                     route_id=route_id,
                     legs=[leg],
@@ -194,6 +337,11 @@ class RouteDiscoveryEngine:
                     transfer_durations_minutes=[],
                     is_direct=True,
                     score=float(leg.duration_minutes),
+                    total_travel_time_minutes=leg.duration_minutes,
+                    total_wait_time_minutes=0,
+                    layovers=[],
+                    insights=insights,
+                    overall_transfer_risk=overall_risk,
                 )
                 direct_routes.append(route)
 
@@ -253,6 +401,23 @@ class RouteDiscoveryEngine:
 
                         if min_transfer_minutes <= transfer_minutes <= max_transfer_minutes:
                             total_duration = leg1.duration_minutes + transfer_minutes + leg2.duration_minutes
+                            travel_time = leg1.duration_minutes + leg2.duration_minutes
+                            wait_time = transfer_minutes
+                            layover = self.classify_transfer_layover(
+                                station_code=hub_code,
+                                arriving_train_number=t1.number,
+                                departing_train_number=t2.number,
+                                arrival_time=hub_arrival_dt,
+                                departure_time=leg2.departure_time,
+                                duration_minutes=transfer_minutes,
+                            )
+                            insights, overall_risk = self.generate_journey_insights(
+                                legs=[leg1, leg2],
+                                total_duration=total_duration,
+                                travel_time=travel_time,
+                                wait_time=wait_time,
+                                layovers=[layover],
+                            )
                             route_id = f"route_{t1.number}_{t2.number}_{hub_code}_{journey_date.strftime('%Y%m%d')}"
                             route = CandidateRoute(
                                 route_id=route_id,
@@ -263,6 +428,11 @@ class RouteDiscoveryEngine:
                                 transfer_durations_minutes=[transfer_minutes],
                                 is_direct=False,
                                 score=float(total_duration + 180),
+                                total_travel_time_minutes=travel_time,
+                                total_wait_time_minutes=wait_time,
+                                layovers=[layover],
+                                insights=insights,
+                                overall_transfer_risk=overall_risk,
                             )
                             connecting_routes.append(route)
 
@@ -462,6 +632,32 @@ class RouteDiscoveryEngine:
                                     + t2_mins
                                     + leg3.duration_minutes
                                 )
+                                travel_time = leg1.duration_minutes + leg2.duration_minutes + leg3.duration_minutes
+                                wait_time = t1_mins + t2_mins
+                                layover1 = self.classify_transfer_layover(
+                                    station_code=hub1_code,
+                                    arriving_train_number=t1.number,
+                                    departing_train_number=t2.number,
+                                    arrival_time=hub1_arr_dt,
+                                    departure_time=leg2.departure_time,
+                                    duration_minutes=t1_mins,
+                                )
+                                layover2 = self.classify_transfer_layover(
+                                    station_code=hub2_code,
+                                    arriving_train_number=t2.number,
+                                    departing_train_number=t3.number,
+                                    arrival_time=hub2_arr_dt,
+                                    departure_time=leg3.departure_time,
+                                    duration_minutes=t2_mins,
+                                )
+                                layovers = [layover1, layover2]
+                                insights, overall_risk = self.generate_journey_insights(
+                                    legs=[leg1, leg2, leg3],
+                                    total_duration=total_duration,
+                                    travel_time=travel_time,
+                                    wait_time=wait_time,
+                                    layovers=layovers,
+                                )
                                 route_id = (
                                     f"route_{t1.number}_{t2.number}_{t3.number}_{hub1_code}_{hub2_code}_"
                                     f"{journey_date.strftime('%Y%m%d')}"
@@ -475,6 +671,11 @@ class RouteDiscoveryEngine:
                                     transfer_durations_minutes=[t1_mins, t2_mins],
                                     is_direct=False,
                                     score=float(total_duration + 360),
+                                    total_travel_time_minutes=travel_time,
+                                    total_wait_time_minutes=wait_time,
+                                    layovers=layovers,
+                                    insights=insights,
+                                    overall_transfer_risk=overall_risk,
                                 )
                                 two_transfer_routes.append(route)
                                 if len(two_transfer_routes) >= max_routes_per_search:

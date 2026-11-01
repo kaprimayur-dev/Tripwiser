@@ -48,6 +48,18 @@ class LegSchema(BaseModel):
     intermediate_stop_count: int = 0
 
 
+class LayoverSchema(BaseModel):
+    interchange_station_code: str
+    arriving_train_number: str
+    departing_train_number: str
+    arrival_time: datetime.datetime
+    departure_time: datetime.datetime
+    duration_minutes: int
+    risk_level: str
+    risk_label: str
+    risk_description: str
+
+
 class RouteSchema(BaseModel):
     route_id: str
     is_direct: bool
@@ -57,6 +69,12 @@ class RouteSchema(BaseModel):
     transfer_durations_minutes: List[int]
     score: float
     legs: List[LegSchema]
+    # TW-113 Journey Breakdown & Risk Intelligence
+    total_travel_time_minutes: int = 0
+    total_wait_time_minutes: int = 0
+    layovers: List[LayoverSchema] = Field(default_factory=list)
+    insights: List[str] = Field(default_factory=list)
+    overall_transfer_risk: Optional[str] = None
 
 
 class RouteSearchQuerySchema(BaseModel):
@@ -131,6 +149,24 @@ async def search_routes(
             total_fare=r.total_fare,
             transfer_durations_minutes=r.transfer_durations_minutes,
             score=r.score,
+            total_travel_time_minutes=r.total_travel_time_minutes,
+            total_wait_time_minutes=r.total_wait_time_minutes,
+            layovers=[
+                LayoverSchema(
+                    interchange_station_code=lay.interchange_station_code,
+                    arriving_train_number=lay.arriving_train_number,
+                    departing_train_number=lay.departing_train_number,
+                    arrival_time=lay.arrival_time,
+                    departure_time=lay.departure_time,
+                    duration_minutes=lay.duration_minutes,
+                    risk_level=lay.risk_level.value if hasattr(lay.risk_level, 'value') else str(lay.risk_level),
+                    risk_label=lay.risk_label,
+                    risk_description=lay.risk_description,
+                )
+                for lay in r.layovers
+            ],
+            insights=r.insights,
+            overall_transfer_risk=r.overall_transfer_risk,
             legs=[
                 LegSchema(
                     train_number=leg.train_number,

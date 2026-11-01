@@ -83,6 +83,19 @@ export function JourneyDetailsModal({
   const intermediateHub = intermediateHubs.join(', ');
 
   const totalDistance = route.legs.reduce((acc, leg) => acc + (leg.distance_km || 0), 0);
+  const totalTravelMins =
+    route.total_travel_time_minutes !== undefined && route.total_travel_time_minutes > 0
+      ? route.total_travel_time_minutes
+      : route.legs.reduce((acc, l) => acc + (l.duration_minutes || 0), 0);
+  const totalWaitMins =
+    route.total_wait_time_minutes !== undefined
+      ? route.total_wait_time_minutes
+      : Math.max(0, route.total_duration_minutes - totalTravelMins);
+  const travelPct =
+    route.total_duration_minutes > 0
+      ? Math.min(100, Math.max(0, Math.round((totalTravelMins / route.total_duration_minutes) * 100)))
+      : 100;
+  const waitPct = 100 - travelPct;
 
   const handleCopy = () => {
     const lines = [
@@ -173,32 +186,62 @@ export function JourneyDetailsModal({
 
             <div className="bg-cream-50 rounded-xl p-3 border border-cream-300">
               <span className="text-[10px] font-bold uppercase tracking-wider text-espresso-500">
-                Total Distance
+                Aboard Trains
               </span>
-              <div className="font-display text-lg font-bold text-espresso-900 mt-0.5">
-                {totalDistance > 0 ? `${totalDistance} km` : 'Timetable leg'}
+              <div className="font-display text-lg font-bold text-olive mt-0.5">
+                {formatDuration(totalTravelMins)}
               </div>
+              <span className="text-[10px] text-espresso-600 block">{travelPct}% of journey</span>
             </div>
 
             <div className="bg-cream-50 rounded-xl p-3 border border-cream-300">
               <span className="text-[10px] font-bold uppercase tracking-wider text-espresso-500">
-                Connections
+                Transfer Waiting
               </span>
-              <div className="font-display text-lg font-bold text-espresso-900 mt-0.5">
-                {route.transfer_count === 0
-                  ? 'Direct Service'
-                  : `${route.transfer_count} Interchange${route.transfer_count > 1 ? 's' : ''}`}
+              <div className="font-display text-lg font-bold text-terracotta mt-0.5">
+                {formatDuration(totalWaitMins)}
               </div>
+              <span className="text-[10px] text-espresso-600 block">{waitPct}% of journey</span>
             </div>
 
             <div className="bg-cream-50 rounded-xl p-3 border border-cream-300">
               <span className="text-[10px] font-bold uppercase tracking-wider text-espresso-500">
-                Commercial Feeds
+                Legs &amp; Transfers
               </span>
-              <div className="font-display text-sm font-bold text-espresso-800 mt-1">
-                Fares Deferred
+              <div className="font-display text-base font-bold text-espresso-800 mt-0.5">
+                {route.legs.length} Train{route.legs.length > 1 ? 's' : ''}
               </div>
+              <span className="text-[10px] text-espresso-600 block">
+                {route.transfer_count === 0 ? 'Direct service' : `${route.transfer_count} transfer${route.transfer_count > 1 ? 's' : ''}`}
+              </span>
             </div>
+          </div>
+
+          {/* Journey Reliability & Timetable Insights Section */}
+          <div className="bg-cream-50 rounded-xl p-4 border border-cream-300 space-y-2">
+            <div className="flex items-center justify-between gap-2 flex-wrap">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-espresso-700 flex items-center gap-1.5">
+                <Clock className="w-3.5 h-3.5 text-terracotta" />
+                <span>Journey Reliability &amp; Timetable Insights</span>
+              </h3>
+              {route.overall_transfer_risk && (
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-cream-200 text-espresso-800 border border-cream-300">
+                  Overall Risk: {route.overall_transfer_risk.replace('_', ' ')}
+                </span>
+              )}
+            </div>
+            {route.insights && route.insights.length > 0 ? (
+              <ul className="text-xs text-espresso-700 space-y-1 list-disc list-inside">
+                {route.insights.map((insight, i) => (
+                  <li key={i}>{insight}</li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-xs text-espresso-600">Calculated from published Indian Railways timetable stops.</p>
+            )}
+            <p className="text-[11px] text-espresso-500 pt-2 border-t border-cream-200">
+              * Feasibility is computed strictly from published timetable stop schedules. Live delays, platform allocation, and walking speeds vary; connections are not guaranteed.
+            </p>
           </div>
 
           {/* Leg-by-leg Timeline */}
@@ -317,6 +360,8 @@ export function JourneyDetailsModal({
                         <TransferAdvisoryBadge
                           transferMinutes={layoverMins}
                           transferStationCode={leg.destination_code}
+                          riskLevel={route.layovers?.[idx]?.risk_level}
+                          riskDescription={route.layovers?.[idx]?.risk_description}
                           variant="compact"
                         />
                       </div>

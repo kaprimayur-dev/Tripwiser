@@ -1,7 +1,31 @@
-from typing import Optional
-from pydantic import BaseModel, Field, ConfigDict, field_validator, ValidationInfo
+from typing import Optional, Any
+from enum import Enum
+from pydantic import BaseModel, Field, ConfigDict, field_validator, ValidationInfo, model_validator
 import datetime
 from app.domain.models.availability import AvailabilityResult
+
+
+class TransferRiskLevel(str, Enum):
+    INVALID_CONNECTION = "INVALID_CONNECTION"
+    TIGHT_CONNECTION = "TIGHT_CONNECTION"
+    MODERATE_CONNECTION = "MODERATE_CONNECTION"
+    COMFORTABLE_CONNECTION = "COMFORTABLE_CONNECTION"
+    LONG_WAIT = "LONG_WAIT"
+
+
+class TransferLayover(BaseModel):
+    model_config = ConfigDict(frozen=True)
+
+    interchange_station_code: str = Field(..., min_length=1)
+    arriving_train_number: str = Field(..., min_length=1)
+    departing_train_number: str = Field(..., min_length=1)
+    arrival_time: datetime.datetime
+    departure_time: datetime.datetime
+    duration_minutes: int = Field(..., ge=0)
+    risk_level: TransferRiskLevel
+    risk_label: str
+    risk_description: str
+
 
 class JourneyLeg(BaseModel):
     model_config = ConfigDict(frozen=True)
@@ -78,6 +102,32 @@ class CandidateRoute(BaseModel):
     transfer_durations_minutes: list[int] = Field(default_factory=list)
     is_direct: bool
     score: float = 0.0
+
+    # TW-113 Journey Time Breakdown & Risk Intelligence
+    total_travel_time_minutes: int = Field(0, ge=0)
+    total_wait_time_minutes: int = Field(0, ge=0)
+    layovers: list[TransferLayover] = Field(default_factory=list)
+    insights: list[str] = Field(default_factory=list)
+    overall_transfer_risk: Optional[str] = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def populate_breakdown_defaults(cls, data: Any) -> Any:
+        if isinstance(data, dict):
+            legs = data.get("legs") or []
+            durations = data.get("transfer_durations_minutes") or []
+            if "total_travel_time_minutes" not in data or data["total_travel_time_minutes"] == 0:
+                travel_time = 0
+                for leg in legs:
+                    if isinstance(leg, dict):
+                        travel_time += leg.get("duration_minutes", 0)
+                    elif hasattr(leg, "duration_minutes"):
+                        travel_time += getattr(leg, "duration_minutes", 0)
+                data["total_travel_time_minutes"] = travel_time
+
+            if "total_wait_time_minutes" not in data or data["total_wait_time_minutes"] == 0:
+                data["total_wait_time_minutes"] = sum(durations)
+        return data
 
     @field_validator("route_id")
     @classmethod
