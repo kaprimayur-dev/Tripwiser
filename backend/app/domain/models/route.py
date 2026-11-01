@@ -16,6 +16,8 @@ class JourneyLeg(BaseModel):
     travel_class: Optional[str] = Field(None)
     distance_km: float = Field(..., ge=0.0)
     availability: Optional[AvailabilityResult] = None
+    runs_on_days: Optional[list[int]] = None
+    intermediate_stop_count: int = 0
 
     @field_validator("train_number", "train_name", "origin_code", "destination_code")
     @classmethod

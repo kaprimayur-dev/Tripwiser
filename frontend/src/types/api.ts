@@ -39,6 +39,9 @@ export interface JourneyLeg {
   distance_km: number;
   timetable_status: string; // "TIMETABLE_CONFIRMED"
   availability?: Availability | null;
+  runs_on_days?: number[] | null;
+  frequency_description?: string | null;
+  intermediate_stop_count?: number;
 }
 
 export interface CandidateRoute {
@@ -115,5 +118,67 @@ export interface BachelorSpecialSearchResponse {
   provider_status?: string | null;
   chart_policy_notice: string;
 }
+
+export interface ScheduleStop {
+  stop_sequence: number;
+  station_code: string;
+  station_name: string;
+  arrival_time?: string | null;
+  departure_time?: string | null;
+  day_offset: number;
+  distance_km: number;
+  halt_minutes: number;
+  is_commercial_halt: boolean;
+}
+
+export interface TrainSummary {
+  number: string;
+  name: string;
+  origin_code: string;
+  origin_name: string;
+  destination_code: string;
+  destination_name: string;
+  runs_on_days: number[];
+  frequency_description: string;
+  total_stops: number;
+  distance_km: number;
+  provenance_tier: string;
+}
+
+export interface TrainDetail {
+  number: string;
+  name: string;
+  origin_code: string;
+  origin_name: string;
+  destination_code: string;
+  destination_name: string;
+  runs_on_days: number[];
+  frequency_description: string;
+  total_stops: number;
+  distance_km: number;
+  source_document?: string | null;
+  publication_version?: string | null;
+  table_reference?: string | null;
+  provenance_tier: string;
+}
+
+export interface TrainScheduleResponse {
+  train: TrainDetail;
+  total_stops: number;
+  commercial_stops_count: number;
+  stops: ScheduleStop[];
+}
+
+export interface IntermediateStopsResponse {
+  train_number: string;
+  train_name: string;
+  from_station_code: string;
+  from_station_name: string;
+  to_station_code: string;
+  to_station_name: string;
+  intermediate_stop_count: number;
+  stops: ScheduleStop[];
+}
+
 
 

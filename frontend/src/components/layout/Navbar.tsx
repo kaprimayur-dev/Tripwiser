@@ -1,11 +1,13 @@
 'use client';
 
 import React from 'react';
-import { Train, Sparkles, Navigation } from 'lucide-react';
+import { Train, Sparkles, Navigation, Layers } from 'lucide-react';
+
+export type AppMode = 'connecting' | 'bachelor' | 'timetable';
 
 interface NavbarProps {
-  currentMode?: 'connecting' | 'bachelor';
-  onSelectMode?: (mode: 'connecting' | 'bachelor') => void;
+  currentMode?: AppMode;
+  onSelectMode?: (mode: AppMode) => void;
 }
 
 export function Navbar({ currentMode = 'connecting', onSelectMode }: NavbarProps) {
@@ -36,18 +38,34 @@ export function Navbar({ currentMode = 'connecting', onSelectMode }: NavbarProps
         </div>
 
         {/* Mode Selector in Header */}
-        <div className="flex items-center gap-1.5 bg-cream-200/70 p-1 rounded-xl border border-cream-300">
+        <div className="flex items-center gap-1 bg-cream-200/70 p-1 rounded-xl border border-cream-300">
           <button
             type="button"
+            id="nav-connecting-tab"
             onClick={() => onSelectMode && onSelectMode('connecting')}
             className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               currentMode === 'connecting'
-                ? 'bg-white text-espresso-900 shadow-sm'
+                ? 'bg-white text-espresso-900 shadow-sm font-bold'
                 : 'text-espresso-600 hover:text-espresso-900'
             }`}
           >
             <Navigation className="w-3.5 h-3.5" />
-            <span>Connecting Routes</span>
+            <span className="hidden sm:inline">Connecting</span>
+            <span>Routes</span>
+          </button>
+
+          <button
+            type="button"
+            id="nav-timetable-tab"
+            onClick={() => onSelectMode && onSelectMode('timetable')}
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              currentMode === 'timetable'
+                ? 'bg-white text-espresso-900 shadow-sm font-bold'
+                : 'text-espresso-600 hover:text-espresso-900'
+            }`}
+          >
+            <Layers className="w-3.5 h-3.5" />
+            <span>Timetable</span>
           </button>
 
           <button
@@ -56,17 +74,13 @@ export function Navbar({ currentMode = 'connecting', onSelectMode }: NavbarProps
             onClick={() => onSelectMode && onSelectMode('bachelor')}
             className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               currentMode === 'bachelor'
-                ? 'bg-terracotta text-white shadow-sm'
+                ? 'bg-terracotta text-white shadow-sm font-bold'
                 : 'text-terracotta hover:bg-terracotta/10'
             }`}
           >
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Bachelor Special</span>
-            <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
-              currentMode === 'bachelor' ? 'bg-white/20 text-white' : 'bg-terracotta/20 text-terracotta'
-            }`}>
-              Live
-            </span>
+            <span className="hidden sm:inline">Bachelor</span>
+            <span>Special</span>
           </button>
         </div>
       </div>

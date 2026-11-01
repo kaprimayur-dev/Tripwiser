@@ -13,9 +13,12 @@ import {
   Check,
   AlertCircle,
   Sparkles,
+  ChevronDown,
+  ChevronUp,
 } from 'lucide-react';
 import { CandidateRoute, JourneyLeg } from '../../types/api';
 import { TransferAdvisoryBadge } from './TransferAdvisoryBadge';
+import { IntermediateStopsList } from './IntermediateStopsList';
 
 interface JourneyDetailsModalProps {
   route: CandidateRoute | null;
@@ -31,6 +34,14 @@ export function JourneyDetailsModal({
   isRecommended = false,
 }: JourneyDetailsModalProps) {
   const [copied, setCopied] = useState(false);
+  const [expandedLegs, setExpandedLegs] = useState<Record<number, boolean>>({});
+
+  const toggleLeg = (idx: number) => {
+    setExpandedLegs((prev) => ({
+      ...prev,
+      [idx]: !prev[idx],
+    }));
+  };
 
   if (!isOpen || !route) return null;
 
@@ -253,6 +264,33 @@ export function JourneyDetailsModal({
                           {formatDate(leg.arrival_time)}
                         </div>
                       </div>
+                    </div>
+
+                    {/* Intermediate Halts Toggle */}
+                    <div className="pt-2 border-t border-cream-200">
+                      <button
+                        type="button"
+                        data-testid="modal-toggle-intermediate-stops"
+                        onClick={() => toggleLeg(idx)}
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-terracotta hover:text-terracotta/80 transition-colors"
+                      >
+                        <span>
+                          {expandedLegs[idx]
+                            ? 'Hide Intermediate Halts'
+                            : `View Intermediate Halts (${leg.intermediate_stop_count !== undefined ? `${leg.intermediate_stop_count} stops` : 'Expand'})`}
+                        </span>
+                        {expandedLegs[idx] ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                      </button>
+
+                      {expandedLegs[idx] && (
+                        <div className="mt-2">
+                          <IntermediateStopsList
+                            trainNumber={leg.train_number}
+                            fromCode={leg.origin_code}
+                            toCode={leg.destination_code}
+                          />
+                        </div>
+                      )}
                     </div>
 
                     {/* Platform & Station Guidance */}

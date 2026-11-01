@@ -1,20 +1,22 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { Navbar } from '../components/layout/Navbar';
+import { Navbar, AppMode } from '../components/layout/Navbar';
 import { Footer } from '../components/layout/Footer';
 import { JourneySearchCard } from '../components/search/JourneySearchCard';
 import { ResultsStream } from '../components/results/ResultsStream';
 import { DataIntegrityBanner } from '../components/common/DataIntegrityBanner';
 import { BachelorSearchCard } from '../components/bachelor/BachelorSearchCard';
 import { BachelorSpecialStream } from '../components/bachelor/BachelorSpecialStream';
+import { TrainSearchCard } from '../components/trains/TrainSearchCard';
+import { TrainScheduleView } from '../components/trains/TrainScheduleView';
 import { SortMode } from '../components/results/SortingFilterBar';
 import { Station, RouteSearchResponse, BachelorSpecialSearchResponse } from '../types/api';
 import { searchRoutes, searchBachelorSpecial, getStationByCode } from '../services/api';
-import { Sparkles, Navigation } from 'lucide-react';
+import { Sparkles, Navigation, Layers } from 'lucide-react';
 
 export default function Home() {
-  const [activeMode, setActiveMode] = useState<'connecting' | 'bachelor'>('connecting');
+  const [activeMode, setActiveMode] = useState<AppMode>('connecting');
 
   // Shared Form State
   const [origin, setOrigin] = useState<Station | null>(null);
@@ -34,12 +36,36 @@ export default function Home() {
   const [bachelorError, setBachelorError] = useState<Error | null>(null);
   const [bachelorResponse, setBachelorResponse] = useState<BachelorSpecialSearchResponse | null>(null);
 
-  // Default tomorrow date on mount
+  // Timetable Inspector State
+  const [selectedTrain, setSelectedTrain] = useState<string | null>(null);
+
+  // Default tomorrow date and URL params on mount
   useEffect(() => {
     const d = new Date();
     d.setDate(d.getDate() + 1);
     setDate(d.toISOString().split('T')[0]);
+
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const modeParam = params.get('mode');
+      if (modeParam === 'timetable' || modeParam === 'bachelor' || modeParam === 'connecting') {
+        setActiveMode(modeParam);
+      }
+      const trainParam = params.get('train');
+      if (trainParam) {
+        setSelectedTrain(trainParam.trim());
+      }
+    }
   }, []);
+
+  const handleModeChange = (mode: AppMode) => {
+    setActiveMode(mode);
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      url.searchParams.set('mode', mode);
+      window.history.replaceState({}, '', url.toString());
+    }
+  };
 
   // Execute connecting route search
   const executeSearch = useCallback(
@@ -65,6 +91,7 @@ export default function Home() {
 
         if (typeof window !== 'undefined') {
           const url = new URL(window.location.href);
+          url.searchParams.set('mode', 'connecting');
           url.searchParams.set('origin', params.originCode);
           url.searchParams.set('destination', params.destCode);
           url.searchParams.set('date', params.journeyDate);
@@ -100,6 +127,18 @@ export default function Home() {
           travelClass: params.preferredClass,
         });
         setBachelorResponse(response);
+
+        if (typeof window !== 'undefined') {
+          const url = new URL(window.location.href);
+          url.searchParams.set('mode', 'bachelor');
+          url.searchParams.set('origin', params.originCode);
+          url.searchParams.set('destination', params.destCode);
+          url.searchParams.set('date', params.journeyDate);
+          if (params.preferredClass) {
+            url.searchParams.set('class', params.preferredClass);
+          }
+          window.history.replaceState({}, '', url.toString());
+        }
       } catch (err: any) {
         setBachelorError(err instanceof Error ? err : new Error(String(err)));
         setBachelorResponse(null);
@@ -186,7 +225,7 @@ export default function Home() {
             transfers: 1,
             sortBy: 'recommended',
           });
-        } else {
+        } else if (activeMode === 'bachelor') {
           executeBachelorSearch({
             originCode: origStation.code,
             destCode: destStation.code,
@@ -200,9 +239,28 @@ export default function Home() {
     }
   };
 
+  const handleSelectTrain = (trainNumber: string) => {
+    setSelectedTrain(trainNumber);
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      url.searchParams.set('mode', 'timetable');
+      url.searchParams.set('train', trainNumber);
+      window.history.replaceState({}, '', url.toString());
+    }
+  };
+
+  const handleClearTrain = () => {
+    setSelectedTrain(null);
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      url.searchParams.delete('train');
+      window.history.replaceState({}, '', url.toString());
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-cream-100 text-espresso-900">
-      <Navbar currentMode={activeMode} onSelectMode={setActiveMode} />
+      <Navbar currentMode={activeMode} onSelectMode={handleModeChange} />
 
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8">
         {/* Hero Section */}
@@ -214,51 +272,69 @@ export default function Home() {
           <h1 className="font-display text-4xl sm:text-5xl font-bold tracking-tight text-espresso-900 leading-tight">
             {activeMode === 'connecting'
               ? 'The direct route isn’t the only route.'
-              : 'One train. Continuous berths. Zero waitlist.'}
+              : activeMode === 'bachelor'
+              ? 'One train. Continuous berths. Zero waitlist.'
+              : 'Inspect every halt, offset & running day.'}
           </h1>
 
           <p className="text-sm sm:text-base text-espresso-600 leading-relaxed">
             {activeMode === 'connecting'
               ? 'When direct trains are waitlisted, TripWiser discovers practical connecting journeys, guaranteed transfer windows, and nearby station alternatives across Indian Railways.'
-              : 'TripWiser Bachelor Special finds and assembles vacant berth segments across intermediate stations on the same train, giving you a continuous journey without changing trains.'}
+              : activeMode === 'bachelor'
+              ? 'TripWiser Bachelor Special finds and assembles vacant berth segments across intermediate stations on the same train, giving you a continuous journey without changing trains.'
+              : 'Search any compiled train to view its complete stoppage sequence, arrival/departure timings, halt durations, operating days, and verified timetable provenance.'}
           </p>
         </div>
 
         {/* Feature Mode Selector Tabs */}
         <div className="flex justify-center">
-          <div className="inline-flex p-1 rounded-2xl bg-cream-200/80 border border-cream-300 shadow-inner">
+          <div className="inline-flex p-1 rounded-2xl bg-cream-200/80 border border-cream-300 shadow-inner flex-wrap justify-center gap-1">
             <button
               type="button"
               id="tab-connecting-mode"
-              onClick={() => setActiveMode('connecting')}
-              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+              onClick={() => handleModeChange('connecting')}
+              className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
                 activeMode === 'connecting'
                   ? 'bg-white text-espresso-900 shadow-sm'
                   : 'text-espresso-600 hover:text-espresso-900'
               }`}
             >
               <Navigation className="w-4 h-4 text-espresso-700" />
-              <span>Connecting Route Discovery</span>
+              <span>Connecting Routes</span>
+            </button>
+
+            <button
+              type="button"
+              id="tab-timetable-mode"
+              onClick={() => handleModeChange('timetable')}
+              className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+                activeMode === 'timetable'
+                  ? 'bg-white text-espresso-900 shadow-sm'
+                  : 'text-espresso-600 hover:text-espresso-900'
+              }`}
+            >
+              <Layers className="w-4 h-4 text-espresso-700" />
+              <span>Train Timetable</span>
             </button>
 
             <button
               type="button"
               id="tab-bachelor-mode"
-              onClick={() => setActiveMode('bachelor')}
-              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+              onClick={() => handleModeChange('bachelor')}
+              className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
                 activeMode === 'bachelor'
                   ? 'bg-terracotta text-white shadow-sm'
                   : 'text-terracotta hover:bg-terracotta/10'
               }`}
             >
               <Sparkles className="w-4 h-4" />
-              <span>Bachelor Special (Berth Segments)</span>
+              <span>Bachelor Special</span>
             </button>
           </div>
         </div>
 
         {/* Dynamic Search Console according to active mode */}
-        {activeMode === 'connecting' ? (
+        {activeMode === 'connecting' && (
           <>
             <JourneySearchCard
               initialOrigin={origin}
@@ -284,7 +360,9 @@ export default function Home() {
               onSelectCorridor={handleSelectCorridor}
             />
           </>
-        ) : (
+        )}
+
+        {activeMode === 'bachelor' && (
           <>
             <BachelorSearchCard
               initialOrigin={origin}
@@ -299,10 +377,53 @@ export default function Home() {
               data={bachelorResponse}
               isLoading={bachelorLoading}
               error={bachelorError}
-              onSwitchToConnecting={() => setActiveMode('connecting')}
+              onSwitchToConnecting={() => handleModeChange('connecting')}
               onSelectSampleCorridor={handleSelectCorridor}
             />
           </>
+        )}
+
+        {activeMode === 'timetable' && (
+          <div className="space-y-6">
+            <TrainSearchCard
+              onSelectTrain={handleSelectTrain}
+              initialTrainNumber={selectedTrain || undefined}
+            />
+
+            {selectedTrain ? (
+              <TrainScheduleView
+                trainNumber={selectedTrain}
+                onClose={handleClearTrain}
+              />
+            ) : (
+              <div className="p-8 text-center rounded-2xl bg-white border border-cream-300 shadow-sm text-espresso-600">
+                <Layers className="w-10 h-10 text-espresso-300 mx-auto mb-3" />
+                <h3 className="font-display text-lg font-bold text-espresso-900 mb-1">
+                  Search a Train Schedule
+                </h3>
+                <p className="text-xs sm:text-sm text-espresso-600 max-w-md mx-auto">
+                  Type a train number (e.g. 12002 Bhopal Shatabdi, 12951 Mumbai Rajdhani, 12621 Tamil Nadu Express) or train name above to inspect its verified stoppage timeline.
+                </p>
+                <div className="mt-4 flex flex-wrap justify-center gap-2">
+                  {[
+                    { number: '12002', name: 'Bhopal Shatabdi' },
+                    { number: '12951', name: 'Mumbai Rajdhani' },
+                    { number: '12301', name: 'Howrah Rajdhani' },
+                    { number: '12621', name: 'Tamil Nadu Express' },
+                  ].map((preset) => (
+                    <button
+                      key={preset.number}
+                      type="button"
+                      onClick={() => handleSelectTrain(preset.number)}
+                      className="px-3 py-1.5 rounded-lg bg-cream-200/80 hover:bg-cream-300 text-xs font-medium text-espresso-800 border border-cream-300 transition-colors"
+                    >
+                      {preset.number} · {preset.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         )}
       </main>
 

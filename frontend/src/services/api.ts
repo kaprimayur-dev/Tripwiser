@@ -3,7 +3,16 @@
  * Uses relative URL path to leverage Next.js proxy rewrites in next.config.js.
  */
 
-import { Station, NearbyStationItem, RouteSearchResponse, BachelorSpecialSearchResponse } from '../types/api';
+import {
+  Station,
+  NearbyStationItem,
+  RouteSearchResponse,
+  BachelorSpecialSearchResponse,
+  TrainSummary,
+  TrainDetail,
+  TrainScheduleResponse,
+  IntermediateStopsResponse,
+} from '../types/api';
 
 const API_BASE = '/api/v1';
 
@@ -91,4 +100,61 @@ export async function searchBachelorSpecial(params: BachelorSearchParams): Promi
   return res.json();
 }
 
+export async function searchTrains(query: string, limit = 10): Promise<TrainSummary[]> {
+  const clean = query.trim();
+  if (!clean || clean.length < 2) return [];
 
+  const res = await fetch(`${API_BASE}/trains/search?q=${encodeURIComponent(clean)}&limit=${limit}`);
+  if (!res.ok) {
+    throw new Error(`Failed to search trains: ${res.statusText}`);
+  }
+  return res.json();
+}
+
+export async function getTrainDetails(trainNumber: string): Promise<TrainDetail> {
+  const res = await fetch(`${API_BASE}/trains/${encodeURIComponent(trainNumber.trim().toUpperCase())}`);
+  if (!res.ok) {
+    const errorBody = await res.json().catch(() => ({ detail: res.statusText }));
+    const msg = typeof errorBody.detail === 'object' ? errorBody.detail.message : errorBody.detail;
+    throw new Error(msg || `Failed to get train details: ${res.status}`);
+  }
+  return res.json();
+}
+
+export async function getTrainSchedule(
+  trainNumber: string,
+  onlyCommercial = false
+): Promise<TrainScheduleResponse> {
+  const res = await fetch(
+    `${API_BASE}/trains/${encodeURIComponent(trainNumber.trim().toUpperCase())}/schedule?only_commercial=${onlyCommercial}`
+  );
+  if (!res.ok) {
+    const errorBody = await res.json().catch(() => ({ detail: res.statusText }));
+    const msg = typeof errorBody.detail === 'object' ? errorBody.detail.message : errorBody.detail;
+    throw new Error(msg || `Failed to get train schedule: ${res.status}`);
+  }
+  return res.json();
+}
+
+export async function getIntermediateStops(
+  trainNumber: string,
+  fromCode: string,
+  toCode: string,
+  onlyCommercial = true
+): Promise<IntermediateStopsResponse> {
+  const searchParams = new URLSearchParams({
+    from_code: fromCode.trim().toUpperCase(),
+    to_code: toCode.trim().toUpperCase(),
+    only_commercial: String(onlyCommercial),
+  });
+
+  const res = await fetch(
+    `${API_BASE}/trains/${encodeURIComponent(trainNumber.trim().toUpperCase())}/intermediate-stops?${searchParams.toString()}`
+  );
+  if (!res.ok) {
+    const errorBody = await res.json().catch(() => ({ detail: res.statusText }));
+    const msg = typeof errorBody.detail === 'object' ? errorBody.detail.message : errorBody.detail;
+    throw new Error(msg || `Failed to fetch intermediate stops: ${res.status}`);
+  }
+  return res.json();
+}

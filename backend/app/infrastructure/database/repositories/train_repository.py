@@ -1,10 +1,11 @@
-from typing import Optional
+from typing import Optional, List, Tuple, Dict
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
+from sqlalchemy import select, or_
 from sqlalchemy.orm import selectinload
 from app.domain.repositories.train_repository import TrainRepository
 from app.domain.models.train import Train, TrainScheduleEntry
 from app.infrastructure.database.models.train import TrainORM, ScheduleORM
+from app.infrastructure.database.models.station import StationORM
 
 class SQLAlchemyTrainRepository(TrainRepository):
     def __init__(self, session: AsyncSession):
@@ -94,3 +95,41 @@ class SQLAlchemyTrainRepository(TrainRepository):
 
         await self.session.flush()
         return train
+
+    async def search_trains(self, query: str, limit: int = 10) -> List[TrainORM]:
+        clean_q = query.strip()
+        if not clean_q:
+            return []
+        pattern = f"%{clean_q}%"
+        stmt = (
+            select(TrainORM)
+            .options(selectinload(TrainORM.schedules))
+            .where(
+                or_(
+                    TrainORM.number.ilike(f"{clean_q}%"),
+                    TrainORM.name.ilike(pattern),
+                )
+            )
+            .order_by(TrainORM.number)
+            .limit(limit)
+        )
+        result = await self.session.execute(stmt)
+        return list(result.scalars().all())
+
+    async def get_schedule_with_stations(self, train_number: str) -> List[Tuple[ScheduleORM, str]]:
+        stmt = (
+            select(ScheduleORM, StationORM.name.label("station_name"))
+            .join(StationORM, ScheduleORM.station_code == StationORM.code)
+            .where(ScheduleORM.train_number == train_number.strip())
+            .order_by(ScheduleORM.stop_sequence)
+        )
+        result = await self.session.execute(stmt)
+        return list(result.all())
+
+    async def get_station_names_for_codes(self, station_codes: List[str]) -> Dict[str, str]:
+        if not station_codes:
+            return {}
+        stmt = select(StationORM.code, StationORM.name).where(StationORM.code.in_(station_codes))
+        result = await self.session.execute(stmt)
+        return {code: name for code, name in result.all()}
+

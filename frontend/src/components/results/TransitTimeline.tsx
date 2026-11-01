@@ -1,12 +1,24 @@
-import React from 'react';
-import { Train, Clock, ArrowRight, ShieldCheck, MapPin } from 'lucide-react';
+'use client';
+
+import React, { useState } from 'react';
+import { Train, Clock, ArrowRight, ShieldCheck, MapPin, ChevronDown, ChevronUp } from 'lucide-react';
 import { CandidateRoute, JourneyLeg } from '../../types/api';
+import { IntermediateStopsList } from './IntermediateStopsList';
 
 interface TransitTimelineProps {
   route: CandidateRoute;
 }
 
 export function TransitTimeline({ route }: TransitTimelineProps) {
+  const [expandedLegs, setExpandedLegs] = useState<Record<number, boolean>>({});
+
+  const toggleLeg = (index: number) => {
+    setExpandedLegs((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
+
   const formatTime = (isoString: string) => {
     try {
       const d = new Date(isoString);
@@ -43,13 +55,14 @@ export function TransitTimeline({ route }: TransitTimelineProps) {
         {route.legs.map((leg: JourneyLeg, index: number) => {
           const layoverDuration =
             route.transfer_durations_minutes && route.transfer_durations_minutes[index];
+          const isStopsOpen = !!expandedLegs[index];
 
           return (
             <React.Fragment key={`${leg.train_number}-${index}`}>
               {/* Leg Container */}
               <div className="bg-cream-50 rounded-xl p-4 border border-cream-300">
                 {/* Leg Header */}
-                <div className="flex items-center justify-between gap-3 mb-3 pb-2.5 border-b border-cream-200">
+                <div className="flex items-center justify-between gap-3 mb-3 pb-2.5 border-b border-cream-200 flex-wrap">
                   <div className="flex items-center gap-2 min-w-0">
                     <span className="w-6 h-6 rounded-md bg-espresso-900 text-cream-100 flex items-center justify-center text-xs font-bold font-mono">
                       {index + 1}
@@ -64,7 +77,12 @@ export function TransitTimeline({ route }: TransitTimelineProps) {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 flex-shrink-0">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    {leg.frequency_description && (
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-cream-200 text-espresso-800">
+                        {leg.frequency_description}
+                      </span>
+                    )}
                     <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-olive/15 text-olive">
                       <ShieldCheck className="w-3 h-3" />
                       <span>Timetable Confirmed</span>
@@ -84,7 +102,7 @@ export function TransitTimeline({ route }: TransitTimelineProps) {
                     </div>
                     <div className="font-semibold text-espresso-800 flex items-center gap-1">
                       <span>Station:</span>
-                      <span className="font-mono bg-cream-200 px-1.5 py-0.2 rounded font-bold text-espresso-900">
+                      <span className="font-mono bg-cream-200 px-1.5 py-0.5 rounded font-bold text-espresso-900">
                         {leg.origin_code}
                       </span>
                     </div>
@@ -103,7 +121,7 @@ export function TransitTimeline({ route }: TransitTimelineProps) {
                     </div>
                     <div className="font-semibold text-espresso-800 flex items-center gap-1">
                       <span>Station:</span>
-                      <span className="font-mono bg-cream-200 px-1.5 py-0.2 rounded font-bold text-espresso-900">
+                      <span className="font-mono bg-cream-200 px-1.5 py-0.5 rounded font-bold text-espresso-900">
                         {leg.destination_code}
                       </span>
                     </div>
@@ -133,8 +151,38 @@ export function TransitTimeline({ route }: TransitTimelineProps) {
                   </div>
                 </div>
 
+                {/* Stoppage Inspection Toggle Button */}
+                <div className="mt-3 pt-2.5 border-t border-cream-200 flex items-center justify-between">
+                  <button
+                    type="button"
+                    data-testid="toggle-intermediate-stops"
+                    onClick={() => toggleLeg(index)}
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-terracotta hover:text-terracotta/80 transition-colors"
+                  >
+                    <span>
+                      {isStopsOpen
+                        ? 'Hide Intermediate Halts'
+                        : `View Intermediate Halts (${leg.intermediate_stop_count !== undefined ? `${leg.intermediate_stop_count} stops` : 'Expand'})`}
+                    </span>
+                    {isStopsOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                  </button>
+
+                  <span className="text-[11px] text-espresso-500">
+                    Timetable verified
+                  </span>
+                </div>
+
+                {/* Expandable Stoppage List */}
+                {isStopsOpen && (
+                  <IntermediateStopsList
+                    trainNumber={leg.train_number}
+                    fromCode={leg.origin_code}
+                    toCode={leg.destination_code}
+                  />
+                )}
+
                 {/* Seat Availability & Fare Honest Notice */}
-                <div className="mt-3 pt-2.5 border-t border-cream-200 flex items-center justify-between text-[11px] text-espresso-600">
+                <div className="mt-3 pt-2 border-t border-cream-200 flex items-center justify-between text-[11px] text-espresso-600">
                   <span>Seat Availability: <strong className="text-espresso-800 font-semibold">Live feed deferred</strong></span>
                   <span>Fare: <strong className="text-espresso-800 font-semibold">Feed deferred</strong></span>
                 </div>
@@ -172,4 +220,3 @@ export function TransitTimeline({ route }: TransitTimelineProps) {
     </div>
   );
 }
-

@@ -11,6 +11,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.db import AsyncSessionLocal
 from app.domain.services.route_engine import RouteDiscoveryEngine
 from app.api.v1.stations import StationResponse
+from app.api.v1.trains import format_running_days
 
 router = APIRouter(prefix="/routes", tags=["routes"])
 
@@ -42,6 +43,9 @@ class LegSchema(BaseModel):
     distance_km: float
     timetable_status: str = "TIMETABLE_CONFIRMED"
     availability: Optional[AvailabilitySchema] = None
+    runs_on_days: Optional[List[int]] = None
+    frequency_description: Optional[str] = None
+    intermediate_stop_count: int = 0
 
 
 class RouteSchema(BaseModel):
@@ -139,6 +143,9 @@ async def search_routes(
                     travel_class=leg.travel_class,
                     distance_km=leg.distance_km,
                     timetable_status="TIMETABLE_CONFIRMED",
+                    runs_on_days=leg.runs_on_days,
+                    frequency_description=format_running_days(leg.runs_on_days) if leg.runs_on_days else None,
+                    intermediate_stop_count=leg.intermediate_stop_count,
                     availability=(
                         AvailabilitySchema(
                             status=leg.availability.status.value,

@@ -136,6 +136,18 @@ export function RouteCard({
               ? `Direct service from ${firstLeg.origin_code} to ${lastLeg.destination_code}`
               : `Change trains at ${intermediateHub} (${layoverMinutes || 0}m layover)`}
           </p>
+          <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+            {firstLeg.frequency_description && (
+              <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-cream-200 text-espresso-800">
+                {firstLeg.frequency_description}
+              </span>
+            )}
+            {route.is_direct && firstLeg.intermediate_stop_count !== undefined && firstLeg.intermediate_stop_count > 0 && (
+              <span className="text-[11px] text-espresso-600 font-medium">
+                • {firstLeg.intermediate_stop_count} intermediate halts
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Departure & Arrival Visual Box */}

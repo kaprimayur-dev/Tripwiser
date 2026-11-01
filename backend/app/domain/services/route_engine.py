@@ -331,6 +331,16 @@ class RouteDiscoveryEngine:
         if distance_km < 0:
             distance_km = float(dest_stop.distance_km)
 
+        # Count intermediate commercial halts
+        intermediate_count = sum(
+            1 for s in train.schedule
+            if orig_stop.stop_sequence < s.stop_sequence < dest_stop.stop_sequence
+            and (
+                (s.arrival_time and s.departure_time and s.arrival_time != s.departure_time)
+                or (s.arrival_time is None or s.departure_time is None)
+            )
+        )
+
         # Timetable route discovery does not fabricate live availability or commercial fares
         return JourneyLeg(
             train_number=train.number,
@@ -343,6 +353,8 @@ class RouteDiscoveryEngine:
             travel_class=None,
             distance_km=distance_km,
             availability=None,
+            runs_on_days=train.runs_on_days,
+            intermediate_stop_count=intermediate_count,
         )
 
     def _rank_routes(self, routes: Sequence[CandidateRoute], sort_by: str) -> List[CandidateRoute]:
