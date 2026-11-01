@@ -4,7 +4,7 @@
   "version": "2.0.0",
   "audit_status": "OFFICIALLY_VERIFIED_INDIVIDUAL_TRAIN_SPECIFIC",
   "audit_policy": "Zero blanket defaults; every train entry is substantiated by official timetable tables and coaching directorate circulars.",
-  "total_verified_trains": 196,
+  "total_verified_trains": 192,
   "calendars": {
     "12301": {
       "train_number": "12301",
@@ -3660,82 +3660,6 @@
       "publication_version": "TAG 2024-2026 (Published July 2024, in force 2024-2026)",
       "table_reference": "Table 10: Hyderabad - Chennai Central Charminar Express",
       "operating_days_description": "Daily (Mon-Sun)",
-      "provenance_tier": "OFFICIALLY_VERIFIED_INDIVIDUAL_TABLE_RECORD"
-    },
-    "20171": {
-      "train_number": "20171",
-      "train_name": "Indian Railways Service",
-      "origin_code": "UNKNOWN",
-      "destination_code": "UNKNOWN",
-      "runs_on_days": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        6
-      ],
-      "source_document": "Trains at a Glance (TAG) 2024-2026, Ministry of Railways",
-      "publication_version": "TAG 2024-2026 (Published July 2024, in force 2024-2026)",
-      "table_reference": "Railway Board Gazetted Circular 2023/Chg/16/RKMP-NDLS",
-      "operating_days_description": "Except Saturday",
-      "provenance_tier": "OFFICIALLY_VERIFIED_INDIVIDUAL_TABLE_RECORD"
-    },
-    "20172": {
-      "train_number": "20172",
-      "train_name": "Indian Railways Service",
-      "origin_code": "UNKNOWN",
-      "destination_code": "UNKNOWN",
-      "runs_on_days": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        6
-      ],
-      "source_document": "Trains at a Glance (TAG) 2024-2026, Ministry of Railways",
-      "publication_version": "TAG 2024-2026 (Published July 2024, in force 2024-2026)",
-      "table_reference": "Railway Board Gazetted Circular 2023/Chg/16/RKMP-NDLS",
-      "operating_days_description": "Except Saturday",
-      "provenance_tier": "OFFICIALLY_VERIFIED_INDIVIDUAL_TABLE_RECORD"
-    },
-    "22435": {
-      "train_number": "22435",
-      "train_name": "Indian Railways Service",
-      "origin_code": "UNKNOWN",
-      "destination_code": "UNKNOWN",
-      "runs_on_days": [
-        0,
-        1,
-        2,
-        4,
-        5,
-        6
-      ],
-      "source_document": "Trains at a Glance (TAG) 2024-2026, Ministry of Railways",
-      "publication_version": "TAG 2024-2026 (Published July 2024, in force 2024-2026)",
-      "table_reference": "Railway Board Gazetted Circular 2019/Chg/16/BSB-NDLS",
-      "operating_days_description": "Except Thursday",
-      "provenance_tier": "OFFICIALLY_VERIFIED_INDIVIDUAL_TABLE_RECORD"
-    },
-    "22436": {
-      "train_number": "22436",
-      "train_name": "Indian Railways Service",
-      "origin_code": "UNKNOWN",
-      "destination_code": "UNKNOWN",
-      "runs_on_days": [
-        0,
-        1,
-        2,
-        4,
-        5,
-        6
-      ],
-      "source_document": "Trains at a Glance (TAG) 2024-2026, Ministry of Railways",
-      "publication_version": "TAG 2024-2026 (Published July 2024, in force 2024-2026)",
-      "table_reference": "Railway Board Gazetted Circular 2019/Chg/16/BSB-NDLS",
-      "operating_days_description": "Except Thursday",
       "provenance_tier": "OFFICIALLY_VERIFIED_INDIVIDUAL_TABLE_RECORD"
     }
   }
