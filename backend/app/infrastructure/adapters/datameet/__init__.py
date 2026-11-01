@@ -12,6 +12,14 @@ from app.infrastructure.adapters.datameet.train_models import (
     TrainQuarantineRecord,
     TrainAdapterResult,
 )
+from app.infrastructure.adapters.datameet.schedule_adapter import DataMeetScheduleAdapter
+from app.infrastructure.adapters.datameet.schedule_models import (
+    DataMeetScheduleEntry,
+    DataMeetTrainSchedule,
+    AcceptedScheduleRecord,
+    ScheduleQuarantineRecord,
+    ScheduleAdapterResult,
+)
 
 __all__ = [
     "DataMeetStationAdapter",
@@ -24,4 +32,10 @@ __all__ = [
     "AcceptedTrainRecord",
     "TrainQuarantineRecord",
     "TrainAdapterResult",
+    "DataMeetScheduleAdapter",
+    "DataMeetScheduleEntry",
+    "DataMeetTrainSchedule",
+    "AcceptedScheduleRecord",
+    "ScheduleQuarantineRecord",
+    "ScheduleAdapterResult",
 ]
