@@ -9,6 +9,11 @@ class StationRepository(ABC):
         pass
 
     @abstractmethod
+    async def get_by_codes(self, codes: list[str]) -> list[Station]:
+        """Retrieve multiple stations by their station codes."""
+        pass
+
+    @abstractmethod
     async def search_by_name_or_code(self, query: str, limit: int = 10) -> list[Station]:
         """Search stations matching code or name for autocomplete."""
         pass

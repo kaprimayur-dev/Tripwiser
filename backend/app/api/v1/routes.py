@@ -216,3 +216,169 @@ async def search_routes(
         routes=routes_data,
     )
 
+
+# ---------------------------------------------------------------------------
+# Network Intelligence & Interchange Endpoints (TW-112)
+# ---------------------------------------------------------------------------
+
+class TrainConnectivityItem(BaseModel):
+    train_number: str
+    train_name: str
+    origin_code: str
+    destination_code: str
+    departure_time: str
+    arrival_time: str
+    day_difference: int
+    duration_minutes: int
+    distance_km: float
+    runs_on_days: List[int]
+    frequency_description: Optional[str] = None
+    intermediate_stop_count: int
+    origin_stop_sequence: int
+    destination_stop_sequence: int
+
+
+class StationConnectivityResponse(BaseModel):
+    origin_code: str
+    destination_code: str
+    total_trains_count: int
+    fastest_duration_minutes: Optional[int] = None
+    average_duration_minutes: Optional[int] = None
+    trains: List[TrainConnectivityItem]
+
+
+class InterchangeStationItem(BaseModel):
+    station_code: str
+    station_name: str
+    city: Optional[str] = None
+    state: Optional[str] = None
+    zone: Optional[str] = None
+    latitude: float
+    longitude: float
+    inbound_trains_count: int
+    outbound_trains_count: int
+    connection_score: int
+    sample_inbound_trains: List[str]
+    sample_outbound_trains: List[str]
+
+
+class InterchangeDiscoveryResponse(BaseModel):
+    origin_code: Optional[str] = None
+    destination_code: Optional[str] = None
+    total_interchanges_found: int
+    interchanges: List[InterchangeStationItem]
+
+
+@router.get("/connectivity", response_model=StationConnectivityResponse)
+async def get_station_connectivity(
+    origin_code: str = Query(..., min_length=1, max_length=10, description="Origin station code (e.g. NDLS, BCT)"),
+    destination_code: str = Query(..., min_length=1, max_length=10, description="Destination station code (e.g. BPL, HWH)"),
+    session: AsyncSession = Depends(get_db),
+):
+    """
+    Returns all compiled direct trains connecting two stations with scheduled timings,
+    operating days, durations, intermediate halts, and distances.
+    """
+    orig_clean = origin_code.strip().upper()
+    dest_clean = destination_code.strip().upper()
+
+    if orig_clean == dest_clean:
+        raise HTTPException(status_code=400, detail="Origin and destination stations cannot be identical.")
+
+    engine = RouteDiscoveryEngine(session)
+    orig_st = await engine.station_repo.get_by_code(orig_clean)
+    dest_st = await engine.station_repo.get_by_code(dest_clean)
+    if not orig_st or not dest_st:
+        raise HTTPException(
+            status_code=404,
+            detail=f"One or both stations ('{orig_clean}', '{dest_clean}') not found in station database.",
+        )
+
+    res = await engine.get_station_connectivity(orig_clean, dest_clean)
+    return StationConnectivityResponse(
+        origin_code=res.origin_code,
+        destination_code=res.destination_code,
+        total_trains_count=res.total_trains_count,
+        fastest_duration_minutes=res.fastest_duration_minutes,
+        average_duration_minutes=res.average_duration_minutes,
+        trains=[
+            TrainConnectivityItem(
+                train_number=tc.train_number,
+                train_name=tc.train_name,
+                origin_code=tc.origin_code,
+                destination_code=tc.destination_code,
+                departure_time=tc.departure_time.strftime("%H:%M"),
+                arrival_time=tc.arrival_time.strftime("%H:%M"),
+                day_difference=tc.day_difference,
+                duration_minutes=tc.duration_minutes,
+                distance_km=tc.distance_km,
+                runs_on_days=tc.runs_on_days,
+                frequency_description=format_running_days(tc.runs_on_days) if tc.runs_on_days else None,
+                intermediate_stop_count=tc.intermediate_stop_count,
+                origin_stop_sequence=tc.origin_stop_sequence,
+                destination_stop_sequence=tc.destination_stop_sequence,
+            )
+            for tc in res.trains
+        ],
+    )
+
+
+@router.get("/interchanges", response_model=InterchangeDiscoveryResponse)
+async def get_interchanges(
+    origin_code: Optional[str] = Query(None, min_length=1, max_length=10, description="Optional corridor origin code"),
+    destination_code: Optional[str] = Query(None, min_length=1, max_length=10, description="Optional corridor destination code"),
+    limit: int = Query(20, ge=1, le=50, description="Maximum interchange hubs to return"),
+    session: AsyncSession = Depends(get_db),
+):
+    """
+    Discovers interchange junction stations. When origin and destination are given,
+    identifies transfer hubs linking inbound and outbound train services.
+    When omitted, returns the highest-frequency junction hubs across Indian Railways.
+    """
+    orig_clean = origin_code.strip().upper() if origin_code else None
+    dest_clean = destination_code.strip().upper() if destination_code else None
+
+    if (orig_clean and not dest_clean) or (dest_clean and not orig_clean):
+        raise HTTPException(
+            status_code=400,
+            detail="Must provide both 'origin_code' and 'destination_code' for corridor interchanges, or neither for global hubs.",
+        )
+
+    if orig_clean and dest_clean and orig_clean == dest_clean:
+        raise HTTPException(status_code=400, detail="Origin and destination stations cannot be identical.")
+
+    engine = RouteDiscoveryEngine(session)
+    if orig_clean and dest_clean:
+        orig_st = await engine.station_repo.get_by_code(orig_clean)
+        dest_st = await engine.station_repo.get_by_code(dest_clean)
+        if not orig_st or not dest_st:
+            raise HTTPException(
+                status_code=404,
+                detail=f"One or both stations ('{orig_clean}', '{dest_clean}') not found in station database.",
+            )
+
+    interchanges = await engine.get_interchanges(orig_clean, dest_clean, limit=limit)
+    return InterchangeDiscoveryResponse(
+        origin_code=orig_clean,
+        destination_code=dest_clean,
+        total_interchanges_found=len(interchanges),
+        interchanges=[
+            InterchangeStationItem(
+                station_code=ic.station_code,
+                station_name=ic.station_name,
+                city=ic.city,
+                state=ic.state,
+                zone=ic.zone,
+                latitude=ic.latitude,
+                longitude=ic.longitude,
+                inbound_trains_count=ic.inbound_trains_count,
+                outbound_trains_count=ic.outbound_trains_count,
+                connection_score=ic.connection_score,
+                sample_inbound_trains=ic.sample_inbound_trains,
+                sample_outbound_trains=ic.sample_outbound_trains,
+            )
+            for ic in interchanges
+        ],
+    )
+
+

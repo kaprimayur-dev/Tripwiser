@@ -8,6 +8,7 @@ import { SortingFilterBar, SortMode } from './SortingFilterBar';
 import { RouteComparisonMatrix } from './RouteComparisonMatrix';
 import { NearbyAlternativesBanner } from './NearbyAlternativesBanner';
 import { JourneyDetailsModal } from './JourneyDetailsModal';
+import { InterchangeHubsCard } from '../network/InterchangeHubsCard';
 
 interface ResultsStreamProps {
   data: RouteSearchResponse | null;
@@ -210,6 +211,12 @@ export function ResultsStream({
           </div>
         </div>
       </div>
+
+      {/* Corridor Interchange Junctions Discovery (TW-112) */}
+      <InterchangeHubsCard
+        originCode={query.origin}
+        destinationCode={query.destination}
+      />
 
       {/* Nearby Metropolitan Twin Stations Banner */}
       {onSelectCorridor && (

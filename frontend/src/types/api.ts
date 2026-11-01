@@ -193,5 +193,54 @@ export interface IntermediateStopsResponse {
   stops: ScheduleStop[];
 }
 
+export interface TrainConnectivityItem {
+  train_number: string;
+  train_name: string;
+  origin_code: string;
+  destination_code: string;
+  departure_time: string;
+  arrival_time: string;
+  day_difference: number;
+  duration_minutes: number;
+  distance_km: number;
+  runs_on_days: number[];
+  frequency_description?: string | null;
+  intermediate_stop_count: number;
+  origin_stop_sequence: number;
+  destination_stop_sequence: number;
+}
+
+export interface StationConnectivityResponse {
+  origin_code: string;
+  destination_code: string;
+  total_trains_count: number;
+  fastest_duration_minutes?: number | null;
+  average_duration_minutes?: number | null;
+  trains: TrainConnectivityItem[];
+}
+
+export interface InterchangeStationItem {
+  station_code: string;
+  station_name: string;
+  city?: string | null;
+  state?: string | null;
+  zone?: string | null;
+  latitude: number;
+  longitude: number;
+  inbound_trains_count: number;
+  outbound_trains_count: number;
+  connection_score: number;
+  sample_inbound_trains: string[];
+  sample_outbound_trains: string[];
+}
+
+export interface InterchangeDiscoveryResponse {
+  origin_code?: string | null;
+  destination_code?: string | null;
+  total_interchanges_found: number;
+  interchanges: InterchangeStationItem[];
+}
+
+
 
 

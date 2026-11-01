@@ -47,6 +47,34 @@ class SQLAlchemyStationRepository(StationRepository):
             zone=orm.zone
         )
 
+    async def get_by_codes(self, codes: list[str]) -> list[Station]:
+        if not codes:
+            return []
+        clean_codes = [c.strip().upper() for c in codes if c and c.strip()]
+        if not clean_codes:
+            return []
+
+        stmt = select(
+            StationORM,
+            func.ST_Y(func.geometry(StationORM.location)).label("lat"),
+            func.ST_X(func.geometry(StationORM.location)).label("lon")
+        ).where(StationORM.code.in_(clean_codes))
+
+        result = await self.session.execute(stmt)
+        rows = result.all()
+        return [
+            Station(
+                code=orm.code,
+                name=orm.name,
+                latitude=float(lat) if lat is not None else 0.0,
+                longitude=float(lon) if lon is not None else 0.0,
+                city=orm.city,
+                state=orm.state,
+                zone=orm.zone,
+            )
+            for orm, lat, lon in rows
+        ]
+
     async def search_by_name_or_code(self, query: str, limit: int = 10) -> list[Station]:
         clean_q = query.strip().upper()
         if not clean_q:

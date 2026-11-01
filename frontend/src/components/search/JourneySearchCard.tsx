@@ -55,6 +55,12 @@ export function JourneySearchCard({
     }
   }, [initialDestination]);
 
+  useEffect(() => {
+    if (initialMaxTransfers !== undefined) {
+      setMaxTransfers(initialMaxTransfers);
+    }
+  }, [initialMaxTransfers]);
+
   // Quick date helpers
   const setQuickDate = (daysFromToday: number) => {
     const d = new Date();
@@ -208,6 +214,7 @@ export function JourneySearchCard({
               <div className="flex rounded-xl border border-cream-300 bg-cream-50 p-1">
                 <button
                   type="button"
+                  id="btn-transfers-0"
                   onClick={() => setMaxTransfers(0)}
                   className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                     maxTransfers === 0
@@ -215,10 +222,11 @@ export function JourneySearchCard({
                       : 'text-espresso-600 hover:text-espresso-900'
                   }`}
                 >
-                  Direct Only
+                  Direct
                 </button>
                 <button
                   type="button"
+                  id="btn-transfers-1"
                   onClick={() => setMaxTransfers(1)}
                   className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                     maxTransfers === 1
@@ -228,9 +236,25 @@ export function JourneySearchCard({
                 >
                   1 Transfer
                 </button>
+                <button
+                  type="button"
+                  id="btn-transfers-2"
+                  onClick={() => setMaxTransfers(2)}
+                  className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                    maxTransfers === 2
+                      ? 'bg-white text-espresso-900 shadow-sm border border-cream-300'
+                      : 'text-espresso-600 hover:text-espresso-900'
+                  }`}
+                >
+                  2 Transfers
+                </button>
               </div>
               <p className="text-[10px] text-espresso-500 mt-1">
-                {maxTransfers === 1 ? 'Finds guaranteed layover hubs' : 'Only direct trains'}
+                {maxTransfers === 0
+                  ? 'Only direct trains'
+                  : maxTransfers === 1
+                  ? 'Single junction layover'
+                  : 'Up to 2 transfers / 3 train legs'}
               </p>
             </div>
 

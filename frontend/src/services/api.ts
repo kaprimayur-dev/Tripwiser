@@ -13,6 +13,8 @@ import {
   TrainDetail,
   TrainScheduleResponse,
   IntermediateStopsResponse,
+  StationConnectivityResponse,
+  InterchangeDiscoveryResponse,
 } from '../types/api';
 
 const API_BASE = '/api/v1';
@@ -186,3 +188,38 @@ export async function getIntermediateStops(
   }
   return res.json();
 }
+
+export async function getStationConnectivity(
+  originCode: string,
+  destinationCode: string
+): Promise<StationConnectivityResponse> {
+  const orig = originCode.trim().toUpperCase();
+  const dest = destinationCode.trim().toUpperCase();
+  const res = await fetch(`${API_BASE}/routes/connectivity?origin_code=${orig}&destination_code=${dest}`);
+  if (!res.ok) {
+    const errorBody = await res.json().catch(() => ({ detail: res.statusText }));
+    throw new Error(errorBody.detail || `Failed to get connectivity: ${res.status}`);
+  }
+  return res.json();
+}
+
+export async function getInterchanges(
+  originCode?: string,
+  destinationCode?: string,
+  limit = 20
+): Promise<InterchangeDiscoveryResponse> {
+  const params = new URLSearchParams();
+  if (originCode && destinationCode) {
+    params.set('origin_code', originCode.trim().toUpperCase());
+    params.set('destination_code', destinationCode.trim().toUpperCase());
+  }
+  params.set('limit', String(limit));
+
+  const res = await fetch(`${API_BASE}/routes/interchanges?${params.toString()}`);
+  if (!res.ok) {
+    const errorBody = await res.json().catch(() => ({ detail: res.statusText }));
+    throw new Error(errorBody.detail || `Failed to discover interchanges: ${res.status}`);
+  }
+  return res.json();
+}
+

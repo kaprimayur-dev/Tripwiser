@@ -71,9 +71,9 @@ export function RouteCard({
 
   const dayDiff = getDayDifference();
 
-  // Find intermediate hub if 1-transfer
-  const intermediateHub =
-    route.transfer_count === 1 && route.legs.length >= 2 ? route.legs[0].destination_code : null;
+  // Find intermediate hubs
+  const intermediateHubs = route.legs.slice(0, -1).map((leg) => leg.destination_code);
+  const intermediateHub = intermediateHubs.join(', ');
 
   const layoverMinutes = route.transfer_durations_minutes?.[0];
 
@@ -101,18 +101,27 @@ export function RouteCard({
               <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-olive/15 text-olive">
                 DIRECT SERVICE
               </span>
-            ) : (
+            ) : route.transfer_count === 1 ? (
               <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-terracotta/10 text-terracotta">
                 1 TRANSFER VIA {intermediateHub}
               </span>
+            ) : (
+              <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-terracotta/15 text-terracotta">
+                {route.transfer_count} TRANSFERS VIA {intermediateHub}
+              </span>
             )}
 
-            {!route.is_direct && layoverMinutes !== undefined && (
-              <TransferAdvisoryBadge
-                transferMinutes={layoverMinutes}
-                transferStationCode={intermediateHub || undefined}
-                variant="compact"
-              />
+            {!route.is_direct && route.transfer_durations_minutes && route.transfer_durations_minutes.length > 0 && (
+              <div className="flex items-center gap-1.5 flex-wrap">
+                {route.transfer_durations_minutes.map((dur, i) => (
+                  <TransferAdvisoryBadge
+                    key={i}
+                    transferMinutes={dur}
+                    transferStationCode={intermediateHubs[i]}
+                    variant="compact"
+                  />
+                ))}
+              </div>
             )}
           </div>
 
@@ -129,12 +138,16 @@ export function RouteCard({
           <h3 className="font-display text-lg font-bold text-espresso-900 leading-snug">
             {route.is_direct
               ? `${firstLeg.train_name} (#${firstLeg.train_number})`
-              : `Coordinated Route: ${firstLeg.train_name} ➔ ${lastLeg.train_name}`}
+              : route.transfer_count === 1
+              ? `Coordinated Route: ${firstLeg.train_name} ➔ ${lastLeg.train_name}`
+              : `Multi-Leg Journey: ${route.legs.map((l) => l.train_name).join(' ➔ ')}`}
           </h3>
           <p className="text-xs text-espresso-600 mt-0.5">
             {route.is_direct
               ? `Direct service from ${firstLeg.origin_code} to ${lastLeg.destination_code}`
-              : `Change trains at ${intermediateHub} (${layoverMinutes || 0}m layover)`}
+              : route.transfer_count === 1
+              ? `Change trains at ${intermediateHub} (${layoverMinutes || 0}m layover)`
+              : `Transfers at ${intermediateHubs.map((h, i) => `${h} (${route.transfer_durations_minutes[i]}m)`).join(', ')}`}
           </p>
           <div className="flex items-center gap-2 mt-1.5 flex-wrap">
             {firstLeg.frequency_description && (

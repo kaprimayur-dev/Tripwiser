@@ -44,43 +44,6 @@ export default function Home() {
   // Station Discovery State
   const [selectedStationCode, setSelectedStationCode] = useState<string | null>(null);
 
-  // Default tomorrow date and URL params on mount
-  useEffect(() => {
-    const d = new Date();
-    d.setDate(d.getDate() + 1);
-    setDate(d.toISOString().split('T')[0]);
-
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const modeParam = params.get('mode');
-      if (
-        modeParam === 'timetable' ||
-        modeParam === 'bachelor' ||
-        modeParam === 'connecting' ||
-        modeParam === 'stations'
-      ) {
-        setActiveMode(modeParam as AppMode);
-      }
-      const trainParam = params.get('train');
-      if (trainParam) {
-        setSelectedTrain(trainParam.trim());
-      }
-      const stationParam = params.get('station');
-      if (stationParam) {
-        setSelectedStationCode(stationParam.trim().toUpperCase());
-      }
-    }
-  }, []);
-
-  const handleModeChange = (mode: AppMode) => {
-    setActiveMode(mode);
-    if (typeof window !== 'undefined') {
-      const url = new URL(window.location.href);
-      url.searchParams.set('mode', mode);
-      window.history.replaceState({}, '', url.toString());
-    }
-  };
-
   // Execute connecting route search
   const executeSearch = useCallback(
     async (params: {
@@ -109,6 +72,7 @@ export default function Home() {
           url.searchParams.set('origin', params.originCode);
           url.searchParams.set('destination', params.destCode);
           url.searchParams.set('date', params.journeyDate);
+          url.searchParams.set('transfers', String(params.transfers));
           url.searchParams.set('sort', params.sortBy);
           window.history.replaceState({}, '', url.toString());
         }
@@ -121,6 +85,67 @@ export default function Home() {
     },
     []
   );
+
+  // Default tomorrow date and URL params on mount
+  useEffect(() => {
+    const d = new Date();
+    d.setDate(d.getDate() + 1);
+    setDate(d.toISOString().split('T')[0]);
+
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const modeParam = params.get('mode');
+      if (
+        modeParam === 'timetable' ||
+        modeParam === 'bachelor' ||
+        modeParam === 'connecting' ||
+        modeParam === 'stations'
+      ) {
+        setActiveMode(modeParam as AppMode);
+      }
+      const trainParam = params.get('train');
+      if (trainParam) {
+        setSelectedTrain(trainParam.trim());
+      }
+      const stationParam = params.get('station');
+      if (stationParam) {
+        setSelectedStationCode(stationParam.trim().toUpperCase());
+      }
+      const transfersParam = params.get('transfers');
+      if (transfersParam && ['0', '1', '2'].includes(transfersParam)) {
+        setMaxTransfers(Number(transfersParam));
+      }
+
+      const origParam = params.get('origin');
+      const destParam = params.get('destination');
+      if (origParam && destParam && (!modeParam || modeParam === 'connecting')) {
+        Promise.all([getStationByCode(origParam), getStationByCode(destParam)]).then(([o, d]) => {
+          if (o && d) {
+            setOrigin(o);
+            setDestination(d);
+            const queryDate = params.get('date') || new Date(Date.now() + 86400000).toISOString().split('T')[0];
+            const numTransfers = transfersParam ? Number(transfersParam) : 1;
+            executeSearch({
+              originCode: o.code,
+              destCode: d.code,
+              journeyDate: queryDate,
+              transfers: numTransfers,
+              sortBy: 'recommended',
+            });
+          }
+        });
+      }
+    }
+  }, [executeSearch]);
+
+  const handleModeChange = (mode: AppMode) => {
+    setActiveMode(mode);
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      url.searchParams.set('mode', mode);
+      window.history.replaceState({}, '', url.toString());
+    }
+  };
 
   // Execute Bachelor Special search
   const executeBachelorSearch = useCallback(

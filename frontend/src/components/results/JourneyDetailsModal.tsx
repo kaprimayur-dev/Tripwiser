@@ -79,8 +79,8 @@ export function JourneyDetailsModal({
     return `${hours}h ${minutes}m`;
   };
 
-  const intermediateHub =
-    route.transfer_count === 1 && route.legs.length >= 2 ? route.legs[0].destination_code : null;
+  const intermediateHubs = route.legs.slice(0, -1).map((leg) => leg.destination_code);
+  const intermediateHub = intermediateHubs.join(', ');
 
   const totalDistance = route.legs.reduce((acc, leg) => acc + (leg.distance_km || 0), 0);
 
@@ -90,7 +90,7 @@ export function JourneyDetailsModal({
       `Total Duration: ${formatDuration(route.total_duration_minutes)} (${totalDistance} km)`,
       `Departure: ${formatDate(firstLeg.departure_time)} at ${formatTime(firstLeg.departure_time)} (${firstLeg.origin_code})`,
       `Arrival: ${formatDate(lastLeg.arrival_time)} at ${formatTime(lastLeg.arrival_time)} (${lastLeg.destination_code})`,
-      `Transfers: ${route.transfer_count === 0 ? 'Direct service' : `1 Transfer at ${intermediateHub}`}`,
+      `Transfers: ${route.transfer_count === 0 ? 'Direct service' : `${route.transfer_count} Transfer(s) at ${intermediateHub}`}`,
       '',
       ...route.legs.map(
         (leg, idx) =>
@@ -185,7 +185,9 @@ export function JourneyDetailsModal({
                 Connections
               </span>
               <div className="font-display text-lg font-bold text-espresso-900 mt-0.5">
-                {route.transfer_count === 0 ? 'Direct Service' : '1 Interchange'}
+                {route.transfer_count === 0
+                  ? 'Direct Service'
+                  : `${route.transfer_count} Interchange${route.transfer_count > 1 ? 's' : ''}`}
               </div>
             </div>
 
