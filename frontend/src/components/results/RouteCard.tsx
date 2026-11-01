@@ -1,16 +1,31 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp, Clock, Train, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
+import {
+  ChevronDown,
+  ChevronUp,
+  Clock,
+  Train,
+  ArrowRight,
+  ShieldCheck,
+  Sparkles,
+  FileText,
+} from 'lucide-react';
 import { CandidateRoute } from '../../types/api';
 import { TransitTimeline } from './TransitTimeline';
+import { TransferAdvisoryBadge } from './TransferAdvisoryBadge';
 
 interface RouteCardProps {
   route: CandidateRoute;
   isRecommended?: boolean;
+  onOpenDetails?: (route: CandidateRoute) => void;
 }
 
-export function RouteCard({ route, isRecommended = false }: RouteCardProps) {
+export function RouteCard({
+  route,
+  isRecommended = false,
+  onOpenDetails,
+}: RouteCardProps) {
   const [isExpanded, setIsExpanded] = useState<boolean>(isRecommended);
 
   const firstLeg = route.legs[0];
@@ -60,8 +75,11 @@ export function RouteCard({ route, isRecommended = false }: RouteCardProps) {
   const intermediateHub =
     route.transfer_count === 1 && route.legs.length >= 2 ? route.legs[0].destination_code : null;
 
+  const layoverMinutes = route.transfer_durations_minutes?.[0];
+
   return (
     <div
+      id={`route-card-${route.route_id}`}
       className={`bg-white rounded-2xl border transition-all duration-200 overflow-hidden ${
         isRecommended
           ? 'border-terracotta/40 shadow-md ring-1 ring-terracotta/20'
@@ -69,7 +87,7 @@ export function RouteCard({ route, isRecommended = false }: RouteCardProps) {
       }`}
     >
       <div className="p-5 sm:p-6 space-y-4">
-        {/* Top Badges */}
+        {/* Top Badges & Transfer Advisory */}
         <div className="flex items-center justify-between gap-2 flex-wrap">
           <div className="flex items-center gap-1.5 flex-wrap">
             {isRecommended && (
@@ -87,6 +105,14 @@ export function RouteCard({ route, isRecommended = false }: RouteCardProps) {
               <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-terracotta/10 text-terracotta">
                 1 TRANSFER VIA {intermediateHub}
               </span>
+            )}
+
+            {!route.is_direct && layoverMinutes !== undefined && (
+              <TransferAdvisoryBadge
+                transferMinutes={layoverMinutes}
+                transferStationCode={intermediateHub || undefined}
+                variant="compact"
+              />
             )}
           </div>
 
@@ -108,7 +134,7 @@ export function RouteCard({ route, isRecommended = false }: RouteCardProps) {
           <p className="text-xs text-espresso-600 mt-0.5">
             {route.is_direct
               ? `Direct service from ${firstLeg.origin_code} to ${lastLeg.destination_code}`
-              : `Change trains at ${intermediateHub} (${route.transfer_durations_minutes[0] || 0}m layover)`}
+              : `Change trains at ${intermediateHub} (${layoverMinutes || 0}m layover)`}
           </p>
         </div>
 
@@ -153,10 +179,10 @@ export function RouteCard({ route, isRecommended = false }: RouteCardProps) {
               <span className="w-2.5 h-2.5 rounded-full bg-espresso-900 flex-shrink-0" />
             </div>
 
-            <span className="text-[11px] text-espresso-600 mt-1 font-medium">
+            <span className="text-[11px] text-espresso-600 mt-1 font-medium text-center">
               {route.is_direct
                 ? `${firstLeg.distance_km} km direct`
-                : `${route.transfer_durations_minutes[0] || 0}m layover at ${intermediateHub}`}
+                : `${layoverMinutes || 0}m layover at ${intermediateHub}`}
             </span>
           </div>
 
@@ -197,15 +223,28 @@ export function RouteCard({ route, isRecommended = false }: RouteCardProps) {
           </div>
         </div>
 
-        {/* Expand / Collapse Details Drawer Button */}
-        <button
-          type="button"
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="w-full pt-3 border-t border-cream-200 flex items-center justify-center gap-1.5 text-xs font-bold text-espresso-800 hover:text-terracotta transition-colors"
-        >
-          <span>{isExpanded ? 'Hide Leg Timetable' : 'View Detailed Route Timeline'}</span>
-          {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-        </button>
+        {/* Action Controls: Details Modal and Timeline Toggle */}
+        <div className="pt-3 border-t border-cream-200 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
+          {onOpenDetails && (
+            <button
+              type="button"
+              onClick={() => onOpenDetails(route)}
+              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-espresso-900 text-cream-100 text-xs font-semibold hover:bg-espresso-800 transition-colors shadow-sm"
+            >
+              <FileText className="w-3.5 h-3.5 text-terracotta" />
+              <span>Full Journey Details &amp; Itinerary</span>
+            </button>
+          )}
+
+          <button
+            type="button"
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-bold text-espresso-800 hover:text-terracotta transition-colors self-center sm:self-auto"
+          >
+            <span>{isExpanded ? 'Hide Leg Timetable' : 'Quick Leg Timetable'}</span>
+            {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+          </button>
+        </div>
 
         {/* Accordion Content */}
         {isExpanded && <TransitTimeline route={route} />}
@@ -213,4 +252,3 @@ export function RouteCard({ route, isRecommended = false }: RouteCardProps) {
     </div>
   );
 }
-

@@ -1,10 +1,13 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Train, AlertCircle, ArrowRight, Calendar, Compass, RefreshCw } from 'lucide-react';
-import { RouteSearchResponse } from '../../types/api';
+import { RouteSearchResponse, CandidateRoute } from '../../types/api';
 import { RouteCard } from './RouteCard';
 import { SortingFilterBar, SortMode } from './SortingFilterBar';
+import { RouteComparisonMatrix } from './RouteComparisonMatrix';
+import { NearbyAlternativesBanner } from './NearbyAlternativesBanner';
+import { JourneyDetailsModal } from './JourneyDetailsModal';
 
 interface ResultsStreamProps {
   data: RouteSearchResponse | null;
@@ -23,6 +26,8 @@ export function ResultsStream({
   onSortChange,
   onSelectCorridor,
 }: ResultsStreamProps) {
+  const [activeModalRoute, setActiveModalRoute] = useState<CandidateRoute | null>(null);
+
   if (isLoading) {
     return (
       <div className="space-y-4 animate-pulse">
@@ -96,54 +101,72 @@ export function ResultsStream({
     }
 
     return (
-      <div className="bg-white rounded-2xl p-8 border border-cream-300 shadow-sm text-center space-y-4">
-        <div className="w-12 h-12 rounded-2xl bg-cream-100 text-espresso-700 flex items-center justify-center mx-auto">
-          <Compass className="w-6 h-6 text-terracotta" />
-        </div>
-
-        <div>
-          <h3 className="font-display text-xl font-bold text-espresso-900 mb-1">
-            {title}
-          </h3>
-          <p className="text-sm text-espresso-600 max-w-md mx-auto leading-relaxed">
-            {explanation}
-          </p>
-        </div>
-
-        {/* Suggestion to test compiled real corridors */}
+      <div className="space-y-4">
+        {/* Nearby Alternate Stations Opportunity even when no route found */}
         {onSelectCorridor && (
-          <div className="pt-4 border-t border-cream-200 max-w-lg mx-auto">
-            <span className="text-xs font-semibold text-espresso-700 block mb-2">
-              Try searching a verified railway corridor in the local dataset:
-            </span>
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              <button
-                type="button"
-                onClick={() => onSelectCorridor('BCT', 'NDLS')}
-                className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-cream-100 hover:bg-terracotta hover:text-white text-espresso-800 transition-colors"
-              >
-                Mumbai (BCT) ➔ Delhi (NDLS)
-              </button>
-              <button
-                type="button"
-                onClick={() => onSelectCorridor('NDLS', 'BPL')}
-                className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-cream-100 hover:bg-terracotta hover:text-white text-espresso-800 transition-colors"
-              >
-                Delhi (NDLS) ➔ Bhopal (BPL)
-              </button>
-              <button
-                type="button"
-                onClick={() => onSelectCorridor('NDLS', 'HWH')}
-                className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-cream-100 hover:bg-terracotta hover:text-white text-espresso-800 transition-colors"
-              >
-                Delhi (NDLS) ➔ Kolkata (HWH)
-              </button>
-            </div>
-          </div>
+          <NearbyAlternativesBanner
+            currentOriginCode={query.origin}
+            currentDestinationCode={query.destination}
+            onSelectAlternative={(orig, dest) => onSelectCorridor(orig, dest)}
+          />
         )}
+
+        <div className="bg-white rounded-2xl p-8 border border-cream-300 shadow-sm text-center space-y-4">
+          <div className="w-12 h-12 rounded-2xl bg-cream-100 text-espresso-700 flex items-center justify-center mx-auto">
+            <Compass className="w-6 h-6 text-terracotta" />
+          </div>
+
+          <div>
+            <h3 className="font-display text-xl font-bold text-espresso-900 mb-1">
+              {title}
+            </h3>
+            <p className="text-sm text-espresso-600 max-w-md mx-auto leading-relaxed">
+              {explanation}
+            </p>
+          </div>
+
+          {/* Suggestion to test compiled real corridors */}
+          {onSelectCorridor && (
+            <div className="pt-4 border-t border-cream-200 max-w-lg mx-auto">
+              <span className="text-xs font-semibold text-espresso-700 block mb-2">
+                Try searching a verified railway corridor in the local dataset:
+              </span>
+              <div className="flex flex-wrap items-center justify-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => onSelectCorridor('BCT', 'NDLS')}
+                  className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-cream-100 hover:bg-terracotta hover:text-white text-espresso-800 transition-colors"
+                >
+                  Mumbai (BCT) ➔ Delhi (NDLS)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onSelectCorridor('NDLS', 'BPL')}
+                  className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-cream-100 hover:bg-terracotta hover:text-white text-espresso-800 transition-colors"
+                >
+                  Delhi (NDLS) ➔ Bhopal (BPL)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onSelectCorridor('NDLS', 'HWH')}
+                  className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-cream-100 hover:bg-terracotta hover:text-white text-espresso-800 transition-colors"
+                >
+                  Delhi (NDLS) ➔ Kolkata (HWH)
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     );
   }
+
+  const handleSelectRouteFromMatrix = (routeId: string) => {
+    const el = document.getElementById(`route-card-${routeId}`);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -188,6 +211,23 @@ export function ResultsStream({
         </div>
       </div>
 
+      {/* Nearby Metropolitan Twin Stations Banner */}
+      {onSelectCorridor && (
+        <NearbyAlternativesBanner
+          currentOriginCode={query.origin}
+          currentDestinationCode={query.destination}
+          onSelectAlternative={(orig, dest) => onSelectCorridor(orig, dest)}
+        />
+      )}
+
+      {/* Route Comparison Matrix (when >= 2 routes exist) */}
+      {routes.length >= 2 && (
+        <RouteComparisonMatrix
+          routes={routes}
+          onSelectRoute={handleSelectRouteFromMatrix}
+        />
+      )}
+
       {/* Sorting & Filter Strip */}
       <SortingFilterBar
         currentSort={currentSort}
@@ -203,10 +243,22 @@ export function ResultsStream({
             key={route.route_id}
             route={route}
             isRecommended={idx === 0 && currentSort === 'recommended'}
+            onOpenDetails={(r) => setActiveModalRoute(r)}
           />
         ))}
       </div>
+
+      {/* Full Journey Details Modal */}
+      <JourneyDetailsModal
+        route={activeModalRoute}
+        isOpen={Boolean(activeModalRoute)}
+        onClose={() => setActiveModalRoute(null)}
+        isRecommended={
+          Boolean(activeModalRoute) &&
+          routes[0]?.route_id === activeModalRoute?.route_id &&
+          currentSort === 'recommended'
+        }
+      />
     </div>
   );
 }
-
