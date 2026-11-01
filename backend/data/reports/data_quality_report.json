@@ -1,0 +1,119 @@
+{
+  "report_id": "quality_audit_20261101_230624",
+  "generated_at": "2026-11-01T23:06:24.713354",
+  "total_records_inspected": 34182,
+  "stations": {
+    "total_inspected": 8990,
+    "valid_count": 4213,
+    "rejected_count": 293,
+    "review_required_count": 4484,
+    "retained_incomplete_count": 0,
+    "warnings_count": 0
+  },
+  "trains": {
+    "total_inspected": 5208,
+    "valid_count": 5207,
+    "rejected_count": 1,
+    "review_required_count": 0,
+    "retained_incomplete_count": 0,
+    "warnings_count": 0
+  },
+  "schedules": {
+    "total_inspected": 14776,
+    "valid_count": 4378,
+    "rejected_count": 9641,
+    "review_required_count": 731,
+    "retained_incomplete_count": 26,
+    "warnings_count": 0
+  },
+  "calendars": {
+    "total_inspected": 5208,
+    "valid_count": 192,
+    "rejected_count": 0,
+    "review_required_count": 5016,
+    "retained_incomplete_count": 0,
+    "warnings_count": 0
+  },
+  "findings_by_severity": {
+    "WARNING": 32487,
+    "CRITICAL": 293,
+    "ERROR": 13,
+    "INFO": 305825
+  },
+  "findings_by_category": {
+    "STATION": 5071,
+    "TRAIN": 4,
+    "SCHEDULE": 328527,
+    "CALENDAR": 5016
+  },
+  "top_failure_rules": [
+    {
+      "rule_code": "SCH_ZERO_DWELL_WAYPOINT",
+      "count": 283066
+    },
+    {
+      "rule_code": "SCH_INCOMPLETE_TIMING",
+      "count": 22759
+    },
+    {
+      "rule_code": "SCH_MISSING_DAY_OFFSET",
+      "count": 22561
+    },
+    {
+      "rule_code": "CAL_AWAITING_CALENDAR",
+      "count": 5016
+    },
+    {
+      "rule_code": "STN_MISSING_STATE",
+      "count": 4777
+    },
+    {
+      "rule_code": "STN_NULL_GEOMETRY",
+      "count": 293
+    },
+    {
+      "rule_code": "SCH_NEGATIVE_STATION_DWELL",
+      "count": 112
+    },
+    {
+      "rule_code": "SCH_DEST_ENDPOINT_MISMATCH",
+      "count": 16
+    },
+    {
+      "rule_code": "SCH_ANOMALOUS_DAY_OFFSET",
+      "count": 6
+    },
+    {
+      "rule_code": "SCH_ORIGIN_ENDPOINT_MISMATCH",
+      "count": 5
+    },
+    {
+      "rule_code": "SCH_DECREASING_DAY_OFFSET",
+      "count": 2
+    },
+    {
+      "rule_code": "STN_MISSING_NAME",
+      "count": 1
+    },
+    {
+      "rule_code": "TRN_MISSING_NAME",
+      "count": 1
+    },
+    {
+      "rule_code": "TRN_UNRESOLVED_ORIGIN",
+      "count": 1
+    },
+    {
+      "rule_code": "TRN_UNRESOLVED_DESTINATION",
+      "count": 1
+    }
+  ],
+  "data_freshness_statement": "Dataset compiled from public DataMeet Railways repository snapshots and official Indian Railways Trains at a Glance (TAG 2024-2026) publication tables. Source files do not provide per-record HTTP last-modified timestamps; freshness cannot be dynamically verified beyond the documented publication release dates.",
+  "source_artifacts": {
+    "stations.json": "app/infrastructure/data/sources/datameet/stations.json",
+    "trains.json": "app/infrastructure/data/sources/datameet/trains.json",
+    "schedules.json": "app/infrastructure/data/sources/datameet/schedules.json",
+    "railway_running_calendars.json": "app/infrastructure/data/sources/official/railway_running_calendars.json"
+  },
+  "reproducibility_hash": "bd76cfaf219516dd40310729c172a2d34b5dfbdd8a797c54b8fd5ad53c8732e9"
+}
