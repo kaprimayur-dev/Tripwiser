@@ -73,19 +73,26 @@ async def test_chart_vacancy_persistence_flow():
 
     async with AsyncSessionLocal() as session:
         try:
-            # 1. Setup required foreign key entities
-            st1 = StationORM(code="GWL", name="Gwalior", location="SRID=4326;POINT(78.1828 26.2183)")
-            st2 = StationORM(code="JHS", name="Jhansi", location="SRID=4326;POINT(78.5685 25.4484)")
-            session.add_all([st1, st2])
+            # 1. Setup required foreign key entities (use existing if already present)
+            st1 = await session.get(StationORM, "GWL")
+            if not st1:
+                st1 = StationORM(code="GWL", name="Gwalior", location="SRID=4326;POINT(78.1828 26.2183)")
+                session.add(st1)
+            st2 = await session.get(StationORM, "JHS")
+            if not st2:
+                st2 = StationORM(code="JHS", name="Jhansi", location="SRID=4326;POINT(78.5685 25.4484)")
+                session.add(st2)
             
-            tr = TrainORM(
-                number="12616",
-                name="Grand Trunk Express",
-                origin_code="GWL",
-                destination_code="JHS",
-                runs_on_days=[0, 1, 2, 3, 4, 5, 6]
-            )
-            session.add(tr)
+            tr = await session.get(TrainORM, "12616")
+            if not tr:
+                tr = TrainORM(
+                    number="12616",
+                    name="Grand Trunk Express",
+                    origin_code="GWL",
+                    destination_code="JHS",
+                    runs_on_days=[0, 1, 2, 3, 4, 5, 6]
+                )
+                session.add(tr)
             await session.flush()
 
             # 2. Insert ChartVacancyORM

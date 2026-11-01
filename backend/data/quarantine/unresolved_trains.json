@@ -1,0 +1,2331 @@
+[
+  {
+    "train_number": "05697",
+    "train_name": "Hill Queen Express",
+    "rejection_codes": [
+      "UNRESOLVED_DESTINATION_STATION"
+    ],
+    "validation_messages": [
+      "Destination station code 'LFG' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            93.17660000000001,
+            25.750035999999998
+          ],
+          [
+            93.123109,
+            25.707319
+          ],
+          [
+            93.09084800000001,
+            25.611069999999998
+          ],
+          [
+            93.110265,
+            25.49759
+          ],
+          [
+            93.126587,
+            25.427907
+          ],
+          [
+            93.122747,
+            25.368686
+          ],
+          [
+            93.13311999999999,
+            25.339050999999998
+          ],
+          [
+            93.13537099999999,
+            25.30497
+          ],
+          [
+            93.177527,
+            25.263973
+          ],
+          [
+            93.162162,
+            25.227501
+          ],
+          [
+            93.126299,
+            25.187996
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "13:30:00",
+        "from_station_code": "LMG",
+        "name": "Hill Queen Express",
+        "zone": "NFR",
+        "chair_car": 1,
+        "first_class": 0,
+        "duration_m": 45,
+        "sleeper": 0,
+        "from_station_name": "LUMDING JN",
+        "number": "05697",
+        "departure": "09:45:00",
+        "return_train": "05698",
+        "to_station_code": "LFG",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Lower Haflong",
+        "duration_h": 3,
+        "type": "JShtb",
+        "first_ac": 0,
+        "distance": 104
+      }
+    }
+  },
+  {
+    "train_number": "05698",
+    "train_name": "Hill Queen Express",
+    "rejection_codes": [
+      "UNRESOLVED_ORIGIN_STATION"
+    ],
+    "validation_messages": [
+      "Origin station code 'LFG' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            93.126299,
+            25.187996
+          ],
+          [
+            93.162162,
+            25.227501
+          ],
+          [
+            93.177527,
+            25.263973
+          ],
+          [
+            93.13537099999999,
+            25.30497
+          ],
+          [
+            93.13311999999999,
+            25.339050999999998
+          ],
+          [
+            93.122747,
+            25.368686
+          ],
+          [
+            93.126587,
+            25.427907
+          ],
+          [
+            93.110265,
+            25.49759
+          ],
+          [
+            93.09084800000001,
+            25.611069999999998
+          ],
+          [
+            93.123109,
+            25.707319
+          ],
+          [
+            93.17660000000001,
+            25.750035999999998
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "17:30:00",
+        "from_station_code": "LFG",
+        "name": "Hill Queen Express",
+        "zone": "NFR",
+        "chair_car": 1,
+        "first_class": 0,
+        "duration_m": 45,
+        "sleeper": 0,
+        "from_station_name": "Lower Haflong",
+        "number": "05698",
+        "departure": "13:45:00",
+        "return_train": "05697",
+        "to_station_code": "LMG",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "LUMDING JN",
+        "duration_h": 3,
+        "type": "JShtb",
+        "first_ac": 0,
+        "distance": 104
+      }
+    }
+  },
+  {
+    "train_number": "15311",
+    "train_name": "KUMAON EXPRESS",
+    "rejection_codes": [
+      "UNRESOLVED_DESTINATION_STATION"
+    ],
+    "validation_messages": [
+      "Destination station code 'LKKA' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            78.64517,
+            27.801268
+          ],
+          [
+            78.658063,
+            27.814972
+          ],
+          [
+            78.748798,
+            27.883694
+          ],
+          [
+            78.748458,
+            27.883353999999997
+          ],
+          [
+            78.818201,
+            27.908304
+          ],
+          [
+            78.863805,
+            27.944171
+          ],
+          [
+            78.88310899999999,
+            27.973382
+          ],
+          [
+            78.92398,
+            27.984069
+          ],
+          [
+            79.01491,
+            27.995236
+          ],
+          [
+            79.10472999999999,
+            28.003861999999998
+          ],
+          [
+            79.1360237,
+            28.0274922
+          ],
+          [
+            79.20593600000001,
+            28.125245999999997
+          ],
+          [
+            79.42761829999999,
+            28.3110435
+          ],
+          [
+            79.290097,
+            28.213407
+          ],
+          [
+            79.3291058,
+            28.26312382
+          ],
+          [
+            79.375029,
+            28.298118
+          ],
+          [
+            79.4109744,
+            28.3372843
+          ],
+          [
+            79.403718,
+            28.3556564
+          ],
+          [
+            79.421171,
+            28.388265999999998
+          ],
+          [
+            79.432729,
+            28.434064000000003
+          ],
+          [
+            79.44724,
+            28.4939826
+          ],
+          [
+            79.468143,
+            28.58606
+          ],
+          [
+            79.476473,
+            28.64478
+          ],
+          [
+            79.488904,
+            28.717268999999998
+          ],
+          [
+            79.5003221,
+            28.777391
+          ],
+          [
+            79.519746,
+            28.913427000000002
+          ],
+          [
+            79.51778,
+            29.017708
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "15:20:00",
+        "from_station_code": "KSJF",
+        "name": "KUMAON EXPRESS",
+        "zone": "NER",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 40,
+        "sleeper": 0,
+        "from_station_name": "Kasganj Mg",
+        "number": "15311",
+        "departure": "09:40:00",
+        "return_train": "15312",
+        "to_station_code": "LKKA",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Lal Kuan",
+        "duration_h": 5,
+        "type": "Exp",
+        "first_ac": 0,
+        "distance": 188
+      }
+    }
+  },
+  {
+    "train_number": "15312",
+    "train_name": "Kumaun Express",
+    "rejection_codes": [
+      "UNRESOLVED_ORIGIN_STATION"
+    ],
+    "validation_messages": [
+      "Origin station code 'LKKA' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.51778,
+            29.017708
+          ],
+          [
+            79.519746,
+            28.913427000000002
+          ],
+          [
+            79.5003221,
+            28.777391
+          ],
+          [
+            79.488904,
+            28.717268999999998
+          ],
+          [
+            79.476473,
+            28.64478
+          ],
+          [
+            79.468143,
+            28.58606
+          ],
+          [
+            79.44724,
+            28.4939826
+          ],
+          [
+            79.432729,
+            28.434064000000003
+          ],
+          [
+            79.421171,
+            28.388265999999998
+          ],
+          [
+            79.403718,
+            28.3556564
+          ],
+          [
+            79.4109744,
+            28.3372843
+          ],
+          [
+            79.375029,
+            28.298118
+          ],
+          [
+            79.3291058,
+            28.26312382
+          ],
+          [
+            79.290097,
+            28.213407
+          ],
+          [
+            79.42761829999999,
+            28.3110435
+          ],
+          [
+            79.20593600000001,
+            28.125245999999997
+          ],
+          [
+            79.1360237,
+            28.0274922
+          ],
+          [
+            79.10472999999999,
+            28.003861999999998
+          ],
+          [
+            79.01491,
+            27.995236
+          ],
+          [
+            78.92398,
+            27.984069
+          ],
+          [
+            78.88310899999999,
+            27.973382
+          ],
+          [
+            78.863805,
+            27.944171
+          ],
+          [
+            78.818201,
+            27.908304
+          ],
+          [
+            78.748458,
+            27.883353999999997
+          ],
+          [
+            78.748798,
+            27.883694
+          ],
+          [
+            78.658063,
+            27.814972
+          ],
+          [
+            78.64517,
+            27.801268
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "23:40:00",
+        "from_station_code": "LKKA",
+        "name": "Kumaun Express",
+        "zone": "NER",
+        "chair_car": 0,
+        "first_class": 1,
+        "duration_m": 55,
+        "sleeper": 1,
+        "from_station_name": "Lal Kuan",
+        "number": "15312",
+        "departure": "17:45:00",
+        "return_train": "15311",
+        "to_station_code": "KSJF",
+        "second_ac": 1,
+        "classes": "",
+        "to_station_name": "Kasganj Mg",
+        "duration_h": 5,
+        "type": "Exp",
+        "first_ac": 0,
+        "distance": 188
+      }
+    }
+  },
+  {
+    "train_number": "16861",
+    "train_name": "Tiruturaipudi Karaikkudi Express",
+    "rejection_codes": [
+      "UNRESOLVED_ORIGIN_STATION"
+    ],
+    "validation_messages": [
+      "Origin station code 'TTP' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.38580758869648,
+            10.332285228976446
+          ],
+          [
+            78.99684813804924,
+            10.164469056963739
+          ],
+          [
+            78.79331499999999,
+            10.068518
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "08:45:00",
+        "from_station_code": "TTP",
+        "name": "Tiruturaipudi Karaikkudi Express",
+        "zone": "SR",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 30,
+        "sleeper": 0,
+        "from_station_name": "Tiruturaipudi Junction",
+        "number": "16861",
+        "departure": "05:15:00",
+        "return_train": "16862",
+        "to_station_code": "KKDI",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Karaikkudi Junction",
+        "duration_h": 3,
+        "type": "Exp",
+        "first_ac": 0,
+        "distance": 123
+      }
+    }
+  },
+  {
+    "train_number": "16862",
+    "train_name": "Karaikkudi Tiruturaipudi Express",
+    "rejection_codes": [
+      "UNRESOLVED_DESTINATION_STATION"
+    ],
+    "validation_messages": [
+      "Destination station code 'TTP' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            78.79331499999999,
+            10.068518
+          ],
+          [
+            78.99684813804924,
+            10.164469056963739
+          ],
+          [
+            79.38580758869648,
+            10.332285228976446
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "21:15:00",
+        "from_station_code": "KKDI",
+        "name": "Karaikkudi Tiruturaipudi Express",
+        "zone": "SR",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 30,
+        "sleeper": 0,
+        "from_station_name": "Karaikkudi Junction",
+        "number": "16862",
+        "departure": "17:45:00",
+        "return_train": "16861",
+        "to_station_code": "TTP",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Tiruturaipudi Junction",
+        "duration_h": 3,
+        "type": "Exp",
+        "first_ac": 0,
+        "distance": 123
+      }
+    }
+  },
+  {
+    "train_number": "52021",
+    "train_name": "Moti Koral Miyagam Mix Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_ORIGIN_STATION"
+    ],
+    "validation_messages": [
+      "Origin station code 'MKRL' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            73.120353,
+            22.050722
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "08:50:00",
+        "from_station_code": "MKRL",
+        "name": "Moti Koral Miyagam Mix Passenger",
+        "zone": "WR",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 50,
+        "sleeper": 0,
+        "from_station_name": "Moti Koral",
+        "number": "52021",
+        "departure": "07:00:00",
+        "return_train": "52022",
+        "to_station_code": "MYG",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "MIYAGAM KARJAN",
+        "duration_h": 1,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 28
+      }
+    }
+  },
+  {
+    "train_number": "52022",
+    "train_name": "Miyagam Moti Koral Mix Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_DESTINATION_STATION"
+    ],
+    "validation_messages": [
+      "Destination station code 'MKRL' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            73.120353,
+            22.050722
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "19:35:00",
+        "from_station_code": "MYG",
+        "name": "Miyagam Moti Koral Mix Passenger",
+        "zone": "WR",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 25,
+        "sleeper": 0,
+        "from_station_name": "MIYAGAM KARJAN",
+        "number": "52022",
+        "departure": "17:10:00",
+        "return_train": "52021",
+        "to_station_code": "MKRL",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Moti Koral",
+        "duration_h": 2,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 28
+      }
+    }
+  },
+  {
+    "train_number": "52027",
+    "train_name": "Choranda Dabhoi Mix Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_ORIGIN_STATION"
+    ],
+    "validation_messages": [
+      "Origin station code 'CRND' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            73.119763,
+            22.050131999999998
+          ],
+          [
+            73.415466,
+            22.137755
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "15:25:00",
+        "from_station_code": "CRND",
+        "name": "Choranda Dabhoi Mix Passenger",
+        "zone": "WR",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 10,
+        "sleeper": 0,
+        "from_station_name": "Choranda Junction",
+        "number": "52027",
+        "departure": "13:15:00",
+        "return_train": "52028",
+        "to_station_code": "DB",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Dabhoi Junction",
+        "duration_h": 2,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 41
+      }
+    }
+  },
+  {
+    "train_number": "52028",
+    "train_name": "Dabhoi Choranda Mix Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_DESTINATION_STATION"
+    ],
+    "validation_messages": [
+      "Destination station code 'CRND' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            73.415466,
+            22.137755
+          ],
+          [
+            73.119763,
+            22.050131999999998
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "12:55:00",
+        "from_station_code": "DB",
+        "name": "Dabhoi Choranda Mix Passenger",
+        "zone": "WR",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 0,
+        "sleeper": 0,
+        "from_station_name": "Dabhoi Junction",
+        "number": "52028",
+        "departure": "09:55:00",
+        "return_train": "52027",
+        "to_station_code": "CRND",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Choranda Junction",
+        "duration_h": 3,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 41
+      }
+    }
+  },
+  {
+    "train_number": "52033",
+    "train_name": "Jambusar Pratapnagar Mix Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_ORIGIN_STATION"
+    ],
+    "validation_messages": [
+      "Origin station code 'JMB' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            73.09017872437835,
+            22.237238915003488
+          ],
+          [
+            73.1319768447429,
+            22.266245011489417
+          ],
+          [
+            73.210289,
+            22.281143
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "09:20:00",
+        "from_station_code": "JMB",
+        "name": "Jambusar Pratapnagar Mix Passenger",
+        "zone": "WR",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 0,
+        "sleeper": 0,
+        "from_station_name": "Jambusar Junction",
+        "number": "52033",
+        "departure": "06:20:00",
+        "return_train": "52034",
+        "to_station_code": "PRTN",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Pratapnagar",
+        "duration_h": 3,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 51
+      }
+    }
+  },
+  {
+    "train_number": "52034",
+    "train_name": "Pratapnagar Jambusar Mix Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_DESTINATION_STATION"
+    ],
+    "validation_messages": [
+      "Destination station code 'JMB' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            73.210289,
+            22.281143
+          ],
+          [
+            73.1319768447429,
+            22.266245011489417
+          ],
+          [
+            73.09017872437835,
+            22.237238915003488
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "21:10:00",
+        "from_station_code": "PRTN",
+        "name": "Pratapnagar Jambusar Mix Passenger",
+        "zone": "WR",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 0,
+        "sleeper": 0,
+        "from_station_name": "Pratapnagar",
+        "number": "52034",
+        "departure": "18:10:00",
+        "return_train": "52035",
+        "to_station_code": "JMB",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Jambusar Junction",
+        "duration_h": 3,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 51
+      }
+    }
+  },
+  {
+    "train_number": "52035",
+    "train_name": "Jambusar Pratapnagar Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_ORIGIN_STATION"
+    ],
+    "validation_messages": [
+      "Origin station code 'JMB' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            73.09017872437835,
+            22.237238915003488
+          ],
+          [
+            73.1319768447429,
+            22.266245011489417
+          ],
+          [
+            73.210289,
+            22.281143
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "17:10:00",
+        "from_station_code": "JMB",
+        "name": "Jambusar Pratapnagar Passenger",
+        "zone": "WR",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 0,
+        "sleeper": 0,
+        "from_station_name": "Jambusar Junction",
+        "number": "52035",
+        "departure": "14:10:00",
+        "return_train": "52036",
+        "to_station_code": "PRTN",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Pratapnagar",
+        "duration_h": 3,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 51
+      }
+    }
+  },
+  {
+    "train_number": "52036",
+    "train_name": "Pratapnagar Jambusar Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_DESTINATION_STATION"
+    ],
+    "validation_messages": [
+      "Destination station code 'JMB' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            73.210289,
+            22.281143
+          ],
+          [
+            73.1319768447429,
+            22.266245011489417
+          ],
+          [
+            73.09017872437835,
+            22.237238915003488
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "13:00:00",
+        "from_station_code": "PRTN",
+        "name": "Pratapnagar Jambusar Passenger",
+        "zone": "WR",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 0,
+        "sleeper": 0,
+        "from_station_name": "Pratapnagar",
+        "number": "52036",
+        "departure": "10:00:00",
+        "return_train": "52035",
+        "to_station_code": "JMB",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Jambusar Junction",
+        "duration_h": 3,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 51
+      }
+    }
+  },
+  {
+    "train_number": "52037",
+    "train_name": "Nadiad Bhadran Mix Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_DESTINATION_STATION"
+    ],
+    "validation_messages": [
+      "Destination station code 'BDRN' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            72.855718,
+            22.694105999999998
+          ],
+          [
+            72.9294731,
+            22.5452909
+          ],
+          [
+            72.847673,
+            22.402073
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "12:25:00",
+        "from_station_code": "ND",
+        "name": "Nadiad Bhadran Mix Passenger",
+        "zone": "WR",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 10,
+        "sleeper": 0,
+        "from_station_name": "NADIAD JN",
+        "number": "52037",
+        "departure": "09:15:00",
+        "return_train": "52038",
+        "to_station_code": "BDRN",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Bhadran",
+        "duration_h": 3,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 62
+      }
+    }
+  },
+  {
+    "train_number": "52038",
+    "train_name": "Bhadran Nadiad Mix Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_ORIGIN_STATION"
+    ],
+    "validation_messages": [
+      "Origin station code 'BDRN' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            72.847673,
+            22.402073
+          ],
+          [
+            72.9294731,
+            22.5452909
+          ],
+          [
+            72.855718,
+            22.694105999999998
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "17:25:00",
+        "from_station_code": "BDRN",
+        "name": "Bhadran Nadiad Mix Passenger",
+        "zone": "WR",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 15,
+        "sleeper": 0,
+        "from_station_name": "Bhadran",
+        "number": "52038",
+        "departure": "14:10:00",
+        "return_train": "52037",
+        "to_station_code": "ND",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "NADIAD JN",
+        "duration_h": 3,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 62
+      }
+    }
+  },
+  {
+    "train_number": "52048",
+    "train_name": "Umarpada Kosamba Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_ORIGIN_STATION"
+    ],
+    "validation_messages": [
+      "Origin station code 'UMPD' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            73.31783892586827,
+            21.45148506222334
+          ],
+          [
+            73.23136643506587,
+            21.439673931772646
+          ],
+          [
+            72.95459799999999,
+            21.464052
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "18:30:00",
+        "from_station_code": "UMPD",
+        "name": "Umarpada Kosamba Passenger",
+        "zone": "WR",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 30,
+        "sleeper": 0,
+        "from_station_name": "Umarpada",
+        "number": "52048",
+        "departure": "14:00:00",
+        "return_train": "52047",
+        "to_station_code": "KSB",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "KOSAMBA JN",
+        "duration_h": 4,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 62
+      }
+    }
+  },
+  {
+    "train_number": "52143",
+    "train_name": "Pulgaon Arvi Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_DESTINATION_STATION"
+    ],
+    "validation_messages": [
+      "Destination station code 'ARVI' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            78.318111,
+            20.726734
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "11:50:00",
+        "from_station_code": "PLO",
+        "name": "Pulgaon Arvi Passenger",
+        "zone": "CR",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 20,
+        "sleeper": 0,
+        "from_station_name": "PULGAON JN",
+        "number": "52143",
+        "departure": "08:30:00",
+        "return_train": "52144",
+        "to_station_code": "ARVI",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Arvi",
+        "duration_h": 3,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 39
+      }
+    }
+  },
+  {
+    "train_number": "52144",
+    "train_name": "Arvi Pulgaon Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_ORIGIN_STATION"
+    ],
+    "validation_messages": [
+      "Origin station code 'ARVI' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            78.318111,
+            20.726734
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "15:30:00",
+        "from_station_code": "ARVI",
+        "name": "Arvi Pulgaon Passenger",
+        "zone": "CR",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 20,
+        "sleeper": 0,
+        "from_station_name": "Arvi",
+        "number": "52144",
+        "departure": "12:10:00",
+        "return_train": "52143",
+        "to_station_code": "PLO",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "PULGAON JN",
+        "duration_h": 3,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 39
+      }
+    }
+  },
+  {
+    "train_number": "52201",
+    "train_name": "Kasganj Lalkuan Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_DESTINATION_STATION"
+    ],
+    "validation_messages": [
+      "Destination station code 'LKKA' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            78.64517,
+            27.801268
+          ],
+          [
+            78.658063,
+            27.814972
+          ],
+          [
+            78.748798,
+            27.883694
+          ],
+          [
+            78.748458,
+            27.883353999999997
+          ],
+          [
+            78.818201,
+            27.908304
+          ],
+          [
+            78.863805,
+            27.944171
+          ],
+          [
+            78.88310899999999,
+            27.973382
+          ],
+          [
+            78.92398,
+            27.984069
+          ],
+          [
+            79.01491,
+            27.995236
+          ],
+          [
+            79.10472999999999,
+            28.003861999999998
+          ],
+          [
+            79.1360237,
+            28.0274922
+          ],
+          [
+            79.20593600000001,
+            28.125245999999997
+          ],
+          [
+            79.42761829999999,
+            28.3110435
+          ],
+          [
+            79.290097,
+            28.213407
+          ],
+          [
+            79.3291058,
+            28.26312382
+          ],
+          [
+            79.375029,
+            28.298118
+          ],
+          [
+            79.4109744,
+            28.3372843
+          ],
+          [
+            79.403718,
+            28.3556564
+          ],
+          [
+            79.421171,
+            28.388265999999998
+          ],
+          [
+            79.432729,
+            28.434064000000003
+          ],
+          [
+            79.44724,
+            28.4939826
+          ],
+          [
+            79.468143,
+            28.58606
+          ],
+          [
+            79.476473,
+            28.64478
+          ],
+          [
+            79.488904,
+            28.717268999999998
+          ],
+          [
+            79.5003221,
+            28.777391
+          ],
+          [
+            79.519746,
+            28.913427000000002
+          ],
+          [
+            79.51778,
+            29.017708
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "12:55:00",
+        "from_station_code": "KSJF",
+        "name": "Kasganj Lalkuan Passenger",
+        "zone": "NER",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 55,
+        "sleeper": 0,
+        "from_station_name": "Kasganj Mg",
+        "number": "52201",
+        "departure": "06:00:00",
+        "return_train": "52202",
+        "to_station_code": "LKKA",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Lal Kuan",
+        "duration_h": 6,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 188
+      }
+    }
+  },
+  {
+    "train_number": "52202",
+    "train_name": "Lalkuan Kasganj Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_ORIGIN_STATION"
+    ],
+    "validation_messages": [
+      "Origin station code 'LKKA' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.51778,
+            29.017708
+          ],
+          [
+            79.519746,
+            28.913427000000002
+          ],
+          [
+            79.5003221,
+            28.777391
+          ],
+          [
+            79.488904,
+            28.717268999999998
+          ],
+          [
+            79.476473,
+            28.64478
+          ],
+          [
+            79.468143,
+            28.58606
+          ],
+          [
+            79.44724,
+            28.4939826
+          ],
+          [
+            79.432729,
+            28.434064000000003
+          ],
+          [
+            79.421171,
+            28.388265999999998
+          ],
+          [
+            79.403718,
+            28.3556564
+          ],
+          [
+            79.4109744,
+            28.3372843
+          ],
+          [
+            79.375029,
+            28.298118
+          ],
+          [
+            79.3291058,
+            28.26312382
+          ],
+          [
+            79.290097,
+            28.213407
+          ],
+          [
+            79.42761829999999,
+            28.3110435
+          ],
+          [
+            79.20593600000001,
+            28.125245999999997
+          ],
+          [
+            79.1360237,
+            28.0274922
+          ],
+          [
+            79.10472999999999,
+            28.003861999999998
+          ],
+          [
+            79.01491,
+            27.995236
+          ],
+          [
+            78.92398,
+            27.984069
+          ],
+          [
+            78.88310899999999,
+            27.973382
+          ],
+          [
+            78.863805,
+            27.944171
+          ],
+          [
+            78.818201,
+            27.908304
+          ],
+          [
+            78.748458,
+            27.883353999999997
+          ],
+          [
+            78.748798,
+            27.883694
+          ],
+          [
+            78.658063,
+            27.814972
+          ],
+          [
+            78.64517,
+            27.801268
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "21:55:00",
+        "from_station_code": "LKKA",
+        "name": "Lalkuan Kasganj Passenger",
+        "zone": "NER",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 30,
+        "sleeper": 0,
+        "from_station_name": "Lal Kuan",
+        "number": "52202",
+        "departure": "14:25:00",
+        "return_train": "52201",
+        "to_station_code": "KSJF",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Kasganj Mg",
+        "duration_h": 7,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 188
+      }
+    }
+  },
+  {
+    "train_number": "52209",
+    "train_name": "Bareilly Lalkuan Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_DESTINATION_STATION"
+    ],
+    "validation_messages": [
+      "Destination station code 'LKKA' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.4109744,
+            28.3372843
+          ],
+          [
+            79.403718,
+            28.3556564
+          ],
+          [
+            79.421171,
+            28.388265999999998
+          ],
+          [
+            79.432729,
+            28.434064000000003
+          ],
+          [
+            79.44724,
+            28.4939826
+          ],
+          [
+            79.468143,
+            28.58606
+          ],
+          [
+            79.476473,
+            28.64478
+          ],
+          [
+            79.488904,
+            28.717268999999998
+          ],
+          [
+            79.5003221,
+            28.777391
+          ],
+          [
+            79.519746,
+            28.913427000000002
+          ],
+          [
+            79.51778,
+            29.017708
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "17:15:00",
+        "from_station_code": "BRY",
+        "name": "Bareilly Lalkuan Passenger",
+        "zone": "NER",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 50,
+        "sleeper": 0,
+        "from_station_name": "BAREILLY",
+        "number": "52209",
+        "departure": "14:25:00",
+        "return_train": "52210",
+        "to_station_code": "LKKA",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Lal Kuan",
+        "duration_h": 2,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 84
+      }
+    }
+  },
+  {
+    "train_number": "52210",
+    "train_name": "Lalkuan Bareilly Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_ORIGIN_STATION"
+    ],
+    "validation_messages": [
+      "Origin station code 'LKKA' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.51778,
+            29.017708
+          ],
+          [
+            79.519746,
+            28.913427000000002
+          ],
+          [
+            79.5003221,
+            28.777391
+          ],
+          [
+            79.488904,
+            28.717268999999998
+          ],
+          [
+            79.476473,
+            28.64478
+          ],
+          [
+            79.468143,
+            28.58606
+          ],
+          [
+            79.44724,
+            28.4939826
+          ],
+          [
+            79.432729,
+            28.434064000000003
+          ],
+          [
+            79.421171,
+            28.388265999999998
+          ],
+          [
+            79.403718,
+            28.3556564
+          ],
+          [
+            79.4109744,
+            28.3372843
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "09:55:00",
+        "from_station_code": "LKKA",
+        "name": "Lalkuan Bareilly Passenger",
+        "zone": "NER",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 45,
+        "sleeper": 0,
+        "from_station_name": "Lal Kuan",
+        "number": "52210",
+        "departure": "07:10:00",
+        "return_train": "52209",
+        "to_station_code": "BRY",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "BAREILLY",
+        "duration_h": 2,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 84
+      }
+    }
+  },
+  {
+    "train_number": "52211",
+    "train_name": "Bareilly Lal Kuan Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_DESTINATION_STATION"
+    ],
+    "validation_messages": [
+      "Destination station code 'LKKA' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.4109744,
+            28.3372843
+          ],
+          [
+            79.403718,
+            28.3556564
+          ],
+          [
+            79.421171,
+            28.388265999999998
+          ],
+          [
+            79.432729,
+            28.434064000000003
+          ],
+          [
+            79.44724,
+            28.4939826
+          ],
+          [
+            79.468143,
+            28.58606
+          ],
+          [
+            79.476473,
+            28.64478
+          ],
+          [
+            79.488904,
+            28.717268999999998
+          ],
+          [
+            79.5003221,
+            28.777391
+          ],
+          [
+            79.519746,
+            28.913427000000002
+          ],
+          [
+            79.51778,
+            29.017708
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "19:45:00",
+        "from_station_code": "BRY",
+        "name": "Bareilly Lal Kuan Passenger",
+        "zone": "NER",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 40,
+        "sleeper": 0,
+        "from_station_name": "BAREILLY",
+        "number": "52211",
+        "departure": "17:05:00",
+        "return_train": "52210",
+        "to_station_code": "LKKA",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Lal Kuan",
+        "duration_h": 2,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 84
+      }
+    }
+  },
+  {
+    "train_number": "52212",
+    "train_name": "Lal Kuan Bareilly Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_ORIGIN_STATION"
+    ],
+    "validation_messages": [
+      "Origin station code 'LKKA' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.51778,
+            29.017708
+          ],
+          [
+            79.519746,
+            28.913427000000002
+          ],
+          [
+            79.5003221,
+            28.777391
+          ],
+          [
+            79.488904,
+            28.717268999999998
+          ],
+          [
+            79.476473,
+            28.64478
+          ],
+          [
+            79.468143,
+            28.58606
+          ],
+          [
+            79.44724,
+            28.4939826
+          ],
+          [
+            79.432729,
+            28.434064000000003
+          ],
+          [
+            79.421171,
+            28.388265999999998
+          ],
+          [
+            79.403718,
+            28.3556564
+          ],
+          [
+            79.4109744,
+            28.3372843
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "13:00:00",
+        "from_station_code": "LKKA",
+        "name": "Lal Kuan Bareilly Passenger",
+        "zone": "NER",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 0,
+        "sleeper": 0,
+        "from_station_name": "Lal Kuan",
+        "number": "52212",
+        "departure": "10:00:00",
+        "return_train": "52211",
+        "to_station_code": "BRY",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "BAREILLY",
+        "duration_h": 3,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 84
+      }
+    }
+  },
+  {
+    "train_number": "52287",
+    "train_name": "Thawe Chhapra Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_DESTINATION_STATION"
+    ],
+    "validation_messages": [
+      "Destination station code 'LKKA' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.4109744,
+            28.3372843
+          ],
+          [
+            79.403718,
+            28.3556564
+          ],
+          [
+            79.421171,
+            28.388265999999998
+          ],
+          [
+            79.432729,
+            28.434064000000003
+          ],
+          [
+            79.44724,
+            28.4939826
+          ],
+          [
+            79.468143,
+            28.58606
+          ],
+          [
+            79.476473,
+            28.64478
+          ],
+          [
+            79.488904,
+            28.717268999999998
+          ],
+          [
+            79.5003221,
+            28.777391
+          ],
+          [
+            79.519746,
+            28.913427000000002
+          ],
+          [
+            79.51778,
+            29.017708
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "08:25:00",
+        "from_station_code": "BRY",
+        "name": "Thawe Chhapra Passenger",
+        "zone": "NER",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 55,
+        "sleeper": 0,
+        "from_station_name": "BAREILLY",
+        "number": "52287",
+        "departure": "05:30:00",
+        "return_train": "52286",
+        "to_station_code": "LKKA",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Lal Kuan",
+        "duration_h": 2,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 84
+      }
+    }
+  },
+  {
+    "train_number": "53474",
+    "train_name": "JAMALPUR MONGHYAR PASS",
+    "rejection_codes": [
+      "UNRESOLVED_DESTINATION_STATION"
+    ],
+    "validation_messages": [
+      "Destination station code 'MGR' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            86.492285,
+            25.313906
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "18:18:00",
+        "from_station_code": "JMP",
+        "name": "JAMALPUR MONGHYAR PASS",
+        "zone": "ER",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 28,
+        "sleeper": 0,
+        "from_station_name": "JAMALPUR JN",
+        "number": "53474",
+        "departure": "17:50:00",
+        "return_train": null,
+        "to_station_code": "MGR",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Munger",
+        "duration_h": 0,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 9
+      }
+    }
+  },
+  {
+    "train_number": "56890",
+    "train_name": "Tiruturaipdi Tiruvarur Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_ORIGIN_STATION"
+    ],
+    "validation_messages": [
+      "Origin station code 'TTP' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.63389799999999,
+            10.764347
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "08:05:00",
+        "from_station_code": "TTP",
+        "name": "Tiruturaipdi Tiruvarur Passenger",
+        "zone": "SR",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 55,
+        "sleeper": 0,
+        "from_station_name": "Tiruturaipudi Junction",
+        "number": "56890",
+        "departure": "07:10:00",
+        "return_train": "56889",
+        "to_station_code": "TVR",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "THIRUVARUR JN",
+        "duration_h": 0,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 26
+      }
+    }
+  },
+  {
+    "train_number": "52047",
+    "train_name": "Kosamba Umarpada Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_DESTINATION_STATION"
+    ],
+    "validation_messages": [
+      "Destination station code 'UMPD' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            72.95459799999999,
+            21.464052
+          ],
+          [
+            73.23136643506587,
+            21.439673931772646
+          ],
+          [
+            73.31783892586827,
+            21.45148506222334
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "13:45:00",
+        "from_station_code": "KSB",
+        "name": "Kosamba Umarpada Passenger",
+        "zone": "WR",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 15,
+        "sleeper": 0,
+        "from_station_name": "KOSAMBA JN",
+        "number": "52047",
+        "departure": "09:30:00",
+        "return_train": "52048",
+        "to_station_code": "UMPD",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Umarpada",
+        "duration_h": 4,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 62
+      }
+    }
+  },
+  {
+    "train_number": "06345",
+    "train_name": null,
+    "rejection_codes": [
+      "MISSING_TRAIN_NAME"
+    ],
+    "validation_messages": [
+      "Train name is missing, non-string, or whitespace-only"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            77.001342,
+            10.653079
+          ],
+          [
+            76.935071,
+            10.624894
+          ],
+          [
+            76.87534699999999,
+            10.629748000000001
+          ],
+          [
+            76.77172300000001,
+            10.626386
+          ],
+          [
+            76.697715,
+            10.626984
+          ],
+          [
+            76.686919,
+            10.641667
+          ],
+          [
+            76.684608,
+            10.683752
+          ],
+          [
+            76.65216699999999,
+            10.7753892
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 1,
+        "arrival": "06:30:00",
+        "from_station_code": "POY",
+        "name": "",
+        "zone": "SR",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 40,
+        "sleeper": 1,
+        "from_station_name": "POLLACHI JN",
+        "number": "06345",
+        "departure": "18:50:00",
+        "return_train": "06346",
+        "to_station_code": "PGTN",
+        "second_ac": 1,
+        "classes": "",
+        "to_station_name": "PALGHAT TOWN",
+        "duration_h": 11,
+        "type": "Exp",
+        "first_ac": 0,
+        "distance": 638
+      }
+    }
+  },
+  {
+    "train_number": "52332",
+    "train_name": "Saharsa-Raghopur Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_DESTINATION_STATION"
+    ],
+    "validation_messages": [
+      "Destination station code 'RGV' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            86.594953,
+            25.875207999999997
+          ],
+          [
+            86.59822100000001,
+            25.969294
+          ],
+          [
+            86.605596,
+            26.019349
+          ],
+          [
+            86.603023,
+            26.117556999999998
+          ],
+          [
+            86.657383,
+            26.218533
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "03:25:00",
+        "from_station_code": "SHC",
+        "name": "Saharsa-Raghopur Passenger",
+        "zone": "ECR",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 40,
+        "sleeper": 0,
+        "from_station_name": "SAHARSA JN",
+        "number": "52332",
+        "departure": "23:45:00",
+        "return_train": "52331",
+        "to_station_code": "RGV",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Rathopur",
+        "duration_h": 3,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 63
+      }
+    }
+  },
+  {
+    "train_number": "52331",
+    "train_name": "Raghopur-Saharsa Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_ORIGIN_STATION"
+    ],
+    "validation_messages": [
+      "Origin station code 'RGV' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            86.657383,
+            26.218533
+          ],
+          [
+            86.603023,
+            26.117556999999998
+          ],
+          [
+            86.605596,
+            26.019349
+          ],
+          [
+            86.59822100000001,
+            25.969294
+          ],
+          [
+            86.594953,
+            25.875207999999997
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "08:00:00",
+        "from_station_code": "RGV",
+        "name": "Raghopur-Saharsa Passenger",
+        "zone": "ECR",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 50,
+        "sleeper": 0,
+        "from_station_name": "Rathopur",
+        "number": "52331",
+        "departure": "04:10:00",
+        "return_train": "52332",
+        "to_station_code": "SHC",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "SAHARSA JN",
+        "duration_h": 3,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 63
+      }
+    }
+  },
+  {
+    "train_number": "56889",
+    "train_name": "Tiruvarur Tiruturaipudi Passenger",
+    "rejection_codes": [
+      "UNRESOLVED_DESTINATION_STATION"
+    ],
+    "validation_messages": [
+      "Destination station code 'TTP' not found in verified station foundation"
+    ],
+    "raw_payload": {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.63389799999999,
+            10.764347
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "third_ac": 0,
+        "arrival": "21:00:00",
+        "from_station_code": "TVR",
+        "name": "Tiruvarur Tiruturaipudi Passenger",
+        "zone": "SR",
+        "chair_car": 0,
+        "first_class": 0,
+        "duration_m": 0,
+        "sleeper": 0,
+        "from_station_name": "THIRUVARUR JN",
+        "number": "56889",
+        "departure": "20:00:00",
+        "return_train": "56890",
+        "to_station_code": "TTP",
+        "second_ac": 0,
+        "classes": "",
+        "to_station_name": "Tiruturaipudi Junction",
+        "duration_h": 1,
+        "type": "Pass",
+        "first_ac": 0,
+        "distance": 26
+      }
+    }
+  }
+]

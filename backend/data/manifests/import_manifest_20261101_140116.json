@@ -1,0 +1,60 @@
+{
+  "manifest_id": "manifest_20261101_140115",
+  "created_at": "2026-11-01T14:01:15.139258+00:00",
+  "dry_run": false,
+  "execution_duration_sec": 21.055,
+  "sources": {
+    "stations.json": {
+      "path": "/app/app/infrastructure/data/sources/datameet/stations.json",
+      "size_bytes": 1864683,
+      "sha256": "9bd5e1da3a859e5359a95f40b6009aa468efb177da4faac57ffdcd7daeb4df18"
+    },
+    "trains.json": {
+      "path": "/app/app/infrastructure/data/sources/datameet/trains.json",
+      "size_bytes": 14768598,
+      "sha256": "e434d9c56016ccdf2291ccd446586ef87a7fab101084efa5f68871ab27800167"
+    },
+    "schedules.json": {
+      "path": "/app/app/infrastructure/data/sources/datameet/schedules.json",
+      "size_bytes": 82174280,
+      "sha256": "105d63816acb177eac30a7d156eb2d312625a42ddebd273edee810d2989878ec"
+    },
+    "bootstrap_railway_data.json": {
+      "path": "/app/app/infrastructure/data/fixtures/bootstrap_railway_data.json",
+      "size_bytes": 57638,
+      "sha256": "d1fceafb623c36641439656ca8de515550fbb46bbe3d4d978c764d93d74d43e2"
+    }
+  },
+  "reconciliation": {
+    "stations": {
+      "total": 8990,
+      "accepted": 8697,
+      "quarantined": 293
+    },
+    "trains": {
+      "total": 5208,
+      "accepted": 5175,
+      "quarantined": 33,
+      "compiled_domain": 8,
+      "uncompiled_tier1": 5167
+    },
+    "schedule_stops": {
+      "total": 417080,
+      "accepted": 414176,
+      "quarantined": 2904,
+      "accepted_incomplete": 21756,
+      "missing_day_offset": 21629
+    }
+  },
+  "uncompiled_train_exclusion_reasons": {
+    "AWAITING_RUNNING_CALENDAR": 5167,
+    "INCOMPLETE_TIMING": 657,
+    "UNKNOWN_DAY_OFFSET": 640,
+    "DESTINATION_ENDPOINT_MISMATCH": 16,
+    "ORIGIN_ENDPOINT_MISMATCH": 5
+  },
+  "persistence": {
+    "stations_persisted": 8697,
+    "trains_persisted": 8
+  }
+}

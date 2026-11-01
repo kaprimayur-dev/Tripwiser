@@ -1,0 +1,6157 @@
+[
+  {
+    "station_code": "XX-BECE",
+    "station_name": "XX-BECE",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "XX-BECE",
+        "name": "XX-BECE",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "XX-BSPY",
+    "station_name": "XX-BSPY",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "XX-BSPY",
+        "name": "XX-BSPY",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "YY-BPLC",
+    "station_name": "YY-BPLC",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "YY-BPLC",
+        "name": "YY-BPLC",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "BJUP",
+    "station_name": "BJUP",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "BJUP",
+        "name": "BJUP",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "CIKA",
+    "station_name": "CIKA",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "CIKA",
+        "name": "CIKA",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "XX-CPHO",
+    "station_name": "XX-CPHO",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "XX-CPHO",
+        "name": "XX-CPHO",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "LLHW",
+    "station_name": "LLHW",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "LLHW",
+        "name": "LLHW",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "YY-BINP",
+    "station_name": "YY-BINP",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "YY-BINP",
+        "name": "YY-BINP",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "XX-JSGB",
+    "station_name": "XX-JSGB",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "XX-JSGB",
+        "name": "XX-JSGB",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "SREE",
+    "station_name": "SREE",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "SREE",
+        "name": "SREE",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "DKJC",
+    "station_name": "DKJC",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "DKJC",
+        "name": "DKJC",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "TSKG",
+    "station_name": "TINSUKIA GOODS",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "TSKG",
+        "name": "TINSUKIA GOODS",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "YY-IDHW",
+    "station_name": "YY-IDHW",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "YY-IDHW",
+        "name": "YY-IDHW",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "BVAC",
+    "station_name": "BVAC",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "BVAC",
+        "name": "BVAC",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "BVBC",
+    "station_name": "BVBC",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "BVBC",
+        "name": "BVBC",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "PCLS",
+    "station_name": "PCLS",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "PCLS",
+        "name": "PCLS",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "VMC",
+    "station_name": "VMC",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "VMC",
+        "name": "VMC",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "BDX",
+    "station_name": "BDX",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "BDX",
+        "name": "BDX",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "JMSY",
+    "station_name": "JMSY",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "JMSY",
+        "name": "JMSY",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "OSHI",
+    "station_name": "OSHI",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "OSHI",
+        "name": "OSHI",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "KTTY",
+    "station_name": "KTTY",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "KTTY",
+        "name": "KTTY",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "IGPX",
+    "station_name": "IGPX",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "IGPX",
+        "name": "IGPX",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "OKAC",
+    "station_name": "OKAC",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "OKAC",
+        "name": "OKAC",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "AAV",
+    "station_name": "Ambav",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "AAV",
+        "name": "Ambav",
+        "zone": "WR",
+        "address": "Ambav, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "DBLG",
+    "station_name": "DBLG",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "DBLG",
+        "name": "DBLG",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "NHLG",
+    "station_name": "NHLG",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "NHLG",
+        "name": "NHLG",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "JGLP",
+    "station_name": "JGLP",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "JGLP",
+        "name": "JGLP",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "PNSR",
+    "station_name": "PNSR",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "PNSR",
+        "name": "PNSR",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "ENBG",
+    "station_name": "ENBG",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "ENBG",
+        "name": "ENBG",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "NHGJ",
+    "station_name": "NHGJ",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "NHGJ",
+        "name": "NHGJ",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "LNMA",
+    "station_name": "LNMA",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "LNMA",
+        "name": "LNMA",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "PNS",
+    "station_name": "PILLAMSHAT",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "PNS",
+        "name": "PILLAMSHAT",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "IPRA",
+    "station_name": "IPRA",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "IPRA",
+        "name": "IPRA",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "CPMR",
+    "station_name": "CPMR",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "CPMR",
+        "name": "CPMR",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "XX-CLDO",
+    "station_name": "XX-CLDO",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "XX-CLDO",
+        "name": "XX-CLDO",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "DDYX",
+    "station_name": "DDYX",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "DDYX",
+        "name": "DDYX",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "XX-SUNB",
+    "station_name": "XX-SUNB",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "XX-SUNB",
+        "name": "XX-SUNB",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "MNVL",
+    "station_name": "MNVL",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "MNVL",
+        "name": "MNVL",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "KGWD",
+    "station_name": "KAGWAD",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "KGWD",
+        "name": "KAGWAD",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "CRWL",
+    "station_name": "CHAK RAKHWAL",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "CRWL",
+        "name": "CHAK RAKHWAL",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "DIWR",
+    "station_name": "DIWR",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "DIWR",
+        "name": "DIWR",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "CUKI",
+    "station_name": "CUKI",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "CUKI",
+        "name": "CUKI",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "XX-BDXO",
+    "station_name": "XX-BDXO",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "XX-BDXO",
+        "name": "XX-BDXO",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "HLG",
+    "station_name": "Hillgrove",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Tamil Nadu",
+        "code": "HLG",
+        "name": "Hillgrove",
+        "zone": "SR",
+        "address": "Nilgiris, Tamil Nadu"
+      }
+    }
+  },
+  {
+    "station_code": "SPBK",
+    "station_name": "SPBK",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "SPBK",
+        "name": "SPBK",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "DDAC",
+    "station_name": "DDAC",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "DDAC",
+        "name": "DDAC",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "XX-ANK",
+    "station_name": "XX-ANK",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "XX-ANK",
+        "name": "XX-ANK",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "HALT",
+    "station_name": "HALT",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "HALT",
+        "name": "HALT",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "XX-GTLB",
+    "station_name": "XX-GTLB",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "XX-GTLB",
+        "name": "XX-GTLB",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "XX-TNGC",
+    "station_name": "XX-TNGC",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "XX-TNGC",
+        "name": "XX-TNGC",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "XX-HPTB",
+    "station_name": "XX-HPTB",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "XX-HPTB",
+        "name": "XX-HPTB",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "INDRG",
+    "station_name": "INDRG",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "INDRG",
+        "name": "INDRG",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "GNSYM",
+    "station_name": "GNSYM",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "GNSYM",
+        "name": "GNSYM",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "SMYD",
+    "station_name": "SMYD",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "SMYD",
+        "name": "SMYD",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "XX-TNAB",
+    "station_name": "XX-TNAB",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "XX-TNAB",
+        "name": "XX-TNAB",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "DNGD",
+    "station_name": "Dungarda",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "DNGD",
+        "name": "Dungarda",
+        "zone": "WR",
+        "address": "Gujarat, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "PHVP",
+    "station_name": "PHVP",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "PHVP",
+        "name": "PHVP",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "CNP",
+    "station_name": "CNP",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "CNP",
+        "name": "CNP",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "XX-BSBC",
+    "station_name": "XX-BSBC",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "XX-BSBC",
+        "name": "XX-BSBC",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "YY-DKJC",
+    "station_name": "YY-DKJC",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "YY-DKJC",
+        "name": "YY-DKJC",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "PFMA",
+    "station_name": "PFMA",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "PFMA",
+        "name": "PFMA",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "ARVI",
+    "station_name": "Arvi",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "ARVI",
+        "name": "Arvi",
+        "zone": "CR",
+        "address": "Dist. Wardha, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "ARX",
+    "station_name": "Areli",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Uttar Pradesh",
+        "code": "ARX",
+        "name": "Areli",
+        "zone": "NER",
+        "address": "Areli, Uttar Pradesh"
+      }
+    }
+  },
+  {
+    "station_code": "ASM",
+    "station_name": "Asarma",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "ASM",
+        "name": "Asarma",
+        "zone": "WR",
+        "address": "SH 166, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "ATB",
+    "station_name": "Alattambadi",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Tamil Nadu",
+        "code": "ATB",
+        "name": "Alattambadi",
+        "zone": "SR",
+        "address": "Mazavarayanallu Rd, Tamil Nadu"
+      }
+    }
+  },
+  {
+    "station_code": "ATDA",
+    "station_name": "Atladara",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "ATDA",
+        "name": "Atladara",
+        "zone": "WR",
+        "address": "Gujarat, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "ATX",
+    "station_name": "Alinagar Tola",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "ATX",
+        "name": "Alinagar Tola",
+        "zone": "ECR",
+        "address": "Purnea, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "AYI",
+    "station_name": "Ayingudi",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Tamil Nadu",
+        "code": "AYI",
+        "name": "Ayingudi",
+        "zone": "SR",
+        "address": "Peravurani - Aranthangi Rd, Tamil Nadu"
+      }
+    }
+  },
+  {
+    "station_code": "AKL",
+    "station_name": "Anakhol",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "AKL",
+        "name": "Anakhol",
+        "zone": "WR",
+        "address": "State HIghway 133, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "BASA",
+    "station_name": "Banosa",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "BASA",
+        "name": "Banosa",
+        "zone": "CR",
+        "address": "Daryapur, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "BATS",
+    "station_name": "Bhatsar",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "BATS",
+        "name": "Bhatsar",
+        "zone": "WR",
+        "address": "Brahmanwada, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "BCF",
+    "station_name": "Bankapasi",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "West Bengal",
+        "code": "BCF",
+        "name": "Bankapasi",
+        "zone": "ER",
+        "address": "Bankapasi, West Bengal"
+      }
+    }
+  },
+  {
+    "station_code": "BCHR",
+    "station_name": "Bachar",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "BCHR",
+        "name": "Bachar",
+        "zone": "WR",
+        "address": "Palej, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "BCM",
+    "station_name": "Buranpudi",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "BCM",
+        "name": "Buranpudi",
+        "zone": "ECR",
+        "address": "Supaul, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "BDKE",
+    "station_name": "Bhadsivni",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "BDKE",
+        "name": "Bhadsivni",
+        "zone": "CR",
+        "address": "Bhadsivni, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "BDRN",
+    "station_name": "Bhadran",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "BDRN",
+        "name": "Bhadran",
+        "zone": "WR",
+        "address": "Borsad, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "BF",
+    "station_name": "Bagetar",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Assam",
+        "code": "BF",
+        "name": "Bagetar",
+        "zone": "NFR",
+        "address": "North Cachar Hills, Assam"
+      }
+    }
+  },
+  {
+    "station_code": "BGR",
+    "station_name": "Bhagdara",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "BGR",
+        "name": "Bhagdara",
+        "zone": "CR",
+        "address": "Bhagdara, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "XX-MEJB",
+    "station_name": "XX-MEJB",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "XX-MEJB",
+        "name": "XX-MEJB",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "BHHT",
+    "station_name": "Barhara",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "BHHT",
+        "name": "Barhara",
+        "zone": "?",
+        "address": "Barhara, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "XX-KJMB",
+    "station_name": "XX-KJMB",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "XX-KJMB",
+        "name": "XX-KJMB",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "BHOJ",
+    "station_name": "Bhoj Padra",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "BHOJ",
+        "name": "Bhoj Padra",
+        "zone": "WR",
+        "address": "Vadodara Jambusar, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "BHRD",
+    "station_name": "Baghara Road",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "",
+        "code": "BHRD",
+        "name": "Baghara Road",
+        "zone": "SER",
+        "address": ""
+      }
+    }
+  },
+  {
+    "station_code": "DDBC",
+    "station_name": "DDBC",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "DDBC",
+        "name": "DDBC",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "BHWR",
+    "station_name": "Bhitiharwa Ashram",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "BHWR",
+        "name": "Bhitiharwa Ashram",
+        "zone": "ECR",
+        "address": "Pashchim Champaran, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "BMDI",
+    "station_name": "Brahmanwada",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "BMDI",
+        "name": "Brahmanwada",
+        "zone": "WR",
+        "address": "State Highway 7, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "BOTR",
+    "station_name": "Bhavdhari",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Haryana",
+        "code": "BOTR",
+        "name": "Bhavdhari",
+        "zone": "NWR",
+        "address": "Bhiwani, Haryana"
+      }
+    }
+  },
+  {
+    "station_code": "BOX",
+    "station_name": "Bhojasar",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Rajasthan",
+        "code": "BOX",
+        "name": "Bhojasar",
+        "zone": "NWR",
+        "address": "State Highway 8, Rajasthan"
+      }
+    }
+  },
+  {
+    "station_code": "BPAH",
+    "station_name": "Benipur Halt",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "BPAH",
+        "name": "Benipur Halt",
+        "zone": "ECR",
+        "address": "Darbhanga, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "BRPM",
+    "station_name": "Baripur Mandala",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "BRPM",
+        "name": "Baripur Mandala",
+        "zone": "WR",
+        "address": "Mandala, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "BRTL",
+    "station_name": "Bharthali",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "BRTL",
+        "name": "Bharthali",
+        "zone": "WR",
+        "address": "National Highway 8, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "KNDV",
+    "station_name": "KNDV",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "KNDV",
+        "name": "KNDV",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "CDLD",
+    "station_name": "Chandlodiya",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "CDLD",
+        "name": "Chandlodiya",
+        "zone": "WR",
+        "address": "Ahmadabad, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "CDMA",
+    "station_name": "Chandeshwarsthan",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "CDMA",
+        "name": "Chandeshwarsthan",
+        "zone": "ECR",
+        "address": "Chandeshwarsthan, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "CIO",
+    "station_name": "Chikhli Road",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "CIO",
+        "name": "Chikhli Road",
+        "zone": "WR",
+        "address": "SH 179, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "CKNA",
+    "station_name": "Chikna",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "",
+        "code": "CKNA",
+        "name": "Chikna",
+        "zone": "ECR",
+        "address": ""
+      }
+    }
+  },
+  {
+    "station_code": "YY-MMRX",
+    "station_name": "YY-MMRX",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "YY-MMRX",
+        "name": "YY-MMRX",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "BSLX",
+    "station_name": "BSLX",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "BSLX",
+        "name": "BSLX",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "DMJ",
+    "station_name": "Dharmaj",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "DMJ",
+        "name": "Dharmaj",
+        "zone": "WR",
+        "address": "State Highway 6, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "DOLK",
+    "station_name": "Dholikua",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "DOLK",
+        "name": "Dholikua",
+        "zone": "WR",
+        "address": "Gujarat, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "DSNB",
+    "station_name": "Darsana Border",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bangladesh",
+        "code": "DSNB",
+        "name": "Darsana Border",
+        "zone": "?",
+        "address": "Chuadanga, Bangladesh"
+      }
+    }
+  },
+  {
+    "station_code": "DURP",
+    "station_name": "Durgapuri",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Madhya Pradesh",
+        "code": "DURP",
+        "name": "Durgapuri",
+        "zone": "NCR",
+        "address": "Khojeepura, Madhya Pradesh"
+      }
+    }
+  },
+  {
+    "station_code": "DWM",
+    "station_name": "Darwha Moti Bagh Junction",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "DWM",
+        "name": "Darwha Moti Bagh Junction",
+        "zone": "CR",
+        "address": "Darwha, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "ER08",
+    "station_name": "Kalinagar",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "West Bengal",
+        "code": "ER08",
+        "name": "Kalinagar",
+        "zone": "ER",
+        "address": "State Highway 6, West Bengal"
+      }
+    }
+  },
+  {
+    "station_code": "GALG",
+    "station_name": "GoldingGanj",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "GALG",
+        "name": "GoldingGanj",
+        "zone": "?",
+        "address": "GoldingGanj, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "GNPT",
+    "station_name": "Ganpatpura",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "GNPT",
+        "name": "Ganpatpura",
+        "zone": "WR",
+        "address": "Gujarat, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "MGSO",
+    "station_name": "MGSO",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "MGSO",
+        "name": "MGSO",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "DLWS",
+    "station_name": "DLWS",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "DLWS",
+        "name": "DLWS",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "GOV",
+    "station_name": "Govindpuri",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Uttar Pradesh",
+        "code": "GOV",
+        "name": "Govindpuri",
+        "zone": "NCR",
+        "address": "Kanpur, Uttar Pradesh"
+      }
+    }
+  },
+  {
+    "station_code": "GPLG",
+    "station_name": "Gopalpurgram",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "West Bengal",
+        "code": "GPLG",
+        "name": "Gopalpurgram",
+        "zone": "ER",
+        "address": "Contai Nandakumar Rd, West Bengal"
+      }
+    }
+  },
+  {
+    "station_code": "GQD",
+    "station_name": "Gourdaha Halt",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "West Bengal",
+        "code": "GQD",
+        "name": "Gourdaha Halt",
+        "zone": "ER",
+        "address": "Gourdaha, West Bengal"
+      }
+    }
+  },
+  {
+    "station_code": "PHLG",
+    "station_name": "PHLG",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "PHLG",
+        "name": "PHLG",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "H",
+    "station_name": "Venkatagiri Kote Halt",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Karnataka",
+        "code": "H",
+        "name": "Venkatagiri Kote Halt",
+        "zone": "SWR",
+        "address": "Venkatagiri Kote, Karnataka"
+      }
+    }
+  },
+  {
+    "station_code": "MRLA",
+    "station_name": "MARIYAL GANGAVA",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "MRLA",
+        "name": "MARIYAL GANGAVA",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "HJO",
+    "station_name": "Harangajao",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Assam",
+        "code": "HJO",
+        "name": "Harangajao",
+        "zone": "NFR",
+        "address": "North Cachar Hills, Assam"
+      }
+    }
+  },
+  {
+    "station_code": "HRD",
+    "station_name": "Harsud",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Madhya Pradesh",
+        "code": "HRD",
+        "name": "Harsud",
+        "zone": "WCR",
+        "address": "Harsud, Madhya Pradesh"
+      }
+    }
+  },
+  {
+    "station_code": "HSWS",
+    "station_name": "Hansiawas",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Rajasthan",
+        "code": "HSWS",
+        "name": "Hansiawas",
+        "zone": "NWR",
+        "address": "Hansiawas, Rajasthan"
+      }
+    }
+  },
+  {
+    "station_code": "INDR",
+    "station_name": "Indira Nagar",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Tamil Nadu",
+        "code": "INDR",
+        "name": "Indira Nagar",
+        "zone": "SR",
+        "address": "Chennai, Tamil Nadu"
+      }
+    }
+  },
+  {
+    "station_code": "JJPR",
+    "station_name": "Jhanjharpur Bazar Halt",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "JJPR",
+        "name": "Jhanjharpur Bazar Halt",
+        "zone": "?",
+        "address": "Jhanjharpur, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "PBS",
+    "station_name": "Purab Sarai",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "PBS",
+        "name": "Purab Sarai",
+        "zone": "ER",
+        "address": "Munger, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "JMB",
+    "station_name": "Jambusar Junction",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "JMB",
+        "name": "Jambusar Junction",
+        "zone": "WR",
+        "address": "Bharuch Jambusar, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "JMBC",
+    "station_name": "Jambusar City",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "JMBC",
+        "name": "Jambusar City",
+        "zone": "WR",
+        "address": "Jambusar, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "JONA",
+    "station_name": "Jonha",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Jharkhand",
+        "code": "JONA",
+        "name": "Jonha",
+        "zone": "SER",
+        "address": "State Highway 2, Jharkhand"
+      }
+    }
+  },
+  {
+    "station_code": "JPAH",
+    "station_name": "Jagdishpur Halt",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "JPAH",
+        "name": "Jagdishpur Halt",
+        "zone": "ECR",
+        "address": "Darbhanga, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "KALD",
+    "station_name": "Kalanad",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Kerala",
+        "code": "KALD",
+        "name": "Kalanad",
+        "zone": "SR",
+        "address": "Kizur Rd, Kerala"
+      }
+    }
+  },
+  {
+    "station_code": "KALN",
+    "station_name": "Kalana",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Rajasthan",
+        "code": "KALN",
+        "name": "Kalana",
+        "zone": "NWR",
+        "address": "MDR 18, Rajasthan"
+      }
+    }
+  },
+  {
+    "station_code": "KAPM",
+    "station_name": "Kottapalem",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Andhra Pradesh",
+        "code": "KAPM",
+        "name": "Kottapalem",
+        "zone": "ECoR",
+        "address": "Vishakhapatnam, Andhra Pradesh"
+      }
+    }
+  },
+  {
+    "station_code": "KBGN",
+    "station_name": "Khubagaon",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "KBGN",
+        "name": "Khubagaon",
+        "zone": "CR",
+        "address": "Khubagaon, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "KCY",
+    "station_name": "Kaichar",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "West Bengal",
+        "code": "KCY",
+        "name": "Kaichar",
+        "zone": "ER",
+        "address": "Kaichar, West Bengal"
+      }
+    }
+  },
+  {
+    "station_code": "KDRA",
+    "station_name": "Kadampura",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "KDRA",
+        "name": "Kadampura",
+        "zone": "ECR",
+        "address": "Kadampura, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "KIE",
+    "station_name": "Khiria Khurd",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Uttar Pradesh",
+        "code": "KIE",
+        "name": "Khiria Khurd",
+        "zone": "NER",
+        "address": "Shahbaznagar, Uttar Pradesh"
+      }
+    }
+  },
+  {
+    "station_code": "KMB",
+    "station_name": "Kalv Amba",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "KMB",
+        "name": "Kalv Amba",
+        "zone": "WR",
+        "address": "Gujarat, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "KNDR",
+    "station_name": "Kandari",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "KNDR",
+        "name": "Kandari",
+        "zone": "WR",
+        "address": "Gujarat, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "KNGM",
+    "station_name": "Kangam",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "KNGM",
+        "name": "Kangam",
+        "zone": "WR",
+        "address": "Gujarat, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "KNPL",
+    "station_name": "Kandanur Puduvayal",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Tamil Nadu",
+        "code": "KNPL",
+        "name": "Kandanur Puduvayal",
+        "zone": "SR",
+        "address": "State Highway 28, Tamil Nadu"
+      }
+    }
+  },
+  {
+    "station_code": "KORA",
+    "station_name": "Kora",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "KORA",
+        "name": "Kora",
+        "zone": "WR",
+        "address": "Gujarat, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "KORL",
+    "station_name": "Kural",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "KORL",
+        "name": "Kural",
+        "zone": "WR",
+        "address": "Vadodara Jambusar, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "KQV",
+    "station_name": "Kinkhed",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "KQV",
+        "name": "Kinkhed",
+        "zone": "CR",
+        "address": "State Highway 201, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "KR",
+    "station_name": "Kevdi",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "KR",
+        "name": "Kevdi",
+        "zone": "WR",
+        "address": "SH 166, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "KRJN",
+    "station_name": "Karanjali Halt",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "West Bengal",
+        "code": "KRJN",
+        "name": "Karanjali Halt",
+        "zone": "ER",
+        "address": "Tengrabichi, West Bengal"
+      }
+    }
+  },
+  {
+    "station_code": "KRJT",
+    "station_name": "Karanja Town",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "KRJT",
+        "name": "Karanja Town",
+        "zone": "CR",
+        "address": "Karanja, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "KSAI",
+    "station_name": "Kosadi Halt",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "KSAI",
+        "name": "Kosadi Halt",
+        "zone": "WR",
+        "address": "Mosali, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "KSBG",
+    "station_name": "Khusta Buzurg",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "KSBG",
+        "name": "Khusta Buzurg",
+        "zone": "CR",
+        "address": "Amravati, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "KTNI",
+    "station_name": "Kapustalni",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "KTNI",
+        "name": "Kapustalni",
+        "zone": "CR",
+        "address": "Amravati, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "KTNR",
+    "station_name": "Kirtyanand Nagar",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "KTNR",
+        "name": "Kirtyanand Nagar",
+        "zone": "ECR",
+        "address": "Purnea, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "KV",
+    "station_name": "Kayavarohan",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "KV",
+        "name": "Kayavarohan",
+        "zone": "WR",
+        "address": "Kayavarohan, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "KVO",
+    "station_name": "Kevdi Road",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "KVO",
+        "name": "Kevdi Road",
+        "zone": "WR",
+        "address": "Gujarat, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "KXD",
+    "station_name": "Kokalda",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "KXD",
+        "name": "Kokalda",
+        "zone": "CR",
+        "address": "Amravati, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "KZPB",
+    "station_name": "Kazipara Barasat",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "West Bengal",
+        "code": "KZPB",
+        "name": "Kazipara Barasat",
+        "zone": "ER",
+        "address": "Station Rd, West Bengal"
+      }
+    }
+  },
+  {
+    "station_code": "LDD",
+    "station_name": "Ladkhed",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "LDD",
+        "name": "Ladkhed",
+        "zone": "CR",
+        "address": "SH 212, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "LFG",
+    "station_name": "Lower Haflong",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Assam",
+        "code": "LFG",
+        "name": "Lower Haflong",
+        "zone": "NFR",
+        "address": "Haflong, Assam"
+      }
+    }
+  },
+  {
+    "station_code": "LGN",
+    "station_name": "Lehgaon",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "LGN",
+        "name": "Lehgaon",
+        "zone": "CR",
+        "address": "Amravati, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "LKKA",
+    "station_name": "Lal Kuan",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Uttarakhand",
+        "code": "LKKA",
+        "name": "Lal Kuan",
+        "zone": "NER",
+        "address": "Lalkuan, Uttarakhand"
+      }
+    }
+  },
+  {
+    "station_code": "LMB",
+    "station_name": "Limbara",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "LMB",
+        "name": "Limbara",
+        "zone": "WR",
+        "address": "SH 166, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "LPU",
+    "station_name": "Lakhpuri",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "LPU",
+        "name": "Lakhpuri",
+        "zone": "CR",
+        "address": "Lakhpuri, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "LSN",
+    "station_name": "Lasina",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "LSN",
+        "name": "Lasina",
+        "zone": "CR",
+        "address": "Lasina, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "MARD",
+    "station_name": "Mavur Road",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Tamil Nadu",
+        "code": "MARD",
+        "name": "Mavur Road",
+        "zone": "SR",
+        "address": "State Highway 23, Tamil Nadu"
+      }
+    }
+  },
+  {
+    "station_code": "MAX",
+    "station_name": "Mangudi",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Tamil Nadu",
+        "code": "MAX",
+        "name": "Mangudi",
+        "zone": "SR",
+        "address": "State Highway 23, Tamil Nadu"
+      }
+    }
+  },
+  {
+    "station_code": "MBH",
+    "station_name": "Mobha Road",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "MBH",
+        "name": "Mobha Road",
+        "zone": "WR",
+        "address": "Vadodara Jambusar, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "MDNP",
+    "station_name": "Madanpur Halt",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Jharkhand",
+        "code": "MDNP",
+        "name": "Madanpur Halt",
+        "zone": "ER",
+        "address": "Madanpur, Jharkhand"
+      }
+    }
+  },
+  {
+    "station_code": "MGR",
+    "station_name": "Munger",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "MGR",
+        "name": "Munger",
+        "zone": "ER",
+        "address": "Munger, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "MGX",
+    "station_name": "Mailongdisa",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Assam",
+        "code": "MGX",
+        "name": "Mailongdisa",
+        "zone": "NFR",
+        "address": "Mailongdisa, Assam"
+      }
+    }
+  },
+  {
+    "station_code": "MKRL",
+    "station_name": "Moti Koral",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "MKRL",
+        "name": "Moti Koral",
+        "zone": "WR",
+        "address": "Maninageshwar Rd, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "MNGV",
+    "station_name": "Mota Miya Mangrol",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "MNGV",
+        "name": "Mota Miya Mangrol",
+        "zone": "WR",
+        "address": "Mosali, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "MNLI",
+    "station_name": "Manali Halt",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Tamil Nadu",
+        "code": "MNLI",
+        "name": "Manali Halt",
+        "zone": "SR",
+        "address": "State Highway 23, Tamil Nadu"
+      }
+    }
+  },
+  {
+    "station_code": "MQW",
+    "station_name": "Mallannagar",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Uttar Pradesh",
+        "code": "MQW",
+        "name": "Mallannagar",
+        "zone": "NER",
+        "address": "State Highway 33, Uttar Pradesh"
+      }
+    }
+  },
+  {
+    "station_code": "MRD",
+    "station_name": "Manund",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "MRD",
+        "name": "Manund",
+        "zone": "WR",
+        "address": "State HIghway 55, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "MTAP",
+    "station_name": "Matania Anantpur",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "West Bengal",
+        "code": "MTAP",
+        "name": "Matania Anantpur",
+        "zone": "ER",
+        "address": "Matania Anantapur Railway Station, West Bengal"
+      }
+    }
+  },
+  {
+    "station_code": "MTT",
+    "station_name": "Mutupet",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Tamil Nadu",
+        "code": "MTT",
+        "name": "Mutupet",
+        "zone": "SR",
+        "address": "Muthupet, Tamil Nadu"
+      }
+    }
+  },
+  {
+    "station_code": "MZRT",
+    "station_name": "Murtajapur Town",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "MZRT",
+        "name": "Murtajapur Town",
+        "zone": "CR",
+        "address": "Murtajapur, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "NADA",
+    "station_name": "Nada",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "NADA",
+        "name": "Nada",
+        "zone": "WR",
+        "address": "Mota Habipura Nada Rd, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "NBGH",
+    "station_name": "Nowbagh",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "NBGH",
+        "name": "Nowbagh",
+        "zone": "CR",
+        "address": "Nowbagh, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "NDLH",
+    "station_name": "Nandlalee Halt",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "",
+        "code": "NDLH",
+        "name": "Nandlalee Halt",
+        "zone": "?",
+        "address": ""
+      }
+    }
+  },
+  {
+    "station_code": "NGX",
+    "station_name": "Nigan",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "West Bengal",
+        "code": "NGX",
+        "name": "Nigan",
+        "zone": "ER",
+        "address": "Nigan, West Bengal"
+      }
+    }
+  },
+  {
+    "station_code": "NPV",
+    "station_name": "Narpatganj",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "NPV",
+        "name": "Narpatganj",
+        "zone": "ECR",
+        "address": "National Highway 57, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "NRKE",
+    "station_name": "Nari Khetri",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Rajasthan",
+        "code": "NRKE",
+        "name": "Nari Khetri",
+        "zone": "NWR",
+        "address": "Jhunjhunu, Rajasthan"
+      }
+    }
+  },
+  {
+    "station_code": "NRPM",
+    "station_name": "Narayanpur Murli Halt",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "NRPM",
+        "name": "Narayanpur Murli Halt",
+        "zone": "ECR",
+        "address": "Saraygarh, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "NRUR",
+    "station_name": "Nareshwar Road",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "NRUR",
+        "name": "Nareshwar Road",
+        "zone": "WR",
+        "address": "Nareshwar Rd, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "NRWI",
+    "station_name": "Narwasi",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Rajasthan",
+        "code": "NRWI",
+        "name": "Narwasi",
+        "zone": "NWR",
+        "address": "MDR 18, Rajasthan"
+      }
+    }
+  },
+  {
+    "station_code": "NUIH",
+    "station_name": "Neuri Halt",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "NUIH",
+        "name": "Neuri Halt",
+        "zone": "ECR",
+        "address": "Darbhanga, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "NXR",
+    "station_name": "Nagsar",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Uttar Pradesh",
+        "code": "NXR",
+        "name": "Nagsar",
+        "zone": "ECR",
+        "address": "Ghazipur, Uttar Pradesh"
+      }
+    }
+  },
+  {
+    "station_code": "NZH",
+    "station_name": "Nidaghatta",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Karnataka",
+        "code": "NZH",
+        "name": "Nidaghatta",
+        "zone": "?",
+        "address": "Bangalore-Mysore Rd, Karnataka"
+      }
+    }
+  },
+  {
+    "station_code": "P",
+    "station_name": null,
+    "rejection_codes": [
+      "MISSING_STATION_NAME",
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Station name is missing, non-string, or whitespace-only",
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "",
+        "code": "P",
+        "name": "",
+        "zone": "?",
+        "address": ""
+      }
+    }
+  },
+  {
+    "station_code": "PHU",
+    "station_name": "Pahur",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "PHU",
+        "name": "Pahur",
+        "zone": "CR",
+        "address": "Pahur, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "PIJ",
+    "station_name": "Pij",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "PIJ",
+        "name": "Pij",
+        "zone": "WR",
+        "address": "State Highway 149, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "PKP",
+    "station_name": "Pallikkara",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Kerala",
+        "code": "PKP",
+        "name": "Pallikkara",
+        "zone": "SR",
+        "address": "Kasaragod, Kerala"
+      }
+    }
+  },
+  {
+    "station_code": "PKT",
+    "station_name": "Pattukottai",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Tamil Nadu",
+        "code": "PKT",
+        "name": "Pattukottai",
+        "zone": "SR",
+        "address": "Pattukkottai, Tamil Nadu"
+      }
+    }
+  },
+  {
+    "station_code": "PMGN",
+    "station_name": "Pimpalgaon",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "PMGN",
+        "name": "Pimpalgaon",
+        "zone": "CR",
+        "address": "Pimpalgaon, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "POHE",
+    "station_name": "Pohe",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "POHE",
+        "name": "Pohe",
+        "zone": "CR",
+        "address": "Pohe, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "PPV",
+    "station_name": "Pratapganj",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "PPV",
+        "name": "Pratapganj",
+        "zone": "ECR",
+        "address": "Pratapganj, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "PRGT",
+    "station_name": "Pargothan",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "PRGT",
+        "name": "Pargothan",
+        "zone": "CR",
+        "address": "Wardha, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "PRKA",
+    "station_name": "Parikha",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "PRKA",
+        "name": "Parikha",
+        "zone": "WR",
+        "address": "Gujarat, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "PRNC",
+    "station_name": "Purnia Court",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "PRNC",
+        "name": "Purnia Court",
+        "zone": "ECR",
+        "address": "Purnia, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "PRNG",
+    "station_name": "Pritam Nagar",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Madhya Pradesh",
+        "code": "PRNG",
+        "name": "Pritam Nagar",
+        "zone": "WR",
+        "address": "Ratlam, Madhya Pradesh"
+      }
+    }
+  },
+  {
+    "station_code": "PTG",
+    "station_name": "Patna Ghat",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "PTG",
+        "name": "Patna Ghat",
+        "zone": "ECR",
+        "address": "Sabalpur, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "PTRT",
+    "station_name": "Pathrot",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "PTRT",
+        "name": "Pathrot",
+        "zone": "CR",
+        "address": "Amravati, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "PVI",
+    "station_name": "Peravurani",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Tamil Nadu",
+        "code": "PVI",
+        "name": "Peravurani",
+        "zone": "SR",
+        "address": "Peravurani, Tamil Nadu"
+      }
+    }
+  },
+  {
+    "station_code": "RAS",
+    "station_name": "Ras",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "RAS",
+        "name": "Ras",
+        "zone": "WR",
+        "address": "Bhadran, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "RGV",
+    "station_name": "Rathopur",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "RGV",
+        "name": "Rathopur",
+        "zone": "ECR",
+        "address": "Saraygarh, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "RPP",
+    "station_name": "Ranu Pipri",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "RPP",
+        "name": "Ranu Pipri",
+        "zone": "WR",
+        "address": "Gujarat, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "RVT",
+    "station_name": "Revelganj Ghat",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "RVT",
+        "name": "Revelganj Ghat",
+        "zone": "NER",
+        "address": "Ghaghra Bank, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "RW",
+    "station_name": "Rankua",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "RW",
+        "name": "Rankua",
+        "zone": "WR",
+        "address": "Gujarat, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "SAHA",
+    "station_name": "Sarahula",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Uttar Pradesh",
+        "code": "SAHA",
+        "name": "Sarahula",
+        "zone": "ECR",
+        "address": "Dildarnagar, Uttar Pradesh"
+      }
+    }
+  },
+  {
+    "station_code": "SDRN",
+    "station_name": "Shendurni",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "SDRN",
+        "name": "Shendurni",
+        "zone": "CR",
+        "address": "Shendurni, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "SGBA",
+    "station_name": "Sir Gurudas Banerjee Halt",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "West Bengal",
+        "code": "SGBA",
+        "name": "Sir Gurudas Banerjee Halt",
+        "zone": "ER",
+        "address": "Kolkata, West Bengal"
+      }
+    }
+  },
+  {
+    "station_code": "SHKY",
+    "station_name": "Saharsa Kutchery Halt",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "SHKY",
+        "name": "Saharsa Kutchery Halt",
+        "zone": "ECR",
+        "address": "Bihra Panchayat, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "SHRG",
+    "station_name": "Sri Ramgarh Halt",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Rajasthan",
+        "code": "SHRG",
+        "name": "Sri Ramgarh Halt",
+        "zone": "NWR",
+        "address": "Ramgarh Railway Station, Rajasthan"
+      }
+    }
+  },
+  {
+    "station_code": "SIZ",
+    "station_name": "Shrikhanda",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "West Bengal",
+        "code": "SIZ",
+        "name": "Shrikhanda",
+        "zone": "ER",
+        "address": "Shrikhanda, West Bengal"
+      }
+    }
+  },
+  {
+    "station_code": "SJTR",
+    "station_name": "Sojitra",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "SJTR",
+        "name": "Sojitra",
+        "zone": "WR",
+        "address": "Anand, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "SMDR",
+    "station_name": "Simodara",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "SMDR",
+        "name": "Simodara",
+        "zone": "WR",
+        "address": "SH 166, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "SMTN",
+    "station_name": "Somthan",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "SMTN",
+        "name": "Somthan",
+        "zone": "CR",
+        "address": "Somthan, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "SOF",
+    "station_name": "Saota",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "West Bengal",
+        "code": "SOF",
+        "name": "Saota",
+        "zone": "ER",
+        "address": "Saota, West Bengal"
+      }
+    }
+  },
+  {
+    "station_code": "SNBD",
+    "station_name": "Sunderabad",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Madhya Pradesh",
+        "code": "SNBD",
+        "name": "Sunderabad",
+        "zone": "WR",
+        "address": "Ratlam, Madhya Pradesh"
+      }
+    }
+  },
+  {
+    "station_code": "SPS",
+    "station_name": "Shripat Shrikhand",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "West Bengal",
+        "code": "SPS",
+        "name": "Shripat Shrikhand",
+        "zone": "ER",
+        "address": "Shripat Shrikhand, West Bengal"
+      }
+    }
+  },
+  {
+    "station_code": "SURR",
+    "station_name": "Surera",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Rajasthan",
+        "code": "SURR",
+        "name": "Surera",
+        "zone": "NWR",
+        "address": "Surera, Rajasthan"
+      }
+    }
+  },
+  {
+    "station_code": "SWQ",
+    "station_name": "Sangwi",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "SWQ",
+        "name": "Sangwi",
+        "zone": "CR",
+        "address": "Sangwi, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "TAM",
+    "station_name": "Tilaivilagam",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Tamil Nadu",
+        "code": "TAM",
+        "name": "Tilaivilagam",
+        "zone": "SR",
+        "address": "Pattukkotai-Thiruthuraipoondi Rd, Tamil Nadu"
+      }
+    }
+  },
+  {
+    "station_code": "TCT",
+    "station_name": "Tiruchitrambalam",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Tamil Nadu",
+        "code": "TCT",
+        "name": "Tiruchitrambalam",
+        "zone": "SR",
+        "address": "Musiri - Kulithalai - Manapparai - Pudukottai - Alangudi - Peravoorani - Sethubavachatram Rd, Tamil Nadu"
+      }
+    }
+  },
+  {
+    "station_code": "THZI",
+    "station_name": "Takazhi",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Kerala",
+        "code": "THZI",
+        "name": "Takazhi",
+        "zone": "SR",
+        "address": "Takazhi, Kerala"
+      }
+    }
+  },
+  {
+    "station_code": "TJNR",
+    "station_name": "Taj Nagar",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Haryana",
+        "code": "TJNR",
+        "name": "Taj Nagar",
+        "zone": "NR",
+        "address": "Gurgaon, Haryana"
+      }
+    }
+  },
+  {
+    "station_code": "TLI",
+    "station_name": "Tulwara Jhil",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Rajasthan",
+        "code": "TLI",
+        "name": "Tulwara Jhil",
+        "zone": "NWR",
+        "address": "Tibi Railway Station, Rajasthan"
+      }
+    }
+  },
+  {
+    "station_code": "TNK",
+    "station_name": "Tirunellikaval",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Tamil Nadu",
+        "code": "TNK",
+        "name": "Tirunellikaval",
+        "zone": "SR",
+        "address": "State Highway 23, Tamil Nadu"
+      }
+    }
+  },
+  {
+    "station_code": "TPN",
+    "station_name": "Tapona",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "TPN",
+        "name": "Tapona",
+        "zone": "CR",
+        "address": "Tapona, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "TTP",
+    "station_name": "Tiruturaipudi Junction",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Tamil Nadu",
+        "code": "TTP",
+        "name": "Tiruturaipudi Junction",
+        "zone": "SR",
+        "address": "Thiruthuraipoondi, Tamil Nadu"
+      }
+    }
+  },
+  {
+    "station_code": "UMPD",
+    "station_name": "Umarpada",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "UMPD",
+        "name": "Umarpada",
+        "zone": "WR",
+        "address": "Umarpada to Jumavadi, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "UNI",
+    "station_name": "Unai Vansada Road",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "UNI",
+        "name": "Unai Vansada Road",
+        "zone": "WR",
+        "address": "Gujarat, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "VASO",
+    "station_name": "Vaso",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "VASO",
+        "name": "Vaso",
+        "zone": "WR",
+        "address": "Rampur, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "VDNP",
+    "station_name": "Baijnath Andoli",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "VDNP",
+        "name": "Baijnath Andoli",
+        "zone": "ECR",
+        "address": "Baijnath Andoli, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "VEP",
+    "station_name": "Velpuru Road",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Andhra Pradesh",
+        "code": "VEP",
+        "name": "Velpuru Road",
+        "zone": "SCR",
+        "address": "Station Rd, Andhra Pradesh"
+      }
+    }
+  },
+  {
+    "station_code": "VLC",
+    "station_name": "Velachha",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "VLC",
+        "name": "Velachha",
+        "zone": "WR",
+        "address": "SH 166, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "VLN",
+    "station_name": "Vilegaon",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "VLN",
+        "name": "Vilegaon",
+        "zone": "CR",
+        "address": "Vilegaon, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "VMM",
+    "station_name": "Valaramanikkam",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Tamil Nadu",
+        "code": "VMM",
+        "name": "Valaramanikkam",
+        "zone": "SR",
+        "address": "State Highway 28, Tamil Nadu"
+      }
+    }
+  },
+  {
+    "station_code": "VOL",
+    "station_name": "Virol",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "VOL",
+        "name": "Virol",
+        "zone": "WR",
+        "address": "Anand, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "VRJ",
+    "station_name": "Vadaj",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "VRJ",
+        "name": "Vadaj",
+        "zone": "WR",
+        "address": "State Highway 160, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "VRKD",
+    "station_name": "Varkhedi",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "VRKD",
+        "name": "Varkhedi",
+        "zone": "CR",
+        "address": "Jalgaon, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "VSI",
+    "station_name": "Vishvamitri",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "VSI",
+        "name": "Vishvamitri",
+        "zone": "WR",
+        "address": "Vadodara, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "VUL",
+    "station_name": "Virul",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "VUL",
+        "name": "Virul",
+        "zone": "CR",
+        "address": "Wardha, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "WRD",
+    "station_name": "Warudkhed",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "WRD",
+        "name": "Warudkhed",
+        "zone": "CR",
+        "address": "Wardha, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "XBAC",
+    "station_name": "Bachharpur Halt",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "XBAC",
+        "name": "Bachharpur Halt",
+        "zone": "ECR",
+        "address": "Bachharpur, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "BDO",
+    "station_name": "Bahalda Road",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Orissa",
+        "code": "BDO",
+        "name": "Bahalda Road",
+        "zone": "SER",
+        "address": "Mayurbhanj, Orissa"
+      }
+    }
+  },
+  {
+    "station_code": "AMJ",
+    "station_name": "Amin Gaon",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Assam",
+        "code": "AMJ",
+        "name": "Amin Gaon",
+        "zone": "NFR",
+        "address": "Guwahati, Assam"
+      }
+    }
+  },
+  {
+    "station_code": "AMNR",
+    "station_name": "Ammanur",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Tamil Nadu",
+        "code": "AMNR",
+        "name": "Ammanur",
+        "zone": "SR",
+        "address": "Mazavarayanallu Rd, Tamil Nadu"
+      }
+    }
+  },
+  {
+    "station_code": "ANKI",
+    "station_name": "Anakhi",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "ANKI",
+        "name": "Anakhi",
+        "zone": "WR",
+        "address": "Bharuch, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "ANW",
+    "station_name": "Anawal",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "ANW",
+        "name": "Anawal",
+        "zone": "WR",
+        "address": "Anawal, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "CMK",
+    "station_name": "Chamak",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "CMK",
+        "name": "Chamak",
+        "zone": "CR",
+        "address": "Amravati, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "CRND",
+    "station_name": "Choranda Junction",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "CRND",
+        "name": "Choranda Junction",
+        "zone": "WR",
+        "address": "Choranda, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "DAVC",
+    "station_name": "Jalalabad DAV College",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Punjab",
+        "code": "DAVC",
+        "name": "Jalalabad DAV College",
+        "zone": "NR",
+        "address": "Jalalabad, Punjab"
+      }
+    }
+  },
+  {
+    "station_code": "DEU",
+    "station_name": "Devsana",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "DEU",
+        "name": "Devsana",
+        "zone": "WR",
+        "address": "State Highway 133, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "DEWA",
+    "station_name": "Dewa",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "DEWA",
+        "name": "Dewa",
+        "zone": "WR",
+        "address": "Dewa, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "DNZ",
+    "station_name": "Dhanori",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Maharashtra",
+        "code": "DNZ",
+        "name": "Dhanori",
+        "zone": "CR",
+        "address": "SH244, Maharashtra"
+      }
+    }
+  },
+  {
+    "station_code": "GNV",
+    "station_name": "Gandevi",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "GNV",
+        "name": "Gandevi",
+        "zone": "WR",
+        "address": "Gandevi, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "HFG",
+    "station_name": "Haflong Hill",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Assam",
+        "code": "HFG",
+        "name": "Haflong Hill",
+        "zone": "NFR",
+        "address": "North Cachar Hills, Assam"
+      }
+    }
+  },
+  {
+    "station_code": "NRPD",
+    "station_name": "Narayanpet Road",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Karnataka",
+        "code": "NRPD",
+        "name": "Narayanpet Road",
+        "zone": "SCR",
+        "address": "SH 51, Karnataka"
+      }
+    }
+  },
+  {
+    "station_code": "SBY",
+    "station_name": "Solan Brewery",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Himachal Pradesh",
+        "code": "SBY",
+        "name": "Solan Brewery",
+        "zone": "NR",
+        "address": "Solan, Himachal Pradesh"
+      }
+    }
+  },
+  {
+    "station_code": "SNAD",
+    "station_name": "Saniyad",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Gujarat",
+        "code": "SNAD",
+        "name": "Saniyad",
+        "zone": "WR",
+        "address": "Palej, Gujarat"
+      }
+    }
+  },
+  {
+    "station_code": "SRGR",
+    "station_name": "Saraygarh",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": "Bihar",
+        "code": "SRGR",
+        "name": "Saraygarh",
+        "zone": "ECR",
+        "address": "Saraygarh, Bihar"
+      }
+    }
+  },
+  {
+    "station_code": "BLYC",
+    "station_name": "BLYC",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "BLYC",
+        "name": "BLYC",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "BWND",
+    "station_name": "BWND",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "BWND",
+        "name": "BWND",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "YY-WADB",
+    "station_name": "YY-WADB",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "YY-WADB",
+        "name": "YY-WADB",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "YY-MLYB",
+    "station_name": "YY-MLYB",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "YY-MLYB",
+        "name": "YY-MLYB",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "WDC",
+    "station_name": "WDC",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "WDC",
+        "name": "WDC",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "AMLX",
+    "station_name": "AMLX",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "AMLX",
+        "name": "AMLX",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "AQX",
+    "station_name": "AQX",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "AQX",
+        "name": "AQX",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "VAH",
+    "station_name": "VAH",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "VAH",
+        "name": "VAH",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "GBY",
+    "station_name": "GUABARI",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "GBY",
+        "name": "GUABARI",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "DSKG",
+    "station_name": "DSKG",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "DSKG",
+        "name": "DSKG",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "BDYD",
+    "station_name": "BDYD",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "BDYD",
+        "name": "BDYD",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "SGBB",
+    "station_name": "SGBB",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "SGBB",
+        "name": "SGBB",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "BSPC",
+    "station_name": "BSPC",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "BSPC",
+        "name": "BSPC",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "BSGS",
+    "station_name": "BSGS",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "BSGS",
+        "name": "BSGS",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "LKOY",
+    "station_name": "LKOY",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "LKOY",
+        "name": "LKOY",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "KGPW",
+    "station_name": "KGPW",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "KGPW",
+        "name": "KGPW",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "GVDP",
+    "station_name": "GVDP",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "GVDP",
+        "name": "GVDP",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "RLJC",
+    "station_name": "RLJC",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "RLJC",
+        "name": "RLJC",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "RPMY",
+    "station_name": "RPMY",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "RPMY",
+        "name": "RPMY",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "NFKS",
+    "station_name": "NFKS",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "NFKS",
+        "name": "NFKS",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "NFKN",
+    "station_name": "NFKN",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "NFKN",
+        "name": "NFKN",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "KHMP",
+    "station_name": "KHEMPUR",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "KHMP",
+        "name": "KHEMPUR",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "IKC",
+    "station_name": "IKARCHALA",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "IKC",
+        "name": "IKARCHALA",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "YY-BJUC",
+    "station_name": "YY-BJUC",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "YY-BJUC",
+        "name": "YY-BJUC",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "MTUJ",
+    "station_name": "MTUJ",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "MTUJ",
+        "name": "MTUJ",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "CCSJ",
+    "station_name": "CCSJ",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "CCSJ",
+        "name": "CCSJ",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "CPPR",
+    "station_name": "CPPR",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "CPPR",
+        "name": "CPPR",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "PAIL",
+    "station_name": "PAIL",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "PAIL",
+        "name": "PAIL",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "ULR",
+    "station_name": "ULTADANGA ROAD",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "ULR",
+        "name": "ULTADANGA ROAD",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "CLWS",
+    "station_name": "CLWS",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "CLWS",
+        "name": "CLWS",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "JUNC",
+    "station_name": "JUNC",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "JUNC",
+        "name": "JUNC",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "ETYD",
+    "station_name": "ETYD",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "ETYD",
+        "name": "ETYD",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "LCAB",
+    "station_name": "LCAB",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "LCAB",
+        "name": "LCAB",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "BELG",
+    "station_name": "BELG",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "BELG",
+        "name": "BELG",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "KANL",
+    "station_name": "KANL",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "KANL",
+        "name": "KANL",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "YADA",
+    "station_name": "YADA",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "YADA",
+        "name": "YADA",
+        "zone": null,
+        "address": null
+      }
+    }
+  },
+  {
+    "station_code": "YAKUT PUR(YKA",
+    "station_name": "YAKUT PUR(YKA",
+    "rejection_codes": [
+      "NULL_GEOMETRY"
+    ],
+    "validation_messages": [
+      "Feature geometry is null"
+    ],
+    "raw_payload": {
+      "geometry": null,
+      "type": "Feature",
+      "properties": {
+        "state": null,
+        "code": "YAKUT PUR(YKA",
+        "name": "YAKUT PUR(YKA",
+        "zone": null,
+        "address": null
+      }
+    }
+  }
+]
