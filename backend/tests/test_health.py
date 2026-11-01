@@ -2,6 +2,8 @@ import pytest
 from httpx import AsyncClient, ASGITransport
 from app.main import app
 
+from unittest.mock import AsyncMock, patch
+
 @pytest.mark.asyncio
 async def test_health_endpoint():
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
@@ -13,12 +15,21 @@ async def test_health_endpoint():
         assert "environment" in data
 
 @pytest.mark.asyncio
-async def test_readiness_endpoint_when_db_down():
+async def test_readiness_endpoint_when_healthy():
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
-        # Since DB/Redis are not connected in mock test environment, expect 503 Service Unavailable
         response = await client.get("/api/v1/health/ready")
-        assert response.status_code == 503
-        data = response.json()["detail"]
-        assert data["status"] == "unhealthy"
-        assert "database" in data["services"]
-        assert "redis" in data["services"]
+        assert response.status_code == 200
+        data = response.json()
+        assert data["status"] == "ready"
+        assert data["services"]["database"] is True
+        assert data["services"]["redis"] is True
+
+@pytest.mark.asyncio
+async def test_readiness_endpoint_when_db_down():
+    with patch("app.api.v1.health.check_database_health", new_callable=AsyncMock, return_value=False):
+        async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
+            response = await client.get("/api/v1/health/ready")
+            assert response.status_code == 503
+            data = response.json()["detail"]
+            assert data["status"] == "unhealthy"
+            assert data["services"]["database"] is False

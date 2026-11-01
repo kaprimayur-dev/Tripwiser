@@ -26,8 +26,8 @@ class SQLAlchemyStationRepository(StationRepository):
     async def get_by_code(self, code: str) -> Optional[Station]:
         stmt = select(
             StationORM,
-            func.ST_Y(StationORM.location).label("lat"),
-            func.ST_X(StationORM.location).label("lon")
+            func.ST_Y(func.geometry(StationORM.location)).label("lat"),
+            func.ST_X(func.geometry(StationORM.location)).label("lon")
         ).where(StationORM.code == code)
         
         result = await self.session.execute(stmt)
@@ -50,8 +50,8 @@ class SQLAlchemyStationRepository(StationRepository):
         q = f"%{query.strip().upper()}%"
         stmt = select(
             StationORM,
-            func.ST_Y(StationORM.location).label("lat"),
-            func.ST_X(StationORM.location).label("lon")
+            func.ST_Y(func.geometry(StationORM.location)).label("lat"),
+            func.ST_X(func.geometry(StationORM.location)).label("lon")
         ).where(
             or_(
                 StationORM.code.ilike(q),
@@ -85,8 +85,8 @@ class SQLAlchemyStationRepository(StationRepository):
         
         stmt = select(
             StationORM,
-            func.ST_Y(StationORM.location).label("lat"),
-            func.ST_X(StationORM.location).label("lon"),
+            func.ST_Y(func.geometry(StationORM.location)).label("lat"),
+            func.ST_X(func.geometry(StationORM.location)).label("lon"),
             (func.ST_Distance(StationORM.location, point) / 1000.0).label("dist_km")
         ).where(
             ST_DWithin(StationORM.location, point, radius_meters)
