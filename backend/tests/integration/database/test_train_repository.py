@@ -28,8 +28,8 @@ async def test_train_repository_flow():
             e1 = TrainScheduleEntry(station_code="GWL", departure_time=datetime.time(6, 15), day_offset=0, distance_km=0.0, stop_sequence=1)
             e2 = TrainScheduleEntry(station_code="BPL", arrival_time=datetime.time(10, 45), day_offset=0, distance_km=390.0, stop_sequence=2)
             train = Train(
-                number="12616",
-                name="Grand Trunk Express",
+                number="TEST12616",
+                name="Test Grand Trunk Express",
                 origin_code="GWL",
                 destination_code="BPL",
                 runs_on_days=[0, 1, 2, 3, 4, 5, 6],
@@ -39,9 +39,9 @@ async def test_train_repository_flow():
             await tr_repo.save(train)
 
             # 3. Retrieve Train by Number
-            retrieved = await tr_repo.get_by_number("12616")
+            retrieved = await tr_repo.get_by_number("TEST12616")
             assert retrieved is not None
-            assert retrieved.name == "Grand Trunk Express"
+            assert retrieved.name == "Test Grand Trunk Express"
             assert len(retrieved.schedule) == 2
             assert retrieved.schedule[0].station_code == "GWL"
             assert retrieved.schedule[1].station_code == "BPL"
@@ -49,7 +49,7 @@ async def test_train_repository_flow():
             # 4. Find Direct Trains
             direct_trains = await tr_repo.find_direct_trains("GWL", "BPL")
             assert len(direct_trains) >= 1
-            assert any(t.number == "12616" for t in direct_trains)
+            assert any(t.number == "TEST12616" for t in direct_trains)
 
         finally:
             await session.rollback()

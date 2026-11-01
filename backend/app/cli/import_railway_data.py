@@ -15,7 +15,7 @@ import os
 import sys
 import time
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Union
 
 from app.core.db import check_database_health
 from app.domain.models.station import Station
@@ -24,7 +24,11 @@ from app.infrastructure.adapters.datameet.station_adapter import DataMeetStation
 from app.infrastructure.adapters.datameet.train_adapter import DataMeetTrainAdapter
 from app.infrastructure.adapters.datameet.train_models import DataMeetTrainRecord
 from app.infrastructure.adapters.datameet.schedule_adapter import DataMeetScheduleAdapter
-from app.infrastructure.integration.calendar_provider import FixtureCalendarProvider
+from app.infrastructure.integration.calendar_provider import (
+    FixtureCalendarProvider,
+    JsonCalendarProvider,
+    CompositeCalendarProvider,
+)
 from app.infrastructure.integration.models import (
     IntegratedRailwayDataset,
     IntegratedTrainRecord,
@@ -40,6 +44,22 @@ logger = logging.getLogger("tripwiser-importer")
 
 DEFAULT_FIXTURE_PATH = Path("backend/app/infrastructure/data/fixtures/bootstrap_railway_data.json")
 DEFAULT_DATAMEET_DIR = Path("backend/app/infrastructure/data/sources/datameet")
+DEFAULT_OFFICIAL_CALENDAR_PATH = Path("backend/app/infrastructure/data/sources/official/railway_running_calendars.json")
+
+
+def resolve_source_path(p: Union[str, Path]) -> Path:
+    """Resolves path supporting both host-relative and docker-relative working directories."""
+    path = Path(p)
+    if path.exists():
+        return path
+    parts = path.parts
+    if parts and parts[0] == "backend":
+        alt = Path(*parts[1:])
+        if alt.exists():
+            return alt
+    return path
+
+
 
 
 def parse_args(args: List[str] | None = None) -> argparse.Namespace:
@@ -96,6 +116,12 @@ def parse_args(args: List[str] | None = None) -> argparse.Namespace:
         type=str,
         default=str(DEFAULT_FIXTURE_PATH),
         help="Path to curated bootstrap fixture JSON",
+    )
+    parser.add_argument(
+        "--calendar-path",
+        type=str,
+        default=str(DEFAULT_OFFICIAL_CALENDAR_PATH),
+        help="Path to verified official running calendar JSON dataset",
     )
     parser.add_argument(
         "--datameet-dir",
@@ -227,8 +253,12 @@ def load_fixture_dataset(fixture_path: Path) -> tuple[IntegratedRailwayDataset, 
     return dataset, [fixture_path]
 
 
-def load_datameet_dataset(datameet_dir: Path, fixture_path: Path):
-    """Loads and integrates DataMeet datasets with FixtureCalendarProvider."""
+def load_datameet_dataset(
+    datameet_dir: Path,
+    fixture_path: Path,
+    calendar_path: Path | None = None,
+):
+    """Loads and integrates DataMeet datasets with CompositeCalendarProvider."""
     st_path = datameet_dir / "stations.json"
     tr_path = datameet_dir / "trains.json"
     sch_path = datameet_dir / "schedules.json"
@@ -237,16 +267,25 @@ def load_datameet_dataset(datameet_dir: Path, fixture_path: Path):
         if not p.exists():
             raise FileNotFoundError(f"Required DataMeet file missing: {p}")
 
-    calendar_provider = FixtureCalendarProvider(fixture_path)
+    providers = [FixtureCalendarProvider(fixture_path)]
+    source_files = [st_path, tr_path, sch_path, fixture_path]
+
+    if calendar_path is not None and calendar_path.exists():
+        logger.info("Configuring verified running calendar from %s", calendar_path)
+        providers.append(JsonCalendarProvider(calendar_path))
+        source_files.append(calendar_path)
+
+    composite_calendar = CompositeCalendarProvider(providers)
+
     logger.info("Integrating multi-source dataset via RailwayDataIntegrationService.integrate()")
     integration_service = RailwayDataIntegrationService()
     dataset = integration_service.integrate(
         stations_source=st_path,
         trains_source=tr_path,
         schedules_source=sch_path,
-        calendar_provider=calendar_provider,
+        calendar_provider=composite_calendar,
     )
-    return dataset, [st_path, tr_path, sch_path, fixture_path]
+    return dataset, source_files
 
 
 def print_summary_table(
@@ -305,12 +344,13 @@ async def run_pipeline(args: argparse.Namespace) -> int:
     logger.info("Beginning TripWiser ingestion pipeline: source=%s, mode=%s", source, mode_str)
 
     # 1. Load & Integrate Dataset
-    fixture_path = Path(args.fixture_path)
+    fixture_path = resolve_source_path(args.fixture_path)
     if source == "fixture":
         dataset, source_files = load_fixture_dataset(fixture_path)
     else:
-        datameet_dir = Path(args.datameet_dir)
-        dataset, source_files = load_datameet_dataset(datameet_dir, fixture_path)
+        datameet_dir = resolve_source_path(args.datameet_dir)
+        calendar_path = resolve_source_path(args.calendar_path) if args.calendar_path else None
+        dataset, source_files = load_datameet_dataset(datameet_dir, fixture_path, calendar_path)
 
     # 2. Database Persistence
     persisted_st = 0

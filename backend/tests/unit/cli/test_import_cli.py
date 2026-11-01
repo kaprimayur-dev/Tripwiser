@@ -29,6 +29,7 @@ class TestImportCLIUnit:
         assert args.chunk_size == 1000
         assert args.manifest_dir == "data/manifests"
         assert args.quarantine_dir == "data/quarantine"
+        assert "railway_running_calendars.json" in str(args.calendar_path)
 
     def test_custom_cli_arguments(self):
         custom = [
@@ -38,6 +39,7 @@ class TestImportCLIUnit:
             "--chunk-size", "500",
             "--manifest-dir", "custom/manifests",
             "--quarantine-dir", "custom/quarantine",
+            "--calendar-path", "custom/calendars.json",
         ]
         args = parse_args(custom)
         assert args.source == "datameet"
@@ -46,6 +48,7 @@ class TestImportCLIUnit:
         assert args.chunk_size == 500
         assert args.manifest_dir == "custom/manifests"
         assert args.quarantine_dir == "custom/quarantine"
+        assert args.calendar_path == "custom/calendars.json"
 
     def test_invalid_source_argument(self):
         with pytest.raises(SystemExit):

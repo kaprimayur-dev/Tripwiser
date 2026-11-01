@@ -14,7 +14,7 @@ class ChartVacancyORM(Base):
         default=uuid.uuid4,
         server_default=func.uuid_generate_v4()
     )
-    train_number: Mapped[str] = mapped_column(String(10), ForeignKey("trains.number"), nullable=False)
+    train_number: Mapped[str] = mapped_column(String(20), ForeignKey("trains.number"), nullable=False)
     chart_date: Mapped[date] = mapped_column(Date, nullable=False)
     coach: Mapped[str] = mapped_column(String(10), nullable=False)
     berth_number: Mapped[int] = mapped_column(Integer, nullable=False)

@@ -38,6 +38,15 @@ async function runE2ETest() {
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 900 });
 
+    page.on('console', (msg) => console.log('BROWSER CONSOLE:', msg.text()));
+    page.on('pageerror', (err) => console.log('BROWSER PAGE ERROR:', err.message));
+    page.on('response', (res) => {
+      console.log('HTTP RESPONSE:', res.url(), res.status());
+    });
+    page.on('requestfailed', (req) => {
+      console.log('REQ FAILED:', req.url(), req.failure()?.errorText);
+    });
+
     // 1. Navigate to TripWiser Home
     console.log('1. Navigating to http://localhost:3000...');
     const response = await page.goto('http://localhost:3000', {

@@ -7,7 +7,7 @@ from app.infrastructure.database.models.base import Base
 class TrainORM(Base):
     __tablename__ = "trains"
 
-    number: Mapped[str] = mapped_column(String(10), primary_key=True)
+    number: Mapped[str] = mapped_column(String(20), primary_key=True)
     name: Mapped[str] = mapped_column(String(150), nullable=False)
     origin_code: Mapped[str] = mapped_column(String(10), ForeignKey("stations.code"), nullable=False)
     destination_code: Mapped[str] = mapped_column(String(10), ForeignKey("stations.code"), nullable=False)
@@ -30,7 +30,7 @@ class ScheduleORM(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     train_number: Mapped[str] = mapped_column(
-        String(10),
+        String(20),
         ForeignKey("trains.number", ondelete="CASCADE"),
         nullable=False
     )

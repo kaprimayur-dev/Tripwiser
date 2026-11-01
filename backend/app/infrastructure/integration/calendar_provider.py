@@ -41,3 +41,78 @@ class FixtureCalendarProvider:
     def get_running_days(self, train_number: str) -> tuple[int, ...] | None:
         return self._mapping.get(str(train_number).strip())
 
+
+class JsonCalendarProvider:
+    """
+    Verified running calendar provider backed by an external structured JSON file.
+    
+    Supports metadata extraction (source, license, version) and validates that running days
+    fall strictly within 0 (Monday) to 6 (Sunday).
+    """
+
+    def __init__(self, json_path: Union[str, Path]):
+        self._path = Path(json_path)
+        self._mapping: dict[str, tuple[int, ...]] = {}
+        self._metadata: dict[str, str] = {
+            "source": "UNKNOWN",
+            "license": "UNKNOWN",
+            "version": "1.0.0",
+        }
+        self._load()
+
+    def _load(self) -> None:
+        if not self._path.exists() or not self._path.is_file():
+            return
+
+        with open(self._path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        if isinstance(data, dict):
+            # Check for structured envelope
+            if "calendars" in data and isinstance(data["calendars"], dict):
+                self._metadata["source"] = str(data.get("source", "Official Indian Railways Publications"))
+                self._metadata["license"] = str(data.get("license", "Government Open Data License - India (GODL)"))
+                self._metadata["version"] = str(data.get("version", "1.0.0"))
+                raw_calendars = data["calendars"]
+            else:
+                raw_calendars = data
+
+            for num, days in raw_calendars.items():
+                if isinstance(days, (list, tuple)):
+                    valid_days = [int(d) for d in days if 0 <= int(d) <= 6]
+                    if valid_days:
+                        self._mapping[str(num).strip()] = tuple(sorted(set(valid_days)))
+
+    @property
+    def metadata(self) -> dict[str, str]:
+        return dict(self._metadata)
+
+    @property
+    def total_trains(self) -> int:
+        return len(self._mapping)
+
+    def get_running_days(self, train_number: str) -> tuple[int, ...] | None:
+        return self._mapping.get(str(train_number).strip())
+
+
+class CompositeCalendarProvider:
+    """
+    Chained composite calendar provider evaluating multiple providers in priority order.
+    """
+
+    def __init__(self, providers: Sequence[CalendarProvider]):
+        self._providers = list(providers)
+
+    @property
+    def providers(self) -> tuple[CalendarProvider, ...]:
+        return tuple(self._providers)
+
+    def get_running_days(self, train_number: str) -> tuple[int, ...] | None:
+        clean_num = str(train_number).strip()
+        for provider in self._providers:
+            days = provider.get_running_days(clean_num)
+            if days is not None and len(days) > 0:
+                return days
+        return None
+
+
