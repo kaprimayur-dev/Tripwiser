@@ -56,6 +56,7 @@ class BachelorSpecialSearchResponse(BaseModel):
     status: str
     data_source: str
     is_live_source: bool
+    provider_status: Optional[str] = None
     chart_policy_notice: str
 
 
@@ -128,6 +129,7 @@ async def search_bachelor_special(
         status=result.status,
         data_source=result.data_source,
         is_live_source=result.is_live_source,
+        provider_status=result.provider_status,
         chart_policy_notice=result.chart_policy_notice,
     )
 

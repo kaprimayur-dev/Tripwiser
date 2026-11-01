@@ -112,6 +112,7 @@ export interface BachelorSpecialSearchResponse {
   status: string;
   data_source: string;
   is_live_source: boolean;
+  provider_status?: string | null;
   chart_policy_notice: string;
 }
 

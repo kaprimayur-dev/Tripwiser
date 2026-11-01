@@ -3,11 +3,13 @@ from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.domain.models.bachelor import BachelorSpecialItinerary, BachelorSpecialSearchResult
+from app.domain.providers.vacancy_provider import ChartVacancyProvider
 from app.domain.repositories.train_repository import TrainRepository
 from app.domain.repositories.vacancy_repository import VacancyRepository
 from app.domain.services.bachelor_engine import BachelorEngine
 from app.infrastructure.database.repositories.train_repository import SQLAlchemyTrainRepository
 from app.infrastructure.database.repositories.vacancy_repository import PostgresVacancyRepository
+from app.infrastructure.providers.irctc_chart_provider import IRCTCEnterpriseChartProvider
 
 
 class BachelorSpecialService:
@@ -17,11 +19,13 @@ class BachelorSpecialService:
         train_repo: Optional[TrainRepository] = None,
         vacancy_repo: Optional[VacancyRepository] = None,
         engine: Optional[BachelorEngine] = None,
+        provider: Optional[ChartVacancyProvider] = None,
     ):
         self.session = session
         self.train_repo = train_repo or SQLAlchemyTrainRepository(session)
         self.vacancy_repo = vacancy_repo or PostgresVacancyRepository(session)
         self.engine = engine or BachelorEngine()
+        self.provider = provider or IRCTCEnterpriseChartProvider()
 
     async def search_bachelor_special(
         self,
@@ -107,6 +111,11 @@ class BachelorSpecialService:
         ranked_all = self.engine._rank_itineraries(all_itineraries)
 
         status = "SUCCESS" if ranked_all else "NO_CHART_VACANCIES"
+        prov_status = (
+            "CONFIGURED_LIVE"
+            if getattr(self.provider, "is_configured", False)
+            else "AWAITING_CRIS_PARTNER_CREDENTIALS"
+        )
 
         return BachelorSpecialSearchResult(
             origin_code=orig_clean,
@@ -116,5 +125,6 @@ class BachelorSpecialService:
             total_itineraries=len(ranked_all),
             itineraries=ranked_all,
             status=status,
+            provider_status=prov_status,
         )
 

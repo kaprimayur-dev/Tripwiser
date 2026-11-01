@@ -51,13 +51,11 @@ async function runBachelorE2ETest() {
 
     // 2. Switch to Bachelor Special tab mode
     console.log('2. Switching to Bachelor Special Mode...');
-    await page.waitForSelector('#tab-bachelor-mode', { timeout: 10000 });
-    await sleep(500);
-    await page.evaluate(() => {
-      const btn = document.querySelector('#tab-bachelor-mode');
-      if (btn) btn.click();
-    });
-    await page.waitForSelector('#bachelor-search-card', { timeout: 10000 });
+    await page.waitForSelector('#tab-bachelor-mode', { timeout: 15000 });
+    await sleep(1000);
+    const bachelorTab = await page.$('#tab-bachelor-mode');
+    await bachelorTab.click();
+    await page.waitForSelector('#bachelor-search-card', { timeout: 15000 });
     console.log('✓ Successfully activated Bachelor Special search console.');
 
     // 3. Test Origin Autocomplete: GWL (Gwalior)

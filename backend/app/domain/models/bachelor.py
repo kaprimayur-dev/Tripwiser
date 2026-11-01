@@ -155,6 +155,10 @@ class BachelorSpecialSearchResult(BaseModel):
     status: str = Field("SUCCESS", description="Discovery status (SUCCESS, NO_CHART_VACANCIES, NO_DIRECT_TRAINS)")
     data_source: str = Field("chart_vacancies", description="Underlying vacancy repository data source")
     is_live_source: bool = Field(False, description="Whether data is sourced from real-time live charting API")
+    provider_status: Optional[str] = Field(
+        "AWAITING_CRIS_PARTNER_CREDENTIALS",
+        description="Status of live PRS chart provider adapter"
+    )
     chart_policy_notice: str = Field(
         "Charts in Indian Railways are prepared 4 hours prior to train departure from its origin station (first chart) "
         "and 30 minutes prior (final chart). Berth vacancies are only observed during active chart windows. "
