@@ -14,8 +14,8 @@ import {
   X,
   ExternalLink,
 } from 'lucide-react';
-import { Station, StationDetail, NearbyStationItem } from '../../types/api';
-import { getStationDetails, getNearbyStationsByCode } from '../../services/api';
+import { Station, StationDetail, NearbyStationItem, StationTrainsResponse, StationTrainService } from '../../types/api';
+import { getStationDetails, getNearbyStationsByCode, getStationTrains } from '../../services/api';
 
 interface StationDetailViewProps {
   stationCode: string;
@@ -23,6 +23,7 @@ interface StationDetailViewProps {
   onSelectAsOrigin: (station: Station) => void;
   onSelectAsDestination: (station: Station) => void;
   onInspectStation: (stationCode: string) => void;
+  onInspectTrain?: (trainNumber: string) => void;
 }
 
 const RADIUS_OPTIONS = [15, 30, 50, 75];
@@ -33,6 +34,7 @@ export function StationDetailView({
   onSelectAsOrigin,
   onSelectAsDestination,
   onInspectStation,
+  onInspectTrain,
 }: StationDetailViewProps) {
   const [stationData, setStationData] = useState<StationDetail | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -43,11 +45,16 @@ export function StationDetailView({
   const [nearbyStations, setNearbyStations] = useState<NearbyStationItem[]>([]);
   const [nearbyLoading, setNearbyLoading] = useState<boolean>(false);
 
+  // Serving trains state
+  const [stationTrainsData, setStationTrainsData] = useState<StationTrainsResponse | null>(null);
+  const [trainsLoading, setTrainsLoading] = useState<boolean>(false);
+
   useEffect(() => {
     if (!stationCode) return;
 
     let isMounted = true;
     setLoading(true);
+    setTrainsLoading(true);
     setError(null);
 
     getStationDetails(stationCode)
@@ -65,6 +72,20 @@ export function StationDetailView({
         if (isMounted) {
           setError(err.message || `Failed to load details for station '${stationCode}'`);
           setLoading(false);
+        }
+      });
+
+    getStationTrains(stationCode)
+      .then((tData) => {
+        if (isMounted) {
+          setStationTrainsData(tData);
+          setTrainsLoading(false);
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setStationTrainsData(null);
+          setTrainsLoading(false);
         }
       });
 
@@ -265,6 +286,144 @@ export function StationDetailView({
             </div>
           )}
         </div>
+      </div>
+
+      {/* Recorded Trains Serving This Station */}
+      <div className="bg-white rounded-2xl border border-cream-300 shadow-sm p-5 sm:p-6 space-y-4" id="station-trains-section">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-cream-200 pb-3">
+          <div>
+            <div className="flex items-center gap-2">
+              <Train className="w-5 h-5 text-terracotta" />
+              <h3 className="font-display text-lg font-bold text-espresso-900">
+                Recorded Trains Serving This Station
+              </h3>
+            </div>
+            <p className="text-xs text-espresso-600 mt-0.5">
+              Scheduled railway services calling, originating from, or terminating at {name} ({code})
+            </p>
+          </div>
+
+          {stationTrainsData && (
+            <div className="flex items-center gap-2 text-xs flex-wrap">
+              <span className="px-2.5 py-1 rounded-full bg-cream-200 text-espresso-800 font-semibold">
+                {stationTrainsData.total_trains} Total
+              </span>
+              {stationTrainsData.originating_count > 0 && (
+                <span className="px-2.5 py-1 rounded-full bg-olive/15 text-olive font-semibold">
+                  {stationTrainsData.originating_count} Originating
+                </span>
+              )}
+              {stationTrainsData.terminating_count > 0 && (
+                <span className="px-2.5 py-1 rounded-full bg-terracotta/15 text-terracotta font-semibold">
+                  {stationTrainsData.terminating_count} Terminating
+                </span>
+              )}
+            </div>
+          )}
+        </div>
+
+        {trainsLoading ? (
+          <div className="py-8 text-center text-xs text-espresso-600 flex items-center justify-center gap-2">
+            <Loader2 className="w-4 h-4 animate-spin text-terracotta" />
+            <span>Loading trains serving {name}...</span>
+          </div>
+        ) : !stationTrainsData || stationTrainsData.trains.length === 0 ? (
+          <div className="p-6 text-center text-xs text-espresso-600 bg-cream-50 rounded-xl border border-cream-200">
+            <p>No compiled train schedules currently recorded for {name} ({code}).</p>
+          </div>
+        ) : (
+          <div className="space-y-3">
+            <div className="grid grid-cols-1 gap-2.5 max-h-[480px] overflow-y-auto pr-1">
+              {stationTrainsData.trains.map((t) => (
+                <div
+                  key={t.train_number}
+                  className="bg-cream-50 hover:bg-cream-100/80 p-3.5 rounded-xl border border-cream-300 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-colors text-xs"
+                >
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="font-mono font-bold bg-espresso-900 text-cream-100 px-2 py-0.5 rounded text-[11px]">
+                        #{t.train_number}
+                      </span>
+                      <span className="font-bold text-espresso-900 text-sm">
+                        {t.train_name}
+                      </span>
+                      <span
+                        className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                          t.service_type === 'ORIGINATING'
+                            ? 'bg-olive/15 text-olive'
+                            : t.service_type === 'TERMINATING'
+                            ? 'bg-terracotta/15 text-terracotta'
+                            : 'bg-cream-200 text-espresso-700'
+                        }`}
+                      >
+                        {t.service_type === 'ORIGINATING'
+                          ? 'Originating'
+                          : t.service_type === 'TERMINATING'
+                          ? 'Terminating'
+                          : 'Calling Halt'}
+                      </span>
+                      {t.table_reference && (
+                        <span className="px-2 py-0.5 rounded text-[10px] bg-cream-200 text-espresso-600 font-mono">
+                          {t.table_reference}
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="text-[11px] text-espresso-600 flex items-center gap-2 flex-wrap">
+                      <span>Route:</span>
+                      <span className="font-medium text-espresso-800">
+                        {t.origin_name} ({t.origin_code}) ➔ {t.destination_name} ({t.destination_code})
+                      </span>
+                      <span>·</span>
+                      <span>Runs: {t.frequency_description}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center sm:flex-col sm:items-end justify-between gap-2 border-t sm:border-t-0 pt-2 sm:pt-0 border-cream-200 flex-shrink-0">
+                    <div className="flex items-center gap-3 text-xs">
+                      {t.arrival_time && (
+                        <div>
+                          <span className="text-[10px] uppercase font-bold text-espresso-500 block">Arr</span>
+                          <span className="font-display font-bold text-espresso-900">{t.arrival_time.slice(0, 5)}</span>
+                        </div>
+                      )}
+                      {t.departure_time && (
+                        <div>
+                          <span className="text-[10px] uppercase font-bold text-espresso-500 block">Dep</span>
+                          <span className="font-display font-bold text-espresso-900">{t.departure_time.slice(0, 5)}</span>
+                        </div>
+                      )}
+                      {t.halt_minutes > 0 && (
+                        <div className="text-right">
+                          <span className="text-[10px] uppercase font-bold text-espresso-500 block">Halt</span>
+                          <span className="font-semibold text-espresso-700">{t.halt_minutes}m</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {onInspectTrain && (
+                      <button
+                        type="button"
+                        onClick={() => onInspectTrain(t.train_number)}
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-espresso-900 hover:bg-espresso-800 text-cream-100 text-[11px] font-semibold transition-colors mt-1"
+                      >
+                        <Layers className="w-3 h-3" />
+                        <span>Inspect Schedule</span>
+                      </button>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="p-3 bg-cream-100 rounded-xl text-[11px] text-espresso-600 border border-cream-200 flex items-start gap-2">
+              <ShieldCheck className="w-3.5 h-3.5 text-olive flex-shrink-0 mt-0.5" />
+              <span>
+                <strong className="text-espresso-800">Operational Disclaimer:</strong> {stationTrainsData.disclaimer} Timings are scheduled timetables compiled from official publication tables; live delay tracking and real-time berth availability are not implied.
+              </span>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Nearby Stations Discovery Section */}

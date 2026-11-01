@@ -9,6 +9,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.db import AsyncSessionLocal
 from app.infrastructure.database.repositories.station_repository import SQLAlchemyStationRepository
+from app.api.v1.trains import get_trains_for_station_core, StationTrainsResponse
 
 router = APIRouter(prefix="/stations", tags=["stations"])
 
@@ -158,3 +159,15 @@ async def get_station_by_code(
         longitude=station.longitude,
         timetable_coverage=StationCoverageSchema(**coverage),
     )
+
+
+@router.get("/{code}/trains", response_model=StationTrainsResponse)
+async def get_station_trains(
+    code: str = Path(..., min_length=1, max_length=30, description="Station code (e.g. NDLS, BCT)"),
+    limit: int = Query(100, ge=1, le=200, description="Maximum number of trains to return"),
+    session: AsyncSession = Depends(get_db),
+):
+    """
+    Discovers all compiled timetable trains that serve this station (calling, originating, or terminating).
+    """
+    return await get_trains_for_station_core(station_code=code, limit=limit, session=session)

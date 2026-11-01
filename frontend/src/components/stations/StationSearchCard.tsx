@@ -149,6 +149,7 @@ export function StationSearchCard({
           )}
 
           <button
+            id="btn-search-station"
             type="submit"
             className="px-4 py-1.5 rounded-lg bg-espresso-900 hover:bg-espresso-800 text-cream-100 text-xs font-semibold flex items-center gap-1 transition-colors flex-shrink-0"
           >

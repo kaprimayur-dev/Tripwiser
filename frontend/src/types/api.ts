@@ -266,6 +266,69 @@ export interface InterchangeDiscoveryResponse {
   interchanges: InterchangeStationItem[];
 }
 
+export interface TrainComparisonItem {
+  number: string;
+  name: string;
+  origin_code: string;
+  origin_name: string;
+  destination_code: string;
+  destination_name: string;
+  departure_time?: string | null;
+  arrival_time?: string | null;
+  day_offset_difference: number;
+  scheduled_duration_minutes?: number | null;
+  duration_formatted: string;
+  distance_km: number;
+  intermediate_stops_count: number;
+  runs_on_days: number[];
+  frequency_description: string;
+  source_document?: string | null;
+  publication_version?: string | null;
+  table_reference?: string | null;
+  provenance_tier: string;
+}
+
+export interface TrainComparisonResponse {
+  origin_code: string;
+  origin_name: string;
+  destination_code: string;
+  destination_name: string;
+  total_trains: number;
+  trains: TrainComparisonItem[];
+  disclaimer: string;
+}
+
+export interface StationTrainService {
+  train_number: string;
+  train_name: string;
+  origin_code: string;
+  origin_name: string;
+  destination_code: string;
+  destination_name: string;
+  arrival_time?: string | null;
+  departure_time?: string | null;
+  halt_minutes: number;
+  day_offset: number;
+  stop_sequence: number;
+  total_stops: number;
+  service_type: 'ORIGINATING' | 'TERMINATING' | 'EN_ROUTE';
+  runs_on_days: number[];
+  frequency_description: string;
+  table_reference?: string | null;
+  provenance_tier: string;
+}
+
+export interface StationTrainsResponse {
+  station_code: string;
+  station_name: string;
+  total_trains: number;
+  originating_count: number;
+  terminating_count: number;
+  calling_count: number;
+  trains: StationTrainService[];
+  disclaimer: string;
+}
+
 
 
 

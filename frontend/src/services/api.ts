@@ -15,6 +15,8 @@ import {
   IntermediateStopsResponse,
   StationConnectivityResponse,
   InterchangeDiscoveryResponse,
+  TrainComparisonResponse,
+  StationTrainsResponse,
 } from '../types/api';
 
 const API_BASE = '/api/v1';
@@ -219,6 +221,39 @@ export async function getInterchanges(
   if (!res.ok) {
     const errorBody = await res.json().catch(() => ({ detail: res.statusText }));
     throw new Error(errorBody.detail || `Failed to discover interchanges: ${res.status}`);
+  }
+  return res.json();
+}
+
+export async function compareTrains(
+  originCode: string,
+  destinationCode: string
+): Promise<TrainComparisonResponse> {
+  const orig = originCode.trim().toUpperCase();
+  const dest = destinationCode.trim().toUpperCase();
+  const res = await fetch(
+    `${API_BASE}/trains/compare?origin=${encodeURIComponent(orig)}&destination=${encodeURIComponent(dest)}`
+  );
+  if (!res.ok) {
+    const errorBody = await res.json().catch(() => ({ detail: res.statusText }));
+    const msg = typeof errorBody.detail === 'object' ? errorBody.detail.message : errorBody.detail;
+    throw new Error(msg || `Failed to compare trains: ${res.status}`);
+  }
+  return res.json();
+}
+
+export async function getStationTrains(
+  stationCode: string,
+  limit = 100
+): Promise<StationTrainsResponse> {
+  const clean = stationCode.trim().toUpperCase();
+  const res = await fetch(
+    `${API_BASE}/stations/${encodeURIComponent(clean)}/trains?limit=${limit}`
+  );
+  if (!res.ok) {
+    const errorBody = await res.json().catch(() => ({ detail: res.statusText }));
+    const msg = typeof errorBody.detail === 'object' ? errorBody.detail.message : errorBody.detail;
+    throw new Error(msg || `Failed to fetch trains for station: ${res.status}`);
   }
   return res.json();
 }

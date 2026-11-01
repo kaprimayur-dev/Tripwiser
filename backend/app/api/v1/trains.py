@@ -171,6 +171,71 @@ class IntermediateStopsResponse(BaseModel):
     stops: List[ScheduleStopSchema]
 
 
+class TrainComparisonItem(BaseModel):
+    number: str
+    name: str
+    origin_code: str
+    origin_name: str
+    destination_code: str
+    destination_name: str
+    departure_time: Optional[str] = None
+    arrival_time: Optional[str] = None
+    day_offset_difference: int = 0
+    scheduled_duration_minutes: Optional[int] = None
+    duration_formatted: str = "--"
+    distance_km: float = 0.0
+    intermediate_stops_count: int = 0
+    runs_on_days: List[int]
+    frequency_description: str
+    source_document: Optional[str] = None
+    publication_version: Optional[str] = None
+    table_reference: Optional[str] = None
+    provenance_tier: str
+
+
+class TrainComparisonResponse(BaseModel):
+    origin_code: str
+    origin_name: str
+    destination_code: str
+    destination_name: str
+    total_trains: int
+    trains: List[TrainComparisonItem]
+    disclaimer: str = (
+        "Static scheduled timetable comparison only. Seat availability, fares, and real-time train operations are strictly deferred."
+    )
+
+
+class StationTrainServiceSchema(BaseModel):
+    train_number: str
+    train_name: str
+    origin_code: str
+    origin_name: str
+    destination_code: str
+    destination_name: str
+    arrival_time: Optional[str] = None
+    departure_time: Optional[str] = None
+    halt_minutes: int = 0
+    day_offset: int = 0
+    stop_sequence: int
+    total_stops: int
+    service_type: str  # "ORIGINATING", "TERMINATING", or "EN_ROUTE"
+    runs_on_days: List[int]
+    frequency_description: str
+    table_reference: Optional[str] = None
+    provenance_tier: str
+
+
+class StationTrainsResponse(BaseModel):
+    station_code: str
+    station_name: str
+    total_trains: int
+    originating_count: int
+    terminating_count: int
+    calling_count: int
+    trains: List[StationTrainServiceSchema]
+    disclaimer: str = "Static timetable records only. Does not imply train is currently running."
+
+
 # --- Helpers ---
 
 def _build_train_detail(
@@ -292,6 +357,215 @@ async def search_trains(
         )
 
     return summaries
+
+
+def _format_minutes(mins: Optional[int]) -> str:
+    if mins is None or mins < 0:
+        return "--"
+    h = mins // 60
+    m = mins % 60
+    if h == 0:
+        return f"{m}m"
+    if m == 0:
+        return f"{h}h"
+    return f"{h}h {m}m"
+
+
+@router.get("/compare", response_model=TrainComparisonResponse)
+async def compare_trains(
+    origin: str = Query(..., min_length=1, max_length=10, description="Origin station code (e.g. NDLS)"),
+    destination: str = Query(..., min_length=1, max_length=10, description="Destination station code (e.g. BPL)"),
+    session: AsyncSession = Depends(get_db),
+):
+    """
+    Compares all direct train services connecting origin and destination stations.
+    Calculates exact scheduled travel durations, intermediate stop counts, and operating days.
+    """
+    orig_clean = origin.strip().upper()
+    dest_clean = destination.strip().upper()
+
+    if orig_clean == dest_clean:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Origin and destination stations cannot be identical ('{orig_clean}')",
+        )
+
+    repo = SQLAlchemyTrainRepository(session)
+    stn_names = await repo.get_station_names_for_codes([orig_clean, dest_clean])
+    if orig_clean not in stn_names:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Origin station '{orig_clean}' not found in station master",
+        )
+    if dest_clean not in stn_names:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Destination station '{dest_clean}' not found in station master",
+        )
+
+    direct_pairs = await repo.compare_direct_trains(orig_clean, dest_clean)
+    cal_prov = get_calendar_provider()
+
+    endpoint_codes = set([orig_clean, dest_clean])
+    for t, _, _ in direct_pairs:
+        endpoint_codes.add(t.origin_code)
+        endpoint_codes.add(t.destination_code)
+    all_stn_names = await repo.get_station_names_for_codes(list(endpoint_codes))
+
+    items: List[TrainComparisonItem] = []
+    for t, orig_s, dest_s in direct_pairs:
+        clean_num = t.number.strip()
+        prov = cal_prov.get_provenance(clean_num)
+        freq_desc = (
+            prov.get("operating_days_description")
+            if prov and prov.get("operating_days_description")
+            else format_running_days(t.runs_on_days)
+        )
+
+        dep_str = orig_s.departure_time.strftime("%H:%M:%S") if orig_s.departure_time else None
+        arr_str = dest_s.arrival_time.strftime("%H:%M:%S") if dest_s.arrival_time else None
+
+        day_diff = dest_s.day_offset - orig_s.day_offset
+        dur_mins: Optional[int] = None
+        if orig_s.departure_time and dest_s.arrival_time:
+            dep_m = orig_s.departure_time.hour * 60 + orig_s.departure_time.minute
+            arr_m = dest_s.arrival_time.hour * 60 + dest_s.arrival_time.minute + day_diff * 1440
+            if arr_m < dep_m and day_diff == 0:
+                arr_m += 1440
+            dur_mins = max(0, arr_m - dep_m)
+
+        dist_km = max(0.0, float(dest_s.distance_km - orig_s.distance_km))
+        inter_count = max(0, dest_s.stop_sequence - orig_s.stop_sequence - 1)
+
+        items.append(
+            TrainComparisonItem(
+                number=t.number,
+                name=t.name,
+                origin_code=t.origin_code,
+                origin_name=all_stn_names.get(t.origin_code, t.origin_code),
+                destination_code=t.destination_code,
+                destination_name=all_stn_names.get(t.destination_code, t.destination_code),
+                departure_time=dep_str,
+                arrival_time=arr_str,
+                day_offset_difference=day_diff,
+                scheduled_duration_minutes=dur_mins,
+                duration_formatted=_format_minutes(dur_mins),
+                distance_km=dist_km,
+                intermediate_stops_count=inter_count,
+                runs_on_days=list(t.runs_on_days),
+                frequency_description=freq_desc,
+                source_document=prov.get("source_document") if prov else None,
+                publication_version=prov.get("publication_version") if prov else None,
+                table_reference=prov.get("table_reference") if prov else None,
+                provenance_tier=prov.get("provenance_tier", "OFFICIALLY_VERIFIED_INDIVIDUAL_TABLE_RECORD")
+                if prov
+                else "VERIFIED_TIMETABLE_RECORD",
+            )
+        )
+
+    items.sort(
+        key=lambda x: (
+            x.scheduled_duration_minutes if x.scheduled_duration_minutes is not None else 999999,
+            x.departure_time or "99:99:99",
+        )
+    )
+
+    return TrainComparisonResponse(
+        origin_code=orig_clean,
+        origin_name=all_stn_names.get(orig_clean, orig_clean),
+        destination_code=dest_clean,
+        destination_name=all_stn_names.get(dest_clean, dest_clean),
+        total_trains=len(items),
+        trains=items,
+    )
+
+
+async def get_trains_for_station_core(
+    station_code: str,
+    limit: int = 100,
+    session: AsyncSession = None,
+) -> StationTrainsResponse:
+    """
+    Core implementation to retrieve all compiled timetable trains that call at, originate from,
+    or terminate at station_code. Used canonically via /api/v1/stations/{code}/trains.
+    """
+    clean_code = station_code.strip().upper()
+    repo = SQLAlchemyTrainRepository(session)
+    stn_names = await repo.get_station_names_for_codes([clean_code])
+    if clean_code not in stn_names:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Station '{clean_code}' not found in station master",
+        )
+
+    rows = await repo.get_trains_serving_station(clean_code, limit=limit)
+    cal_prov = get_calendar_provider()
+
+    endpoint_codes = set([clean_code])
+    for t, _, _, _, _ in rows:
+        endpoint_codes.add(t.origin_code)
+        endpoint_codes.add(t.destination_code)
+    all_stn_names = await repo.get_station_names_for_codes(list(endpoint_codes))
+
+    items: List[StationTrainServiceSchema] = []
+    orig_count = 0
+    term_count = 0
+    calling_count = 0
+
+    for t, s, min_seq, max_seq, total_stops in rows:
+        clean_num = t.number.strip()
+        prov = cal_prov.get_provenance(clean_num)
+        freq_desc = (
+            prov.get("operating_days_description")
+            if prov and prov.get("operating_days_description")
+            else format_running_days(t.runs_on_days)
+        )
+
+        halt_m = calculate_halt_minutes(s.arrival_time, s.departure_time, s.day_offset, s.day_offset)
+
+        if s.stop_sequence == min_seq:
+            service_type = "ORIGINATING"
+            orig_count += 1
+        elif s.stop_sequence == max_seq:
+            service_type = "TERMINATING"
+            term_count += 1
+        else:
+            service_type = "EN_ROUTE"
+            calling_count += 1
+
+        items.append(
+            StationTrainServiceSchema(
+                train_number=t.number,
+                train_name=t.name,
+                origin_code=t.origin_code,
+                origin_name=all_stn_names.get(t.origin_code, t.origin_code),
+                destination_code=t.destination_code,
+                destination_name=all_stn_names.get(t.destination_code, t.destination_code),
+                arrival_time=s.arrival_time.strftime("%H:%M:%S") if s.arrival_time else None,
+                departure_time=s.departure_time.strftime("%H:%M:%S") if s.departure_time else None,
+                halt_minutes=halt_m,
+                day_offset=s.day_offset,
+                stop_sequence=s.stop_sequence,
+                total_stops=total_stops,
+                service_type=service_type,
+                runs_on_days=list(t.runs_on_days),
+                frequency_description=freq_desc,
+                table_reference=prov.get("table_reference") if prov else None,
+                provenance_tier=prov.get("provenance_tier", "OFFICIALLY_VERIFIED_INDIVIDUAL_TABLE_RECORD")
+                if prov
+                else "VERIFIED_TIMETABLE_RECORD",
+            )
+        )
+
+    return StationTrainsResponse(
+        station_code=clean_code,
+        station_name=all_stn_names.get(clean_code, clean_code),
+        total_trains=len(items),
+        originating_count=orig_count,
+        terminating_count=term_count,
+        calling_count=calling_count,
+        trains=items,
+    )
 
 
 @router.get("/{train_number}", response_model=TrainDetailSchema)

@@ -41,17 +41,18 @@ export function TrainSearchCard({
     setLoading(true);
 
     const timer = setTimeout(() => {
-      searchTrains(clean, 8)
+      searchTrains(clean, 12)
         .then((res) => {
           if (isMounted) {
             setSuggestions(res);
-            setIsOpen(res.length > 0);
+            setIsOpen(true);
             setLoading(false);
           }
         })
         .catch(() => {
           if (isMounted) {
             setSuggestions([]);
+            setIsOpen(true);
             setLoading(false);
           }
         });
@@ -113,7 +114,7 @@ export function TrainSearchCard({
             Train Timetable &amp; Stoppage Inspector
           </h2>
           <p className="text-xs text-espresso-600 mt-0.5">
-            Search any Indian Railways train number or name to inspect complete station halts, timings, and running days.
+            Search any Indian Railways train number, service name, or station (code or city) to inspect complete station halts, timings, and running days.
           </p>
         </div>
       </div>
@@ -126,8 +127,8 @@ export function TrainSearchCard({
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            onFocus={() => query.trim().length >= 2 && suggestions.length > 0 && setIsOpen(true)}
-            placeholder="Enter Train Number (e.g. 12002, 12951) or Name (e.g. Shatabdi, Rajdhani)..."
+            onFocus={() => query.trim().length >= 2 && setIsOpen(true)}
+            placeholder="Search by Train Number (e.g. 12002), Name (e.g. Shatabdi), or Station (e.g. Bhopal, BPL)..."
             className="w-full bg-transparent text-sm font-medium text-espresso-900 placeholder:text-espresso-400 focus:outline-none"
             autoComplete="off"
           />
@@ -154,41 +155,50 @@ export function TrainSearchCard({
         </div>
 
         {/* Suggestions Dropdown */}
-        {isOpen && suggestions.length > 0 && (
+        {isOpen && query.trim().length >= 2 && (
           <div className="absolute left-0 right-0 top-full mt-1.5 bg-white rounded-xl border border-cream-300 shadow-xl overflow-hidden z-30 max-h-72 overflow-y-auto divide-y divide-cream-100 animate-fade-in">
-            {suggestions.map((t) => (
-              <button
-                key={t.number}
-                type="button"
-                onClick={() => handleSelect(t)}
-                className="w-full px-4 py-2.5 text-left hover:bg-cream-50 transition-colors flex items-center justify-between gap-3 text-xs"
-              >
-                <div className="min-w-0">
-                  <div className="flex items-center gap-2">
-                    <span className="font-mono font-bold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded text-[11px]">
-                      #{t.number}
-                    </span>
-                    <span className="font-semibold text-espresso-900 truncate">
-                      {t.name}
-                    </span>
+            {suggestions.length > 0 ? (
+              suggestions.map((t) => (
+                <button
+                  key={t.number}
+                  type="button"
+                  onClick={() => handleSelect(t)}
+                  className="w-full px-4 py-2.5 text-left hover:bg-cream-50 transition-colors flex items-center justify-between gap-3 text-xs"
+                >
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono font-bold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded text-[11px]">
+                        #{t.number}
+                      </span>
+                      <span className="font-semibold text-espresso-900 truncate">
+                        {t.name}
+                      </span>
+                    </div>
+                    <div className="text-[11px] text-espresso-600 mt-0.5 flex items-center gap-1.5 truncate">
+                      <span>{t.origin_name} ({t.origin_code})</span>
+                      <ArrowRight className="w-3 h-3 text-espresso-400 flex-shrink-0" />
+                      <span>{t.destination_name} ({t.destination_code})</span>
+                    </div>
                   </div>
-                  <div className="text-[11px] text-espresso-600 mt-0.5 flex items-center gap-1.5 truncate">
-                    <span>{t.origin_name} ({t.origin_code})</span>
-                    <ArrowRight className="w-3 h-3 text-espresso-400 flex-shrink-0" />
-                    <span>{t.destination_name} ({t.destination_code})</span>
-                  </div>
-                </div>
 
-                <div className="text-right flex-shrink-0">
-                  <span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-cream-200 text-espresso-800">
-                    {t.frequency_description}
-                  </span>
-                  <div className="text-[10px] text-espresso-500 mt-0.5">
-                    {t.total_stops} stops • {Math.round(t.distance_km)} km
+                  <div className="text-right flex-shrink-0">
+                    <span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-cream-200 text-espresso-800">
+                      {t.frequency_description}
+                    </span>
+                    <div className="text-[10px] text-espresso-500 mt-0.5">
+                      {t.total_stops} stops • {Math.round(t.distance_km)} km
+                    </div>
                   </div>
-                </div>
-              </button>
-            ))}
+                </button>
+              ))
+            ) : !loading ? (
+              <div className="p-4 text-center text-xs text-espresso-600" id="train-search-empty-state">
+                <p className="font-semibold text-espresso-800">No matching trains found</p>
+                <p className="text-[11px] text-espresso-500 mt-0.5">
+                  Try searching by train number (e.g. 12002, 12951), service name (e.g. Shatabdi), or station (e.g. Bhopal, NDLS).
+                </p>
+              </div>
+            ) : null}
           </div>
         )}
       </form>

@@ -10,6 +10,7 @@ import { BachelorSearchCard } from '../components/bachelor/BachelorSearchCard';
 import { BachelorSpecialStream } from '../components/bachelor/BachelorSpecialStream';
 import { TrainSearchCard } from '../components/trains/TrainSearchCard';
 import { TrainScheduleView } from '../components/trains/TrainScheduleView';
+import { TrainCompareView } from '../components/trains/TrainCompareView';
 import { StationSearchCard } from '../components/stations/StationSearchCard';
 import { StationDetailView } from '../components/stations/StationDetailView';
 import { SavedTripsView } from '../components/trips/SavedTripsView';
@@ -17,7 +18,7 @@ import { SortMode } from '../components/results/SortingFilterBar';
 import { Station, RouteSearchResponse, BachelorSpecialSearchResponse } from '../types/api';
 import { SavedTrip } from '../lib/savedTrips';
 import { searchRoutes, searchBachelorSpecial, getStationByCode } from '../services/api';
-import { Sparkles, Navigation, Layers, Compass, Bookmark, AlertTriangle, X } from 'lucide-react';
+import { Sparkles, Navigation, Layers, Compass, Bookmark, AlertTriangle, X, ArrowLeftRight } from 'lucide-react';
 
 export default function Home() {
   const [activeMode, setActiveMode] = useState<AppMode>('connecting');
@@ -104,6 +105,7 @@ export default function Home() {
         modeParam === 'bachelor' ||
         modeParam === 'connecting' ||
         modeParam === 'stations' ||
+        modeParam === 'compare' ||
         modeParam === 'saved'
       ) {
         setActiveMode(modeParam as AppMode);
@@ -450,6 +452,8 @@ export default function Home() {
               ? 'One train. Continuous berths. Zero waitlist.'
               : activeMode === 'timetable'
               ? 'Inspect every halt, offset & running day.'
+              : activeMode === 'compare'
+              ? 'Compare direct trains head-to-head.'
               : activeMode === 'saved'
               ? 'Your pinned railway journeys, ready anytime.'
               : 'Every station, coordinates & spatial radius.'}
@@ -462,6 +466,8 @@ export default function Home() {
               ? 'TripWiser Bachelor Special finds and assembles vacant berth segments across intermediate stations on the same train, giving you a continuous journey without changing trains.'
               : activeMode === 'timetable'
               ? 'Search any compiled train to view its complete stoppage sequence, arrival/departure timings, halt durations, operating days, and verified timetable provenance.'
+              : activeMode === 'compare'
+              ? 'Evaluate all direct trains between two stations side-by-side with departure timings, journey durations, intermediate stop counts, and operating frequencies.'
               : activeMode === 'saved'
               ? 'Review your saved itineraries, inspect original transfer windows, and recalculate schedules with current timetable operating days.'
               : 'Explore 8,697 Indian railway stations, discover nearby alternate boarding terminals with PostGIS geodetic distance, and inspect verified timetable schedule coverage.'}
@@ -497,6 +503,20 @@ export default function Home() {
             >
               <Layers className="w-4 h-4 text-espresso-700" />
               <span>Train Timetable</span>
+            </button>
+
+            <button
+              type="button"
+              id="tab-compare-mode"
+              onClick={() => handleModeChange('compare')}
+              className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+                activeMode === 'compare'
+                  ? 'bg-white text-espresso-900 shadow-sm'
+                  : 'text-espresso-600 hover:text-espresso-900'
+              }`}
+            >
+              <ArrowLeftRight className="w-4 h-4 text-espresso-700" />
+              <span>Compare Trains</span>
             </button>
 
             <button
@@ -667,6 +687,22 @@ export default function Home() {
           </div>
         )}
 
+        {activeMode === 'compare' && (
+          <TrainCompareView
+            initialOrigin={origin}
+            initialDestination={destination}
+            onInspectTrain={(trainNumber) => {
+              setSelectedTrain(trainNumber);
+              handleModeChange('timetable');
+            }}
+            onSwitchToConnecting={(orig, dest) => {
+              setOrigin(orig);
+              setDestination(dest);
+              handleModeChange('connecting');
+            }}
+          />
+        )}
+
         {activeMode === 'stations' && (
           <div className="space-y-6">
             <StationSearchCard
@@ -681,6 +717,10 @@ export default function Home() {
                 onSelectAsOrigin={handleStationAsOrigin}
                 onSelectAsDestination={handleStationAsDestination}
                 onInspectStation={handleSelectStation}
+                onInspectTrain={(trainNumber) => {
+                  setSelectedTrain(trainNumber);
+                  handleModeChange('timetable');
+                }}
               />
             ) : (
               <div className="p-8 text-center rounded-2xl bg-white border border-cream-300 shadow-sm text-espresso-600">

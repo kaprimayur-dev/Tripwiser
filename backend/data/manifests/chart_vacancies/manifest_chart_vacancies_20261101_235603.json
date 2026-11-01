@@ -1,0 +1,9 @@
+{
+  "source_label": "cli_test",
+  "created_at": "2026-11-01T23:56:03.512001+00:00",
+  "total_input_records": 1,
+  "valid_records_count": 1,
+  "quarantined_records_count": 0,
+  "sha256_checksum": "e36ae18e391af67900e548fad6a272ef00a19490d8590d9e8cee8156fb9d8f00",
+  "quarantine_file": null
+}

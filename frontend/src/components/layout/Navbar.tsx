@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Train, Sparkles, Navigation, Layers, Compass, Bookmark } from 'lucide-react';
+import { Train, Sparkles, Navigation, Layers, Compass, Bookmark, ArrowLeftRight } from 'lucide-react';
 import { getSavedTrips, subscribeSavedTrips } from '../../lib/savedTrips';
 
-export type AppMode = 'connecting' | 'timetable' | 'stations' | 'bachelor' | 'saved';
+export type AppMode = 'connecting' | 'timetable' | 'stations' | 'compare' | 'bachelor' | 'saved';
 
 interface NavbarProps {
   currentMode?: AppMode;
@@ -77,6 +77,20 @@ export function Navbar({ currentMode = 'connecting', onSelectMode }: NavbarProps
           >
             <Layers className="w-3.5 h-3.5" />
             <span>Timetable</span>
+          </button>
+
+          <button
+            type="button"
+            id="nav-compare-tab"
+            onClick={() => onSelectMode && onSelectMode('compare')}
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap min-h-[36px] ${
+              currentMode === 'compare'
+                ? 'bg-white text-espresso-900 shadow-sm font-bold'
+                : 'text-espresso-600 hover:text-espresso-900'
+            }`}
+          >
+            <ArrowLeftRight className="w-3.5 h-3.5 text-terracotta" />
+            <span>Compare</span>
           </button>
 
           <button
