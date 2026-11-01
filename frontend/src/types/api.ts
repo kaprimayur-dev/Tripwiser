@@ -17,6 +17,19 @@ export interface NearbyStationItem {
   distance_km: number;
 }
 
+export interface StationCoverage {
+  has_timetable_coverage: boolean;
+  total_compiled_trains: number;
+  originating_trains_count: number;
+  terminating_trains_count: number;
+  coverage_status: string;
+  coverage_note: string;
+}
+
+export interface StationDetail extends Station {
+  timetable_coverage: StationCoverage;
+}
+
 export interface Availability {
   status: string;
   available_count?: number | null;

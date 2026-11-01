@@ -5,6 +5,7 @@
 
 import {
   Station,
+  StationDetail,
   NearbyStationItem,
   RouteSearchResponse,
   BachelorSpecialSearchResponse,
@@ -46,6 +47,33 @@ export async function getStationByCode(code: string): Promise<Station | null> {
   if (res.status === 404) return null;
   if (!res.ok) {
     throw new Error(`Failed to get station: ${res.statusText}`);
+  }
+  return res.json();
+}
+
+export async function getStationDetails(code: string): Promise<StationDetail | null> {
+  const res = await fetch(`${API_BASE}/stations/${encodeURIComponent(code.trim().toUpperCase())}`);
+  if (res.status === 404) return null;
+  if (!res.ok) {
+    throw new Error(`Failed to get station details: ${res.statusText}`);
+  }
+  return res.json();
+}
+
+export async function getNearbyStationsByCode(
+  stationCode: string,
+  radiusKm = 30,
+  limit = 15
+): Promise<NearbyStationItem[]> {
+  const clean = stationCode.trim().toUpperCase();
+  if (!clean) return [];
+
+  const res = await fetch(
+    `${API_BASE}/stations/nearby?station_code=${encodeURIComponent(clean)}&radius_km=${radiusKm}&limit=${limit}`
+  );
+  if (res.status === 404) return [];
+  if (!res.ok) {
+    throw new Error(`Failed to fetch nearby stations for ${clean}: ${res.statusText}`);
   }
   return res.json();
 }

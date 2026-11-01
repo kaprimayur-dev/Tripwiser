@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowLeftRight, Calendar, Search, Navigation, Filter, Sparkles, Loader2 } from 'lucide-react';
 import { Station } from '../../types/api';
 import { StationAutocomplete } from './StationAutocomplete';
@@ -42,6 +42,18 @@ export function JourneySearchCard({
   const [validationError, setValidationError] = useState<string | null>(null);
   const [isNearbyModalOpen, setIsNearbyModalOpen] = useState<boolean>(false);
   const [isSwapping, setIsSwapping] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (initialOrigin) {
+      setOrigin(initialOrigin);
+    }
+  }, [initialOrigin]);
+
+  useEffect(() => {
+    if (initialDestination) {
+      setDestination(initialDestination);
+    }
+  }, [initialDestination]);
 
   // Quick date helpers
   const setQuickDate = (daysFromToday: number) => {

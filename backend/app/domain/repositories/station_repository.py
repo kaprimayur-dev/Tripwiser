@@ -21,6 +21,18 @@ class StationRepository(ABC):
         pass
 
     @abstractmethod
+    async def get_nearby_stations_by_code(
+        self, station_code: str, radius_km: float, limit: int = 10
+    ) -> Optional[list[tuple[Station, float]]]:
+        """Get stations within radius_km distance of station_code, excluding source. Returns None if station not found."""
+        pass
+
+    @abstractmethod
+    async def get_station_coverage(self, station_code: str) -> dict:
+        """Returns timetable coverage statistics for station_code."""
+        pass
+
+    @abstractmethod
     async def save(self, station: Station) -> Station:
         """Persist or update a station."""
         pass

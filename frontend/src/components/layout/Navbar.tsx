@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { Train, Sparkles, Navigation, Layers } from 'lucide-react';
+import { Train, Sparkles, Navigation, Layers, Compass } from 'lucide-react';
 
-export type AppMode = 'connecting' | 'bachelor' | 'timetable';
+export type AppMode = 'connecting' | 'timetable' | 'stations' | 'bachelor';
 
 interface NavbarProps {
   currentMode?: AppMode;
@@ -66,6 +66,20 @@ export function Navbar({ currentMode = 'connecting', onSelectMode }: NavbarProps
           >
             <Layers className="w-3.5 h-3.5" />
             <span>Timetable</span>
+          </button>
+
+          <button
+            type="button"
+            id="nav-stations-tab"
+            onClick={() => onSelectMode && onSelectMode('stations')}
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              currentMode === 'stations'
+                ? 'bg-white text-espresso-900 shadow-sm font-bold'
+                : 'text-espresso-600 hover:text-espresso-900'
+            }`}
+          >
+            <Compass className="w-3.5 h-3.5" />
+            <span>Stations</span>
           </button>
 
           <button

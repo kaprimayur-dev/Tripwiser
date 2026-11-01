@@ -10,10 +10,12 @@ import { BachelorSearchCard } from '../components/bachelor/BachelorSearchCard';
 import { BachelorSpecialStream } from '../components/bachelor/BachelorSpecialStream';
 import { TrainSearchCard } from '../components/trains/TrainSearchCard';
 import { TrainScheduleView } from '../components/trains/TrainScheduleView';
+import { StationSearchCard } from '../components/stations/StationSearchCard';
+import { StationDetailView } from '../components/stations/StationDetailView';
 import { SortMode } from '../components/results/SortingFilterBar';
 import { Station, RouteSearchResponse, BachelorSpecialSearchResponse } from '../types/api';
 import { searchRoutes, searchBachelorSpecial, getStationByCode } from '../services/api';
-import { Sparkles, Navigation, Layers } from 'lucide-react';
+import { Sparkles, Navigation, Layers, Compass } from 'lucide-react';
 
 export default function Home() {
   const [activeMode, setActiveMode] = useState<AppMode>('connecting');
@@ -39,6 +41,9 @@ export default function Home() {
   // Timetable Inspector State
   const [selectedTrain, setSelectedTrain] = useState<string | null>(null);
 
+  // Station Discovery State
+  const [selectedStationCode, setSelectedStationCode] = useState<string | null>(null);
+
   // Default tomorrow date and URL params on mount
   useEffect(() => {
     const d = new Date();
@@ -48,12 +53,21 @@ export default function Home() {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       const modeParam = params.get('mode');
-      if (modeParam === 'timetable' || modeParam === 'bachelor' || modeParam === 'connecting') {
-        setActiveMode(modeParam);
+      if (
+        modeParam === 'timetable' ||
+        modeParam === 'bachelor' ||
+        modeParam === 'connecting' ||
+        modeParam === 'stations'
+      ) {
+        setActiveMode(modeParam as AppMode);
       }
       const trainParam = params.get('train');
       if (trainParam) {
         setSelectedTrain(trainParam.trim());
+      }
+      const stationParam = params.get('station');
+      if (stationParam) {
+        setSelectedStationCode(stationParam.trim().toUpperCase());
       }
     }
   }, []);
@@ -239,6 +253,7 @@ export default function Home() {
     }
   };
 
+  // Train selection helper
   const handleSelectTrain = (trainNumber: string) => {
     setSelectedTrain(trainNumber);
     if (typeof window !== 'undefined') {
@@ -258,6 +273,55 @@ export default function Home() {
     }
   };
 
+  // Station selection helper
+  const handleSelectStation = (stationCode: string) => {
+    setSelectedStationCode(stationCode);
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      url.searchParams.set('mode', 'stations');
+      url.searchParams.set('station', stationCode);
+      window.history.replaceState({}, '', url.toString());
+    }
+  };
+
+  const handleClearStation = () => {
+    setSelectedStationCode(null);
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      url.searchParams.delete('station');
+      window.history.replaceState({}, '', url.toString());
+    }
+  };
+
+  // Use station as route alternative
+  const handleStationAsOrigin = (st: Station) => {
+    setOrigin(st);
+    handleModeChange('connecting');
+    if (destination && date) {
+      executeSearch({
+        originCode: st.code,
+        destCode: destination.code,
+        journeyDate: date,
+        transfers: maxTransfers,
+        sortBy: sortMode,
+      });
+    }
+  };
+
+  const handleStationAsDestination = (st: Station) => {
+    setDestination(st);
+    handleModeChange('connecting');
+    if (origin && date) {
+      executeSearch({
+        originCode: origin.code,
+        destCode: st.code,
+        journeyDate: date,
+        transfers: maxTransfers,
+        sortBy: sortMode,
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-cream-100 text-espresso-900">
       <Navbar currentMode={activeMode} onSelectMode={handleModeChange} />
@@ -274,7 +338,9 @@ export default function Home() {
               ? 'The direct route isn’t the only route.'
               : activeMode === 'bachelor'
               ? 'One train. Continuous berths. Zero waitlist.'
-              : 'Inspect every halt, offset & running day.'}
+              : activeMode === 'timetable'
+              ? 'Inspect every halt, offset & running day.'
+              : 'Every station, coordinates & spatial radius.'}
           </h1>
 
           <p className="text-sm sm:text-base text-espresso-600 leading-relaxed">
@@ -282,7 +348,9 @@ export default function Home() {
               ? 'When direct trains are waitlisted, TripWiser discovers practical connecting journeys, guaranteed transfer windows, and nearby station alternatives across Indian Railways.'
               : activeMode === 'bachelor'
               ? 'TripWiser Bachelor Special finds and assembles vacant berth segments across intermediate stations on the same train, giving you a continuous journey without changing trains.'
-              : 'Search any compiled train to view its complete stoppage sequence, arrival/departure timings, halt durations, operating days, and verified timetable provenance.'}
+              : activeMode === 'timetable'
+              ? 'Search any compiled train to view its complete stoppage sequence, arrival/departure timings, halt durations, operating days, and verified timetable provenance.'
+              : 'Explore 8,697 Indian railway stations, discover nearby alternate boarding terminals with PostGIS geodetic distance, and inspect verified timetable schedule coverage.'}
           </p>
         </div>
 
@@ -315,6 +383,20 @@ export default function Home() {
             >
               <Layers className="w-4 h-4 text-espresso-700" />
               <span>Train Timetable</span>
+            </button>
+
+            <button
+              type="button"
+              id="tab-stations-mode"
+              onClick={() => handleModeChange('stations')}
+              className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+                activeMode === 'stations'
+                  ? 'bg-white text-espresso-900 shadow-sm'
+                  : 'text-espresso-600 hover:text-espresso-900'
+              }`}
+            >
+              <Compass className="w-4 h-4 text-espresso-700" />
+              <span>Station Discovery</span>
             </button>
 
             <button
@@ -418,6 +500,54 @@ export default function Home() {
                       className="px-3 py-1.5 rounded-lg bg-cream-200/80 hover:bg-cream-300 text-xs font-medium text-espresso-800 border border-cream-300 transition-colors"
                     >
                       {preset.number} · {preset.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {activeMode === 'stations' && (
+          <div className="space-y-6">
+            <StationSearchCard
+              onSelectStation={handleSelectStation}
+              initialStationCode={selectedStationCode || undefined}
+            />
+
+            {selectedStationCode ? (
+              <StationDetailView
+                stationCode={selectedStationCode}
+                onClose={handleClearStation}
+                onSelectAsOrigin={handleStationAsOrigin}
+                onSelectAsDestination={handleStationAsDestination}
+                onInspectStation={handleSelectStation}
+              />
+            ) : (
+              <div className="p-8 text-center rounded-2xl bg-white border border-cream-300 shadow-sm text-espresso-600">
+                <Compass className="w-10 h-10 text-espresso-300 mx-auto mb-3" />
+                <h3 className="font-display text-lg font-bold text-espresso-900 mb-1">
+                  Discover Any Railway Station
+                </h3>
+                <p className="text-xs sm:text-sm text-espresso-600 max-w-md mx-auto">
+                  Search any station code or city name above to inspect its exact coordinates, verified compiled train schedule coverage, and nearby stations within 15–75 km.
+                </p>
+                <div className="mt-4 flex flex-wrap justify-center gap-2">
+                  {[
+                    { code: 'NDLS', name: 'New Delhi' },
+                    { code: 'BCT', name: 'Mumbai Central' },
+                    { code: 'HWH', name: 'Howrah' },
+                    { code: 'MAS', name: 'Chennai Central' },
+                    { code: 'BPL', name: 'Bhopal Jn' },
+                    { code: 'GWL', name: 'Gwalior Jn' },
+                  ].map((preset) => (
+                    <button
+                      key={preset.code}
+                      type="button"
+                      onClick={() => handleSelectStation(preset.code)}
+                      className="px-3 py-1.5 rounded-lg bg-cream-200/80 hover:bg-cream-300 text-xs font-medium text-espresso-800 border border-cream-300 transition-colors"
+                    >
+                      <span className="font-mono font-bold">{preset.code}</span> · {preset.name}
                     </button>
                   ))}
                 </div>
