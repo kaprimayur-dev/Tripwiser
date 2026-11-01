@@ -153,7 +153,7 @@ export function StationDetailView({
               {timetable_coverage.has_timetable_coverage ? (
                 <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-olive/15 text-olive flex items-center gap-1">
                   <ShieldCheck className="w-3.5 h-3.5" />
-                  <span>Timetable Verified</span>
+                  <span>Schedule Coverage Available</span>
                 </span>
               ) : (
                 <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-cream-300/80 text-espresso-600 flex items-center gap-1">

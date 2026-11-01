@@ -97,8 +97,8 @@ async function runE2ETest() {
     if (!detailText.includes('TIMETABLE SCHEDULE COVERAGE')) {
       throw new Error('Detail view missing verified coverage metrics section');
     }
-    if (!detailText.includes('Timetable Verified')) {
-      throw new Error('Detail view missing verified coverage status badge');
+    if (!detailText.includes('Schedule Coverage Available')) {
+      throw new Error('Detail view missing schedule coverage available status badge');
     }
 
     // 5. Verify PostGIS Nearby Stations

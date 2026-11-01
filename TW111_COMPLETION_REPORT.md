@@ -28,7 +28,7 @@ TripWiser now features comprehensive **Station Intelligence & Nearby Station Dis
   - Supports dynamic radius queries (`15 km`, `30 km`, `50 km`, `75 km`, up to `200 km`).
 - **Honest Timetable Coverage Disclosure:**
   - Aggregates live database counts for compiled trains calling at the station, originating trains, and terminating trains:
-    - Stations with compiled schedules (e.g. `BPL` with 28 trains, `NDLS` with 38 trains) display `has_timetable_coverage = True` and badge `"Timetable Verified"`.
+    - Stations with compiled schedules (e.g. `BPL` with 28 trains, `NDLS` with 38 trains) display `has_timetable_coverage = True` and badge `"Schedule Coverage Available"`.
     - Stations with zero compiled schedule records (5,885 network stations) return `has_timetable_coverage = False` with `coverage_status = "AWAITING_COMPILED_SCHEDULES"`, clearly distinguishing valid network stations from non-existent station codes (which return HTTP 404).
 
 ---
@@ -105,3 +105,4 @@ TripWiser now features comprehensive **Station Intelligence & Nearby Station Dis
 - Zero fabricated train frequencies or connectivity assumed between nearby stations.
 - Proximity disclaimer prominently displayed.
 - All 8,697 stations sourced from real Indian Railways records.
+
