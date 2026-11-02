@@ -14,6 +14,7 @@ import {
   Share2,
   Check,
   Info,
+  Compass,
 } from 'lucide-react';
 import { CandidateRoute } from '../../types/api';
 import { TransitTimeline } from './TransitTimeline';
@@ -26,6 +27,12 @@ import {
   subscribeSavedTrips,
   SavedTrip,
 } from '../../lib/savedTrips';
+import {
+  addRouteToJourneyPlan,
+  buildPlanId,
+  isRouteInPlan,
+  subscribeJourneyPlans,
+} from '../../lib/journeyPlans';
 import { buildShareableJourneyUrl, copyToClipboard } from '../../lib/shareUrl';
 
 interface RouteCardProps {
@@ -33,6 +40,7 @@ interface RouteCardProps {
   journeyDate?: string;
   isRecommended?: boolean;
   onOpenDetails?: (route: CandidateRoute) => void;
+  onOpenPlanWorkspace?: () => void;
 }
 
 export function RouteCard({
@@ -40,9 +48,11 @@ export function RouteCard({
   journeyDate,
   isRecommended = false,
   onOpenDetails,
+  onOpenPlanWorkspace,
 }: RouteCardProps) {
   const [isExpanded, setIsExpanded] = useState<boolean>(isRecommended);
   const [isSaved, setIsSaved] = useState<boolean>(false);
+  const [isInPlan, setIsInPlan] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
 
   const firstLeg = route.legs[0];
@@ -56,14 +66,44 @@ export function RouteCard({
     effectiveDate,
     route.route_id
   );
+  const planId = buildPlanId(firstLeg.origin_code, lastLeg.destination_code, effectiveDate);
 
   useEffect(() => {
     setIsSaved(isTripSaved(tripId));
-    const unsubscribe = subscribeSavedTrips(() => {
+    setIsInPlan(isRouteInPlan(planId, route.route_id));
+
+    const unsubscribe1 = subscribeSavedTrips(() => {
       setIsSaved(isTripSaved(tripId));
     });
-    return unsubscribe;
-  }, [tripId]);
+    const unsubscribe2 = subscribeJourneyPlans(() => {
+      setIsInPlan(isRouteInPlan(planId, route.route_id));
+    });
+
+    return () => {
+      unsubscribe1();
+      unsubscribe2();
+    };
+  }, [tripId, planId, route.route_id]);
+
+  const handleAddToPlan = () => {
+    if (isInPlan) {
+      if (onOpenPlanWorkspace) {
+        onOpenPlanWorkspace();
+      }
+      return;
+    }
+    addRouteToJourneyPlan(
+      firstLeg.origin_code,
+      firstLeg.origin_code,
+      lastLeg.destination_code,
+      lastLeg.destination_code,
+      effectiveDate,
+      route.transfer_count,
+      route
+    );
+    setIsInPlan(true);
+    setIsSaved(true);
+  };
 
   const handleToggleSave = () => {
     if (isSaved) {
@@ -97,7 +137,17 @@ export function RouteCard({
       };
 
       saveTrip(savedData);
+      addRouteToJourneyPlan(
+        firstLeg.origin_code,
+        firstLeg.origin_code,
+        lastLeg.destination_code,
+        lastLeg.destination_code,
+        effectiveDate,
+        route.transfer_count,
+        route
+      );
       setIsSaved(true);
+      setIsInPlan(true);
     }
   };
 
@@ -231,8 +281,23 @@ export function RouteCard({
             )}
           </div>
 
-          {/* Save & Share Action Buttons */}
+          {/* Plan, Save & Share Action Buttons */}
           <div className="flex items-center gap-1.5 ml-auto">
+            <button
+              type="button"
+              id={`btn-plan-route-${route.route_id}`}
+              onClick={handleAddToPlan}
+              className={`px-2.5 py-1.5 rounded-xl text-xs font-semibold border transition-all flex items-center gap-1.5 ${
+                isInPlan
+                  ? 'bg-olive text-white border-olive shadow-2xs font-bold'
+                  : 'bg-cream-100 hover:bg-cream-200 text-espresso-800 border-cream-300'
+              }`}
+              title={isInPlan ? 'Already in Journey Plan — Click to view workspace' : 'Add this option to Journey Plan'}
+            >
+              <Compass className={`w-3.5 h-3.5 ${isInPlan ? 'text-white' : 'text-terracotta'}`} />
+              <span className="text-[11px]">{isInPlan ? 'In Plan' : 'Add to Plan'}</span>
+            </button>
+
             <button
               type="button"
               id={`btn-share-route-${route.route_id}`}

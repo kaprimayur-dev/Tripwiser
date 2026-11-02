@@ -278,6 +278,9 @@ class RouteDiscoveryEngine:
         if sorting_applied == "cheapest":
             sorting_applied = "recommended"
             sorting_note = "Cheapest sorting deferred: No verified commercial fare feed is available."
+        elif sorting_applied in ("comfortable", "comfortable_transfers"):
+            sorting_applied = "comfortable"
+            sorting_note = "Prioritizing journeys with comfortable scheduled transfer windows (60–180 minutes)."
 
         result.sorting_applied = sorting_applied
         result.sorting_note = sorting_note
@@ -767,6 +770,21 @@ class RouteDiscoveryEngine:
             route_list.sort(key=lambda r: (r.total_duration_minutes, r.transfer_count))
         elif sort_by == "fewest_transfers":
             route_list.sort(key=lambda r: (r.transfer_count, r.total_duration_minutes))
+        elif sort_by in ("comfortable", "comfortable_transfers"):
+            def compute_comfortable_score(r: CandidateRoute) -> float:
+                score = float(r.total_duration_minutes)
+                if r.is_direct:
+                    return score - 60.0
+                for dt in r.transfer_durations_minutes:
+                    if dt < 60:
+                        score += (60 - dt) * 4.0
+                    elif 60 <= dt <= 180:
+                        score -= 45.0
+                    elif dt > 240:
+                        score += (dt - 240) * 0.4
+                return score
+
+            route_list.sort(key=compute_comfortable_score)
         else:  # recommended (default)
             def compute_recommended_score(r: CandidateRoute) -> float:
                 score = float(r.total_duration_minutes)

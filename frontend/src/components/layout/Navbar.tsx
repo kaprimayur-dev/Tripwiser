@@ -3,8 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import { Train, Sparkles, Navigation, Layers, Compass, Bookmark, ArrowLeftRight } from 'lucide-react';
 import { getSavedTrips, subscribeSavedTrips } from '../../lib/savedTrips';
+import { getJourneyPlans, subscribeJourneyPlans } from '../../lib/journeyPlans';
 
-export type AppMode = 'connecting' | 'timetable' | 'stations' | 'compare' | 'bachelor' | 'saved';
+export type AppMode = 'connecting' | 'timetable' | 'stations' | 'compare' | 'bachelor' | 'saved' | 'plan';
 
 interface NavbarProps {
   currentMode?: AppMode;
@@ -15,11 +16,18 @@ export function Navbar({ currentMode = 'connecting', onSelectMode }: NavbarProps
   const [savedCount, setSavedCount] = useState<number>(0);
 
   useEffect(() => {
-    setSavedCount(getSavedTrips().length);
-    const unsubscribe = subscribeSavedTrips(() => {
-      setSavedCount(getSavedTrips().length);
-    });
-    return unsubscribe;
+    const updateCount = () => {
+      const tripsLen = getSavedTrips().length;
+      const plansLen = getJourneyPlans().length;
+      setSavedCount(Math.max(tripsLen, plansLen));
+    };
+    updateCount();
+    const unsub1 = subscribeSavedTrips(updateCount);
+    const unsub2 = subscribeJourneyPlans(updateCount);
+    return () => {
+      unsub1();
+      unsub2();
+    };
   }, []);
 
   return (
@@ -128,18 +136,18 @@ export function Navbar({ currentMode = 'connecting', onSelectMode }: NavbarProps
             id="nav-saved-trips-tab"
             onClick={() => onSelectMode && onSelectMode('saved')}
             className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap min-h-[36px] ${
-              currentMode === 'saved'
+              currentMode === 'saved' || currentMode === 'plan'
                 ? 'bg-espresso-900 text-cream-100 shadow-sm font-bold'
                 : 'text-espresso-700 hover:text-espresso-900'
             }`}
           >
-            <Bookmark className={`w-3.5 h-3.5 ${currentMode === 'saved' ? 'fill-terracotta text-terracotta' : ''}`} />
-            <span>My Trips</span>
+            <Bookmark className={`w-3.5 h-3.5 ${currentMode === 'saved' || currentMode === 'plan' ? 'fill-terracotta text-terracotta' : ''}`} />
+            <span>My Plans</span>
             {savedCount > 0 && (
               <span
                 id="saved-trips-count-badge"
                 className={`ml-0.5 px-1.5 py-0.2 text-[10px] rounded-full font-bold ${
-                  currentMode === 'saved'
+                  currentMode === 'saved' || currentMode === 'plan'
                     ? 'bg-terracotta text-white'
                     : 'bg-terracotta/15 text-terracotta'
                 }`}

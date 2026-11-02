@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { Sparkles, Zap, ArrowDownUp, AlertCircle, IndianRupee, Filter } from 'lucide-react';
+import { Sparkles, Zap, ArrowDownUp, AlertCircle, IndianRupee, Filter, Clock } from 'lucide-react';
 
-export type SortMode = 'recommended' | 'fastest' | 'fewest_transfers' | 'cheapest';
+export type SortMode = 'recommended' | 'fastest' | 'fewest_transfers' | 'comfortable' | 'cheapest';
 export type TransferFilterMode = 'all' | 'direct' | '1-transfer' | '2-transfers';
 
 interface SortingFilterBarProps {
@@ -44,6 +44,11 @@ export function SortingFilterBar({
       id: 'fewest_transfers',
       label: 'Fewest Transfers',
       icon: <ArrowDownUp className="w-3.5 h-3.5" />,
+    },
+    {
+      id: 'comfortable',
+      label: 'Comfortable Transfers',
+      icon: <Clock className="w-3.5 h-3.5" />,
     },
     {
       id: 'cheapest',

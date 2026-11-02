@@ -17,6 +17,7 @@ interface ResultsStreamProps {
   currentSort: SortMode;
   onSortChange: (sort: SortMode) => void;
   onSelectCorridor?: (originCode: string, destCode: string) => void;
+  onOpenPlanWorkspace?: () => void;
 }
 
 export function ResultsStream({
@@ -26,6 +27,7 @@ export function ResultsStream({
   currentSort,
   onSortChange,
   onSelectCorridor,
+  onOpenPlanWorkspace,
 }: ResultsStreamProps) {
   const [activeModalRoute, setActiveModalRoute] = useState<CandidateRoute | null>(null);
   const [transferFilter, setTransferFilter] = useState<TransferFilterMode>('all');
@@ -289,6 +291,7 @@ export function ResultsStream({
               journeyDate={query.journey_date}
               isRecommended={idx === 0 && currentSort === 'recommended' && transferFilter === 'all'}
               onOpenDetails={(r) => setActiveModalRoute(r)}
+              onOpenPlanWorkspace={onOpenPlanWorkspace}
             />
           ))
         )}

@@ -14,9 +14,11 @@ import { TrainCompareView } from '../components/trains/TrainCompareView';
 import { StationSearchCard } from '../components/stations/StationSearchCard';
 import { StationDetailView } from '../components/stations/StationDetailView';
 import { SavedTripsView } from '../components/trips/SavedTripsView';
+import { JourneyPlanningWorkspace } from '../components/plans/JourneyPlanningWorkspace';
 import { SortMode } from '../components/results/SortingFilterBar';
-import { Station, RouteSearchResponse, BachelorSpecialSearchResponse } from '../types/api';
+import { Station, RouteSearchResponse, BachelorSpecialSearchResponse, JourneyPlan } from '../types/api';
 import { SavedTrip } from '../lib/savedTrips';
+import { getSavedJourneyPreference, saveJourneyPreference } from '../lib/journeyPlans';
 import { searchRoutes, searchBachelorSpecial, getStationByCode } from '../services/api';
 import { Sparkles, Navigation, Layers, Compass, Bookmark, AlertTriangle, X, ArrowLeftRight } from 'lucide-react';
 
@@ -106,7 +108,8 @@ export default function Home() {
         modeParam === 'connecting' ||
         modeParam === 'stations' ||
         modeParam === 'compare' ||
-        modeParam === 'saved'
+        modeParam === 'saved' ||
+        modeParam === 'plan'
       ) {
         setActiveMode(modeParam as AppMode);
       }
@@ -123,8 +126,13 @@ export default function Home() {
         setMaxTransfers(Number(transfersParam));
       }
       const sortParam = params.get('sort');
-      if (sortParam && ['recommended', 'fastest', 'fewest_transfers', 'cheapest'].includes(sortParam)) {
+      if (sortParam && ['recommended', 'fastest', 'fewest_transfers', 'comfortable', 'cheapest'].includes(sortParam)) {
         setSortMode(sortParam as SortMode);
+      } else {
+        const savedPref = getSavedJourneyPreference();
+        if (savedPref) {
+          setSortMode(savedPref as SortMode);
+        }
       }
 
       const origParam = params.get('origin');
@@ -163,8 +171,12 @@ export default function Home() {
 
               setOrigin(o);
               setDestination(d);
-              if (!modeParam || modeParam === 'connecting') {
-                setActiveMode('connecting');
+              if (!modeParam || modeParam === 'connecting' || modeParam === 'plan') {
+                if (modeParam === 'plan') {
+                  setActiveMode('plan');
+                } else {
+                  setActiveMode('connecting');
+                }
                 executeSearch({
                   originCode: o.code,
                   destCode: d.code,
@@ -276,6 +288,7 @@ export default function Home() {
   // Handle changing sort mode
   const handleSortChange = (newSort: SortMode) => {
     setSortMode(newSort);
+    saveJourneyPreference(newSort as any);
     if (origin && destination && date) {
       executeSearch({
         originCode: origin.code,
@@ -434,6 +447,46 @@ export default function Home() {
     }
   };
 
+  const handleRecheckPlan = async (plan: JourneyPlan) => {
+    try {
+      const origStation = await getStationByCode(plan.origin_code).catch(() => null);
+      const destStation = await getStationByCode(plan.destination_code).catch(() => null);
+
+      const o: Station = origStation || {
+        code: plan.origin_code,
+        name: plan.origin_name,
+        city: '',
+        state: '',
+        latitude: 0,
+        longitude: 0,
+      };
+      const d: Station = destStation || {
+        code: plan.destination_code,
+        name: plan.destination_name,
+        city: '',
+        state: '',
+        latitude: 0,
+        longitude: 0,
+      };
+
+      setOrigin(o);
+      setDestination(d);
+      setDate(plan.journey_date);
+      setMaxTransfers(plan.max_transfers);
+      handleModeChange('connecting');
+
+      executeSearch({
+        originCode: o.code,
+        destCode: d.code,
+        journeyDate: plan.journey_date,
+        transfers: plan.max_transfers,
+        sortBy: sortMode,
+      });
+    } catch (err) {
+      console.error('Failed to recheck journey plan:', err);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-cream-100 text-espresso-900">
       <Navbar currentMode={activeMode} onSelectMode={handleModeChange} />
@@ -454,8 +507,8 @@ export default function Home() {
               ? 'Inspect every halt, offset & running day.'
               : activeMode === 'compare'
               ? 'Compare direct trains head-to-head.'
-              : activeMode === 'saved'
-              ? 'Your pinned railway journeys, ready anytime.'
+              : activeMode === 'saved' || activeMode === 'plan'
+              ? 'Organize options, compare alternatives & designate preferred journeys.'
               : 'Every station, coordinates & spatial radius.'}
           </h1>
 
@@ -468,8 +521,8 @@ export default function Home() {
               ? 'Search any compiled train to view its complete stoppage sequence, arrival/departure timings, halt durations, operating days, and verified timetable provenance.'
               : activeMode === 'compare'
               ? 'Evaluate all direct trains between two stations side-by-side with departure timings, journey durations, intermediate stop counts, and operating frequencies.'
-              : activeMode === 'saved'
-              ? 'Review your saved itineraries, inspect original transfer windows, and recalculate schedules with current timetable operating days.'
+              : activeMode === 'saved' || activeMode === 'plan'
+              ? 'Organize multiple route alternatives under unified journey plans, select preferred itineraries, review scheduled layovers, and share your complete travel options.'
               : 'Explore 8,697 Indian railway stations, discover nearby alternate boarding terminals with PostGIS geodetic distance, and inspect verified timetable schedule coverage.'}
           </p>
         </div>
@@ -550,15 +603,15 @@ export default function Home() {
             <button
               type="button"
               id="tab-saved-mode"
-              onClick={() => handleModeChange('saved')}
+              onClick={() => handleModeChange('plan')}
               className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
-                activeMode === 'saved'
+                activeMode === 'saved' || activeMode === 'plan'
                   ? 'bg-espresso-900 text-cream-100 shadow-sm font-bold'
                   : 'text-espresso-600 hover:text-espresso-900'
               }`}
             >
-              <Bookmark className={`w-4 h-4 ${activeMode === 'saved' ? 'fill-terracotta text-terracotta' : ''}`} />
-              <span>My Trips</span>
+              <Bookmark className={`w-4 h-4 ${activeMode === 'saved' || activeMode === 'plan' ? 'fill-terracotta text-terracotta' : ''}`} />
+              <span>Journey Plans</span>
             </button>
           </div>
         </div>
@@ -612,13 +665,18 @@ export default function Home() {
               currentSort={sortMode}
               onSortChange={handleSortChange}
               onSelectCorridor={handleSelectCorridor}
+              onOpenPlanWorkspace={() => handleModeChange('plan')}
             />
           </>
         )}
 
-        {activeMode === 'saved' && (
-          <SavedTripsView
-            onRecheckTrip={handleRecheckTrip}
+        {(activeMode === 'saved' || activeMode === 'plan') && (
+          <JourneyPlanningWorkspace
+            onRecheckPlan={handleRecheckPlan}
+            onInspectTrain={(trainNumber) => {
+              setSelectedTrain(trainNumber);
+              handleModeChange('timetable');
+            }}
             onNavigateSearch={() => handleModeChange('connecting')}
           />
         )}

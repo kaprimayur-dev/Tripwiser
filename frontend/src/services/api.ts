@@ -87,7 +87,7 @@ export interface RouteSearchParams {
   destination: string;
   date: string;
   maxTransfers?: number;
-  sortBy?: 'recommended' | 'fastest' | 'fewest_transfers' | 'cheapest';
+  sortBy?: 'recommended' | 'fastest' | 'fewest_transfers' | 'comfortable' | 'cheapest';
 }
 
 export async function searchRoutes(params: RouteSearchParams): Promise<RouteSearchResponse> {

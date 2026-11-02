@@ -107,7 +107,7 @@ async def search_routes(
     destination: str = Query(..., min_length=1, description="Destination station code (e.g. NDLS, BPL, HWH)"),
     date: str = Query(..., description="Journey date in YYYY-MM-DD format"),
     max_transfers: int = Query(1, ge=0, le=2, description="Maximum transfers allowed (0=direct only, 1=one transfer)"),
-    sort_by: str = Query("recommended", pattern="^(recommended|fastest|fewest_transfers|cheapest)$"),
+    sort_by: str = Query("recommended", pattern="^(recommended|fastest|fewest_transfers|cheapest|comfortable|comfortable_transfers)$"),
     session: AsyncSession = Depends(get_db),
 ):
     """

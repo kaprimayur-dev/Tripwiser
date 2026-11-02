@@ -11,6 +11,9 @@ export interface ShareJourneyParams {
   maxTransfers?: number;
   sortBy?: string;
   routeId?: string;
+  mode?: string;
+  preferredRouteId?: string;
+  alternativeRouteIds?: string[];
 }
 
 /**
@@ -20,7 +23,7 @@ export function buildShareableJourneyUrl(params: ShareJourneyParams): string {
   const origin = typeof window !== 'undefined' ? window.location.origin : 'https://tripwiser.in';
   const url = new URL(origin);
 
-  url.searchParams.set('mode', 'connecting');
+  url.searchParams.set('mode', params.mode || 'connecting');
   url.searchParams.set('origin', params.originCode.trim().toUpperCase());
   url.searchParams.set('destination', params.destinationCode.trim().toUpperCase());
   url.searchParams.set('date', params.journeyDate);
@@ -32,6 +35,12 @@ export function buildShareableJourneyUrl(params: ShareJourneyParams): string {
   }
   if (params.routeId) {
     url.searchParams.set('route', params.routeId);
+  }
+  if (params.preferredRouteId) {
+    url.searchParams.set('preferred', params.preferredRouteId);
+  }
+  if (params.alternativeRouteIds && params.alternativeRouteIds.length > 0) {
+    url.searchParams.set('alternatives', params.alternativeRouteIds.join(','));
   }
 
   return url.toString();

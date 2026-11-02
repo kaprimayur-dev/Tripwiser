@@ -329,6 +329,50 @@ export interface StationTrainsResponse {
   disclaimer: string;
 }
 
+// ==========================================
+// TW-117 Journey Planning & Personalization
+// ==========================================
+
+export type JourneyPreference =
+  | 'recommended'
+  | 'fastest'
+  | 'fewest_transfers'
+  | 'comfortable';
+
+export interface JourneyPlanOption {
+  route_id: string;
+  is_direct: boolean;
+  transfer_count: number;
+  total_duration_minutes: number;
+  total_travel_time_minutes: number;
+  total_wait_time_minutes: number;
+  train_summary: string;
+  train_numbers: string[];
+  departure_time: string;
+  arrival_time: string;
+  overall_transfer_risk?: TransferRiskLevel | null;
+  legs: JourneyLeg[];
+  layovers?: TransferLayover[];
+  insights?: string[];
+  added_at: string;
+}
+
+export interface JourneyPlan {
+  id: string; // e.g. "PLAN_NDLS_BPL_2026-11-04"
+  title?: string;
+  created_at: string;
+  updated_at: string;
+  origin_code: string;
+  origin_name: string;
+  destination_code: string;
+  destination_name: string;
+  journey_date: string;
+  max_transfers: number;
+  preferred_route_id: string;
+  options: JourneyPlanOption[];
+  notes?: string;
+}
+
 
 
 
