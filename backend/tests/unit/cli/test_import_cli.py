@@ -85,3 +85,24 @@ class TestImportCLIUnit:
         assert len(manifest_files) == 1
         assert quarantine_dir.exists()
 
+    @pytest.mark.asyncio
+    @pytest.mark.skipif(not FIXTURE_PATH.exists(), reason="Bootstrap fixture required")
+    async def test_dry_run_flag_strictly_prevents_persistence(self, tmp_path):
+        manifest_dir = tmp_path / "manifests"
+        quarantine_dir = tmp_path / "quarantine"
+
+        args = parse_args([
+            "--source", "fixture",
+            "--dry-run",
+            "--persist-all",  # Even if persist-all is passed, dry-run must override
+            "--fixture-path", str(FIXTURE_PATH),
+            "--manifest-dir", str(manifest_dir),
+            "--quarantine-dir", str(quarantine_dir),
+        ])
+
+        with patch("app.cli.import_railway_data.RailwayDataPersistenceService") as mock_service_cls:
+            exit_code = await run_pipeline(args)
+            assert exit_code == 0
+            # RailwayDataPersistenceService must NOT be instantiated
+            mock_service_cls.assert_not_called()
+
