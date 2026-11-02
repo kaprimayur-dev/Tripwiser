@@ -48,3 +48,4 @@ def test_async_database_url_normalization():
     # 6. sslmode=disable mapped to ssl=disable
     s6 = Settings(DATABASE_URL="postgresql://user:pass@host:5432/db?sslmode=disable")
     assert s6.ASYNC_DATABASE_URL == "postgresql+asyncpg://user:pass@host:5432/db?ssl=disable"
+

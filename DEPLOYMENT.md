@@ -203,3 +203,4 @@ alembic downgrade 002_chart_vacancies_unique
 1. **No Live Delay Prediction**: TripWiser operates strictly on verified timetables and official running calendars. It does not synthesize or predict live GPS train delays.
 2. **Bachelor Special Berth Vacancy Feed**: Live chart reservation vacancies require an official IRCTC partner API integration. The platform currently discloses berth segment availability as a structural timetable prototype without fabricating real-time vacant berths.
 3. **Browser-Local Storage**: Journey plans and preferences are stored locally in the passenger's browser (`localStorage`). Clearing browser cache will reset locally saved plans.
+
