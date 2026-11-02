@@ -1,8 +1,13 @@
 import asyncio
+import sys
+from pathlib import Path
 from logging.config import fileConfig
 from sqlalchemy import pool
 from sqlalchemy.ext.asyncio import async_engine_from_config
 from alembic import context
+
+# Ensure backend root is on sys.path for CLI execution
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from app.core.config import settings
 from app.infrastructure.database.models import Base
@@ -15,7 +20,7 @@ if config.config_file_name:
 target_metadata = Base.metadata
 
 def run_migrations_offline() -> None:
-    url = settings.DATABASE_URL
+    url = settings.ASYNC_DATABASE_URL
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -37,7 +42,7 @@ def do_run_migrations(connection):
 
 async def run_async_migrations():
     configuration = config.get_section(config.config_ini_section, {})
-    configuration["sqlalchemy.url"] = settings.DATABASE_URL
+    configuration["sqlalchemy.url"] = settings.ASYNC_DATABASE_URL
 
     connectable = async_engine_from_config(
         configuration,

@@ -7,7 +7,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 engine = create_async_engine(
-    settings.DATABASE_URL,
+    settings.ASYNC_DATABASE_URL,
     echo=False,
     future=True,
     poolclass=NullPool
